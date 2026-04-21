@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Courses — For Her Wellbeing</title>
+<meta name="description" content="Self-paced online courses by Dr. Raga Deepthi — understand your hormones, PCOS, metabolism, and how to heal. Science-backed, affordable, available anywhere.">
+<meta property="og:title" content="Online Courses — For Her Wellbeing">
+<meta property="og:description" content="PhD-level women's health education, made accessible. Self-paced courses on PCOS, hormones, weight science, and more.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/courses.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+.course-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.course-card {
+  background: var(--white); border-radius: 4px;
+  border: 1px solid var(--border); overflow: hidden;
+  transition: all 0.3s; display: flex; flex-direction: column;
+}
+.course-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(74,16,66,0.1); }
+.course-card-top {
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  flex: 1;
+}
+.course-icon { width: 40px; height: 40px; margin-bottom: 0.75rem; color: var(--plum); }
+.course-badge {
+  font-size: 0.63rem; font-weight: 500; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 50px;
+  display: inline-block; margin-bottom: 0.6rem;
+}
+.badge-live { background: rgba(201,146,42,0.12); color: var(--gold); }
+.badge-soon { background: rgba(74,16,66,0.08); color: var(--plum); }
+.badge-abroad { background: rgba(201,146,42,0.18); color: var(--gold); }
+.course-title {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 400;
+  color: var(--plum); line-height: 1.25; margin-bottom: 0.5rem;
+}
+.course-desc {
+  font-size: 0.82rem; font-weight: 300; line-height: 1.7; color: var(--text-mid);
+  margin-bottom: 1rem;
+}
+.course-modules { display: flex; flex-direction: column; gap: 0.35rem; }
+.cm { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 300; color: var(--text-mid); }
+.cm::before { content: '✓'; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+.curriculum-toggle { background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.73rem; font-weight: 500; color: var(--plum); letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 0.4rem; margin-top: 0.85rem; padding: 0; }
+.curriculum-toggle .ct-icon { font-size: 1rem; transition: transform 0.25s; color: var(--gold); line-height:1; }
+button.curriculum-open .ct-icon { transform: rotate(45deg); }
+.curriculum-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+button.curriculum-open + .curriculum-body { max-height: 800px; }
+.module-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 4px; margin-top: 0.75rem; overflow: hidden; }
+.module-item { display: grid; grid-template-columns: 32px 1fr; gap: 0; border-bottom: 1px solid var(--border); }
+.module-item:last-child { border-bottom: none; }
+.module-num { background: rgba(74,16,66,0.04); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 0.75rem; color: var(--gold); font-weight: 400; padding: 0.75rem 0; border-right: 1px solid var(--border); }
+.module-content { padding: 0.7rem 0.85rem; }
+.module-title { font-size: 0.78rem; font-weight: 500; color: var(--plum); margin-bottom: 0.15rem; }
+.module-meta { font-size: 0.7rem; font-weight: 300; color: var(--text-light); }
+.course-card-bottom {
+  padding: 1.25rem 2rem; background: var(--cream);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.course-price {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--plum);
+}
+.course-price-note { font-size: 0.7rem; color: var(--text-light); font-weight: 300; }
+.course-cta {
+  background: var(--plum); color: white; border: none; border-radius: 50px;
+  padding: 0.6rem 1.25rem; font-family: var(--sans); font-size: 0.72rem;
+  font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.course-cta:hover { background: var(--plum-light); }
+.course-cta.gold { background: var(--gold); color: var(--plum); }
+.course-cta.gold:hover { background: var(--gold-light); }
+.course-cta.ghost {
+  background: transparent; color: var(--plum);
+  border: 1.5px solid var(--border);
+}
+.course-cta.ghost:hover { border-color: var(--plum); }
+
+/* WAITLIST MODAL */
+.waitlist-bar {
+  background: var(--plum); padding: 2rem 0; text-align: center;
+  position: sticky; top: 68px; z-index: 50;
+}
+.wb-inner { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.wb-text { font-size: 0.88rem; font-weight: 300; color: rgba(255,253,249,0.8); }
+.wb-form { display: flex; gap: 0.5rem; }
+.wb-input { padding: 0.6rem 1.1rem; border: none; border-radius: 50px; font-family: var(--sans); font-size: 0.82rem; background: rgba(255,253,249,0.12); color: white; outline: none; width: 220px; }
+.wb-input::placeholder { color: rgba(255,253,249,0.4); }
+.wb-btn { background: var(--gold); color: var(--plum); border: none; border-radius: 50px; padding: 0.6rem 1.25rem; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+
+/* HOW IT WORKS */
+.how-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.how-cell { text-align: center; padding: 0 1rem; }
+.how-num {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--plum); display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem; font-family: var(--serif); font-size: 1.2rem; font-weight: 300; color: var(--gold);
+}
+.how-title { font-family: var(--serif); font-size: 1rem; color: var(--plum); margin-bottom: 0.4rem; }
+.how-body { font-size: 0.8rem; font-weight: 300; color: var(--text-mid); line-height: 1.6; }
+
+/* DIFFERENCE TABLE */
+.diff-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+.diff-table th, .diff-table td { padding: 1rem 1.25rem; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.diff-table th { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-light); background: var(--cream); }
+.diff-table td:first-child { font-weight: 400; color: var(--text-dark); }
+.diff-table td:not(:first-child) { text-align: center; color: var(--text-mid); font-weight: 300; }
+.diff-check { color: var(--gold); font-weight: 600; }
+.diff-cross { color: var(--text-light); }
+
+@media(max-width: 900px) { .course-grid { grid-template-columns: 1fr 1fr; } .how-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 600px) { .course-grid { grid-template-columns: 1fr; } .how-grid { grid-template-columns: 1fr 1fr; } .wb-form { flex-direction: column; } .wb-input { width: 100%; } }
+</style>
+</head>
+<body>
+
+<!-- WAITLIST BAR -->
+<div class="waitlist-bar">
+  <div class="wb-inner">
+    <div class="wb-text">Courses launching soon — join the waitlist for early access & founding price</div>
+    <form class="wb-form" onsubmit="joinWaitlist(event)">
+      <input class="wb-input" type="email" id="wl-email" placeholder="your@email.com" required>
+      <button type="submit" class="wb-btn">Join Waitlist</button>
+    </form>
+  </div>
+</div>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="eyebrow eyebrow-light">Self-Paced Online Courses</span>
+    <h1 class="page-title">PhD-Level Science.<br><em>At Your Own Pace.</em></h1>
+    <p class="page-sub">Deep, accessible courses on women's hormonal health — learn to understand your body, read your labs, and take evidence-based action. No clinic visit required.</p>
+  </div>
+</div>
+
+<!-- COURSES GRID -->
+<section style="background:var(--cream);" class="section-pad">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="eyebrow">The Course Library</span>
+      <h2 class="section-title">Learn What Your<br><em>Doctor Never Explained</em></h2>
+    </div>
+    <div class="course-grid">
+
+      <!-- Course 1 -->
+      <div class="course-card fade-in fade-in-delay-1">
+        <div class="course-card-top">
+          <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M22 2l-4 4m0 0h4m-4 0V2"/></svg>
+          <span class="course-badge badge-soon">Coming Soon</span>
+          <div class="course-title">Understand Your Hormones</div>
+          <p class="course-desc">What PCOS actually is, why your cycle matters, how to read your hormone panel — and what to do about it. Built for women with no science background.</p>
+          <div class="course-modules">
+            <span class="cm">6 modules · ~4 hours total · Lifetime access</span>
+            <span class="cm">Video lectures + PDF guides + quiz assessments</span>
+            <span class="cm">Certificate of completion included</span>
+          </div>
+          <button class="curriculum-toggle" onclick="toggleCurriculum(this)"><span>View Full Curriculum</span><span class="ct-icon">+</span></button>
+          <div class="curriculum-body">
+            <div class="module-list">
+              <div class="module-item"><div class="module-num">01</div><div class="module-content"><div class="module-title">What is PCOS? The Real Science</div><div class="module-meta">45 min · Video + PDF guide</div></div></div>
+              <div class="module-item"><div class="module-num">02</div><div class="module-content"><div class="module-title">Your Hormone Panel Decoded</div><div class="module-meta">40 min · What to test, when & how to read results</div></div></div>
+              <div class="module-item"><div class="module-num">03</div><div class="module-content"><div class="module-title">The Insulin–PCOS Connection</div><div class="module-meta">35 min · Why insulin resistance drives most PCOS</div></div></div>
+              <div class="module-item"><div class="module-num">04</div><div class="module-content"><div class="module-title">Diet for Hormonal Balance</div><div class="module-meta">50 min · Indian kitchen protocols that work</div></div></div>
+              <div class="module-item"><div class="module-num">05</div><div class="module-content"><div class="module-title">Stress, Cortisol & Your Cycle</div><div class="module-meta">30 min · How stress disrupts your hormones</div></div></div>
+              <div class="module-item"><div class="module-num">06</div><div class="module-content"><div class="module-title">Your Long-Term PCOS Management Plan</div><div class="module-meta">40 min · Building your personalised protocol</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <div>
+            <div class="course-price">₹2,999</div>
+            <div class="course-price-note">Founding price · Lifetime access</div>
+          </div>
+          <a href="#" onclick="joinWaitlistFor('hormones')" class="course-cta ghost">Join Waitlist</a>
+        </div>
+      </div>
+
+      <!-- Course 2 -->
+      <div class="course-card fade-in fade-in-delay-2">
+        <div class="course-card-top">
+          <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          <span class="course-badge badge-soon">Coming Soon</span>
+          <div class="course-title">Weight Reset Science</div>
+          <p class="course-desc">Why standard diets fail Indian women. The real drivers — insulin resistance, cortisol, gut dysbiosis — and a protocol that actually works for our bodies.</p>
+          <div class="course-modules">
+            <span class="cm">6 modules · ~5 hours total · Lifetime access</span>
+            <span class="cm">Video lectures + Indian meal plan templates</span>
+            <span class="cm">Lab test interpretation guide included</span>
+          </div>
+          <button class="curriculum-toggle" onclick="toggleCurriculum(this)"><span>View Full Curriculum</span><span class="ct-icon">+</span></button>
+          <div class="curriculum-body">
+            <div class="module-list">
+              <div class="module-item"><div class="module-num">01</div><div class="module-content"><div class="module-title">Why Calorie Counting Fails Indian Women</div><div class="module-meta">45 min · The biology behind weight resistance</div></div></div>
+              <div class="module-item"><div class="module-num">02</div><div class="module-content"><div class="module-title">Insulin Resistance — The Hidden Driver</div><div class="module-meta">50 min · Testing, identifying & reversing it</div></div></div>
+              <div class="module-item"><div class="module-num">03</div><div class="module-content"><div class="module-title">Gut Microbiome & Weight Connection</div><div class="module-meta">45 min · How gut bacteria control your metabolism</div></div></div>
+              <div class="module-item"><div class="module-num">04</div><div class="module-content"><div class="module-title">Hormonal Weight — Thyroid, Cortisol, Oestrogen</div><div class="module-meta">40 min · Diagnosing hormonal fat gain</div></div></div>
+              <div class="module-item"><div class="module-num">05</div><div class="module-content"><div class="module-title">Indian Food Protocols That Actually Work</div><div class="module-meta">55 min · 21-day meal framework for Indian kitchens</div></div></div>
+              <div class="module-item"><div class="module-num">06</div><div class="module-content"><div class="module-title">Movement Science for Metabolic Health</div><div class="module-meta">35 min · What type of movement accelerates fat loss</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <div>
+            <div class="course-price">₹3,499</div>
+            <div class="course-price-note">Founding price · Lifetime access</div>
+          </div>
+          <a href="#" onclick="joinWaitlistFor('weight')" class="course-cta ghost">Join Waitlist</a>
+        </div>
+      </div>
+
+      <!-- Course 3 — Abroad (featured) -->
+      <div class="course-card fade-in fade-in-delay-3" style="border-color:var(--gold);">
+        <div class="course-card-top">
+          <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="course-badge badge-abroad">For Women Abroad</span>
+          <div class="course-title">Healthy Abroad — Indian Body, New Country</div>
+          <p class="course-desc">Built exclusively for Indian women who've moved abroad. Vitamin D, gut reset, adapting your diet to Western groceries, and managing PCOS in a cold climate.</p>
+          <div class="course-modules">
+            <span class="cm">5 modules · ~3.5 hours · Telugu + English</span>
+            <span class="cm">Western grocery shopping guide included</span>
+            <span class="cm">Country-specific Vitamin D protocols (UK/Germany/US/Canada)</span>
+          </div>
+          <button class="curriculum-toggle" onclick="toggleCurriculum(this)"><span>View Full Curriculum</span><span class="ct-icon">+</span></button>
+          <div class="curriculum-body">
+            <div class="module-list">
+              <div class="module-item"><div class="module-num">01</div><div class="module-content"><div class="module-title">What Moving Abroad Does to Your Body</div><div class="module-meta">40 min · The science behind the abroad body change</div></div></div>
+              <div class="module-item"><div class="module-num">02</div><div class="module-content"><div class="module-title">Vitamin D & Micronutrients in Cold Countries</div><div class="module-meta">45 min · UK, Germany, Canada, USA protocols</div></div></div>
+              <div class="module-item"><div class="module-num">03</div><div class="module-content"><div class="module-title">Gut Reset with Western Groceries</div><div class="module-meta">50 min · Rebuilding your Indian microbiome abroad</div></div></div>
+              <div class="module-item"><div class="module-num">04</div><div class="module-content"><div class="module-title">PCOS in Winter Climates</div><div class="module-meta">40 min · Managing PCOS without Indian sunlight & food</div></div></div>
+              <div class="module-item"><div class="module-num">05</div><div class="module-content"><div class="module-title">Pregnancy & Postpartum Abroad — Alone</div><div class="module-meta">45 min · Nutrition & mental health without family support</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <div>
+            <div class="course-price">₹2,999</div>
+            <div class="course-price-note">Founding price · Lifetime access</div>
+          </div>
+          <a href="#" onclick="joinWaitlistFor('abroad')" class="course-cta gold">Join Waitlist</a>
+        </div>
+      </div>
+
+      <!-- Course 4 -->
+      <div class="course-card fade-in fade-in-delay-1">
+        <div class="course-card-top">
+          <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9m-14 5V9m0 0H3m6 0h14"/><circle cx="12" cy="18" r="2"/><path d="M12 16v-3"/></svg>
+          <span class="course-badge badge-soon">Coming Soon</span>
+          <div class="course-title">PCOS Self-Management Toolkit</div>
+          <p class="course-desc">A deep, actionable 8-module program for women with PCOS — anti-inflammatory eating, cycle syncing, at-home yoga, supplement guidance, and long-term management.</p>
+          <div class="course-modules">
+            <span class="cm">8 modules · ~6 hours total · Most comprehensive</span>
+            <span class="cm">Lab report interpretation workbook</span>
+            <span class="cm">12 at-home yoga sessions (video)</span>
+          </div>
+          <button class="curriculum-toggle" onclick="toggleCurriculum(this)"><span>View Full Curriculum</span><span class="ct-icon">+</span></button>
+          <div class="curriculum-body">
+            <div class="module-list">
+              <div class="module-item"><div class="module-num">01</div><div class="module-content"><div class="module-title">Anti-Inflammatory Nutrition Masterclass</div><div class="module-meta">50 min · Foods that heal vs. inflame your hormones</div></div></div>
+              <div class="module-item"><div class="module-num">02</div><div class="module-content"><div class="module-title">Cycle Syncing — Food & Movement</div><div class="module-meta">45 min · Eat & move with your hormonal phases</div></div></div>
+              <div class="module-item"><div class="module-num">03</div><div class="module-content"><div class="module-title">At-Home Yoga for Hormonal Balance</div><div class="module-meta">60 min · 12 yoga sequences filmed for PCOS</div></div></div>
+              <div class="module-item"><div class="module-num">04</div><div class="module-content"><div class="module-title">Supplements — Evidence vs. Marketing</div><div class="module-meta">40 min · What actually works, what's a waste</div></div></div>
+              <div class="module-item"><div class="module-num">05</div><div class="module-content"><div class="module-title">Reading Your Own Lab Reports</div><div class="module-meta">45 min · Understand your hormone & metabolic panel</div></div></div>
+              <div class="module-item"><div class="module-num">06</div><div class="module-content"><div class="module-title">Stress Management & Sleep Optimisation</div><div class="module-meta">35 min · HPA axis, cortisol & PCOS</div></div></div>
+              <div class="module-item"><div class="module-num">07</div><div class="module-content"><div class="module-title">PCOS Through Life Stages</div><div class="module-meta">40 min · Teens, pregnancy, perimenopause</div></div></div>
+              <div class="module-item"><div class="module-num">08</div><div class="module-content"><div class="module-title">Building Your Personal PCOS Protocol</div><div class="module-meta">35 min · Create your custom 90-day plan</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <div>
+            <div class="course-price">₹4,999</div>
+            <div class="course-price-note">Founding price · Lifetime access</div>
+          </div>
+          <a href="#" onclick="joinWaitlistFor('pcos-toolkit')" class="course-cta ghost">Join Waitlist</a>
+        </div>
+      </div>
+
+      <!-- Course 5 -->
+      <div class="course-card fade-in fade-in-delay-2">
+        <div class="course-card-top">
+          <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="course-badge badge-soon">Coming Soon</span>
+          <div class="course-title">Pregnancy & Postpartum Nutrition</div>
+          <p class="course-desc">What to eat before, during, and after pregnancy — for Indian women in India and abroad. Evidence-based antenatal nutrition, breastfeeding, and postpartum weight recovery.</p>
+          <div class="course-modules">
+            <span class="cm">5 modules · ~4 hours total · Lifetime access</span>
+            <span class="cm">Trimester-by-trimester meal planner (PDF)</span>
+            <span class="cm">Postpartum recovery nutrition guide</span>
+          </div>
+          <button class="curriculum-toggle" onclick="toggleCurriculum(this)"><span>View Full Curriculum</span><span class="ct-icon">+</span></button>
+          <div class="curriculum-body">
+            <div class="module-list">
+              <div class="module-item"><div class="module-num">01</div><div class="module-content"><div class="module-title">Pre-Conception Nutrition Foundations</div><div class="module-meta">45 min · Preparing your body 3–6 months before pregnancy</div></div></div>
+              <div class="module-item"><div class="module-num">02</div><div class="module-content"><div class="module-title">First Trimester — Nausea, Key Nutrients & Fears</div><div class="module-meta">50 min · Managing symptoms while nourishing well</div></div></div>
+              <div class="module-item"><div class="module-num">03</div><div class="module-content"><div class="module-title">Second & Third Trimester Nutrition</div><div class="module-meta">50 min · Optimal growth, iron, calcium, DHA protocols</div></div></div>
+              <div class="module-item"><div class="module-num">04</div><div class="module-content"><div class="module-title">Breastfeeding Diet & Milk Supply</div><div class="module-meta">40 min · What actually increases supply — science-backed</div></div></div>
+              <div class="module-item"><div class="module-num">05</div><div class="module-content"><div class="module-title">Postpartum Weight — Healthy Timelines</div><div class="module-meta">35 min · Recovery without pressure or deprivation</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <div>
+            <div class="course-price">₹3,499</div>
+            <div class="course-price-note">Founding price · Lifetime access</div>
+          </div>
+          <a href="#" onclick="joinWaitlistFor('pregnancy')" class="course-cta ghost">Join Waitlist</a>
+        </div>
+      </div>
+
+      <!-- Course 6 — Gut Health -->
+      <div class="course-card fade-in fade-in-delay-3">
+        <div class="course-card-top">
+          <svg class="course-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+          <span class="course-badge badge-soon">Coming Soon</span>
+          <div class="course-title">Gut Health & the Woman's Body</div>
+          <p class="course-desc">The gut-hormone connection most women never hear about. Bloating, brain fog, fatigue, skin issues — they often start in the gut. Learn to fix the root.</p>
+          <div class="course-modules">
+            <span class="cm">5 modules · ~3 hours total · Lifetime access</span>
+            <span class="cm">7-day gut reset meal plan (PDF)</span>
+            <span class="cm">Supplement & probiotic guide</span>
+          </div>
+          <button class="curriculum-toggle" onclick="toggleCurriculum(this)"><span>View Full Curriculum</span><span class="ct-icon">+</span></button>
+          <div class="curriculum-body">
+            <div class="module-list">
+              <div class="module-item"><div class="module-num">01</div><div class="module-content"><div class="module-title">The Gut-Hormone Axis Explained</div><div class="module-meta">40 min · Why gut health is women's health</div></div></div>
+              <div class="module-item"><div class="module-num">02</div><div class="module-content"><div class="module-title">Signs Your Gut Needs Healing</div><div class="module-meta">30 min · Bloating, brain fog, skin — reading your signals</div></div></div>
+              <div class="module-item"><div class="module-num">03</div><div class="module-content"><div class="module-title">Food-Based Microbiome Restoration</div><div class="module-meta">45 min · Fermented foods, fibre diversity, Indian superfoods</div></div></div>
+              <div class="module-item"><div class="module-num">04</div><div class="module-content"><div class="module-title">Probiotics, Prebiotics & Postbiotics</div><div class="module-meta">30 min · What works, what's marketing, what to buy</div></div></div>
+              <div class="module-item"><div class="module-num">05</div><div class="module-content"><div class="module-title">Leaky Gut, Inflammation & Immunity</div><div class="module-meta">35 min · The root of autoimmune and hormonal issues</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="course-card-bottom">
+          <div>
+            <div class="course-price">₹2,999</div>
+            <div class="course-price-note">Founding price · Lifetime access</div>
+          </div>
+          <a href="#" onclick="joinWaitlistFor('gut')" class="course-cta ghost">Join Waitlist</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COURSES vs PROGRAMS -->
+<section style="background:var(--white);" class="section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="max-width:640px;">
+      <span class="eyebrow">Which is Right for You?</span>
+      <h2 class="section-title">Course vs.<br><em>3-Month Program</em></h2>
+    </div>
+    <table class="diff-table fade-in">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Self-Paced Course</th>
+          <th>3-Month Program</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Price</td><td>₹2,999 – ₹4,999</td><td>₹15,000 – ₹50,000</td></tr>
+        <tr><td>Dr. Raga's direct attention</td><td class="diff-cross">—</td><td class="diff-check">✓ Monthly 1:1</td></tr>
+        <tr><td>Personalised plan</td><td class="diff-cross">—</td><td class="diff-check">✓ Fully custom</td></tr>
+        <tr><td>Works at your own pace</td><td class="diff-check">✓</td><td class="diff-cross">Set schedule</td></tr>
+        <tr><td>Lab test interpretation</td><td class="diff-cross">—</td><td class="diff-check">✓ Included</td></tr>
+        <tr><td>Community support</td><td class="diff-cross">—</td><td class="diff-check">✓ WhatsApp group</td></tr>
+        <tr><td>Best for</td><td>Self-starters who want to understand their body</td><td>Women ready for a guided, accountable transformation</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;" class="fade-in">
+      <a href="#" onclick="document.getElementById('wl-email').focus()" class="btn-primary">Join Course Waitlist</a>
+      <a href="programs.html" class="btn-ghost" style="color:var(--plum);border-color:var(--border);">See 3-Month Programs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background:var(--cream);" class="section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">How Courses Work</span>
+      <h2 class="section-title">Learn at Your<br><em>Own Pace, Anywhere</em></h2>
+    </div>
+    <div class="how-grid fade-in">
+      <div class="how-cell">
+        <div class="how-num">1</div>
+        <div class="how-title">Enrol</div>
+        <p class="how-body">Pay once. Get lifetime access to all modules, resources, and future updates.</p>
+      </div>
+      <div class="how-cell">
+        <div class="how-num">2</div>
+        <div class="how-title">Watch</div>
+        <p class="how-body">Video lessons in English and Telugu. Watch on any device, pause, rewind, repeat.</p>
+      </div>
+      <div class="how-cell">
+        <div class="how-num">3</div>
+        <div class="how-title">Apply</div>
+        <p class="how-body">Each module ends with a practical action — a meal swap, a test to request, a habit to start.</p>
+      </div>
+      <div class="how-cell">
+        <div class="how-num">4</div>
+        <div class="how-title">Upgrade</div>
+        <p class="how-body">Course graduates get ₹1,000 off a 3-month program consultation — your education continues.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section style="background:var(--plum);padding:4rem 0;">
+  <div class="section-inner" style="text-align:center;">
+    <div class="fade-in">
+      <span class="eyebrow eyebrow-light">Not Sure Where to Start?</span>
+      <h2 class="section-title light" style="margin-bottom:0.75rem;">Ask Dr. Raga — It's Free</h2>
+      <p class="section-body light" style="max-width:480px;margin:0 auto 2rem;">Tell her your main health concern. She'll tell you which course — or which program — is right for you. Personally. In 48 hours.</p>
+      <a href="ask.html" class="btn-primary gold">Ask Your Free Question →</a>
+    </div>
+  </div>
+</section>
+
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script>
+function toggleCurriculum(btn) {
+  const card = btn.closest('.course-card-top');
+  const isOpen = btn.classList.contains('curriculum-open');
+  if (isOpen) {
+    btn.classList.remove('curriculum-open');
+    btn.querySelector('span:first-child').textContent = 'View Full Curriculum';
+  } else {
+    btn.classList.add('curriculum-open');
+    btn.querySelector('span:first-child').textContent = 'Hide Curriculum';
+  }
+}
+
+function joinWaitlist(e) {
+  if (e) e.preventDefault();
+  const email = document.getElementById('wl-email').value;
+  if (!email) return;
+  const btn = document.querySelector('.wb-btn');
+  btn.textContent = 'Joined! ✓';
+  btn.style.background = '#25D366';
+  const leads = JSON.parse(localStorage.getItem('fhw_course_waitlist') || '[]');
+  leads.push({ email, course: 'general', timestamp: new Date().toISOString() });
+  localStorage.setItem('fhw_course_waitlist', JSON.stringify(leads));
+  fetch('https://formspree.io/f/FHW_EMAIL_FORM_ID', {
+    method: 'POST',
+    body: JSON.stringify({ email, source: 'course-waitlist' }),
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+  }).catch(() => {});
+}
+function joinWaitlistFor(course) {
+  const email = prompt('Enter your email to join the waitlist for this course:');
+  if (!email) return;
+  const leads = JSON.parse(localStorage.getItem('fhw_course_waitlist') || '[]');
+  leads.push({ email, course, timestamp: new Date().toISOString() });
+  localStorage.setItem('fhw_course_waitlist', JSON.stringify(leads));
+  alert('You\'re on the waitlist! Dr. Raga will notify you when this course launches.');
+}
+</script>
+<script src="shared.js"></script>
+<script>initSite('courses');</script>
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women's Health Library — For Her Wellbeing</title>
+<meta name="description" content="Science-backed Women's Health Library by Dr. Raga Deepthi — articles and guides on PCOS, hormonal health, obesity, thyroid, gut health, pregnancy nutrition, menopause, and metabolic reset.">
+<meta property="og:title" content="Women's Health Library — For Her Wellbeing">
+<meta property="og:description" content="Understand your body. PhD-level science made accessible — PCOS, hormones, weight, gut health, pregnancy and more. By Dr. Raga Deepthi.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/womens-health.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+.search-bar-wrap {
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem; position: sticky; top: 68px; z-index: 50;
+}
+.search-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.search-input-wrap { position: relative; flex: 1; min-width: 220px; }
+.search-input {
+  width: 100%; padding: 0.65rem 1rem 0.65rem 2.75rem;
+  border: 1px solid var(--border); border-radius: 50px;
+  font-family: var(--sans); font-size: 0.88rem; font-weight: 300;
+  color: var(--text-dark); background: var(--cream); outline: none; transition: border-color 0.2s;
+}
+.search-input:focus { border-color: var(--gold); }
+.search-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light); width: 16px; height: 16px; }
+.filter-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.chip {
+  padding: 0.35rem 1rem; border-radius: 50px;
+  border: 1px solid var(--border); font-size: 0.75rem; font-weight: 500;
+  cursor: pointer; background: white; color: var(--text-mid); transition: all 0.2s;
+}
+.chip.active { background: var(--plum); border-color: var(--plum); color: white; }
+.chip:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+
+.lib-layout { display: grid; grid-template-columns: 260px 1fr; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; }
+.sidebar { position: sticky; top: 130px; }
+.sidebar-cat { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); padding: 1.25rem 0.75rem 0.4rem; }
+.sidebar-item a {
+  display: block; padding: 0.55rem 0.75rem; font-size: 0.83rem; font-weight: 400;
+  color: var(--text-mid); text-decoration: none; border-left: 2px solid transparent;
+  transition: all 0.2s; border-radius: 0 4px 4px 0; line-height: 1.3;
+}
+.sidebar-item a:hover { color: var(--plum); border-left-color: var(--gold); background: rgba(201,146,42,0.06); }
+
+.conditions-list { display: flex; flex-direction: column; gap: 2rem; }
+.cond-card {
+  background: var(--white); border-radius: 4px; border: 1px solid var(--border);
+  overflow: hidden; transition: box-shadow 0.3s; scroll-margin-top: 150px;
+}
+.cond-card:hover { box-shadow: 0 8px 32px rgba(74,16,66,0.08); }
+.cond-header {
+  padding: 2rem 2.5rem; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem;
+}
+.cond-cat { font-size: 0.67rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; display: block; }
+.cond-name { font-family: var(--serif); font-size: 1.8rem; font-weight: 400; color: var(--plum); line-height: 1.2; margin-bottom: 0.35rem; }
+.cond-tagline { font-size: 0.83rem; font-weight: 300; color: var(--text-light); font-style: italic; }
+.cond-toggle { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; flex-shrink: 0; transition: all 0.3s; background: white; }
+.cond-card.open .cond-toggle { background: var(--plum); border-color: var(--plum); color: white; transform: rotate(45deg); }
+.cond-summary { padding: 0 2.5rem 1.5rem; font-size: 0.9rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); border-top: 1px solid var(--border); padding-top: 1.25rem; }
+.cond-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
+.cond-card.open .cond-body { max-height: 2000px; }
+.cond-body-inner { padding: 2rem 2.5rem 2.5rem; border-top: 1px solid var(--border); }
+.cond-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; overflow-x: auto; }
+.ctab { padding: 0.6rem 1.25rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: all 0.2s; white-space: nowrap; }
+.ctab.active { color: var(--plum); border-bottom-color: var(--plum); }
+.ctab-pane { display: none; }
+.ctab-pane.active { display: block; }
+.content-h4 { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; color: var(--plum); margin-bottom: 0.85rem; margin-top: 1.5rem; }
+.content-h4:first-child { margin-top: 0; }
+.content-p { font-size: 0.88rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); margin-bottom: 0.85rem; }
+.symp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.symp-item { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.83rem; font-weight: 300; color: var(--text-mid); padding: 0.55rem 0.7rem; background: var(--cream); border-radius: 3px; line-height: 1.4; }
+.symp-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.tip-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.tip-item { display: grid; grid-template-columns: 26px 1fr; gap: 0.75rem; align-items: start; padding: 1rem 1.25rem; background: var(--cream); border-radius: 4px; border-left: 2px solid var(--gold); }
+.tip-num { font-family: var(--serif); font-size: 1rem; color: var(--gold); font-weight: 400; }
+.tip-text { font-size: 0.84rem; font-weight: 300; line-height: 1.65; color: var(--text-mid); }
+.tip-text strong { font-weight: 500; color: var(--text-dark); }
+.fhw-box { background: linear-gradient(135deg, rgba(74,16,66,0.04) 0%, rgba(201,146,42,0.06) 100%); border: 1px solid rgba(74,16,66,0.1); border-radius: 4px; padding: 2rem; margin-top: 1.5rem; }
+.fhw-box-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 500; color: var(--plum); margin-bottom: 0.75rem; }
+.fhw-box p { font-size: 0.85rem; font-weight: 300; line-height: 1.75; color: var(--text-mid); }
+.book-btn { display: inline-block; margin-top: 1.25rem; }
+
+.no-results { display: none; text-align: center; padding: 4rem 2rem; font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: var(--text-light); font-style: italic; }
+.cond-card.hidden { display: none; }
+
+@media(max-width:900px){ .lib-layout{grid-template-columns:1fr;} .sidebar{position:static;} .symp-grid{grid-template-columns:1fr;} }
+@media(max-width:600px){ .cond-header,.cond-summary,.cond-body-inner{padding-left:1.25rem;padding-right:1.25rem;} }
+</style>
+</head>
+<body>
+
+<div class="page-header" style="margin-top:68px;">
+  <div class="page-header-inner">
+    <span class="eyebrow eyebrow-light">Evidence-Based Education</span>
+    <h1 class="page-title">Women's Health <em>Library</em></h1>
+    <p class="page-sub">Detailed, science-backed information on conditions affecting women — written by Dr. Raga Deepthi to empower you with understanding, not just instructions.</p>
+    <div style="margin-top:1.5rem;background:rgba(201,146,42,0.12);border:1px solid rgba(201,146,42,0.25);border-radius:4px;padding:1rem 1.5rem;max-width:640px;">
+      <p style="font-size:0.8rem;font-weight:300;color:rgba(255,253,249,0.6);line-height:1.6;"><strong style="color:var(--gold);">Educational Purpose Only:</strong> This information is for awareness and education — not a substitute for professional medical diagnosis or treatment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="search-bar-wrap">
+  <div class="search-bar-inner">
+    <div class="search-input-wrap">
+      <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input class="search-input" type="text" id="search-input" placeholder="Search conditions, symptoms…" oninput="filterConditions()">
+    </div>
+    <div class="filter-chips">
+      <span class="chip active" onclick="filterChip('all',this)">All</span>
+      <span class="chip" onclick="filterChip('hormonal',this)">Hormonal</span>
+      <span class="chip" onclick="filterChip('reproductive',this)">Reproductive</span>
+      <span class="chip" onclick="filterChip('mental',this)">Mental Health</span>
+      <span class="chip" onclick="filterChip('metabolic',this)">Metabolic</span>
+      <span class="chip" onclick="filterChip('autoimmune',this)">Autoimmune</span>
+      <span class="chip" onclick="filterChip('pregnancy',this)">Pregnancy</span>
+    </div>
+  </div>
+</div>
+
+<div class="lib-layout">
+  <aside class="sidebar">
+    <ul style="list-style:none;">
+      <li class="sidebar-cat">Hormonal</li>
+      <li class="sidebar-item"><a href="#pcos">PCOS</a></li>
+      <li class="sidebar-item"><a href="#thyroid">Hypothyroidism / Hashimoto's</a></li>
+      <li class="sidebar-item"><a href="#pms">PMS & PMDD</a></li>
+      <li class="sidebar-item"><a href="#menopause">Menopause & Perimenopause</a></li>
+      <li class="sidebar-cat">Reproductive</li>
+      <li class="sidebar-item"><a href="#endometriosis">Endometriosis</a></li>
+      <li class="sidebar-item"><a href="#fibroids">Uterine Fibroids</a></li>
+      <li class="sidebar-item"><a href="#pelvic">Pelvic Floor Dysfunction</a></li>
+      <li class="sidebar-cat">Pregnancy</li>
+      <li class="sidebar-item"><a href="#gestational">Gestational Diabetes</a></li>
+      <li class="sidebar-item"><a href="#ppd">Postpartum Depression</a></li>
+      <li class="sidebar-item"><a href="#pregnancy-weight">Pregnancy Weight</a></li>
+      <li class="sidebar-cat">Mental Health</li>
+      <li class="sidebar-item"><a href="#anxiety">Anxiety in Women</a></li>
+      <li class="sidebar-item"><a href="#depression">Depression in Women</a></li>
+      <li class="sidebar-cat">Metabolic</li>
+      <li class="sidebar-item"><a href="#obesity">Obesity in Women</a></li>
+      <li class="sidebar-item"><a href="#insulin">Insulin Resistance</a></li>
+      <li class="sidebar-item"><a href="#osteoporosis">Osteoporosis</a></li>
+      <li class="sidebar-item"><a href="#anemia">Iron Deficiency Anemia</a></li>
+      <li class="sidebar-cat">Autoimmune</li>
+      <li class="sidebar-item"><a href="#autoimmune">Autoimmune in Women</a></li>
+      <li class="sidebar-item"><a href="#fibro">Fibromyalgia</a></li>
+    </ul>
+  </aside>
+
+  <div>
+    <div class="no-results" id="no-results">No conditions match your search.</div>
+    <div class="conditions-list" id="conditions-list">
+
+<!-- ===== PCOS ===== -->
+<div class="cond-card" id="pcos" data-cat="hormonal" data-name="pcos polycystic ovary syndrome androgen insulin hormonal weight acne hair">
+  <div class="cond-header" onclick="toggleCond('pcos')">
+    <div>
+      <span class="cond-cat">Hormonal</span>
+      <div class="cond-name">PCOS — Polycystic Ovary Syndrome</div>
+      <div class="cond-tagline">Affects 1 in 10 women of reproductive age — the most common hormonal disorder</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">PCOS is a complex hormonal and metabolic condition causing irregular periods, elevated androgens, insulin resistance, and often multiple small ovarian follicles. It's a leading cause of infertility and closely linked to gut dysbiosis and inflammation.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('pcos','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('pcos','symptoms',this)">Symptoms</div>
+        <div class="ctab" onclick="switchTab('pcos','causes',this)">Root Causes</div>
+        <div class="ctab" onclick="switchTab('pcos','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('pcos','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="pcos-overview">
+        <div class="content-h4">What is PCOS?</div>
+        <p class="content-p">PCOS affects 6–15% of women globally, presenting differently in every woman. Some have primarily metabolic symptoms; others have reproductive or dermatological manifestations. It carries long-term risks of Type 2 diabetes, cardiovascular disease, and mental health conditions.</p>
+        <p class="content-p">PCOS is not a single disease but a syndrome — the same root cause (hormonal dysregulation + insulin resistance + inflammation) manifests differently based on genetics, gut health, and lifestyle.</p>
+      </div>
+      <div class="ctab-pane" id="pcos-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Irregular, infrequent or absent periods</div>
+          <div class="symp-item"><div class="symp-dot"></div>Excess facial or body hair (hirsutism)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Acne on face, chest or back</div>
+          <div class="symp-item"><div class="symp-dot"></div>Thinning hair / female-pattern hair loss</div>
+          <div class="symp-item"><div class="symp-dot"></div>Weight gain, especially abdominal</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty losing weight</div>
+          <div class="symp-item"><div class="symp-dot"></div>Fatigue and low energy</div>
+          <div class="symp-item"><div class="symp-dot"></div>Mood swings, anxiety, depression</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty conceiving</div>
+          <div class="symp-item"><div class="symp-dot"></div>Skin darkening (acanthosis nigricans)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Heavy or prolonged menstrual bleeding</div>
+          <div class="symp-item"><div class="symp-dot"></div>Sleep disturbances or sleep apnea</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="pcos-causes">
+        <div class="content-h4">Root Causes</div>
+        <p class="content-p"><strong>Insulin Resistance:</strong> Up to 70% of women with PCOS have insulin resistance. Elevated insulin stimulates ovaries to produce excess androgens, disrupting ovulation.</p>
+        <p class="content-p"><strong>Chronic Low-Grade Inflammation:</strong> Higher inflammatory markers stimulate androgen production and worsen insulin resistance — creating a vicious cycle.</p>
+        <p class="content-p"><strong>Gut Microbiome Dysbiosis:</strong> Research shows significantly different gut microbiome composition in PCOS — less diversity, altered bile acid metabolism, and increased intestinal permeability. This directly worsens hormonal and metabolic dysfunction.</p>
+        <p class="content-p"><strong>Environmental Factors:</strong> Endocrine-disrupting chemicals (BPA, phthalates), chronic stress, poor sleep, and sedentary lifestyle all contribute to PCOS severity.</p>
+      </div>
+      <div class="ctab-pane" id="pcos-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Anti-inflammatory nutrition:</strong> Low-glycemic, whole-food diet rich in colorful vegetables, legumes, healthy fats, and lean protein. Avoid refined carbohydrates, excess sugar, and ultra-processed foods.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Microbiome restoration:</strong> Fermented foods (yogurt, kefir, kimchi), prebiotic fiber (onions, garlic, oats), evidence-based probiotic supplementation to restore gut diversity.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Yoga & mindful movement:</strong> Both resistance training and aerobic exercise improve insulin sensitivity. Yoga — particularly pelvic-targeted practices — supports hormonal regulation and stress reduction.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Stress management:</strong> Chronic stress elevates cortisol, which worsens insulin resistance and disrupts the HPO axis. Daily meditation, breathwork, and adequate sleep are non-negotiable.</div></div>
+          <div class="tip-item"><div class="tip-num">05</div><div class="tip-text"><strong>Evidence-based supplements:</strong> Inositol (myo + D-chiro), magnesium, Vitamin D, zinc, and N-acetylcysteine have strong research support. Always discuss with your healthcare provider.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="pcos-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">PCOS Healing Workshop — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's PhD background in Pediatric Metabolism makes For Her Wellbeing uniquely equipped to address PCOS at its root. Our 3-month PCOS Workshop combines precision metabolic assessment, microbiome-focused nutrition, therapeutic yoga for hormonal balance, and guided meditation. Real results: Divyasree conceived naturally after following the program; Padma's periods regulated in 20 days.</p>
+          <a href="contact.html?program=pcos" class="btn-primary book-btn">Book a PCOS Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OBESITY ===== -->
+<div class="cond-card" id="obesity" data-cat="metabolic" data-name="obesity weight gain hormonal fat insulin resistance gut metabolism women">
+  <div class="cond-header" onclick="toggleCond('obesity')">
+    <div>
+      <span class="cond-cat">Metabolic</span>
+      <div class="cond-name">Obesity & Weight Management in Women</div>
+      <div class="cond-tagline">Hormonal, not just caloric — why standard diets fail women</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Women's weight is regulated by a complex interplay of estrogen, progesterone, insulin, cortisol, thyroid hormone, and gut bacteria. Standard calorie-counting ignores all of these — which is why it fails the majority of women who struggle with weight.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('obesity','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('obesity','causes',this)">Root Causes</div>
+        <div class="ctab" onclick="switchTab('obesity','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('obesity','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="obesity-overview">
+        <div class="content-h4">Why Women Gain & Hold Weight Differently</div>
+        <p class="content-p">Estrogen drives fat storage in hips, thighs, and abdomen. Post-menopausal women experience accelerated abdominal fat accumulation as estrogen declines. PCOS, thyroid dysfunction, and insulin resistance all compound this. The gut microbiome — now well-established as a regulator of body weight — shows distinctly different composition in obese women.</p>
+        <p class="content-p">Up to 88% of overweight women have underlying insulin resistance. Without addressing this, sustainable fat loss is biologically near-impossible — not a matter of willpower.</p>
+      </div>
+      <div class="ctab-pane" id="obesity-causes">
+        <div class="content-h4">Root Causes in Women</div>
+        <p class="content-p"><strong>Hormonal Fat:</strong> Estrogen dominance, low progesterone, elevated cortisol (chronic stress), and declining estrogen at menopause all shift where and how women store fat.</p>
+        <p class="content-p"><strong>Insulin Resistance:</strong> The most common metabolic driver. Cells stop responding to insulin; the pancreas overproduces it; fat storage is locked in and fat burning is blocked.</p>
+        <p class="content-p"><strong>Gut Dysbiosis:</strong> Obese individuals have less gut microbial diversity and altered energy-extracting bacteria. The gut literally harvests more calories from food and increases fat-storage signaling.</p>
+        <p class="content-p"><strong>Chronic Stress & Cortisol:</strong> Cortisol signals the body to store belly fat and break down muscle — the worst metabolic outcome. This creates a cycle that no diet alone can break.</p>
+        <p class="content-p"><strong>Sleep Deprivation:</strong> A single night of poor sleep reduces insulin sensitivity by 25%. Chronically poor sleep makes weight loss physiologically very difficult.</p>
+      </div>
+      <div class="ctab-pane" id="obesity-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Identify YOUR root driver:</strong> Is it hormonal, insulin-driven, gut-related, or stress-induced? A targeted assessment (blood tests, hormone panel, metabolic markers) reveals this — and determines the correct approach.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Low-glycemic, whole-food nutrition:</strong> Not a diet. An eating pattern that stabilises blood sugar, reduces insulin spikes, and supports gut health. Rich in fiber, protein, and healthy fats. Sustainable, not restrictive.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Post-meal walks + resistance training:</strong> A 10–15 minute walk after meals reduces post-meal blood glucose by 30–50%. Resistance training builds insulin-sensitive muscle. These two habits alone produce measurable results.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Gut microbiome restoration:</strong> 30+ plant species per week, fermented foods, adequate fiber. This addresses the gut driver of weight independently of calorie restriction.</div></div>
+          <div class="tip-item"><div class="tip-num">05</div><div class="tip-text"><strong>Stress and sleep as medicine:</strong> Daily meditation, yoga, and 7–9 hours of consistent sleep are not optional lifestyle add-ons — they are direct metabolic interventions that affect weight more than most people realise.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="obesity-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Women's Obesity Workshop — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's PhD in Pediatric Metabolism provides cellular-level understanding of fat storage, insulin signaling, and metabolic health. Our Women's Obesity Workshop addresses weight at its actual root — not with generic calorie advice, but with precision metabolic assessment, gut restoration, yoga, and community. Real result: Divyasree lost 15 kg in 3 months — and conceived naturally.</p>
+          <a href="contact.html?program=obesity" class="btn-primary book-btn">Book Obesity Workshop Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== POSTPARTUM DEPRESSION ===== -->
+<div class="cond-card" id="ppd" data-cat="mental pregnancy" data-name="postpartum depression ppd baby blues maternal mood hormones">
+  <div class="cond-header" onclick="toggleCond('ppd')">
+    <div>
+      <span class="cond-cat">Mental Health · Pregnancy</span>
+      <div class="cond-name">Postpartum Depression</div>
+      <div class="cond-tagline">Affects 1 in 7 new mothers — far more than just "baby blues"</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Postpartum Depression (PPD) involves profound hormonal shifts, microbiome disruption, nutritional depletion, and psychological changes that can severely impact a mother's wellbeing and her bond with her newborn. It is not a sign of weakness — it is a medical condition.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('ppd','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('ppd','symptoms',this)">Symptoms</div>
+        <div class="ctab" onclick="switchTab('ppd','causes',this)">Root Causes</div>
+        <div class="ctab" onclick="switchTab('ppd','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('ppd','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="ppd-overview">
+        <div class="content-h4">Understanding PPD</div>
+        <p class="content-p">PPD is distinct from "baby blues" (mild mood changes lasting 1–2 weeks) in its severity and duration. Estrogen and progesterone drop 90–95% in 24–48 hours after delivery — one of the most dramatic hormonal shifts the human body experiences. This crash profoundly affects serotonin and dopamine.</p>
+        <p class="content-p">Pregnancy and breastfeeding dramatically deplete iron, omega-3 DHA, B12, iodine, folate, zinc, and Vitamin D — all critical for brain and mood function. The gut-brain axis is also severely disrupted during and after birth.</p>
+      </div>
+      <div class="ctab-pane" id="ppd-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Persistent sadness, emptiness, hopelessness</div>
+          <div class="symp-item"><div class="symp-dot"></div>Feeling disconnected from your baby</div>
+          <div class="symp-item"><div class="symp-dot"></div>Extreme fatigue beyond normal new-mother tiredness</div>
+          <div class="symp-item"><div class="symp-dot"></div>Uncontrollable crying or tearfulness</div>
+          <div class="symp-item"><div class="symp-dot"></div>Irritability, anger, or resentment</div>
+          <div class="symp-item"><div class="symp-dot"></div>Intense anxiety or panic attacks</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty sleeping even when baby sleeps</div>
+          <div class="symp-item"><div class="symp-dot"></div>Appetite changes</div>
+          <div class="symp-item"><div class="symp-dot"></div>Feelings of worthlessness or guilt</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty bonding</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="ppd-causes">
+        <div class="content-h4">Root Causes</div>
+        <p class="content-p"><strong>Hormonal Crash:</strong> The 90–95% drop in estrogen and progesterone after delivery directly impacts serotonin, dopamine, and GABA — the neurotransmitters that regulate mood and calm.</p>
+        <p class="content-p"><strong>Nutritional Depletion:</strong> Pregnancy depletes iron, omega-3 DHA (critical for brain health), B12, iodine, folate, zinc, and Vitamin D. These deficiencies directly impair mood regulation.</p>
+        <p class="content-p"><strong>Gut-Brain Axis Disruption:</strong> Birth, antibiotics, and the postpartum period severely alter the gut microbiome. Since 90% of serotonin is produced in the gut, dysbiosis directly contributes to depressive symptoms.</p>
+        <p class="content-p"><strong>Sleep Deprivation:</strong> Chronic sleep deprivation alone can cause or mimic depression — new mothers face some of the most severe sleep disruption of their lives.</p>
+      </div>
+      <div class="ctab-pane" id="ppd-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Seek professional support immediately:</strong> PPD is highly treatable. Psychotherapy (CBT, IPT) and when appropriate medication are first-line. Please reach out — there is no shame in this.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Nutritional replenishment:</strong> Iron-rich foods, omega-3 fatty acids, B vitamins, and Vitamin D. Targeted supplementation under guidance, especially if breastfeeding.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Restorative postnatal yoga:</strong> Gentle postnatal yoga supports physical recovery, reduces cortisol, and provides structured self-care. Even 15 minutes daily makes a measurable difference.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Meditation and mindfulness:</strong> Loving-kindness meditation particularly helps rebuild connection with your baby. Daily mindfulness, even briefly, is clinically shown to reduce PPD severity.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="ppd-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Postpartum Support at For Her Wellbeing</div>
+          <p>Our postnatal yoga program supports mothers recovering from childbirth — addressing pelvic floor restoration, hormonal rebalancing, and emotional healing. Combined with nutritional counselling for micronutrient replenishment and meditation training, we offer comprehensive, compassionate postpartum recovery.</p>
+          <a href="contact.html?program=obesity" class="btn-primary book-btn">Book a Postnatal Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GESTATIONAL DIABETES ===== -->
+<div class="cond-card" id="gestational" data-cat="pregnancy metabolic" data-name="gestational diabetes pregnancy blood sugar glucose insulin">
+  <div class="cond-header" onclick="toggleCond('gestational')">
+    <div>
+      <span class="cond-cat">Pregnancy · Metabolic</span>
+      <div class="cond-name">Gestational Diabetes</div>
+      <div class="cond-tagline">Affects 1 in 7 pregnancies globally — and carries a 50% lifetime risk of Type 2 diabetes</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Gestational diabetes (GDM) occurs when pregnancy hormones impair insulin signalling, causing elevated blood sugar that affects both mother and baby. It typically resolves after birth but is a strong predictor of future metabolic disease. Proactive management dramatically reduces risks for both.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('gestational','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('gestational','symptoms',this)">Symptoms & Risks</div>
+        <div class="ctab" onclick="switchTab('gestational','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('gestational','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="gestational-overview">
+        <div class="content-h4">What is Gestational Diabetes?</div>
+        <p class="content-p">GDM develops because pregnancy hormones (particularly human placental lactogen) cause insulin resistance in the mother. For most women, the pancreas compensates by producing more insulin. When it cannot compensate sufficiently, blood glucose rises — causing GDM.</p>
+        <p class="content-p">Risk factors include: pre-pregnancy overweight/obesity, previous GDM, PCOS, family history of diabetes, age over 35, and certain ethnic backgrounds (South Asian women are at significantly higher risk).</p>
+        <p class="content-p">Women with GDM have a 50% risk of developing Type 2 diabetes within 10 years. Their babies have elevated risk of childhood obesity and metabolic disease. Early, targeted intervention changes both trajectories.</p>
+      </div>
+      <div class="ctab-pane" id="gestational-symptoms">
+        <div class="content-h4">Often Asymptomatic — But Watch For:</div>
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Unusual thirst or frequent urination</div>
+          <div class="symp-item"><div class="symp-dot"></div>Fatigue beyond normal pregnancy tiredness</div>
+          <div class="symp-item"><div class="symp-dot"></div>Blurred vision</div>
+          <div class="symp-item"><div class="symp-dot"></div>Frequent infections (UTIs, thrush)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Nausea (can persist beyond 1st trimester)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Large baby (macrosomia) on ultrasound</div>
+        </div>
+        <div class="content-h4" style="margin-top:1.5rem;">Risks If Unmanaged</div>
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Large for gestational age baby</div>
+          <div class="symp-item"><div class="symp-dot"></div>Premature birth</div>
+          <div class="symp-item"><div class="symp-dot"></div>C-section risk increases significantly</div>
+          <div class="symp-item"><div class="symp-dot"></div>Neonatal low blood sugar</div>
+          <div class="symp-item"><div class="symp-dot"></div>Preeclampsia in mother</div>
+          <div class="symp-item"><div class="symp-dot"></div>50% Type 2 diabetes risk post-delivery</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="gestational-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Trimester-by-trimester nutrition:</strong> Carefully timed, low-glycemic meals that keep blood sugar stable without restricting nutrients needed for baby's growth. Carbohydrate quality and timing matter enormously.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Post-meal gentle movement:</strong> A 10–15 minute walk after every meal reduces post-meal blood glucose by 30–50% without medication. Safe, proven, and accessible for most pregnant women.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Prenatal yoga:</strong> Specific yoga sequences safe for each trimester improve insulin sensitivity, reduce stress hormones, and support healthy blood glucose regulation.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Post-delivery metabolic rescue:</strong> Targeted nutrition, exercise, and monitoring in the year after delivery can reduce Type 2 diabetes risk by over 50%. This window is critical and often ignored by healthcare systems.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="gestational-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Gestational Diabetes Support — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's PhD in Pediatric Metabolism makes gestational diabetes a deeply personal specialty. Our pregnancy weight and GDM track within the Obesity Workshop provides trimester-specific nutrition protocols, prenatal yoga, blood sugar monitoring guidance, and post-delivery metabolic recovery support — protecting both you and your baby's long-term health.</p>
+          <a href="contact.html?program=obesity" class="btn-primary book-btn">Book a Pregnancy Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PREGNANCY WEIGHT ===== -->
+<div class="cond-card" id="pregnancy-weight" data-cat="pregnancy metabolic" data-name="pregnancy weight gain postpartum weight loss gestational">
+  <div class="cond-header" onclick="toggleCond('pregnancy-weight')">
+    <div>
+      <span class="cond-cat">Pregnancy · Metabolic</span>
+      <div class="cond-name">Pregnancy & Postpartum Weight</div>
+      <div class="cond-tagline">Not just cosmetic — gestational weight directly affects birth outcomes and lifelong health</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Pregnancy weight gain follows evidence-based guidelines that depend on pre-pregnancy BMI. Too little restricts baby's growth; too much increases risk of gestational diabetes, preeclampsia, and C-section. Postpartum weight loss requires a completely different approach to standard dieting.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('pregnancy-weight','preconception',this)">Preconception</div>
+        <div class="ctab" onclick="switchTab('pregnancy-weight','gestational',this)">During Pregnancy</div>
+        <div class="ctab" onclick="switchTab('pregnancy-weight','postpartum',this)">Postpartum</div>
+        <div class="ctab" onclick="switchTab('pregnancy-weight','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="pregnancy-weight-preconception">
+        <div class="content-h4">Preconception Weight Optimisation</div>
+        <p class="content-p">Achieving a healthy weight before conception significantly improves fertility, reduces risk of miscarriage, gestational diabetes, preeclampsia, and delivery complications. Research shows even 5% weight loss in overweight women significantly improves ovulation and conception rates.</p>
+        <p class="content-p">For women with PCOS — a leading cause of infertility — targeted weight management that addresses insulin resistance simultaneously treats both the weight AND the fertility challenge.</p>
+      </div>
+      <div class="ctab-pane" id="pregnancy-weight-gestational">
+        <div class="content-h4">Recommended Weight Gain During Pregnancy</div>
+        <p class="content-p">Guidelines vary by pre-pregnancy BMI: underweight women should gain 12–18 kg; normal weight 11–16 kg; overweight 7–11 kg; obese women 5–9 kg. These ranges support healthy fetal development while minimizing complications.</p>
+        <p class="content-p">Our trimester-by-trimester nutrition plans ensure appropriate gain — with the right calories, protein, iron, calcium, omega-3s, and folate for each stage of development — while managing blood sugar and preventing excessive gain.</p>
+      </div>
+      <div class="ctab-pane" id="pregnancy-weight-postpartum">
+        <div class="content-h4">Postpartum Weight Recovery</div>
+        <p class="content-p">The postpartum period demands compassion, not crash diets. Hormonal shifts, sleep deprivation, breastfeeding nutritional needs, and emotional changes make postpartum weight loss fundamentally different from other weight loss.</p>
+        <p class="content-p">Breastfeeding burns approximately 500 extra calories per day — but cutting calories too aggressively reduces milk supply and depletes maternal nutrition reserves. The goal is recovery, restoration, and gradual weight loss over 6–12 months — not rapid loss.</p>
+        <p class="content-p">Our postnatal yoga program rebuilds core strength, pelvic floor function, and hormonal balance — creating the physical foundation for sustainable weight recovery.</p>
+      </div>
+      <div class="ctab-pane" id="pregnancy-weight-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Pregnancy Weight Support — For Her Wellbeing</div>
+          <p>Our Obesity Workshop includes a dedicated pregnancy and postpartum weight track — providing preconception optimisation, trimester nutrition plans, prenatal yoga, gestational diabetes prevention, and postnatal recovery support. Dr. Raga Deepthi's metabolic science background ensures your program protects both your health and your baby's.</p>
+          <a href="contact.html?program=obesity" class="btn-primary book-btn">Book a Pregnancy Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== AUTOIMMUNE ===== -->
+<div class="cond-card" id="autoimmune" data-cat="autoimmune" data-name="autoimmune lupus hashimoto rheumatoid arthritis immune inflammation women">
+  <div class="cond-header" onclick="toggleCond('autoimmune')">
+    <div>
+      <span class="cond-cat">Autoimmune</span>
+      <div class="cond-name">Autoimmune Conditions in Women</div>
+      <div class="cond-tagline">Women are 4× more likely than men to develop autoimmune disease — estrogen is key</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Autoimmune diseases — where the immune system attacks the body's own tissues — disproportionately affect women. Hashimoto's thyroiditis, Lupus (SLE), Rheumatoid Arthritis, and multiple sclerosis are all far more common in women. The gut microbiome, estrogen, and intestinal permeability ("leaky gut") play central roles.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('autoimmune','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('autoimmune','causes',this)">Root Causes</div>
+        <div class="ctab" onclick="switchTab('autoimmune','management',this)">Holistic Management</div>
+        <div class="ctab" onclick="switchTab('autoimmune','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="autoimmune-overview">
+        <div class="content-h4">The Autoimmune-Estrogen Connection</div>
+        <p class="content-p">Estrogen modulates immune function — enhancing it in ways that protect against infection but also increase susceptibility to autoimmunity. This explains why autoimmune conditions cluster around hormonal transitions: puberty, pregnancy, postpartum, and menopause.</p>
+        <p class="content-p">Common autoimmune conditions in women include: Hashimoto's thyroiditis (10% of women), Lupus SLE (9:1 female:male ratio), Rheumatoid Arthritis (3:1), Multiple Sclerosis (3:1), Sjögren's Syndrome (9:1), and Celiac Disease.</p>
+        <p class="content-p">Dr. Raga Deepthi's personal journey through autoimmune challenges — combined with her PhD-level science — gives her uniquely deep insight into supporting women with these conditions.</p>
+      </div>
+      <div class="ctab-pane" id="autoimmune-causes">
+        <div class="content-h4">Root Causes — The Triad</div>
+        <p class="content-p"><strong>1. Gut Permeability ("Leaky Gut"):</strong> A compromised intestinal barrier allows bacterial components into the bloodstream, triggering immune activation. Dysbiosis consistently precedes and accompanies autoimmune flares. This is the most modifiable root cause.</p>
+        <p class="content-p"><strong>2. Molecular Mimicry:</strong> Some gut bacteria and viruses share protein sequences with human tissues. The immune system, trained to attack the pathogen, mistakenly attacks the body's own tissues — this is how many autoimmune conditions are triggered.</p>
+        <p class="content-p"><strong>3. Immune Dysregulation:</strong> Loss of immune tolerance — the ability to recognise "self" — is central to all autoimmune conditions. Chronic stress, sleep deprivation, nutrient deficiencies (especially Vitamin D), and environmental toxins all impair immune tolerance.</p>
+      </div>
+      <div class="ctab-pane" id="autoimmune-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Heal the gut as priority one:</strong> An elimination diet (removing gluten, dairy, and other common triggers for 30–60 days), gut-healing foods (bone broth, collagen, L-glutamine), and microbiome restoration are foundational. Research consistently links gut health to autoimmune activity.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Anti-inflammatory nutrition:</strong> Mediterranean-style, phytonutrient-dense eating. Omega-3 fatty acids (fish, walnuts, flaxseed) reduce inflammatory cytokines that drive autoimmune flares. Avoid inflammatory ultra-processed foods, refined sugar, and seed oils.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Vitamin D optimisation:</strong> Vitamin D is one of the most powerful immune modulators. Deficiency is almost universal in autoimmune patients — and supplementation consistently reduces antibody levels and flare frequency. Target 60–80 ng/mL under medical supervision.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Stress reduction is non-negotiable:</strong> Cortisol dysregulation drives autoimmune flares. Daily meditation, yoga (especially restorative and yin styles), and sleep optimisation measurably reduce inflammatory markers and antibody levels.</div></div>
+          <div class="tip-item"><div class="tip-num">05</div><div class="tip-text"><strong>Work alongside your specialist:</strong> Holistic approaches complement — not replace — rheumatology, endocrinology, or neurology care. The goal is to reduce disease activity, lower medication dosage over time, and improve quality of life.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="autoimmune-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Premium Autoimmune Support — For Her Wellbeing</div>
+          <p>Autoimmune conditions are where Dr. Raga Deepthi's personal story and scientific expertise most powerfully converge. Her own journey through autoimmune challenges — resolved through gut healing, targeted nutrition, yoga, and stress modulation — forms the lived foundation of our premium autoimmune program.</p>
+          <p style="margin-top:0.75rem;">Our Premium 1:1 Autoimmune Intensive (₹50,000–₹1,00,000 / 6 months) includes comprehensive gut and immune assessment, elimination and reintroduction protocols, targeted supplement therapy, restorative yoga, and meditation — designed to achieve remission and sustained quality of life alongside your specialist's care.</p>
+          <a href="contact.html" class="btn-primary book-btn">Book a Premium Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== THYROID ===== -->
+<div class="cond-card" id="thyroid" data-cat="hormonal autoimmune" data-name="thyroid hypothyroidism hashimoto TSH fatigue weight cold">
+  <div class="cond-header" onclick="toggleCond('thyroid')">
+    <div>
+      <span class="cond-cat">Hormonal · Autoimmune</span>
+      <div class="cond-name">Hypothyroidism & Hashimoto's</div>
+      <div class="cond-tagline">Affects up to 10% of women — and is frequently underdiagnosed</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Hypothyroidism (underactive thyroid) — most commonly caused by Hashimoto's Thyroiditis, an autoimmune attack on the thyroid — slows virtually every metabolic process. It is 5–8× more common in women and strongly linked to gut health, stress, and nutrient deficiencies.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('thyroid','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('thyroid','symptoms',this)">Symptoms</div>
+        <div class="ctab" onclick="switchTab('thyroid','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('thyroid','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="thyroid-overview">
+        <div class="content-h4">The Thyroid-Gut-Hormone Connection</div>
+        <p class="content-p">The thyroid regulates metabolism, temperature, heart rate, mood, and reproductive hormones. When it underperforms, everything slows — from digestion to cognition. Hashimoto's thyroiditis is an autoimmune condition where antibodies attack thyroid tissue, and is strongly linked to intestinal permeability (leaky gut).</p>
+        <p class="content-p">Comprehensive thyroid testing should include TSH, Free T3, Free T4, Reverse T3, and TPO/thyroglobulin antibodies. Many women are told their thyroid is "normal" when only TSH is tested — missing subclinical dysfunction and active autoimmune disease.</p>
+      </div>
+      <div class="ctab-pane" id="thyroid-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Persistent fatigue and sluggishness</div>
+          <div class="symp-item"><div class="symp-dot"></div>Unexplained weight gain</div>
+          <div class="symp-item"><div class="symp-dot"></div>Cold intolerance (always feeling cold)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Constipation</div>
+          <div class="symp-item"><div class="symp-dot"></div>Brain fog and poor memory</div>
+          <div class="symp-item"><div class="symp-dot"></div>Depression and low mood</div>
+          <div class="symp-item"><div class="symp-dot"></div>Dry skin and hair</div>
+          <div class="symp-item"><div class="symp-dot"></div>Hair loss (incl. outer eyebrow thinning)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Irregular or heavy periods</div>
+          <div class="symp-item"><div class="symp-dot"></div>Muscle weakness and joint pain</div>
+          <div class="symp-item"><div class="symp-dot"></div>High cholesterol</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty conceiving</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="thyroid-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Thyroid-supportive nutrition:</strong> Selenium (2 Brazil nuts/day), iodine (eggs, seaweed in moderation), zinc (pumpkin seeds), and iron. For Hashimoto's, a gluten-free trial is strongly supported by evidence — molecular mimicry between gluten and thyroid tissue is well-documented.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Gut healing:</strong> Leaky gut is a key Hashimoto's trigger. Gut-healing foods (bone broth, collagen, fermented foods), removal of inflammatory triggers, and microbiome restoration reduce TPO antibody levels over time.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Stress management:</strong> Cortisol impairs T4-to-active-T3 conversion. Adaptogenic support (ashwagandha under guidance), daily meditation, and 7–9 hours of sleep directly improve thyroid function.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Gentle, consistent movement:</strong> Yoga and walking improve metabolism and reduce autoimmune-associated fatigue without over-stressing the adrenals. Avoid high-intensity training during active Hashimoto's flares.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="thyroid-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Thyroid Support at For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's personal autoimmune journey gives her deep empathy and clinical insight into thyroid health. Our approach targets Hashimoto's through gut restoration, targeted nutrition, stress modulation, and therapeutic yoga — reducing antibody load and supporting optimal thyroid conversion alongside your endocrinologist's care.</p>
+          <a href="contact.html" class="btn-primary book-btn">Book a Thyroid Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== INSULIN RESISTANCE ===== -->
+<div class="cond-card" id="insulin" data-cat="metabolic" data-name="insulin resistance metabolic prediabetes blood sugar energy weight fatigue">
+  <div class="cond-header" onclick="toggleCond('insulin')">
+    <div>
+      <span class="cond-cat">Metabolic</span>
+      <div class="cond-name">Insulin Resistance</div>
+      <div class="cond-tagline">Affects 1 in 3 adults — the silent driver behind PCOS, weight gain, and fatigue</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Insulin resistance — where cells fail to respond efficiently to insulin — is highly prevalent in women and directly links to PCOS, hormonal imbalance, weight gain, and cardiovascular risk. It is largely reversible with targeted lifestyle intervention — and is dramatically underdiagnosed because standard blood tests often miss it.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('insulin','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('insulin','symptoms',this)">Signs & Symptoms</div>
+        <div class="ctab" onclick="switchTab('insulin','management',this)">Reversal</div>
+        <div class="ctab" onclick="switchTab('insulin','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="insulin-overview">
+        <div class="content-h4">Why Insulin Resistance Matters for Women</div>
+        <p class="content-p">Chronically elevated insulin — the hallmark of insulin resistance — stimulates ovaries to produce excess androgens (directly causing PCOS), promotes estrogen dominance, drives fat storage (especially abdominal), and accelerates cellular aging. It is the metabolic driver underlying many of the most common conditions in women.</p>
+        <p class="content-p">Standard fasting blood glucose can appear "normal" while insulin is already significantly elevated. Fasting insulin and HOMA-IR testing are far more sensitive and should be requested alongside blood glucose and HbA1c.</p>
+      </div>
+      <div class="ctab-pane" id="insulin-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Persistent fatigue, especially after meals</div>
+          <div class="symp-item"><div class="symp-dot"></div>Carbohydrate and sugar cravings</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty losing weight despite dieting</div>
+          <div class="symp-item"><div class="symp-dot"></div>Abdominal weight gain</div>
+          <div class="symp-item"><div class="symp-dot"></div>Brain fog and difficulty concentrating</div>
+          <div class="symp-item"><div class="symp-dot"></div>Skin darkening in body folds</div>
+          <div class="symp-item"><div class="symp-dot"></div>Skin tags</div>
+          <div class="symp-item"><div class="symp-dot"></div>Elevated fasting triglycerides</div>
+          <div class="symp-item"><div class="symp-dot"></div>Low HDL cholesterol</div>
+          <div class="symp-item"><div class="symp-dot"></div>Frequent hunger shortly after eating</div>
+          <div class="symp-item"><div class="symp-dot"></div>Mood swings tied to eating patterns</div>
+          <div class="symp-item"><div class="symp-dot"></div>Irregular periods (via PCOS pathway)</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="insulin-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Low-glycemic nutrition:</strong> Prioritise non-starchy vegetables, legumes, nuts, seeds, and quality protein at every meal. Minimize refined carbohydrates and added sugars. This single change produces measurable insulin improvement within weeks.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Post-meal walks:</strong> 10–15 minutes of walking after meals reduces post-meal blood glucose by 30–50%. This is one of the most evidence-supported insulin-sensitising habits available — free, safe, and immediately effective.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Resistance training:</strong> Muscle is the primary site of glucose disposal. Building muscle through resistance training (2–3×/week) creates a metabolic sink that permanently improves insulin sensitivity — even at rest.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Prioritise sleep:</strong> A single night of poor sleep reduces insulin sensitivity by 25%. Consistent 7–9 hours of sleep is a direct metabolic intervention — as powerful as many supplements.</div></div>
+          <div class="tip-item"><div class="tip-num">05</div><div class="tip-text"><strong>Key supplements:</strong> Berberine, myo-inositol, magnesium, chromium, alpha-lipoic acid, and Vitamin D have robust evidence. Always discuss with your healthcare provider before starting.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="insulin-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Metabolic Reset — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's PhD in Pediatric Metabolism provides cellular-level understanding of insulin signaling. Our Metabolic Reset Workshop addresses insulin resistance through precision nutrition science, targeted supplementation, microbiome optimisation, yoga, and post-meal movement habits — providing a comprehensive metabolic reset grounded in science.</p>
+          <a href="contact.html?program=metabolic" class="btn-primary book-btn">Book a Metabolic Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MENOPAUSE ===== -->
+<div class="cond-card" id="menopause" data-cat="hormonal" data-name="menopause perimenopause hot flashes estrogen bone weight mood sleep">
+  <div class="cond-header" onclick="toggleCond('menopause')">
+    <div>
+      <span class="cond-cat">Hormonal</span>
+      <div class="cond-name">Menopause & Perimenopause</div>
+      <div class="cond-tagline">A natural transition — but one that deserves serious, proactive attention</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Perimenopause (beginning in a woman's 40s) and menopause mark a profound hormonal shift with far-reaching effects on metabolism, bone health, cardiovascular risk, brain function, and emotional wellbeing. This transition can last 4–12 years and is a critical window for proactive health intervention.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('menopause','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('menopause','symptoms',this)">Symptoms</div>
+        <div class="ctab" onclick="switchTab('menopause','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('menopause','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="menopause-overview">
+        <div class="content-h4">Why Menopause Demands Attention</div>
+        <p class="content-p">Estrogen is not just a reproductive hormone — it protects the heart, bones, brain, urinary tract, and skin. Its decline at menopause increases risk for cardiovascular disease (the leading cause of death in women), osteoporosis, dementia, and metabolic syndrome.</p>
+        <p class="content-p">The gut microbiome undergoes significant changes at menopause, affecting estrogen recycling, metabolism, weight, mood, and inflammation. Addressing the microbiome is central to managing this transition holistically.</p>
+      </div>
+      <div class="ctab-pane" id="menopause-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Hot flashes and night sweats</div>
+          <div class="symp-item"><div class="symp-dot"></div>Sleep disturbances and insomnia</div>
+          <div class="symp-item"><div class="symp-dot"></div>Mood changes: anxiety, irritability, depression</div>
+          <div class="symp-item"><div class="symp-dot"></div>Brain fog and memory issues</div>
+          <div class="symp-item"><div class="symp-dot"></div>Weight gain (especially abdominal)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Vaginal dryness and discomfort</div>
+          <div class="symp-item"><div class="symp-dot"></div>Decreased libido</div>
+          <div class="symp-item"><div class="symp-dot"></div>Joint and muscle aches</div>
+          <div class="symp-item"><div class="symp-dot"></div>Hair thinning and skin changes</div>
+          <div class="symp-item"><div class="symp-dot"></div>Urinary urgency and recurrent UTIs</div>
+          <div class="symp-item"><div class="symp-dot"></div>Heart palpitations</div>
+          <div class="symp-item"><div class="symp-dot"></div>Loss of bone density</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="menopause-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Nutrition for the menopausal transition:</strong> Phytoestrogen-rich foods (flaxseed, soy, legumes), calcium (1200mg/day from food and supplements), Vitamin D, magnesium for bone protection, and a Mediterranean-style diet for cardiovascular health.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Strength training as priority:</strong> Essential for preserving muscle mass, bone density, and metabolic rate. 2–3 resistance sessions per week. Yoga complements this with balance, flexibility, and stress reduction — and specific poses build bone density.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Meditation for vasomotor symptoms:</strong> Mindfulness-based stress reduction (MBSR) is clinically shown to reduce hot flash frequency and severity, improve sleep, and reduce anxiety during menopause. A practical, evidence-based tool.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Microbiome support:</strong> A post-menopausal microbiome supports estrogen metabolism, weight management, and mood. 30+ plant species per week, fermented foods, and targeted probiotics. This is one of the most underappreciated tools in menopause management.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="menopause-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Menopause Support — For Her Wellbeing</div>
+          <p>We offer specialised menopause and perimenopause support through targeted nutrition, microbiome restoration, yoga adapted for midlife women (including bone-building sequences), and meditation training. Dr. Raga Deepthi's metabolic science background ensures your program addresses the cardiovascular, skeletal, and metabolic dimensions — not just the hot flashes.</p>
+          <a href="contact.html" class="btn-primary book-btn">Book a Menopause Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ANXIETY ===== -->
+<div class="cond-card" id="anxiety" data-cat="mental" data-name="anxiety women panic stress cortisol hormonal gut brain mood">
+  <div class="cond-header" onclick="toggleCond('anxiety')">
+    <div>
+      <span class="cond-cat">Mental Health</span>
+      <div class="cond-name">Anxiety in Women</div>
+      <div class="cond-tagline">Women experience anxiety disorders at 2× the rate of men — the hormonal connection is key</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Anxiety disorders are the most common mental health conditions globally. In women, anxiety frequently worsens premenstrually, postpartum, and perimensopausally — because sex hormones directly modulate the brain's anxiety circuits, gut serotonin production, and the HPA stress axis.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('anxiety','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('anxiety','symptoms',this)">Symptoms</div>
+        <div class="ctab" onclick="switchTab('anxiety','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('anxiety','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="anxiety-overview">
+        <div class="content-h4">The Gut-Brain-Hormone Axis in Female Anxiety</div>
+        <p class="content-p">The gut produces 90% of the body's serotonin. Gut microbiome composition directly affects anxiety levels — dysbiosis is consistently associated with higher anxiety in research. Estrogen fluctuations amplify or dampen GABA receptor activity, explaining why anxiety worsens premenstrually and perimensopausally. These are not "emotional" problems — they are biochemical.</p>
+      </div>
+      <div class="ctab-pane" id="anxiety-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Excessive, uncontrollable worry</div>
+          <div class="symp-item"><div class="symp-dot"></div>Racing heart and palpitations</div>
+          <div class="symp-item"><div class="symp-dot"></div>Restlessness and feeling "on edge"</div>
+          <div class="symp-item"><div class="symp-dot"></div>Shortness of breath</div>
+          <div class="symp-item"><div class="symp-dot"></div>Muscle tension and headaches</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty sleeping</div>
+          <div class="symp-item"><div class="symp-dot"></div>Irritability and overwhelm</div>
+          <div class="symp-item"><div class="symp-dot"></div>Panic attacks</div>
+          <div class="symp-item"><div class="symp-dot"></div>GI symptoms: nausea, IBS-like issues</div>
+          <div class="symp-item"><div class="symp-dot"></div>Social withdrawal</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="anxiety-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Meditation and breathwork:</strong> Diaphragmatic breathing activates the parasympathetic nervous system within seconds. Regular mindfulness meditation rewires anxiety circuits in the brain over time — as effective as medication for mild-moderate anxiety in multiple trials.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Gut health as anxiety medicine:</strong> A diverse, fiber-rich diet supporting microbiome health reduces gut-derived anxiety signals. Fermented foods, omega-3s, and minimising ultra-processed foods all benefit gut-brain axis function.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Yoga for the nervous system:</strong> Yin yoga, Yoga Nidra, and slow Hatha directly activate the vagus nerve and parasympathetic system. Even one session per week produces measurable anxiety reduction.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Nutritional support:</strong> Magnesium (glycinate form), L-theanine, ashwagandha, and omega-3 DHA have evidence for anxiety reduction. Limit caffeine and alcohol — which significantly worsen anxiety despite short-term relief.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="anxiety-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Anxiety & Mental Wellbeing — For Her Wellbeing</div>
+          <p>Our meditation training program, therapeutic yoga, and gut-focused nutrition protocols work synergistically to address anxiety — targeting the gut-brain axis, HPA axis regulation, and nervous system simultaneously. We help you build a personalised toolkit for lasting calm.</p>
+          <a href="contact.html" class="btn-primary book-btn">Book a Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FIBROMYALGIA ===== -->
+<div class="cond-card" id="fibro" data-cat="autoimmune" data-name="fibromyalgia chronic pain fatigue fibro fog sleep women">
+  <div class="cond-header" onclick="toggleCond('fibro')">
+    <div>
+      <span class="cond-cat">Chronic Pain</span>
+      <div class="cond-name">Fibromyalgia</div>
+      <div class="cond-tagline">Widespread pain, fatigue, and "fibro fog" — affecting 7–9× more women than men</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Fibromyalgia involves central sensitisation — the nervous system amplifies pain signals, creating widespread musculoskeletal pain, profound fatigue, sleep disruption, and cognitive difficulties. It is not "all in the mind" — it involves measurable neurological changes and is strongly associated with gut dysbiosis.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('fibro','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('fibro','symptoms',this)">Symptoms</div>
+        <div class="ctab" onclick="switchTab('fibro','management',this)">Management</div>
+        <div class="ctab" onclick="switchTab('fibro','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="fibro-overview">
+        <div class="content-h4">Understanding Fibromyalgia</div>
+        <p class="content-p">The gut-fibromyalgia connection is increasingly compelling: research shows significantly reduced gut microbial diversity, increased gut permeability, and altered short-chain fatty acid production in fibromyalgia patients. Microbiome transplant studies in mice have transferred fibromyalgia-like pain sensitivity — suggesting gut bacteria may directly drive central sensitisation.</p>
+        <p class="content-p">Estrogen fluctuations affect pain sensitivity in fibromyalgia — symptoms often worsen premenstrually and during perimenopause, further confirming the hormonal dimension.</p>
+      </div>
+      <div class="ctab-pane" id="fibro-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Widespread musculoskeletal pain</div>
+          <div class="symp-item"><div class="symp-dot"></div>Extreme fatigue not relieved by rest</div>
+          <div class="symp-item"><div class="symp-dot"></div>Non-restorative sleep</div>
+          <div class="symp-item"><div class="symp-dot"></div>"Fibro fog" — cognitive difficulties</div>
+          <div class="symp-item"><div class="symp-dot"></div>Heightened sensitivity to touch, light, sound</div>
+          <div class="symp-item"><div class="symp-dot"></div>Headaches and migraines</div>
+          <div class="symp-item"><div class="symp-dot"></div>IBS and digestive symptoms</div>
+          <div class="symp-item"><div class="symp-dot"></div>Anxiety and depression</div>
+          <div class="symp-item"><div class="symp-dot"></div>Restless legs syndrome</div>
+          <div class="symp-item"><div class="symp-dot"></div>Tingling and numbness in hands/feet</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="fibro-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Graded aerobic exercise:</strong> Counterintuitively, gentle progressive aerobic exercise is one of the most effective fibromyalgia treatments. Yoga, swimming, and walking improve pain, sleep, and quality of life. Start gently and increase gradually.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Sleep restoration:</strong> Restoring deep sleep is fundamental — it's when tissue repair and pain modulation occur. Consistent sleep schedule, magnesium glycinate at bedtime, and sleep hygiene practices. Treating sleep alone often dramatically reduces pain.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Gut-supportive diet:</strong> Anti-inflammatory, whole-food diet. Many women with fibromyalgia report significant relief with gluten-free or low-FODMAP approaches — likely via gut-microbiome-pain pathways.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Mind-body therapies:</strong> Mindfulness, meditation, and yoga are as effective as medications for fibromyalgia in multiple trials — and are strongly recommended by international guidelines. Both physical and mind-body effects are relevant.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="fibro-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Fibromyalgia Support — For Her Wellbeing</div>
+          <p>Our gentle therapeutic yoga adapted for pain sensitivity, gut-supportive nutrition, and meditation for pain management offer a compassionate, evidence-based approach to living better with fibromyalgia. Part of our Premium Autoimmune Intensive program.</p>
+          <a href="contact.html" class="btn-primary book-btn">Book a Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div><!-- end conditions-list -->
+  </div><!-- end main -->
+</div><!-- end lib-layout -->
+
+<!-- BOTTOM CTA -->
+<div style="background:var(--plum);padding:4rem 0;text-align:center;">
+  <div style="max-width:600px;margin:0 auto;padding:0 2rem;">
+    <span class="eyebrow eyebrow-light">Have a Specific Condition?</span>
+    <h2 style="font-family:var(--serif);font-size:2rem;font-weight:300;color:white;margin-bottom:0.75rem;">Ask Dr. Raga Directly</h2>
+    <p style="font-size:0.9rem;font-weight:300;color:rgba(255,253,249,0.65);line-height:1.7;margin-bottom:2rem;">Not finding your condition here? Dr. Raga Deepthi personally responds to health questions within 48 hours — in English or Telugu. Free. Confidential.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="ask.html" class="btn-primary gold">Ask a Free Question</a>
+      <a href="contact.html" class="btn-ghost" style="color:rgba(255,253,249,0.75);border-color:rgba(255,253,249,0.3);">Book ₹500 Consultation</a>
+    </div>
+  </div>
+</div>
+
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script src="shared.js"></script>
+<script>
+initSite('health');
+
+let activeFilter = 'all';
+
+function filterConditions() {
+  const query = document.getElementById('search-input').value.toLowerCase();
+  const cards = document.querySelectorAll('.cond-card');
+  let visible = 0;
+  cards.forEach(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const cat = (card.dataset.cat || '').toLowerCase();
+    const matchSearch = !query || name.includes(query);
+    const matchFilter = activeFilter === 'all' || cat.includes(activeFilter);
+    if (matchSearch && matchFilter) { card.classList.remove('hidden'); visible++; }
+    else { card.classList.add('hidden'); }
+  });
+  document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function filterChip(cat, el) {
+  activeFilter = cat;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  filterConditions();
+}
+
+function toggleCond(id) {
+  const card = document.getElementById(id);
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.cond-card').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+function switchTab(cardId, tabId, el) {
+  const card = document.getElementById(cardId);
+  card.querySelectorAll('.ctab-pane').forEach(p => p.classList.remove('active'));
+  card.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+  document.getElementById(cardId + '-' + tabId).classList.add('active');
+  el.classList.add('active');
+}
+
+// Auto-open from URL hash
+window.addEventListener('DOMContentLoaded', () => {
+  const hash = window.location.hash.replace('#', '');
+  if (hash) {
+    const card = document.getElementById(hash);
+    if (card) {
+      card.classList.add('open');
+      setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    }
+  }
+});
+</script>
+</body>
+</html>

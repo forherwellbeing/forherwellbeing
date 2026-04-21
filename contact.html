@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Consultation — For Her Wellbeing</title>
+<meta name="description" content="Book a personalised consultation with Dr. Raga Deepthi for ₹500. Science-backed guidance on PCOS, weight management, hormonal health, and metabolic issues. Pay via Razorpay, PhonePe, or UPI.">
+<meta property="og:title" content="Book a Consultation — For Her Wellbeing">
+<meta property="og:description" content="₹500 initial consultation with Dr. Raga Deepthi. Understand your root cause. Get a personalised 3-month plan for PCOS, weight, hormones, or gut health.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/contact.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<style>
+.contact-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0; }
+.process-steps { display:flex;flex-direction:column;gap:0;margin:2rem 0; }
+.ps { display:grid;grid-template-columns:48px 1fr;gap:1rem;align-items:start;padding:1.25rem 0;border-bottom:1px solid var(--border); }
+.ps:last-child { border-bottom:none; }
+.ps-num { width:40px;height:40px;background:var(--plum);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+.ps-num span { font-family:var(--serif);font-size:1rem;font-weight:300;color:var(--gold); }
+.ps-title { font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.25rem; }
+.ps-body { font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid); }
+.contact-info-item { margin-bottom:1.5rem; }
+.ci-label { font-size:0.68rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem; }
+.ci-value { font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--plum); }
+
+/* BOOKING FORM BOX */
+.booking-box { background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden; }
+.booking-box-header { background:var(--plum);padding:2rem 2.5rem; }
+.booking-box-title { font-family:var(--serif);font-size:1.6rem;font-weight:300;color:white;margin-bottom:0.25rem; }
+.booking-box-sub { font-size:0.8rem;font-weight:300;color:rgba(255,253,249,0.6);line-height:1.5; }
+.booking-price { display:inline-flex;align-items:baseline;gap:0.35rem;margin-top:0.75rem; }
+.booking-price-num { font-family:var(--serif);font-size:2.5rem;font-weight:300;color:var(--gold-light);line-height:1; }
+.booking-price-label { font-size:0.78rem;color:rgba(255,253,249,0.5);font-weight:300; }
+.booking-form { padding:2.5rem; }
+.form-row-2 { display:grid;grid-template-columns:1fr 1fr;gap:0.75rem; }
+.submit-btn { width:100%;background:var(--gold);color:var(--plum);border:none;cursor:pointer;padding:1rem;border-radius:50px;font-family:var(--sans);font-size:0.85rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;transition:all 0.25s;margin-top:0.5rem; }
+.submit-btn:hover { background:var(--gold-light);transform:translateY(-1px); }
+.submit-btn:disabled { opacity:0.6;cursor:not-allowed;transform:none; }
+
+/* STEP 2 — PAYMENT */
+.payment-step { display:none;padding:2.5rem;text-align:center; }
+.payment-amount { font-family:var(--serif);font-size:3.5rem;font-weight:300;color:var(--plum);line-height:1;margin-bottom:0.25rem; }
+.payment-label { font-size:0.78rem;color:var(--text-light);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2rem; }
+.pay-options { display:flex;flex-direction:column;gap:1rem;margin-bottom:1.5rem; }
+.razorpay-btn {
+  display:flex;align-items:center;justify-content:center;gap:0.75rem;
+  padding:1rem 1.5rem;background:#2d2d2d;color:white;border:none;border-radius:8px;
+  font-family:var(--sans);font-size:0.9rem;font-weight:500;cursor:pointer;
+  text-decoration:none;transition:all 0.25s;width:100%;
+}
+.razorpay-btn:hover { background:#1a1a1a;transform:translateY(-1px); }
+.phonepe-btn {
+  display:flex;align-items:center;justify-content:center;gap:0.75rem;
+  padding:1rem 1.5rem;background:#5f259f;color:white;border:none;border-radius:8px;
+  font-family:var(--sans);font-size:0.9rem;font-weight:500;cursor:pointer;
+  text-decoration:none;transition:all 0.25s;
+}
+.phonepe-btn:hover { background:#4a1a7a;transform:translateY(-1px); }
+.pay-divider { display:flex;align-items:center;gap:0.75rem;color:var(--text-light);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase; }
+.pay-divider::before,.pay-divider::after { content:'';flex:1;height:1px;background:var(--border); }
+.upi-btn {
+  display:flex;align-items:center;justify-content:center;gap:0.75rem;
+  padding:1rem 1.5rem;background:white;color:var(--plum);border:2px solid var(--border);border-radius:8px;
+  font-family:var(--sans);font-size:0.9rem;font-weight:500;cursor:pointer;
+  text-decoration:none;transition:all 0.25s;
+}
+.upi-btn:hover { border-color:var(--plum);background:var(--cream); }
+.qr-box { background:var(--cream);border-radius:8px;padding:1.5rem;margin-bottom:1rem; }
+.qr-img { width:160px;height:160px;margin:0 auto 0.75rem;background:white;border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden; }
+.qr-img img { width:100%;height:100%;object-fit:contain; }
+.upi-id { font-family:var(--sans);font-size:0.85rem;font-weight:500;color:var(--plum);background:white;padding:0.5rem 1rem;border-radius:50px;border:1px solid var(--border);display:inline-block;margin-top:0.5rem;user-select:all;cursor:text; }
+.payment-note { font-size:0.78rem;font-weight:300;line-height:1.65;color:var(--text-light);padding:1rem;background:var(--cream);border-radius:4px;text-align:left; }
+.wa-confirm {
+  display:flex;align-items:center;justify-content:center;gap:0.6rem;
+  padding:1rem;background:#25D366;color:white;border:none;border-radius:8px;
+  font-family:var(--sans);font-size:0.88rem;font-weight:500;cursor:pointer;
+  text-decoration:none;width:100%;transition:all 0.25s;
+}
+.wa-confirm:hover { background:#128C7E; }
+
+/* STEP 3 — SUCCESS */
+.success-step { display:none;padding:2.5rem;text-align:center; }
+
+@media(max-width:900px){ .contact-layout{grid-template-columns:1fr;gap:3rem;padding:3rem 0;} .form-row-2{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="eyebrow eyebrow-light">Begin Your Wellness Journey</span>
+    <h1 class="page-title">Book a Consultation<br>with <em>Dr. Raga Deepthi</em></h1>
+    <p class="page-sub">A personalised, science-backed consultation — understanding your health, recommending targeted tests, and designing your 3-month transformation plan.</p>
+  </div>
+</div>
+
+<section style="background:var(--cream);">
+  <div class="section-inner">
+    <div class="contact-layout">
+
+      <!-- LEFT — INFO -->
+      <div class="fade-in">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="section-title">Your Journey<br><em>Step by Step</em></h2>
+        <div class="process-steps">
+          <div class="ps">
+            <div class="ps-num"><span>1</span></div>
+            <div>
+              <div class="ps-title">Book & Pay ₹500</div>
+              <p class="ps-body">Fill the form and pay ₹500 via Razorpay, PhonePe, or any UPI app to confirm your consultation slot.</p>
+            </div>
+          </div>
+          <div class="ps">
+            <div class="ps-num"><span>2</span></div>
+            <div>
+              <div class="ps-title">Dr. Raga Understands You</div>
+              <p class="ps-body">In your 1:1 session, Dr. Raga listens to your complete health history, symptoms, lifestyle and goals — with patience and without judgment.</p>
+            </div>
+          </div>
+          <div class="ps">
+            <div class="ps-num"><span>3</span></div>
+            <div>
+              <div class="ps-title">Targeted Tests Recommended</div>
+              <p class="ps-body">Based on your intake, Dr. Raga recommends specific lab tests to identify your root cause — hormonal, metabolic, gut or nutritional. No guesswork.</p>
+            </div>
+          </div>
+          <div class="ps">
+            <div class="ps-num" style="background:var(--gold);"><span style="color:var(--plum);">4</span></div>
+            <div>
+              <div class="ps-title">Your Personalised 3-Month Plan</div>
+              <p class="ps-body">Once test results arrive, Dr. Raga builds your fully personalised program — yoga, customised diet, supplements, and community support. Prices range from ₹15,000 to ₹50,000 based on your condition.</p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border-radius:4px;padding:1.5rem;border:1px solid var(--border);margin-bottom:2rem;">
+          <div class="eyebrow" style="margin-bottom:1rem;">Contact Details</div>
+          <div class="contact-info-item">
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:edigaragadeepthi@gmail.com" style="color:inherit;text-decoration:none;">edigaragadeepthi@gmail.com</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-label">WhatsApp</div>
+            <div class="ci-value"><a href="https://wa.me/918008383699" target="_blank" style="color:inherit;text-decoration:none;">+91 8008383699</a></div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-label">Instagram</div>
+            <div class="ci-value"><a href="https://www.instagram.com/for_her_wellbeing/" target="_blank" style="color:inherit;text-decoration:none;">@for_her_wellbeing</a></div>
+          </div>
+          <div class="contact-info-item" style="margin-bottom:0;">
+            <div class="ci-label">LinkedIn</div>
+            <div class="ci-value"><a href="https://www.linkedin.com/in/deepthiediga/" target="_blank" style="color:inherit;text-decoration:none;">Dr. Raga Deepthi Ediga</a></div>
+          </div>
+        </div>
+
+        <a href="https://wa.me/918008383699?text=Hi%20Dr.%20Raga%2C%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" style="display:flex;align-items:center;gap:0.6rem;padding:1rem 1.5rem;background:#25D366;color:white;border-radius:8px;font-family:var(--sans);font-size:0.85rem;font-weight:500;text-decoration:none;transition:background 0.2s;justify-content:center;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Prefer to book via WhatsApp instead?
+        </a>
+      </div>
+
+      <!-- RIGHT — BOOKING FORM -->
+      <div class="fade-in fade-in-delay-2">
+        <div class="booking-box">
+          <!-- STEP 1: FORM -->
+          <div id="step-form">
+            <div class="booking-box-header">
+              <div class="booking-box-title">Book Your Consultation</div>
+              <div class="booking-box-sub">Fill in your details — you'll be guided to pay securely via Razorpay or UPI.</div>
+              <div class="booking-price">
+                <span class="booking-price-num">₹500</span>
+                <span class="booking-price-label">/ initial consultation</span>
+              </div>
+            </div>
+            <div class="booking-form">
+              <form id="booking-form" style="display:flex;flex-direction:column;gap:1rem;" onsubmit="goToPayment(event)">
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">First Name *</label>
+                    <input class="form-input" id="b-fname" type="text" placeholder="Priya" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Last Name</label>
+                    <input class="form-input" id="b-lname" type="text" placeholder="Sharma">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Email *</label>
+                  <input class="form-input" id="b-email" type="email" placeholder="you@email.com" required>
+                </div>
+                <div class="form-row-2">
+                  <div class="form-group">
+                    <label class="form-label">Phone / WhatsApp *</label>
+                    <input class="form-input" id="b-phone" type="tel" placeholder="+91 9876543210" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Age</label>
+                    <input class="form-input" id="b-age" type="number" placeholder="32" min="10" max="90">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">I'm seeking help with *</label>
+                  <select class="form-select" id="b-interest" required>
+                    <option value="">Select...</option>
+                    <option>PCOS / Hormonal Health</option>
+                    <option>Weight Management / Obesity</option>
+                    <option>Pregnancy / Postpartum Weight</option>
+                    <option>Thyroid / Metabolic Issues</option>
+                    <option>Gut Health / Digestion</option>
+                    <option>Menopause Support</option>
+                    <option>General Wellness & Diet</option>
+                    <option>Yoga & Movement</option>
+                    <option>Partnership / Collaboration</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Brief health note (optional)</label>
+                  <textarea class="form-input" id="b-note" placeholder="Any key health concerns or goals you'd like Dr. Raga to know before the session…" rows="3" style="resize:vertical;"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Continue to Payment →</button>
+                <p style="font-size:0.72rem;text-align:center;color:var(--text-light);line-height:1.5;">Your details are private and never shared.</p>
+              </form>
+            </div>
+          </div>
+
+          <!-- STEP 2: PAYMENT -->
+          <div class="payment-step" id="step-payment">
+            <div style="background:var(--plum);padding:1.5rem 2rem;text-align:left;margin:-0px;">
+              <div style="font-size:0.72rem;color:rgba(255,253,249,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">Booking for</div>
+              <div id="payment-name" style="font-family:var(--serif);font-size:1.1rem;color:white;"></div>
+              <div id="payment-interest" style="font-size:0.8rem;color:rgba(255,253,249,0.6);margin-top:0.15rem;"></div>
+            </div>
+            <div style="padding:2.5rem;">
+              <div class="payment-amount">₹500</div>
+              <div class="payment-label">Consultation Fee</div>
+
+              <div class="pay-options">
+                <!-- Razorpay Button — activate by replacing key below -->
+                <button id="razorpay-pay-btn" class="razorpay-btn" onclick="openRazorpay()">
+                  <svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg>
+                  Pay ₹500 Securely via Razorpay
+                </button>
+                <div class="pay-divider">or pay via UPI</div>
+                <!-- PhonePe Button -->
+                <a id="phonepe-link" href="#" target="_blank" class="phonepe-btn">
+                  <svg width="22" height="22" viewBox="0 0 40 40" fill="none">
+                    <rect width="40" height="40" rx="8" fill="white"/>
+                    <path d="M20 6C12.268 6 6 12.268 6 20s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6zm4.5 19.5h-3v-5h-4v5h-3v-11l5-4.5 5 4.5v11z" fill="#5f259f"/>
+                  </svg>
+                  Pay ₹500 via PhonePe
+                </a>
+
+                <!-- Any UPI Button -->
+                <a id="upi-link" href="#" class="upi-btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                  Pay via Any UPI App
+                </a>
+              </div>
+
+              <!-- QR Code -->
+              <div class="qr-box">
+                <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.75rem;">Or scan QR to pay</div>
+                <div class="qr-img">
+                  <img id="qr-img" src="" alt="UPI QR Code">
+                </div>
+                <div style="font-size:0.75rem;color:var(--text-light);margin-bottom:0.4rem;">UPI ID</div>
+                <div class="upi-id" id="upi-id-display">8008383699@ybl</div>
+              </div>
+
+              <div class="payment-note">
+                After paying, please share your payment screenshot on WhatsApp (+91 8008383699) to confirm your booking. Dr. Raga's team will then schedule your consultation within 24 hours.
+              </div>
+
+              <a id="wa-confirm-link" href="#" target="_blank" class="wa-confirm" style="margin-top:1.25rem;display:flex;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Share Payment Screenshot on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <!-- STEP 3: SUCCESS -->
+          <div class="success-step" id="step-success">
+            <div style="display:flex;justify-content:center;margin-bottom:1rem;"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div style="font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--plum);margin-bottom:0.75rem;">You're All Set!</div>
+            <p style="font-size:0.88rem;font-weight:300;line-height:1.75;color:var(--text-mid);">Once Dr. Raga's team confirms your payment on WhatsApp, your consultation will be scheduled within 24 hours.<br><br>Check your email for a confirmation note.</p>
+            <a href="https://wa.me/918008383699" target="_blank" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem;background:#25D366;">Share Payment Screenshot on WhatsApp →</a>
+            <!-- POST-BOOKING UPSELL -->
+            <div style="margin-top:2rem;padding:1.5rem;background:var(--cream);border-radius:6px;text-align:left;">
+              <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">While You Wait</div>
+              <div style="font-family:var(--serif);font-size:1.1rem;color:var(--plum);margin-bottom:0.5rem;">Explore the programs Dr. Raga may recommend for you</div>
+              <div style="display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.25rem;">
+                <a href="programs.html#pcos" style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;background:white;border-radius:4px;border:1px solid var(--border);text-decoration:none;font-size:0.82rem;color:var(--plum);font-weight:400;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <span>PCOS Healing Workshop</span><span style="color:var(--gold);">From ₹15,000 →</span>
+                </a>
+                <a href="programs.html#obesity" style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;background:white;border-radius:4px;border:1px solid var(--border);text-decoration:none;font-size:0.82rem;color:var(--plum);font-weight:400;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <span>Women's Obesity Workshop</span><span style="color:var(--gold);">From ₹18,000 →</span>
+                </a>
+                <a href="programs.html#metabolic" style="display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;background:white;border-radius:4px;border:1px solid var(--border);text-decoration:none;font-size:0.82rem;color:var(--plum);font-weight:400;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <span>Metabolic Reset Workshop</span><span style="color:var(--gold);">From ₹15,000 →</span>
+                </a>
+              </div>
+              <a href="programs.html" style="font-size:0.75rem;color:var(--text-light);text-decoration:none;">View all programs & pricing →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+const UPI_ID = '8008383699@ybl';
+const AMOUNT = 500;
+const WA_NUM = '918008383699';
+// ── RAZORPAY ── Replace the key below when your account is activated ──
+const RAZORPAY_KEY = 'rzp_live_XXXXXXXXXXXXXXXX';
+let _bookingData = {};
+
+function openRazorpay() {
+  const options = {
+    key: RAZORPAY_KEY,
+    amount: AMOUNT * 100,
+    currency: 'INR',
+    name: 'For Her Wellbeing',
+    description: 'Initial Consultation — Dr. Raga Deepthi',
+    image: 'uploads/logo-1776614290085.png',
+    prefill: { name: _bookingData.name, email: _bookingData.email, contact: _bookingData.phone },
+    notes: { interest: _bookingData.interest },
+    theme: { color: '#4a1042' },
+    handler: function(response) {
+      document.getElementById('step-payment').style.display = 'none';
+      document.getElementById('step-success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    modal: { ondismiss: function() {} }
+  };
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
+
+function goToPayment(e) {
+  e.preventDefault();
+  const fname = document.getElementById('b-fname').value;
+  const lname = document.getElementById('b-lname').value;
+  const email = document.getElementById('b-email').value;
+  const phone = document.getElementById('b-phone').value;
+  const interest = document.getElementById('b-interest').value;
+  const note = document.getElementById('b-note').value;
+
+  _bookingData = { name: fname+' '+lname, email, phone, interest, note };
+  // Save lead
+  const lead = { timestamp: new Date().toISOString(), name: fname+' '+lname, email, phone, interest, note };
+  const leads = JSON.parse(localStorage.getItem('fhw_leads') || '[]');
+  leads.push(lead); localStorage.setItem('fhw_leads', JSON.stringify(leads));
+
+  // Send to Formspree (async, no blocking)
+  const fd = new FormData();
+  fd.append('name', fname+' '+lname); fd.append('email', email);
+  fd.append('phone', phone); fd.append('interest', interest); fd.append('note', note);
+  fd.append('_subject', 'New Consultation Booking — For Her Wellbeing');
+  fetch('https://formspree.io/f/YOUR_FORM_ID', { method:'POST', body:fd, headers:{'Accept':'application/json'} }).catch(()=>{});
+
+  // Build payment links
+  const upiNote = encodeURIComponent('FHW Consultation - ' + fname);
+  const upiLink = `upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR&tn=${upiNote}`;
+  const phonePeLink = `phonepe://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR&tn=${upiNote}`;
+
+  document.getElementById('phonepe-link').href = phonePeLink;
+  document.getElementById('upi-link').href = upiLink;
+
+  // QR Code via Google Charts
+  const qrData = encodeURIComponent(`upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR`);
+  document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
+  document.getElementById('upi-id-display').textContent = UPI_ID;
+
+  // WhatsApp confirm link
+  const waMsg = encodeURIComponent(`Hi Dr. Raga, I have paid ₹500 for my consultation booking.\n\nName: ${fname} ${lname}\nPhone: ${phone}\nEmail: ${email}\nInterest: ${interest}\n\nPlease confirm my slot. Thank you!`);
+  document.getElementById('wa-confirm-link').href = `https://wa.me/${WA_NUM}?text=${waMsg}`;
+
+  // Update payment step header
+  document.getElementById('payment-name').textContent = fname + ' ' + lname;
+  document.getElementById('payment-interest').textContent = interest;
+
+  // Show payment step
+  document.getElementById('step-form').style.display = 'none';
+  document.getElementById('step-payment').style.display = 'block';
+  window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
+}
+
+// Pre-select program from URL
+window.addEventListener('DOMContentLoaded', () => {
+  const prog = new URLSearchParams(window.location.search).get('program');
+  const map = {
+    pcos: 'PCOS / Hormonal Health',
+    obesity: 'Weight Management / Obesity',
+    metabolic: 'General Wellness & Diet',
+    counselling: 'General Wellness & Diet',
+    partnership: 'Partnership / Collaboration'
+  };
+  if (prog && map[prog]) {
+    const sel = document.getElementById('b-interest');
+    for (let opt of sel.options) { if (opt.value === map[prog]) { opt.selected = true; break; } }
+  }
+});
+</script>
+<!-- FAQ -->
+<section style="padding:5rem 0;background:var(--cream);">
+  <div class="section-inner" style="max-width:720px;">
+    <div class="fade-in" style="text-align:center;margin-bottom:3rem;">
+      <span class="eyebrow">Before You Book</span>
+      <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.2rem);">Common Questions</h2>
+    </div>
+    <div class="fade-in" style="display:flex;flex-direction:column;gap:0;">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">How long is the consultation?<span class="faq-icon">+</span></button>
+        <div class="faq-a">The initial consultation is 45–60 minutes via video call. Dr. Raga takes a complete health history — symptoms, lifestyle, diet, stress, and goals — and designs your personalised investigation and 3-month plan.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What happens after I pay?<span class="faq-icon">+</span></button>
+        <div class="faq-a">After payment, share your screenshot on WhatsApp (+91 8008383699). Dr. Raga's team will confirm your booking within a few hours and share a calendar link to schedule your video call at a time that works for you.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Is ₹500 refundable if I change my mind?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — if you cancel at least 24 hours before your scheduled slot, the ₹500 is fully refunded. If you need to reschedule, simply WhatsApp us and we will find you a new time at no extra charge.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Do I need to bring test reports?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Not required, but helpful. If you have recent blood reports, thyroid panels, or hormone tests, please have them ready to share during the call. Dr. Raga will recommend any additional tests based on your consultation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Is the consultation available in Telugu?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes. Dr. Raga speaks Telugu and English. Many clients find it easier to explain their health history in Telugu — you are welcome to switch languages mid-conversation.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does the ₹500 consultation include?<span class="faq-icon">+</span></button>
+        <div class="faq-a">A complete 45–60 minute 1:1 with Dr. Raga: root-cause assessment, review of your symptoms and history, recommended lab tests, and a personalised 3-month roadmap. You leave with clarity and a plan — not just generic advice.</div>
+      </div>
+      <div class="faq-item" style="border-bottom:none;">
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">I'm based abroad — can I still book?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Absolutely. Dr. Raga consults with women across Germany, UK, US, Canada, Australia, and Singapore. All consultations are online. Payment via Razorpay supports international cards too. Time zone scheduling is flexible.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { width:100%; background:none; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.25rem 0; font-family:var(--sans); font-size:0.95rem; font-weight:500; color:var(--plum); text-align:left; }
+.faq-q:hover { color:var(--gold); }
+.faq-icon { font-size:1.3rem; font-weight:300; flex-shrink:0; transition:transform 0.25s; line-height:1; }
+.faq-q[aria-expanded="true"] .faq-icon { transform:rotate(45deg); }
+.faq-a { font-size:0.85rem; font-weight:300; color:var(--text-mid); line-height:1.75; max-height:0; overflow:hidden; transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1), padding 0.35s; padding-bottom:0; }
+.faq-q[aria-expanded="true"] + .faq-a { max-height:200px; padding-bottom:1.25rem; }
+</style>
+<script>
+function toggleFaq(btn) {
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+  document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded','false'));
+  if (!isOpen) btn.setAttribute('aria-expanded','true');
+}
+</script>
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script src="shared.js"></script>
+<script>initSite('contact');</script>
+</body>
+</html>

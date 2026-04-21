@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Indian Women Living Abroad — For Her Wellbeing</title>
+<meta name="description" content="Dr. Raga Deepthi spent 11 years in Germany. She knows exactly what moving abroad does to an Indian woman's body — hormones, weight, gut, PCOS. 100% online consultations across all time zones.">
+<meta property="og:title" content="For Indian Women Living Abroad — For Her Wellbeing">
+<meta property="og:description" content="Your body moved countries. Your hormones didn't get the memo. Dr. Raga Deepthi lived this for 11 years — now she fixes it online, from anywhere.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_6663.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/abroad.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ===== ABROAD HERO ===== */
+.abroad-hero {
+  background: var(--plum); padding: 7rem 0 5rem; margin-top: 68px;
+  position: relative; overflow: hidden;
+}
+.abroad-hero::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 80% at 70% 50%, rgba(201,146,42,0.12) 0%, transparent 70%);
+}
+.abroad-hero-inner {
+  max-width:1200px; margin:0 auto; padding:0 2rem;
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+  position:relative; z-index:1;
+}
+.abroad-hero-title {
+  font-family:var(--serif); font-size:clamp(2.4rem,4.5vw,4rem);
+  font-weight:300; line-height:1.1; color:white; margin-bottom:1.25rem;
+}
+.abroad-hero-title em { font-style:italic; color:var(--gold-light); }
+.abroad-hero-sub {
+  font-size:1rem; font-weight:300; line-height:1.8;
+  color:rgba(255,253,249,0.72); margin-bottom:2rem; max-width:480px;
+}
+.abroad-countries {
+  display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:2rem;
+}
+.country-tag {
+  padding:0.35rem 0.9rem; background:rgba(255,253,249,0.08);
+  border:1px solid rgba(255,253,249,0.15); border-radius:50px;
+  font-size:0.75rem; color:rgba(255,253,249,0.65); font-weight:300;
+}
+.abroad-hero-img {
+  border-radius:4px; overflow:hidden; position:relative;
+}
+.abroad-hero-img img {
+  width:100%; height:460px; object-fit:cover; object-position:center top; display:block;
+}
+.abroad-hero-img::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to left, transparent 50%, rgba(74,16,66,0.3) 100%);
+}
+.abroad-badge {
+  position:absolute; bottom:1.5rem; left:1.5rem; z-index:2;
+  background:var(--gold); color:var(--plum); padding:0.6rem 1.25rem;
+  border-radius:50px; font-size:0.75rem; font-weight:600; letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+/* ===== WHAT HAPPENS ===== */
+.what-happens { background:var(--cream); }
+.happen-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+  background:var(--border); border:1px solid var(--border); border-radius:4px;
+  overflow:hidden; margin-top:3rem;
+}
+.happen-cell {
+  background:var(--white); padding:2rem 1.75rem;
+  border-bottom:3px solid transparent; transition:border-color 0.3s;
+}
+.happen-cell:hover { border-bottom-color:var(--gold); }
+.hc-icon { width:40px; height:40px; margin-bottom:0.75rem; color:var(--gold); }
+.hc-title { font-family:var(--serif); font-size:1.05rem; color:var(--plum); margin-bottom:0.4rem; font-weight:400; }
+.hc-body { font-size:0.8rem; font-weight:300; line-height:1.65; color:var(--text-mid); }
+.hc-stat { display:inline-block; margin-top:0.75rem; font-size:0.72rem; font-weight:500; color:var(--gold); letter-spacing:0.06em; }
+
+/* ===== DR. RAGA STORY ===== */
+.raga-story { background:var(--plum); }
+.story-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+}
+.story-img { border-radius:4px; overflow:hidden; }
+.story-img img { width:100%; height:520px; object-fit:cover; object-position:center top; display:block; }
+.story-timeline {
+  display:flex; flex-direction:column; gap:0; margin:2rem 0;
+}
+.stl-item {
+  display:grid; grid-template-columns:60px 1fr; gap:1rem;
+  padding:1.25rem 0; border-bottom:1px solid rgba(255,253,249,0.08);
+}
+.stl-item:last-child { border-bottom:none; }
+.stl-year {
+  font-family:var(--serif); font-size:0.85rem; font-weight:400;
+  color:var(--gold); padding-top:2px; line-height:1.4;
+}
+.stl-title { font-family:var(--serif); font-size:1rem; color:white; margin-bottom:0.25rem; }
+.stl-body { font-size:0.8rem; font-weight:300; line-height:1.6; color:rgba(255,253,249,0.58); }
+
+/* ===== ABROAD PROGRAM ===== */
+.abroad-program { background:var(--white); }
+.ap-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:3rem;
+}
+.ap-card {
+  padding:2rem; background:var(--cream); border-radius:4px;
+  border:1px solid var(--border); border-top:3px solid transparent;
+  transition:border-top-color 0.3s;
+}
+.ap-card:hover { border-top-color:var(--gold); }
+.ap-icon { width:40px; height:40px; color:var(--plum); margin-bottom:0.75rem; }
+.ap-title { font-family:var(--serif); font-size:1.1rem; color:var(--plum); margin-bottom:0.35rem; }
+.ap-body { font-size:0.82rem; font-weight:300; line-height:1.65; color:var(--text-mid); }
+
+/* ===== COUNTRIES ===== */
+.countries-section { background:var(--cream); padding:5rem 0; }
+.countries-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:3rem;
+}
+.country-card {
+  padding:1.5rem; background:var(--white); border-radius:4px;
+  border:1px solid var(--border); text-align:center; transition:all 0.25s;
+}
+.country-card:hover { border-color:var(--gold); transform:translateY(-2px); }
+.country-flag { font-size:2rem; margin-bottom:0.5rem; }
+.country-name { font-family:var(--serif); font-size:0.95rem; color:var(--plum); margin-bottom:0.2rem; }
+.country-note { font-size:0.72rem; color:var(--text-light); font-weight:300; }
+
+/* ===== ONLINE PROOF ===== */
+.online-strip { background:var(--plum); padding:4rem 0; }
+.online-inner {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem;
+  max-width:1200px; margin:0 auto; padding:0 2rem;
+}
+.online-cell { text-align:center; }
+.online-num { font-family:var(--serif); font-size:2.5rem; font-weight:300; color:var(--gold-light); margin-bottom:0.3rem; }
+.online-label { font-size:0.75rem; font-weight:400; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,253,249,0.5); line-height:1.4; }
+
+/* ===== ABROAD TESTIMONIALS ===== */
+.abroad-testi { background:var(--white); }
+.abroad-testi-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:3rem; }
+.abroad-testi-card {
+  padding:2rem; background:var(--cream); border-radius:4px;
+  border-left:3px solid var(--gold);
+}
+.atc-quote { font-family:var(--serif); font-size:0.98rem; font-weight:300; font-style:italic; line-height:1.75; color:var(--text-dark); margin-bottom:1rem; }
+.atc-name { font-size:0.78rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--plum); }
+.atc-location { font-size:0.72rem; color:var(--text-light); margin-top:0.2rem; }
+
+/* ===== CTA ===== */
+.abroad-cta { background:var(--gold); padding:5rem 0; }
+.abroad-cta-inner { max-width:720px; margin:0 auto; text-align:center; padding:0 2rem; }
+.abroad-cta-title { font-family:var(--serif); font-size:clamp(2rem,4vw,3rem); font-weight:300; color:var(--plum); margin-bottom:1rem; }
+.abroad-cta-title em { font-style:italic; }
+.abroad-cta-sub { font-size:0.95rem; font-weight:300; line-height:1.8; color:rgba(74,16,66,0.75); margin-bottom:2rem; }
+.abroad-cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.tz-note { margin-top:1.25rem; font-size:0.78rem; color:rgba(74,16,66,0.55); }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .abroad-hero-inner { grid-template-columns:1fr; gap:3rem; }
+  .abroad-hero-img { display:none; }
+  .story-grid { grid-template-columns:1fr; gap:3rem; }
+  .story-img { display:none; }
+}
+@media(max-width:768px){
+  .happen-grid { grid-template-columns:1fr 1fr; }
+  .ap-grid { grid-template-columns:1fr; }
+  .countries-grid { grid-template-columns:repeat(2,1fr); }
+  .online-inner { grid-template-columns:1fr; gap:1.5rem; }
+  .abroad-testi-grid { grid-template-columns:1fr; }
+  .abroad-cta-btns { flex-direction:column; align-items:center; }
+}
+@media(max-width:480px){
+  .happen-grid { grid-template-columns:1fr; }
+  .countries-grid { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ABROAD HERO -->
+<div class="abroad-hero">
+  <div class="abroad-hero-inner">
+    <div>
+      <span class="eyebrow eyebrow-light">For Indian Women Living Abroad</span>
+      <h1 class="abroad-hero-title">
+        You moved countries.<br>Your hormones<br><em>didn't get the memo.</em>
+      </h1>
+      <p class="abroad-hero-sub">Dr. Raga Deepthi spent 11 years in Germany. She lived every symptom you're experiencing — and turned her own science PhD into the answer. Now she treats women like you, online, from anywhere in the world.</p>
+      <div class="abroad-countries">
+        <span class="country-tag">🇩🇪 Germany</span>
+        <span class="country-tag">🇬🇧 UK</span>
+        <span class="country-tag">🇺🇸 USA</span>
+        <span class="country-tag">🇨🇦 Canada</span>
+        <span class="country-tag">🇦🇺 Australia</span>
+        <span class="country-tag">🇸🇬 Singapore</span>
+        <span class="country-tag">🇳🇱 Netherlands</span>
+        <span class="country-tag">+ more</span>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary gold">Book Online Consultation — ₹500</a>
+        <a href="ask.html" class="btn-ghost" style="color:rgba(255,253,249,0.75);border-color:rgba(255,253,249,0.3);">Ask Dr. Raga Free</a>
+      </div>
+    </div>
+    <div class="abroad-hero-img fade-in fade-in-delay-2">
+      <img src="uploads/IMG_6663.jpg" alt="Dr. Raga Deepthi at India-Germany Academic Meet, New Delhi 2026">
+      <div class="abroad-badge">Speaker · India–Germany Meet 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT HAPPENS TO YOUR BODY -->
+<section class="what-happens section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="max-width:640px;">
+      <span class="eyebrow">The Science No One Told You</span>
+      <h2 class="section-title">What Moving Abroad<br><em>Does to Your Body</em></h2>
+      <p class="section-body">Indian women are biologically adapted to a specific food, climate, and cultural environment. When that changes overnight, the body responds — in ways most local doctors abroad completely miss.</p>
+    </div>
+    <div class="happen-grid fade-in">
+      <div class="happen-cell">
+        <svg class="hc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <div class="hc-title">Vitamin D Crash</div>
+        <p class="hc-body">Indian bodies are calibrated for equatorial sun. Northern Europe and Canada winters cause a dramatic Vitamin D drop — triggering fatigue, weight gain, mood issues, and PCOS flare within months.</p>
+        <span class="hc-stat">Especially severe: UK, Germany, Canada</span>
+      </div>
+      <div class="happen-cell">
+        <svg class="hc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><path d="M8 12c0-2.21 1.79-4 4-4s4 1.79 4 4-1.79 4-4 4-4-1.79-4-4z"/><path d="M12 8V6M12 18v-2M6 12H4M20 12h-2"/></svg>
+        <div class="hc-title">Gut Microbiome Collapse</div>
+        <p class="hc-body">Your gut was built on Indian food — fermented foods, diverse spices, seasonal vegetables. Switching to processed Western food collapses the microbiome, causing bloating, brain fog, and cascading hormonal disruption.</p>
+        <span class="hc-stat">Happens within 2–4 weeks of diet change</span>
+      </div>
+      <div class="happen-cell">
+        <svg class="hc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <div class="hc-title">Cortisol Surge</div>
+        <p class="hc-body">Visa stress, isolation, language barriers, career pressure — all spike cortisol. Chronic cortisol elevation directly disrupts insulin, oestrogen, and progesterone — the root of unexplained weight gain and irregular periods.</p>
+        <span class="hc-stat">Year 1–2 abroad is the highest risk window</span>
+      </div>
+      <div class="happen-cell">
+        <svg class="hc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+        <div class="hc-title">Cold Climate + Hibernation Mode</div>
+        <p class="hc-body">Your metabolism is designed for 30°C, not 5°C. Cold temperatures trigger evolutionary fat-storage patterns. You eat the same, exercise the same — and still gain weight. This is biology, not willpower.</p>
+        <span class="hc-stat">Winter weight gain: 3–5 kg common</span>
+      </div>
+      <div class="happen-cell">
+        <svg class="hc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <div class="hc-title">Pregnancy & Postpartum Alone</div>
+        <p class="hc-body">No mother, no mother-in-law, no family food, no rest. Postpartum weight and mental health are catastrophically under-supported for Indian women abroad. The isolation compounds every biological challenge.</p>
+        <span class="hc-stat">Postpartum depression 2× higher for immigrants</span>
+      </div>
+      <div class="happen-cell">
+        <svg class="hc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div class="hc-title">"You're Fine" — The Misdiagnosis</div>
+        <p class="hc-body">Local doctors abroad don't understand South Asian metabolic profiles. Normal ranges, diet advice, and even PCOS diagnosis criteria don't account for Indian physiology. You leave feeling dismissed — because the system isn't built for you.</p>
+        <span class="hc-stat">Dr. Raga has been there. She understands.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DR. RAGA'S STORY -->
+<section class="raga-story section-pad">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="fade-in">
+        <div class="story-img">
+          <img src="uploads/PXL_20250218_040053330.jpg" alt="Dr. Raga Deepthi in Germany">
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-2">
+        <span class="eyebrow eyebrow-light">Her Story Is Your Story</span>
+        <h2 class="section-title light">11 Years Abroad.<br><em>She Lived Every Symptom.</em></h2>
+        <p class="section-body light">Dr. Raga Deepthi didn't study women's metabolic health from a textbook. She lived it — as an Indian woman in Germany for over a decade.</p>
+        <div class="story-timeline">
+          <div class="stl-item">
+            <div class="stl-year">Year 1</div>
+            <div>
+              <div class="stl-title">Arrived in Heidelberg, Germany</div>
+              <p class="stl-body">PhD programme at Heidelberg University. New country, new food, German winter. Within months: weight gain, irregular periods, persistent fatigue.</p>
+            </div>
+          </div>
+          <div class="stl-item">
+            <div class="stl-year">Year 2–3</div>
+            <div>
+              <div class="stl-title">"You're completely normal"</div>
+              <p class="stl-body">German doctors ran tests. Everything came back within range. But she felt anything but normal. No one understood her physiology — or her context.</p>
+            </div>
+          </div>
+          <div class="stl-item">
+            <div class="stl-year">Year 4–8</div>
+            <div>
+              <div class="stl-title">Turning her PhD into personal research</div>
+              <p class="stl-body">Using her metabolic science background, she investigated what was actually happening — gut microbiome, insulin resistance, Vitamin D, cortisol. She built and tested protocols on herself first.</p>
+            </div>
+          </div>
+          <div class="stl-item">
+            <div class="stl-year">Year 11</div>
+            <div>
+              <div class="stl-title">Returned home with the answer</div>
+              <p class="stl-body">She came back to India with a fully developed, science-backed protocol for women who've experienced exactly what she did. For Her Wellbeing was born.</p>
+            </div>
+          </div>
+        </div>
+        <blockquote style="border-left:2px solid var(--gold);padding-left:1.25rem;margin:0;">
+          <p style="font-family:var(--serif);font-size:1.05rem;font-style:italic;font-weight:300;color:rgba(255,253,249,0.85);line-height:1.7;">"I know what your blood tests look like. I know what you're eating in your German or British kitchen. I know exactly what your body is asking for — because I've been you."</p>
+          <footer style="margin-top:0.6rem;font-size:0.75rem;color:rgba(255,253,249,0.45);letter-spacing:0.08em;text-transform:uppercase;">— Dr. Raga Deepthi Ediga</footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT THE PROGRAM OFFERS -->
+<section class="abroad-program section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;max-width:620px;margin:0 auto;">
+      <span class="eyebrow">Designed for Your Life Abroad</span>
+      <h2 class="section-title">The Same Science.<br><em>Adapted to Your World.</em></h2>
+      <p class="section-body">Every element of Dr. Raga's programs is adapted for women living outside India — your food environment, your climate, your schedule, your stressors.</p>
+    </div>
+    <div class="ap-grid">
+      <div class="ap-card fade-in fade-in-delay-1">
+        <div class="ap-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="ap-title">100% Online</div>
+        <p class="ap-body">All consultations and sessions are via video call. No travel, no clinic. Designed from day one for women who can't access Indian doctors locally.</p>
+      </div>
+      <div class="ap-card fade-in fade-in-delay-2">
+        <div class="ap-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+        <div class="ap-title">Local Grocery Meal Plans</div>
+        <p class="ap-body">Diet plans are built using what's available in Lidl, Aldi, Tesco, Whole Foods, or T&T — not ingredients only found in India. Real plans, real life.</p>
+      </div>
+      <div class="ap-card fade-in fade-in-delay-3">
+        <div class="ap-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="ap-title">Time Zone Flexible</div>
+        <p class="ap-body">Consultations available across European, US, Canadian, and Australian time zones. Dr. Raga works around your schedule — not the other way around.</p>
+      </div>
+      <div class="ap-card fade-in fade-in-delay-1">
+        <div class="ap-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="ap-title">Telugu & English</div>
+        <p class="ap-body">Speak in the language you're most comfortable in. Many NRI women find it easier to explain health concerns in Telugu. Dr. Raga responds in kind.</p>
+      </div>
+      <div class="ap-card fade-in fade-in-delay-2">
+        <div class="ap-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v8l-4 9h14l-4-9V3"/></svg></div>
+        <div class="ap-title">Works with Local Lab Tests</div>
+        <p class="ap-body">Dr. Raga interprets lab reports from German, UK, US, or Australian labs — using South Asian reference ranges, not Western averages that miss Indian-specific issues.</p>
+      </div>
+      <div class="ap-card fade-in fade-in-delay-3">
+        <div class="ap-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
+        <div class="ap-title">Abroad-Specific Protocols</div>
+        <p class="ap-body">Vitamin D supplementation, cold-weather metabolism support, anti-inflammatory protocols for disrupted microbiomes — built specifically for Indian women in Western climates.</p>
+      </div>
+    </div>
+    <div style="margin-top:3rem;text-align:center;" class="fade-in">
+      <a href="contact.html" class="btn-primary gold">Book Your Online Consultation — ₹500</a>
+      <p style="margin-top:0.75rem;font-size:0.78rem;color:var(--text-light);">Secure video call · Works on all devices · All time zones</p>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTRIES WE SERVE -->
+<section class="countries-section">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">Where Our Clients Are</span>
+      <h2 class="section-title">Indian Women<br><em>Across the World</em></h2>
+    </div>
+    <div class="countries-grid fade-in">
+      <div class="country-card">
+        <div class="country-flag">🇩🇪</div>
+        <div class="country-name">Germany</div>
+        <div class="country-note">Where Dr. Raga spent 11 years</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇬🇧</div>
+        <div class="country-name">United Kingdom</div>
+        <div class="country-note">London · Manchester · Edinburgh</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇺🇸</div>
+        <div class="country-name">United States</div>
+        <div class="country-note">All time zones covered</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇨🇦</div>
+        <div class="country-name">Canada</div>
+        <div class="country-note">Toronto · Vancouver · Calgary</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇦🇺</div>
+        <div class="country-name">Australia</div>
+        <div class="country-note">Sydney · Melbourne · Brisbane</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇸🇬</div>
+        <div class="country-name">Singapore</div>
+        <div class="country-note">Close time zone to India</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag">🇳🇱</div>
+        <div class="country-name">Netherlands</div>
+        <div class="country-note">Amsterdam · Eindhoven</div>
+      </div>
+      <div class="country-card">
+        <div class="country-flag"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold)"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="country-name">Anywhere</div>
+        <div class="country-note">If you're Indian and abroad — we serve you</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ONLINE STATS STRIP -->
+<div class="online-strip">
+  <div class="online-inner">
+    <div class="online-cell fade-in">
+      <div class="online-num">100%</div>
+      <div class="online-label">Online — no clinic<br>visit required</div>
+    </div>
+    <div class="online-cell fade-in fade-in-delay-2">
+      <div class="online-num">48 hr</div>
+      <div class="online-label">Response time for<br>free questions</div>
+    </div>
+    <div class="online-cell fade-in fade-in-delay-3">
+      <div class="online-num">11 yrs</div>
+      <div class="online-label">Dr. Raga's personal<br>experience abroad</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="abroad-testi section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">From Women Who've Been There</span>
+      <h2 class="section-title">You're Not the<br><em>First. You Won't Be the Last.</em></h2>
+    </div>
+    <div class="abroad-testi-grid">
+      <div class="abroad-testi-card fade-in fade-in-delay-1">
+        <p class="atc-quote">"Before starting my diet plan, I never thought I would lose weight. After 3 months I lost almost 15 kgs. The most happiest thing is that I conceived after following your diet plan."</p>
+        <div class="atc-name">Divyasree</div>
+        <div class="atc-location">Diet Counselling Client · 15 kg lost · Conceived naturally</div>
+      </div>
+      <div class="abroad-testi-card fade-in fade-in-delay-2">
+        <p class="atc-quote">"When I followed your diet, in just 20 days my periods became regular. Weight loss and inch loss was visible to everyone in a month and I used to feel very light."</p>
+        <div class="atc-name">Padma</div>
+        <div class="atc-location">Diet Counselling Client · Irregular periods resolved in 20 days</div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;text-align:center;padding:2rem;background:var(--cream);border-radius:4px;" class="fade-in">
+      <p style="font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--plum);font-style:italic;max-width:580px;margin:0 auto;">"Whether you're in Hyderabad or Hamburg — your body is the same. The science is the same. And my commitment to your healing is the same."</p>
+      <p style="font-size:0.75rem;color:var(--text-light);margin-top:0.6rem;letter-spacing:0.08em;text-transform:uppercase;">— Dr. Raga Deepthi Ediga, PhD</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="abroad-cta">
+  <div class="abroad-cta-inner">
+    <div class="fade-in">
+      <span class="eyebrow" style="color:rgba(74,16,66,0.6);">Start Today — From Wherever You Are</span>
+      <h2 class="abroad-cta-title">Your Health Doesn't<br>Have to Wait Until<br><em>You Move Back.</em></h2>
+      <p class="abroad-cta-sub">Book a ₹500 online consultation. Dr. Raga reviews your history, your labs, and your life abroad — and designs a plan that works in your actual kitchen, not an imagined Indian one.</p>
+      <div class="abroad-cta-btns">
+        <a href="contact.html" class="btn-primary">Book Online Consultation — ₹500</a>
+        <a href="ask.html" class="btn-ghost" style="color:var(--plum);border-color:rgba(74,16,66,0.35);">Ask a Free Question First</a>
+      </div>
+      <p class="tz-note">Video call via Google Meet · All time zones · Pay in INR or international cards</p>
+    </div>
+  </div>
+</section>
+
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script src="shared.js"></script>
+<script>initSite('abroad');</script>
+</body>
+</html>

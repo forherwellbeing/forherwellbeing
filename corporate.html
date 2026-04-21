@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate & Institutional Wellness — For Her Wellbeing</title>
+<meta name="description" content="Science-backed corporate wellness programs for organisations with women employees — expert talks, quarterly workshops, and annual partnerships by Dr. Raga Deepthi, PhD.">
+<meta property="og:title" content="Corporate Wellness — For Her Wellbeing">
+<meta property="og:description" content="Invest in your women employees' health. PhD-level wellness talks, workshops, and programs that reduce absenteeism and improve retention.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/corporate.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* STATS STRIP */
+.corp-stats { background: var(--plum); padding: 3.5rem 0; }
+.corp-stats-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+}
+.cs-cell {
+  text-align: center; padding: 0 1.5rem;
+  border-right: 1px solid rgba(255,253,249,0.1);
+}
+.cs-cell:last-child { border-right: none; }
+.cs-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 300; color: var(--gold-light); line-height: 1; margin-bottom: 0.3rem; }
+.cs-label { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,253,249,0.45); line-height: 1.5; }
+
+/* TIERS */
+.tier-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.tier-card {
+  background: var(--white); border-radius: 4px;
+  border: 1px solid var(--border); overflow: hidden;
+  transition: all 0.3s; display: flex; flex-direction: column;
+}
+.tier-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(74,16,66,0.1); }
+.tier-card.featured { border-color: var(--gold); }
+.tier-head { padding: 2rem 2rem 1.5rem; border-bottom: 1px solid var(--border); flex: 1; }
+.tier-badge { font-size: 0.63rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 50px; display: inline-block; margin-bottom: 0.75rem; }
+.tier-badge.popular { background: var(--gold); color: var(--plum); }
+.tier-badge.entry { background: rgba(74,16,66,0.08); color: var(--plum); }
+.tier-badge.enterprise { background: var(--plum); color: white; }
+.tier-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 300; color: var(--plum); margin-bottom: 0.4rem; }
+.tier-tagline { font-size: 0.82rem; font-weight: 300; color: var(--text-mid); line-height: 1.6; margin-bottom: 1.25rem; }
+.tier-includes { display: flex; flex-direction: column; gap: 0.5rem; }
+.ti { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; font-weight: 300; color: var(--text-mid); line-height: 1.5; }
+.ti::before { content: '✓'; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+.tier-foot { padding: 1.5rem 2rem; background: var(--cream); }
+.tier-price { font-family: var(--serif); font-size: 1.4rem; font-weight: 300; color: var(--plum); margin-bottom: 0.15rem; }
+.tier-price-note { font-size: 0.72rem; color: var(--text-light); font-weight: 300; margin-bottom: 1rem; }
+
+/* PROCESS */
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; position: relative; margin-top: 3.5rem;
+}
+.process-grid::before {
+  content: ''; position: absolute; top: 28px;
+  left: 12.5%; right: 12.5%; height: 1px;
+  background: linear-gradient(to right, var(--gold), rgba(201,146,42,0.2));
+}
+.proc-item { text-align: center; padding: 0 1.25rem; position: relative; z-index: 1; }
+.proc-dot {
+  width: 56px; height: 56px; border-radius: 50%; background: var(--plum);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 300; color: var(--gold);
+}
+.proc-title { font-family: var(--serif); font-size: 1rem; color: var(--plum); margin-bottom: 0.4rem; }
+.proc-body { font-size: 0.78rem; font-weight: 300; color: var(--text-mid); line-height: 1.6; }
+
+/* WHO WE WORK WITH */
+.who-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1rem; margin-top: 2.5rem;
+}
+.who-cell {
+  padding: 1.5rem; background: var(--white); border-radius: 4px;
+  border: 1px solid var(--border); display: flex; align-items: flex-start; gap: 1rem;
+}
+.who-icon { width: 36px; height: 36px; flex-shrink: 0; color: var(--plum); }
+.who-title { font-family: var(--serif); font-size: 0.98rem; color: var(--plum); margin-bottom: 0.25rem; }
+.who-body { font-size: 0.78rem; font-weight: 300; color: var(--text-mid); line-height: 1.5; }
+
+/* INSTITUTIONAL PACKAGES */
+.inst-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.inst-card {
+  background: var(--white); border-radius: 6px;
+  border: 1px solid var(--border); overflow: hidden;
+  display: flex; flex-direction: column; transition: all 0.3s;
+}
+.inst-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(74,16,66,0.1); border-color: rgba(74,16,66,0.2); }
+.inst-card.featured { border-color: var(--gold); }
+.inst-head { padding: 1.75rem 1.75rem 1.25rem; flex: 1; }
+.inst-icon-wrap { width: 48px; height: 48px; background: rgba(74,16,66,0.06); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--plum); }
+.inst-title { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; color: var(--plum); margin-bottom: 0.35rem; }
+.inst-sub { font-size: 0.75rem; font-weight: 300; color: var(--text-light); margin-bottom: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+.inst-body { font-size: 0.82rem; font-weight: 300; line-height: 1.7; color: var(--text-mid); margin-bottom: 1rem; }
+.inst-includes { display: flex; flex-direction: column; gap: 0.4rem; }
+.ii { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.78rem; font-weight: 300; color: var(--text-mid); line-height: 1.5; }
+.ii::before { content: '—'; color: var(--gold); flex-shrink: 0; font-weight: 400; }
+.inst-foot { padding: 1.25rem 1.75rem; background: var(--cream); border-top: 1px solid var(--border); }
+.inst-price { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--plum); margin-bottom: 0.15rem; }
+.inst-price-note { font-size: 0.68rem; color: var(--text-light); font-weight: 300; margin-bottom: 0.85rem; }
+
+@media(max-width: 900px) { .inst-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 600px) { .inst-grid { grid-template-columns: 1fr; } }
+
+/* ENQUIRY FORM */
+.corp-form-wrap {
+  background: var(--white); border-radius: 6px; border: 1px solid var(--border);
+  overflow: hidden; max-width: 680px; margin: 3rem auto 0;
+}
+.corp-form-head { background: var(--plum); padding: 2rem 2.5rem; }
+.corp-form-head-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 300; color: white; margin-bottom: 0.25rem; }
+.corp-form-head-sub { font-size: 0.8rem; font-weight: 300; color: rgba(255,253,249,0.58); }
+.corp-form { padding: 2rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.corp-submit {
+  width: 100%; background: var(--gold); color: var(--plum);
+  border: none; cursor: pointer; padding: 1rem; border-radius: 50px;
+  font-family: var(--sans); font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.25s; margin-top: 0.5rem;
+}
+.corp-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+@media(max-width: 900px) {
+  .corp-stats-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .cs-cell { border-right: none; }
+  .tier-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid::before { display: none; }
+  .who-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 600px) {
+  .who-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .corp-form .form-row { grid-template-columns: 1fr; }
+  .corp-form { padding: 1.5rem; }
+  .corp-form-head { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="eyebrow eyebrow-light">Corporate & Institutional Wellness</span>
+    <h1 class="page-title">Where Women's Health<br><em>Changes Everything</em></h1>
+    <p class="page-sub">From IVF clinics and schools to coaching centres and corporate teams — science-backed women's wellness programs that create measurable impact at every stage of a woman's life.</p>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="corp-stats">
+  <div class="corp-stats-grid">
+    <div class="cs-cell fade-in">
+      <div class="cs-num">47%</div>
+      <div class="cs-label">of women in India<br>have undiagnosed PCOS</div>
+    </div>
+    <div class="cs-cell fade-in fade-in-delay-1">
+      <div class="cs-num">2.4×</div>
+      <div class="cs-label">higher absenteeism<br>due to hormonal issues</div>
+    </div>
+    <div class="cs-cell fade-in fade-in-delay-2">
+      <div class="cs-num">68%</div>
+      <div class="cs-label">of working women report<br>fatigue affecting focus</div>
+    </div>
+    <div class="cs-cell fade-in fade-in-delay-3">
+      <div class="cs-num">₹0</div>
+      <div class="cs-label">cost of doing nothing<br>— myth. Turnover is expensive.</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE WORK WITH -->
+<section style="background:var(--cream);" class="section-pad">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="eyebrow">Right for Your Organisation</span>
+      <h2 class="section-title">We Work With<br><em>Every Kind of Team</em></h2>
+    </div>
+    <div class="who-grid fade-in">
+      <div class="who-cell">
+        <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <div>
+          <div class="who-title">Tech & IT Companies</div>
+          <p class="who-body">Sedentary desk jobs, late-night calls, relocation stress — a breeding ground for hormonal and metabolic dysfunction in women engineers and managers.</p>
+        </div>
+      </div>
+      <div class="who-cell">
+        <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <div>
+          <div class="who-title">Hospitals & Healthcare</div>
+          <p class="who-body">Healthcare workers neglect their own health while caring for others. Night shifts, cortisol overload, irregular meals — we build programs around their realities.</p>
+        </div>
+      </div>
+      <div class="who-cell">
+        <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <div>
+          <div class="who-title">Banking & Finance</div>
+          <p class="who-body">High-pressure environments where women often suppress symptoms to stay competitive. Burnout, weight gain, and hormonal issues affect performance and retention.</p>
+        </div>
+      </div>
+      <div class="who-cell">
+        <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <div>
+          <div class="who-title">Educational Institutions</div>
+          <p class="who-body">Faculty and staff wellness programs. Universities and schools with a high proportion of women employees benefit significantly from preventive metabolic care.</p>
+        </div>
+      </div>
+      <div class="who-cell">
+        <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <div>
+          <div class="who-title">Indian Teams Abroad</div>
+          <p class="who-body">Companies with Indian employees in Germany, UK, USA, or Singapore. Dr. Raga's abroad-specific expertise is uniquely valuable for NRI workforce wellness.</p>
+        </div>
+      </div>
+      <div class="who-cell">
+        <svg class="who-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div class="who-title">Any Organisation</div>
+          <p class="who-body">If more than 30% of your workforce is women — this matters. Hormonal health directly impacts performance, absenteeism, and retention at every level.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTITUTIONAL WELLNESS PACKAGES -->
+<section style="background:var(--white);" class="section-pad" id="institutional">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">Specialised Institutional Programs</span>
+      <h2 class="section-title">Beyond the Workplace —<br><em>Institutions That Shape Women's Lives</em></h2>
+      <p class="section-body" style="max-width:620px;margin:0 auto;">Tailored wellness packages for clinics, schools, coaching centres, and community organisations where women's health is central — not peripheral.</p>
+    </div>
+    <div class="inst-grid">
+
+      <!-- IVF & Fertility Clinics -->
+      <div class="inst-card featured fade-in fade-in-delay-1">
+        <div class="inst-head">
+          <div class="inst-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="inst-title">IVF & Fertility Clinics</div>
+          <div class="inst-sub">Patient Nutrition Partnership</div>
+          <p class="inst-body">Nutrition is one of the most evidence-backed ways to improve IVF success rates. We provide clinic-referred nutrition packages for patients at every stage — pre-IVF, during stimulation, post-transfer, and postpartum.</p>
+          <div class="inst-includes">
+            <span class="ii">Pre-IVF nutrition optimization (3-month protocol)</span>
+            <span class="ii">Stimulation phase diet guidance & supplements</span>
+            <span class="ii">Post-transfer anti-inflammatory eating protocol</span>
+            <span class="ii">Gut & hormone health for repeat IVF patients</span>
+            <span class="ii">PCOS & endometriosis-specific nutrition plans</span>
+            <span class="ii">Referred patient packages at discounted rates</span>
+          </div>
+        </div>
+        <div class="inst-foot">
+          <div class="inst-price">₹8,000 – ₹25,000 / patient</div>
+          <div class="inst-price-note">Clinic retainer models available · Revenue-share options</div>
+          <a href="#enquiry" class="btn-primary gold" style="display:block;text-align:center;font-size:0.78rem;">Partner With Us →</a>
+        </div>
+      </div>
+
+      <!-- Schools & Junior Colleges -->
+      <div class="inst-card fade-in fade-in-delay-2">
+        <div class="inst-head">
+          <div class="inst-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="inst-title">Schools & Junior Colleges</div>
+          <div class="inst-sub">Teen Girl Health Education</div>
+          <p class="inst-body">Adolescent girls are rarely taught about their own hormonal health. Early education prevents years of mismanaged PCOS, eating disorders, and period shame. We bring science to the classroom.</p>
+          <div class="inst-includes">
+            <span class="ii">Menstrual health & nutrition workshops (classes 9–12)</span>
+            <span class="ii">Body image, hormones & self-care education</span>
+            <span class="ii">Teachers & female staff wellness sessions</span>
+            <span class="ii">Parent awareness webinars (mothers)</span>
+            <span class="ii">Resource kits & take-home guides for students</span>
+            <span class="ii">Quarterly or annual format available</span>
+          </div>
+        </div>
+        <div class="inst-foot">
+          <div class="inst-price">₹20,000 – ₹60,000 / program</div>
+          <div class="inst-price-note">Per quarter · Based on student strength</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;font-size:0.78rem;">Get a Proposal →</a>
+        </div>
+      </div>
+
+      <!-- JEE/NEET Coaching Centres -->
+      <div class="inst-card fade-in fade-in-delay-3">
+        <div class="inst-head">
+          <div class="inst-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="inst-title">JEE / NEET Coaching Centres</div>
+          <div class="inst-sub">High-Stress Female Student Wellness</div>
+          <p class="inst-body">The relentless pressure of competitive exam preparation wreaks havoc on female students' hormones, cycles, and mental health. Burnout, PCOS flares, and severe fatigue are epidemic in coaching centres. We fix that.</p>
+          <div class="inst-includes">
+            <span class="ii">Brain nutrition & focus-enhancing meal protocols</span>
+            <span class="ii">Stress hormones & cortisol management workshops</span>
+            <span class="ii">Period health education for exam-stressed girls</span>
+            <span class="ii">Anti-burnout nutrition program (6-month track)</span>
+            <span class="ii">Webinars for mothers of female students</span>
+            <span class="ii">Online consultations for students with PCOS/fatigue</span>
+          </div>
+        </div>
+        <div class="inst-foot">
+          <div class="inst-price">₹25,000 – ₹75,000 / batch</div>
+          <div class="inst-price-note">Per academic term · Online delivery available</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;font-size:0.78rem;">Get a Proposal →</a>
+        </div>
+      </div>
+
+      <!-- Gynaecology Clinics -->
+      <div class="inst-card fade-in fade-in-delay-1">
+        <div class="inst-head">
+          <div class="inst-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="inst-title">Gynaecology & Obs Clinics</div>
+          <div class="inst-sub">Collaborative Nutrition Co-Management</div>
+          <p class="inst-body">Nutrition is the missing link in gynaecological care. We work alongside your doctors to provide PCOS, endometriosis, PCOD, and antenatal nutrition co-management — improving clinical outcomes and adding a revenue stream.</p>
+          <div class="inst-includes">
+            <span class="ii">PCOS & endometriosis nutrition co-management</span>
+            <span class="ii">Antenatal nutrition program for referred patients</span>
+            <span class="ii">Post-surgical (hysterectomy, laparoscopy) nutrition</span>
+            <span class="ii">Menopause transition diet protocols</span>
+            <span class="ii">Branded patient handouts & take-home guides</span>
+            <span class="ii">Monthly in-clinic or online group sessions</span>
+          </div>
+        </div>
+        <div class="inst-foot">
+          <div class="inst-price">₹10,000 – ₹30,000 / month</div>
+          <div class="inst-price-note">Retainer model · Revenue-share options available</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;font-size:0.78rem;">Start a Conversation →</a>
+        </div>
+      </div>
+
+      <!-- Postpartum & Maternity Centres -->
+      <div class="inst-card fade-in fade-in-delay-2">
+        <div class="inst-head">
+          <div class="inst-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="inst-title">Postpartum & Maternity Centres</div>
+          <div class="inst-sub">Confinement & Recovery Nutrition</div>
+          <p class="inst-body">The postnatal period is one of the most nutritionally critical times in a woman's life — and one of the most neglected. We bring evidence-based postpartum nutrition to maternity centres, NRI families, and confinement care services.</p>
+          <div class="inst-includes">
+            <span class="ii">Confinement period nutrition plans (Indian tradition + science)</span>
+            <span class="ii">Breastfeeding diet & milk supply optimisation</span>
+            <span class="ii">Postpartum weight recovery — healthy timelines</span>
+            <span class="ii">Postpartum depression nutrition support</span>
+            <span class="ii">NRI postpartum care (remote delivery)</span>
+            <span class="ii">Group workshops for new mothers</span>
+          </div>
+        </div>
+        <div class="inst-foot">
+          <div class="inst-price">₹15,000 – ₹40,000 / program</div>
+          <div class="inst-price-note">Per cohort or monthly retainer</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;font-size:0.78rem;">Get a Proposal →</a>
+        </div>
+      </div>
+
+      <!-- NRI Community Organisations -->
+      <div class="inst-card fade-in fade-in-delay-3">
+        <div class="inst-head">
+          <div class="inst-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="inst-title">NRI & Indian Community Orgs</div>
+          <div class="inst-sub">Diaspora Women's Wellness</div>
+          <p class="inst-body">Indian associations, Telugu Sangams, cultural organisations, and NRI community groups in Germany, UK, USA, Canada, and Australia. Dr. Raga spent 11 years in Germany — she delivers wellness uniquely relevant to the diaspora experience.</p>
+          <div class="inst-includes">
+            <span class="ii">Online wellness webinars for community members</span>
+            <span class="ii">Abroad-specific health topics: Vitamin D, gut, PCOS</span>
+            <span class="ii">Monthly virtual wellness sessions for women's groups</span>
+            <span class="ii">Telugu-language delivery available</span>
+            <span class="ii">Partnerships with Indian associations globally</span>
+            <span class="ii">Special pricing for non-profit organisations</span>
+          </div>
+        </div>
+        <div class="inst-foot">
+          <div class="inst-price">Custom Pricing</div>
+          <div class="inst-price-note">Non-profit discounts available</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;font-size:0.78rem;">Connect With Us →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section style="background:var(--white);" class="section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">Program Tiers</span>
+      <h2 class="section-title">Choose Your<br><em>Level of Engagement</em></h2>
+    </div>
+    <div class="tier-grid">
+
+      <div class="tier-card fade-in fade-in-delay-1">
+        <div class="tier-head">
+          <span class="tier-badge entry">Entry</span>
+          <div class="tier-name">Wellness Talk</div>
+          <p class="tier-tagline">A single expert session — live or online — on women's metabolic health, PCOS, hormones, or nutrition. Perfect for team days or annual wellness events.</p>
+          <div class="tier-includes">
+            <span class="ti">2-hour expert talk by Dr. Raga Deepthi</span>
+            <span class="ti">Topic customised to your workforce profile</span>
+            <span class="ti">Live Q&A session included</span>
+            <span class="ti">Digital resource pack for all attendees</span>
+            <span class="ti">Online or in-person (Hyderabad)</span>
+          </div>
+        </div>
+        <div class="tier-foot">
+          <div class="tier-price">₹15,000</div>
+          <div class="tier-price-note">Per session · Up to 100 attendees</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;">Get a Quote</a>
+        </div>
+      </div>
+
+      <div class="tier-card featured fade-in fade-in-delay-2">
+        <div class="tier-head">
+          <span class="tier-badge popular">Most Popular</span>
+          <div class="tier-name">Quarterly Wellness Program</div>
+          <p class="tier-tagline">Ongoing workshops every quarter — building a culture of health literacy in your organisation. Employees go from reactive to proactive about their health.</p>
+          <div class="tier-includes">
+            <span class="ti">4 expert sessions per quarter (monthly)</span>
+            <span class="ti">Topics: hormones, nutrition, gut health, yoga</span>
+            <span class="ti">Individual consultation vouchers for staff</span>
+            <span class="ti">Dedicated WhatsApp group for employees</span>
+            <span class="ti">Progress report for HR at quarter end</span>
+            <span class="ti">Online + optional in-person hybrid</span>
+          </div>
+        </div>
+        <div class="tier-foot">
+          <div class="tier-price">₹75,000 – ₹1,50,000</div>
+          <div class="tier-price-note">Per quarter · Based on team size</div>
+          <a href="#enquiry" class="btn-primary gold" style="display:block;text-align:center;">Get a Quote</a>
+        </div>
+      </div>
+
+      <div class="tier-card fade-in fade-in-delay-3">
+        <div class="tier-head">
+          <span class="tier-badge enterprise">Enterprise</span>
+          <div class="tier-name">Annual Partnership</div>
+          <p class="tier-tagline">A full-year integration of For Her Wellbeing into your organisation's wellness calendar. Deep impact, measurable outcomes, and a dedicated health partner.</p>
+          <div class="tier-includes">
+            <span class="ti">Monthly sessions + special events</span>
+            <span class="ti">Subsidised individual consultations for staff</span>
+            <span class="ti">Custom women's health portal for employees</span>
+            <span class="ti">Quarterly health screenings (metabolic panel)</span>
+            <span class="ti">Menstrual health policy advisory</span>
+            <span class="ti">Named partnership on FHW communications</span>
+          </div>
+        </div>
+        <div class="tier-foot">
+          <div class="tier-price">Custom Pricing</div>
+          <div class="tier-price-note">Based on team size & scope</div>
+          <a href="#enquiry" class="btn-primary" style="display:block;text-align:center;">Start a Conversation</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section style="background:var(--cream);" class="section-pad">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">How It Works</span>
+      <h2 class="section-title">From Enquiry to<br><em>First Session in 2 Weeks</em></h2>
+    </div>
+    <div class="process-grid fade-in">
+      <div class="proc-item">
+        <div class="proc-dot">1</div>
+        <div class="proc-title">Submit Enquiry</div>
+        <p class="proc-body">Fill the form below. Tell us your team size, industry, and what you'd like to address.</p>
+      </div>
+      <div class="proc-item">
+        <div class="proc-dot">2</div>
+        <div class="proc-title">Discovery Call</div>
+        <p class="proc-body">Dr. Raga or her team speaks with your HR/wellness lead to understand your workforce.</p>
+      </div>
+      <div class="proc-item">
+        <div class="proc-dot">3</div>
+        <div class="proc-title">Custom Proposal</div>
+        <p class="proc-body">You receive a tailored program proposal with topics, schedule, and investment — within 48 hours.</p>
+      </div>
+      <div class="proc-item">
+        <div class="proc-dot" style="background:var(--gold);color:var(--plum);">4</div>
+        <div class="proc-title">Program Begins</div>
+        <p class="proc-body">First session within 2 weeks of sign-off. We handle everything — slides, materials, scheduling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY FORM -->
+<section style="background:var(--white);" class="section-pad" id="enquiry">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;max-width:600px;margin:0 auto 0;">
+      <span class="eyebrow">Get in Touch</span>
+      <h2 class="section-title">Request a<br><em>Corporate Proposal</em></h2>
+      <p class="section-body">Tell us about your organisation. We'll get back with a tailored proposal within 24 hours.</p>
+    </div>
+    <div class="corp-form-wrap fade-in">
+      <div class="corp-form-head">
+        <div class="corp-form-head-title">Corporate Wellness Enquiry</div>
+        <div class="corp-form-head-sub">We respond within 24 hours with a custom proposal.</div>
+      </div>
+      <form class="corp-form" id="corp-enquiry-form" onsubmit="submitCorpEnquiry(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Your Name *</label>
+            <input class="form-input" id="ce-name" type="text" placeholder="Anjali Reddy" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Designation</label>
+            <input class="form-input" id="ce-role" type="text" placeholder="HR Manager">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Organisation Name *</label>
+          <input class="form-input" id="ce-org" type="text" placeholder="Infosys, Apollo, HDFC Bank…" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Work Email *</label>
+            <input class="form-input" id="ce-email" type="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone / WhatsApp</label>
+            <input class="form-input" id="ce-phone" type="tel" placeholder="+91 9876543210">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Team Size</label>
+            <select class="form-select" id="ce-size">
+              <option value="">Select…</option>
+              <option>Under 50</option>
+              <option>50 – 200</option>
+              <option>200 – 500</option>
+              <option>500 – 1,000</option>
+              <option>1,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tier of Interest</label>
+            <select class="form-select" id="ce-tier">
+              <option value="">Select…</option>
+              <option>Wellness Talk (₹15,000)</option>
+              <option>Quarterly Program</option>
+              <option>Annual Partnership</option>
+              <option>Not sure — advise me</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What's the main health concern in your team?</label>
+          <textarea class="form-input" id="ce-note" rows="3" placeholder="Stress, fatigue, PCOS awareness, postpartum support for employees, NRI team wellness…"></textarea>
+        </div>
+        <button type="submit" class="corp-submit">Send Enquiry →</button>
+        <p style="font-size:0.72rem;text-align:center;color:var(--text-light);">We respond within 24 hours. Your details are never shared.</p>
+      </form>
+      <div id="corp-thanks" style="display:none;padding:2.5rem;text-align:center;">
+        <div style="margin-bottom:1rem;display:flex;justify-content:center;"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <div style="font-family:var(--serif);font-size:1.6rem;font-weight:300;color:var(--plum);margin-bottom:0.5rem;">Enquiry Received</div>
+        <p style="font-size:0.88rem;font-weight:300;color:var(--text-mid);line-height:1.75;">Thank you. Dr. Raga's team will send your custom proposal within 24 hours — or reach you directly on WhatsApp if you've shared your number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script>
+function submitCorpEnquiry(e) {
+  e.preventDefault();
+  const btn = document.querySelector('.corp-submit');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  const data = {
+    name: document.getElementById('ce-name').value,
+    role: document.getElementById('ce-role').value,
+    org: document.getElementById('ce-org').value,
+    email: document.getElementById('ce-email').value,
+    phone: document.getElementById('ce-phone').value,
+    size: document.getElementById('ce-size').value,
+    tier: document.getElementById('ce-tier').value,
+    note: document.getElementById('ce-note').value,
+    _subject: 'Corporate Wellness Enquiry — For Her Wellbeing'
+  };
+  const leads = JSON.parse(localStorage.getItem('fhw_corp_leads') || '[]');
+  leads.push({ ...data, timestamp: new Date().toISOString() });
+  localStorage.setItem('fhw_corp_leads', JSON.stringify(leads));
+  const fd = new FormData();
+  Object.entries(data).forEach(([k, v]) => fd.append(k, v));
+  fetch('https://formspree.io/f/FHW_CORP_FORM_ID', {
+    method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
+  }).finally(() => {
+    document.getElementById('corp-enquiry-form').style.display = 'none';
+    document.getElementById('corp-thanks').style.display = 'block';
+  });
+}
+</script>
+<script src="shared.js"></script>
+<script>initSite('corporate');</script>
+</body>
+</html>

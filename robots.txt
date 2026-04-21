@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /uploads/testimonial_video_*
+
+Sitemap: https://forherwellbeing.com/sitemap.xml

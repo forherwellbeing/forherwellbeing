@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Vision — For Her Wellbeing Platform</title>
+<meta name="description" content="For Her Wellbeing's mission to empower 1 lakh Indian women through a holistic digital wellness platform — combining science, community, yoga, personalised diet, and supplements.">
+<meta property="og:title" content="Our Vision — For Her Wellbeing">
+<meta property="og:description" content="A mission to reach 1 lakh women. Science-backed, community-powered, Telugu & English. The future of women's holistic health in India.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/platform.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+.vision-hero { background: var(--plum); padding: 7rem 0 5rem; margin-top: 68px; position: relative; overflow: hidden; }
+.vision-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,146,42,0.12) 0%, transparent 70%); }
+.vision-hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.vision-title { font-family: var(--serif); font-size: clamp(2.8rem,5vw,4.5rem); font-weight: 300; line-height: 1.1; color: white; margin-bottom: 1.25rem; }
+.vision-title em { font-style: italic; color: var(--gold-light); }
+.vision-sub { font-size: 1rem; font-weight: 300; line-height: 1.85; color: rgba(255,253,249,0.7); margin-bottom: 2rem; }
+.vision-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.vstat { padding: 1.25rem; background: rgba(255,253,249,0.06); border: 1px solid rgba(255,253,249,0.1); border-radius: 4px; }
+.vstat-num { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; color: var(--gold-light); line-height: 1; margin-bottom: 0.25rem; }
+.vstat-label { font-size: 0.72rem; font-weight: 300; color: rgba(255,253,249,0.5); line-height: 1.4; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* ROADMAP */
+.roadmap { background: var(--white); padding: 6rem 0; }
+.roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; margin-top: 4rem; }
+.roadmap-grid::before { content: ''; position: absolute; top: 40px; left: 12.5%; right: 12.5%; height: 2px; background: linear-gradient(to right, var(--gold), rgba(201,146,42,0.2)); z-index: 0; }
+.roadmap-item { text-align: center; padding: 0 1.5rem; position: relative; z-index: 1; }
+.roadmap-dot { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; }
+.roadmap-dot.current { background: var(--plum); box-shadow: 0 4px 20px rgba(74,16,66,0.3); }
+.roadmap-dot.near { background: var(--gold); box-shadow: 0 4px 20px rgba(201,146,42,0.3); }
+.roadmap-dot.future { background: var(--blush); border: 2px dashed var(--border); }
+.roadmap-dot.vision { background: linear-gradient(135deg, var(--plum), var(--gold)); box-shadow: 0 4px 20px rgba(74,16,66,0.2); }
+.roadmap-phase { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+.roadmap-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--plum); margin-bottom: 0.5rem; }
+.roadmap-desc { font-size: 0.78rem; font-weight: 300; line-height: 1.65; color: var(--text-mid); }
+
+/* PILLARS */
+.pillars-section { background: var(--cream); padding: 6rem 0; }
+.pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.pillar-card { background: var(--white); border-radius: 4px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.3s, box-shadow 0.3s; }
+.pillar-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(74,16,66,0.1); }
+.pillar-card-header { padding: 2.5rem 2rem 1.5rem; border-bottom: 1px solid var(--border); }
+.pillar-icon-wrap { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--plum); }
+.pillar-number { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+.pillar-name { font-family: var(--serif); font-size: 1.4rem; font-weight: 400; color: var(--plum); line-height: 1.25; margin-bottom: 0.5rem; }
+.pillar-tag { font-size: 0.72rem; font-weight: 300; color: var(--text-light); }
+.pillar-card-body { padding: 1.75rem 2rem; }
+.pillar-body-text { font-size: 0.87rem; font-weight: 300; line-height: 1.8; color: var(--text-mid); margin-bottom: 1.25rem; }
+.pillar-items { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.pillar-items li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.82rem; font-weight: 300; color: var(--text-mid); line-height: 1.5; }
+.pillar-items li::before { content: '✓'; color: var(--gold); font-weight: 600; flex-shrink: 0; }
+.pillar-status { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.25rem; padding: 0.3rem 0.85rem; border-radius: 50px; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.status-live { background: rgba(201,146,42,0.12); color: var(--gold); }
+.status-building { background: rgba(74,16,66,0.08); color: var(--plum); }
+.status-coming { background: var(--blush); color: var(--text-mid); }
+
+/* SUPPLEMENTS */
+.supps-section { background: var(--plum); padding: 6rem 0; }
+.supps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.supp-categories { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+.supp-cat { padding: 1.25rem 1.5rem; background: rgba(255,253,249,0.06); border: 1px solid rgba(255,253,249,0.1); border-radius: 4px; transition: border-color 0.3s; }
+.supp-cat:hover { border-color: rgba(201,146,42,0.35); }
+.supp-cat-name { font-family: var(--serif); font-size: 1rem; color: white; margin-bottom: 0.25rem; }
+.supp-cat-desc { font-size: 0.8rem; font-weight: 300; color: rgba(255,253,249,0.55); line-height: 1.5; }
+
+/* MARKETPLACE */
+.market-section { background: var(--white); padding: 6rem 0; }
+.market-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.market-card { padding: 2rem; background: var(--cream); border-radius: 4px; border: 1px solid var(--border); text-align: center; }
+.market-icon { width: 44px; height: 44px; color: var(--plum); margin-bottom: 1rem; }
+.market-title { font-family: var(--serif); font-size: 1.2rem; color: var(--plum); margin-bottom: 0.5rem; }
+.market-desc { font-size: 0.82rem; font-weight: 300; color: var(--text-mid); line-height: 1.7; }
+
+/* SCIENCE */
+.science-section { background: var(--cream); padding: 6rem 0; }
+.science-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.science-card { padding: 2.5rem; background: var(--white); border-radius: 4px; border-left: 3px solid var(--gold); }
+.science-title { font-family: var(--serif); font-size: 1.3rem; color: var(--plum); margin-bottom: 0.75rem; }
+.science-desc { font-size: 0.87rem; font-weight: 300; color: var(--text-mid); line-height: 1.8; }
+.science-horizon { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light); }
+
+/* WAITLIST */
+.waitlist-section { background: var(--gold); padding: 5rem 0; text-align: center; }
+.waitlist-inner { max-width: 600px; margin: 0 auto; padding: 0 2rem; }
+.waitlist-form { display: flex; gap: 0.75rem; margin-top: 2rem; }
+.waitlist-input { flex: 1; padding: 0.9rem 1.25rem; border: none; border-radius: 50px; font-family: var(--sans); font-size: 0.9rem; outline: none; background: rgba(74,16,66,0.1); color: var(--plum); }
+.waitlist-input::placeholder { color: rgba(74,16,66,0.45); }
+.waitlist-btn { background: var(--plum); color: white; border: none; border-radius: 50px; padding: 0.9rem 1.75rem; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+.waitlist-btn:hover { background: var(--plum-light); }
+
+@media(max-width:900px){ .vision-hero-inner,.supps-grid,.science-grid{grid-template-columns:1fr;gap:3rem;} .roadmap-grid{grid-template-columns:1fr 1fr;} .roadmap-grid::before{display:none;} .pillars-grid,.market-grid{grid-template-columns:1fr;} }
+@media(max-width:600px){ .roadmap-grid{grid-template-columns:1fr;} .vision-stat-grid{grid-template-columns:1fr 1fr;} .waitlist-form{flex-direction:column;} }
+</style>
+</head>
+<body>
+
+<div class="vision-hero">
+  <div class="vision-hero-inner">
+    <div>
+      <span class="eyebrow eyebrow-light">The Bigger Picture</span>
+      <h1 class="vision-title">The Amazon<br>for Women's <em>Health</em></h1>
+      <p class="vision-sub">For Her Wellbeing is not just a wellness practice. It is the seed of a global science platform — combining deep research, proprietary supplements, holistic food, advanced therapies, and a marketplace — built exclusively for women's health.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+        <a href="contact.html" class="btn-primary gold">Join the Journey</a>
+        <a href="#waitlist" class="btn-ghost" style="color:rgba(255,253,249,0.75);border-color:rgba(255,253,249,0.3);">Join Waitlist</a>
+      </div>
+    </div>
+    <div class="vision-stat-grid">
+      <div class="vstat">
+        <div class="vstat-num">1L+</div>
+        <div class="vstat-label">Women our mission aims to serve</div>
+      </div>
+      <div class="vstat">
+        <div class="vstat-num">5</div>
+        <div class="vstat-label">Platform pillars being built simultaneously</div>
+      </div>
+      <div class="vstat">
+        <div class="vstat-num">∞</div>
+        <div class="vstat-label">The depth of science behind every offering</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<section class="roadmap">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="eyebrow">The Journey</span>
+      <h2 class="section-title">Where We Are,<br>Where We're <em>Going</em></h2>
+    </div>
+    <div class="roadmap-grid">
+      <div class="roadmap-item fade-in fade-in-delay-1">
+        <div class="roadmap-dot current"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 7 8 4 3 3c0 5 3 9 9 9zM12 12c0-5 4-8 9-9-1 5-4 9-9 9"/></svg></div>
+        <div class="roadmap-phase">Now — Phase 1</div>
+        <div class="roadmap-title">Clinical Foundation</div>
+        <p class="roadmap-desc">Premium consultations, 3-month workshops (PCOS, Obesity, Metabolic Reset), 1:1 coaching, and the Ask Dr. Raga platform — building the trusted clinical brand.</p>
+      </div>
+      <div class="roadmap-item fade-in fade-in-delay-2">
+        <div class="roadmap-dot near"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v8l-4 9h14l-4-9V3"/></svg></div>
+        <div class="roadmap-phase">2026 — Phase 2</div>
+        <div class="roadmap-title">Supplements & Food</div>
+        <p class="roadmap-desc">Science-backed proprietary supplement line for women (PCOS, fertility, thyroid, metabolic health) + holistic food delivery — meal plans prepared and delivered to doorstep.</p>
+      </div>
+      <div class="roadmap-item fade-in fade-in-delay-3">
+        <div class="roadmap-dot future" style="color:var(--plum);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c0-4 3-7 10-7s10 3 10 7-3 7-10 7S2 16 2 12z"/><path d="M12 5v14M5 8.5c2 1 4.5 1.5 7 1.5s5-.5 7-1.5M5 15.5c2-1 4.5-1.5 7-1.5s5 .5 7 1.5"/></svg></div>
+        <div class="roadmap-phase">2027 — Phase 3</div>
+        <div class="roadmap-title">Deep Science</div>
+        <p class="roadmap-desc">Advanced therapies: microbiome testing & personalisation, peptide therapies, cell therapy collaborations, and gene-based health intelligence for women.</p>
+      </div>
+      <div class="roadmap-item fade-in" style="transition-delay:0.4s;">
+        <div class="roadmap-dot vision"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="roadmap-phase">2028+ — Phase 4</div>
+        <div class="roadmap-title">The Marketplace</div>
+        <p class="roadmap-desc">The Amazon for Women's Health — a curated, science-vetted platform where women discover, compare, and purchase every aspect of their holistic wellbeing in one place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars-section">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">5 Platform Pillars</span>
+      <h2 class="section-title">Everything a Woman Needs<br><em>in One Ecosystem</em></h2>
+    </div>
+    <div class="pillars-grid">
+
+      <div class="pillar-card fade-in fade-in-delay-1">
+        <div class="pillar-card-header">
+          <div class="pillar-icon-wrap" style="background:rgba(74,16,66,0.08);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <div class="pillar-number">Pillar 01</div>
+          <div class="pillar-name">Clinical Wellness Programs</div>
+          <div class="pillar-tag">Consultations · Workshops · 1:1 Coaching</div>
+        </div>
+        <div class="pillar-card-body">
+          <p class="pillar-body-text">The clinical heart of the platform. PhD-level metabolic science meets deep empathy. Root-cause diagnosis, targeted lab testing, personalised 3-month protocols for PCOS, obesity, autoimmune, fertility, and metabolic health.</p>
+          <ul class="pillar-items">
+            <li>₹500 initial consultation</li>
+            <li>3-month workshops ₹15,000–₹50,000</li>
+            <li>Premium 1:1 intensive ₹50,000–₹1,00,000</li>
+            <li>Corporate wellness partnerships</li>
+          </ul>
+          <span class="pillar-status status-live"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#22c55e;margin-right:5px;vertical-align:middle;"></span>Live Now</span>
+        </div>
+      </div>
+
+      <div class="pillar-card fade-in fade-in-delay-2">
+        <div class="pillar-card-header">
+          <div class="pillar-icon-wrap" style="background:rgba(201,146,42,0.1);color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.5"/><polyline points="8 3 8 21"/><path d="M14 8h6a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-6z"/><line x1="14" y1="12" x2="20" y2="12"/></svg></div>
+          <div class="pillar-number">Pillar 02</div>
+          <div class="pillar-name">FHW Supplements</div>
+          <div class="pillar-tag">Own Brand · Science-Backed · Women-Specific</div>
+        </div>
+        <div class="pillar-card-body">
+          <p class="pillar-body-text">Women are confused about what supplements to take — generic advice from social media or chemists ignores individual biology. FHW Supplements will be the first supplement line designed specifically from women's metabolic science, with condition-specific formulations.</p>
+          <ul class="pillar-items">
+            <li>PCOS Support Formula (inositol, zinc, NAC, Vit D)</li>
+            <li>Thyroid & Metabolism Support (selenium, iodine, ashwagandha)</li>
+            <li>Fertility & Prenatal (folate, DHA, iron bisglycinate)</li>
+            <li>Gut & Microbiome Restore (probiotics, prebiotics, glutamine)</li>
+            <li>Metabolic Reset (berberine, magnesium, alpha-lipoic acid)</li>
+          </ul>
+          <span class="pillar-status status-building"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#3b82f6;margin-right:5px;vertical-align:middle;"></span>In Research &amp; Development</span>
+        </div>
+      </div>
+
+      <div class="pillar-card fade-in fade-in-delay-3">
+        <div class="pillar-card-header">
+          <div class="pillar-icon-wrap" style="background:rgba(240,220,216,0.5);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 7 8 4 3 3c0 5 3 9 9 9zM12 12c0-5 4-8 9-9-1 5-4 9-9 9"/></svg></div>
+          <div class="pillar-number">Pillar 03</div>
+          <div class="pillar-name">FHW Holistic Food</div>
+          <div class="pillar-tag">Meal Plans · Prepared Food · Home Delivery</div>
+        </div>
+        <div class="pillar-card-body">
+          <p class="pillar-body-text">Food is medicine — but knowing what to eat is not enough if the food isn't available, affordable, and delicious. FHW Food will prepare and deliver condition-specific, scientifically formulated meal plans to women's doorsteps — removing every barrier between prescription and plate.</p>
+          <ul class="pillar-items">
+            <li>PCOS anti-inflammatory meal kits</li>
+            <li>Pregnancy & gestational diabetes meal plans</li>
+            <li>Postpartum nourishment boxes</li>
+            <li>Metabolic reset weekly meal delivery</li>
+            <li>Personalised based on your consultation</li>
+          </ul>
+          <span class="pillar-status status-coming"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#94a3b8;margin-right:5px;vertical-align:middle;"></span>Coming 2026</span>
+        </div>
+      </div>
+
+      <div class="pillar-card fade-in fade-in-delay-1">
+        <div class="pillar-card-header">
+          <div class="pillar-icon-wrap" style="background:rgba(74,16,66,0.06);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v10M8 10c1.5 0 3 .5 4 1.5M16 14c-1.5 0-3-.5-4-1.5"/><circle cx="12" cy="19" r="2"/><path d="M16 10c-1.5 0-3 .5-4 1.5M8 14c1.5 0 3-.5 4-1.5"/></svg></div>
+          <div class="pillar-number">Pillar 04</div>
+          <div class="pillar-name">Deep Science & Advanced Therapies</div>
+          <div class="pillar-tag">Microbiome · Cell Therapy · Gene Intelligence</div>
+        </div>
+        <div class="pillar-card-body">
+          <p class="pillar-body-text">For Her Wellbeing is a science company at its core. We are building pathways to the most advanced therapies in women's health — going far beyond supplements and lifestyle to the frontier of medicine.</p>
+          <ul class="pillar-items">
+            <li>Microbiome sequencing & personalised protocols</li>
+            <li>Peptide therapies for hormonal optimisation</li>
+            <li>Cell therapy collaboration for autoimmune conditions</li>
+            <li>Gene expression testing for disease risk</li>
+            <li>Clinical research partnerships with universities</li>
+          </ul>
+          <span class="pillar-status status-coming"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#94a3b8;margin-right:5px;vertical-align:middle;"></span>Coming 2027</span>
+        </div>
+      </div>
+
+      <div class="pillar-card fade-in fade-in-delay-2">
+        <div class="pillar-card-header">
+          <div class="pillar-icon-wrap" style="background:rgba(201,146,42,0.08);color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+          <div class="pillar-number">Pillar 05</div>
+          <div class="pillar-name">The FHW Marketplace</div>
+          <div class="pillar-tag">The Amazon for Women's Health</div>
+        </div>
+        <div class="pillar-card-body">
+          <p class="pillar-body-text">A curated, science-vetted marketplace where every product — supplement, food, device, therapy, or service — has been reviewed through a lens of women's metabolic science. No marketing claims. No misinformation. Just products that actually work, explained by science.</p>
+          <ul class="pillar-items">
+            <li>Verified supplements from trusted brands</li>
+            <li>Diagnostic test kits (hormones, microbiome, nutrition)</li>
+            <li>Women's health devices (wearables, fertility monitors)</li>
+            <li>Holistic food & ingredient delivery</li>
+            <li>Community-reviewed ratings by condition</li>
+          </ul>
+          <span class="pillar-status status-coming"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#94a3b8;margin-right:5px;vertical-align:middle;"></span>Coming 2028</span>
+        </div>
+      </div>
+
+      <div class="pillar-card fade-in fade-in-delay-3" style="background:var(--plum);border-color:transparent;">
+        <div class="pillar-card-header" style="border-bottom-color:rgba(255,253,249,0.1);">
+          <div class="pillar-icon-wrap" style="background:rgba(201,146,42,0.2);color:var(--gold);"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="pillar-number" style="color:rgba(201,146,42,0.8);">Partnerships</div>
+          <div class="pillar-name" style="color:white;">Collaborate with FHW</div>
+          <div class="pillar-tag" style="color:rgba(255,253,249,0.45);">Hospitals · Brands · Researchers · Investors</div>
+        </div>
+        <div class="pillar-card-body">
+          <p class="pillar-body-text" style="color:rgba(255,253,249,0.65);">We invite hospitals, supplement brands, food companies, research institutions, and investors who share our mission to partner with For Her Wellbeing — building the world's most trusted women's health ecosystem together.</p>
+          <a href="contact.html?program=partnership" class="btn-primary gold" style="margin-top:1rem;display:inline-block;">Partner With Us</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLEMENTS DEEP DIVE -->
+<section class="supps-section" id="supplements">
+  <div class="section-inner">
+    <div class="supps-grid">
+      <div class="fade-in">
+        <span class="eyebrow eyebrow-light">Deep Research</span>
+        <h2 class="section-title light">Why Women Are <em>Confused</em> About Supplements</h2>
+        <p class="section-body light" style="margin-bottom:1.5rem;">The supplement market is flooded with products designed for men, or for "general" use that ignores female physiology. Women are left guessing — or following social media advice that may be actively harmful for their specific condition.</p>
+        <p class="section-body light" style="margin-bottom:2rem;">FHW Supplements will be the first line built entirely from women's metabolic science — condition-specific, evidence-graded, and designed to work alongside your personalised program, not replace it.</p>
+        <div class="supp-categories">
+          <div class="supp-cat">
+            <div class="supp-cat-name">PCOS Formula</div>
+            <div class="supp-cat-desc">Myo-inositol + D-chiro-inositol (40:1 ratio), NAC, zinc, Vitamin D3+K2, spearmint extract — backed by 50+ clinical trials.</div>
+          </div>
+          <div class="supp-cat">
+            <div class="supp-cat-name">Metabolic & Weight Support</div>
+            <div class="supp-cat-desc">Berberine, magnesium glycinate, alpha-lipoic acid, chromium picolinate, probiotic blend — targeting insulin resistance at its roots.</div>
+          </div>
+          <div class="supp-cat">
+            <div class="supp-cat-name">Thyroid & Autoimmune Support</div>
+            <div class="supp-cat-desc">Selenium (selenomethionine), iodine (from kelp), ashwagandha, Vitamin D, omega-3 EPA+DHA — supporting thyroid function and immune modulation.</div>
+          </div>
+          <div class="supp-cat">
+            <div class="supp-cat-name">Fertility & Prenatal</div>
+            <div class="supp-cat-desc">Methylated folate (5-MTHF), DHA, iron bisglycinate, iodine, choline — formulated for the preconception and pregnancy window.</div>
+          </div>
+          <div class="supp-cat">
+            <div class="supp-cat-name">Gut & Microbiome Restore</div>
+            <div class="supp-cat-desc">Multi-strain probiotics (Lactobacillus + Bifidobacterium), prebiotic inulin, L-glutamine, collagen peptides — rebuilding gut barrier from within.</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-2">
+        <div style="background:rgba(255,253,249,0.06);border:1px solid rgba(255,253,249,0.12);border-radius:6px;padding:2.5rem;">
+          <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:white;margin-bottom:0.5rem;">Be First to Know</div>
+          <p style="font-size:0.82rem;font-weight:300;color:rgba(255,253,249,0.55);line-height:1.6;margin-bottom:1.5rem;">Join the FHW Supplements waitlist — get early access, founding-member pricing, and Dr. Raga's supplement research newsletter.</p>
+          <form onsubmit="joinWaitlist(event,'supps')" style="display:flex;flex-direction:column;gap:0.85rem;">
+            <input class="form-input" type="text" id="sw-name" placeholder="Your name" style="background:rgba(255,253,249,0.08);border-color:rgba(255,253,249,0.15);color:rgba(255,253,249,0.9);">
+            <input class="form-input" type="email" id="sw-email" placeholder="your@email.com" required style="background:rgba(255,253,249,0.08);border-color:rgba(255,253,249,0.15);color:rgba(255,253,249,0.9);">
+            <select class="form-select" id="sw-condition" style="background:rgba(255,253,249,0.08);border-color:rgba(255,253,249,0.15);color:rgba(255,253,249,0.7);">
+              <option value="">Most relevant supplement for me...</option>
+              <option>PCOS Formula</option>
+              <option>Metabolic & Weight Support</option>
+              <option>Thyroid & Autoimmune</option>
+              <option>Fertility & Prenatal</option>
+              <option>Gut & Microbiome</option>
+              <option>All of them!</option>
+            </select>
+            <button type="submit" class="btn-primary gold" style="border:none;cursor:pointer;width:100%;">Join Supplement Waitlist →</button>
+          </form>
+          <div id="supps-thanks" style="display:none;margin-top:1rem;text-align:center;padding:1.5rem;">
+            <div style="margin-bottom:0.5rem;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg></div>
+            <div style="font-family:var(--serif);font-size:1.1rem;color:white;">You're on the list!</div>
+            <p style="font-size:0.8rem;font-weight:300;color:rgba(255,253,249,0.55);margin-top:0.5rem;">Dr. Raga will send you her supplement research findings — before they go public.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem;padding:1.5rem;background:rgba(201,146,42,0.1);border:1px solid rgba(201,146,42,0.25);border-radius:4px;">
+          <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Partnership Opportunity</div>
+          <p style="font-size:0.82rem;font-weight:300;color:rgba(255,253,249,0.6);line-height:1.6;">Are you a supplement manufacturer, distributor, or investor interested in co-creating the FHW Supplements line? We want to hear from you.</p>
+          <a href="contact.html?program=partnership" style="display:inline-block;margin-top:0.75rem;font-size:0.75rem;font-weight:500;color:var(--gold);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;">Contact us →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP SCIENCE -->
+<section class="science-section" id="science">
+  <div class="section-inner">
+    <div class="fade-in">
+      <span class="eyebrow">The Science Frontier</span>
+      <h2 class="section-title">Finding Answers No One<br>Has Found <em>Yet</em></h2>
+      <p class="section-body" style="max-width:640px;">For Her Wellbeing is a deep science company. We are not satisfied with existing knowledge — we are actively investigating, researching, and building pathways to therapies that do not yet exist for women.</p>
+    </div>
+    <div class="science-grid">
+      <div class="science-card fade-in fade-in-delay-1">
+        <div class="science-title">Microbiome Personalisation</div>
+        <p class="science-desc">Women's gut microbiome composition differs profoundly by hormonal phase, life stage, and condition. We are building condition-specific microbiome profiles for PCOS, autoimmune, obesity, and menopause — enabling personalised probiotic and prebiotic protocols with clinical precision.</p>
+        <span class="science-horizon">Research phase · 2026–2027</span>
+      </div>
+      <div class="science-card fade-in fade-in-delay-2">
+        <div class="science-title">Peptide Therapies</div>
+        <p class="science-desc">Peptides — short amino acid chains — are emerging as powerful tools for hormonal optimisation, weight management (GLP-1 analogs beyond Ozempic), and immune modulation. We are researching women-specific peptide protocols that address the hormonal root causes conventional medicine treats only with symptomatic drugs.</p>
+        <span class="science-horizon">Research collaboration · 2027</span>
+      </div>
+      <div class="science-card fade-in fade-in-delay-1">
+        <div class="science-title">Cell Therapy for Autoimmune</div>
+        <p class="science-desc">Regulatory T-cell (Treg) therapy, CAR-T cell approaches, and stem cell-based interventions are showing early promise in autoimmune conditions that disproportionately affect women. We are building collaborations with research institutions to create clinical pathways for women who have exhausted conventional options.</p>
+        <span class="science-horizon">Collaboration roadmap · 2027–2028</span>
+      </div>
+      <div class="science-card fade-in fade-in-delay-2">
+        <div class="science-title">Gene Expression Intelligence</div>
+        <p class="science-desc">Nutrigenomics — how your genes determine your response to specific foods, supplements, and lifestyle factors — is transforming personalised medicine. We are building gene-based health intelligence panels specifically for women's conditions: PCOS predisposition, autoimmune risk, estrogen metabolism pathways, and metabolic phenotyping.</p>
+        <span class="science-horizon">Development phase · 2027</span>
+      </div>
+    </div>
+    <div style="margin-top:3rem;padding:2rem;background:var(--white);border-radius:4px;border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;" class="fade-in">
+      <div>
+        <div style="font-family:var(--serif);font-size:1.3rem;color:var(--plum);margin-bottom:0.4rem;">Are you a researcher or clinician?</div>
+        <p style="font-size:0.85rem;font-weight:300;color:var(--text-mid);line-height:1.6;">We are actively seeking research collaborations with universities, hospitals, and clinical scientists working in women's health, microbiome science, and advanced therapeutics.</p>
+      </div>
+      <a href="contact.html?program=partnership" class="btn-primary" style="flex-shrink:0;">Collaborate with Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- MARKETPLACE PREVIEW -->
+<section class="market-section" id="marketplace">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;">
+      <span class="eyebrow">The Vision</span>
+      <h2 class="section-title">The FHW Marketplace —<br><em>"Amazon for Women's Health"</em></h2>
+      <p class="section-body" style="margin:0 auto;text-align:center;max-width:580px;">Every product a woman needs for her health — curated, verified, and explained through the lens of women's metabolic science. Not just listed. Understood.</p>
+    </div>
+    <div class="market-grid">
+      <div class="market-card fade-in fade-in-delay-1">
+        <div class="market-icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v8l-4 9h14l-4-9V3"/></svg></div>
+        <div class="market-title">Diagnostic Tests</div>
+        <p class="market-desc">At-home hormone panels, microbiome sequencing kits, metabolic markers — ordered online, done at home, results explained by Dr. Raga.</p>
+      </div>
+      <div class="market-card fade-in fade-in-delay-2">
+        <div class="market-icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg></div>
+        <div class="market-title">Curated Supplements</div>
+        <p class="market-desc">Science-vetted supplements from trusted brands — filtered by condition, evidence grade, and individual lab results. No marketing hype.</p>
+      </div>
+      <div class="market-card fade-in fade-in-delay-3">
+        <div class="market-icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 7 8 4 3 3c0 5 3 9 9 9zM12 12c0-5 4-8 9-9-1 5-4 9-9 9"/></svg></div>
+        <div class="market-title">Holistic Food</div>
+        <p class="market-desc">Condition-specific meal kits, prepared food, and ingredient boxes — delivered to your door, designed by Dr. Raga's nutritional protocols.</p>
+      </div>
+      <div class="market-card fade-in fade-in-delay-1">
+        <div class="market-icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="7"/><polyline points="12 9 12 12 13.5 13.5"/><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"/></svg></div>
+        <div class="market-title">Health Devices</div>
+        <p class="market-desc">Fertility monitors, CGM (continuous glucose monitors), wearables for HRV and sleep — selected for evidence of benefit in women's health.</p>
+      </div>
+      <div class="market-card fade-in fade-in-delay-2">
+        <div class="market-icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+        <div class="market-title">Expert Programs</div>
+        <p class="market-desc">Dr. Raga's workshops and other verified practitioners' programs — one platform where women access the best in holistic women's health globally.</p>
+      </div>
+      <div class="market-card fade-in fade-in-delay-3">
+        <div class="market-icon"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="market-title">Community Reviews</div>
+        <p class="market-desc">Reviews filtered by condition, age, life stage — so a woman with PCOS reads from other women with PCOS, not a general population average.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist-section" id="waitlist">
+  <div class="waitlist-inner">
+    <span class="eyebrow" style="color:rgba(74,16,66,0.6);">Be Part of the Mission</span>
+    <h2 style="font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--plum);margin-bottom:0.5rem;">Join the Platform Waitlist</h2>
+    <p style="font-size:0.9rem;font-weight:300;color:rgba(74,16,66,0.7);line-height:1.7;margin-bottom:0;">Be among the first to access FHW Supplements, holistic food delivery, advanced testing, and the marketplace — as each pillar launches.</p>
+    <form onsubmit="joinWaitlist(event,'platform')" style="display:flex;gap:0.75rem;margin-top:2rem;flex-wrap:wrap;justify-content:center;">
+      <input class="waitlist-input" type="email" id="pw-email" placeholder="your@email.com" required style="min-width:240px;">
+      <button type="submit" class="waitlist-btn">Join Waitlist →</button>
+    </form>
+    <div id="platform-thanks" style="display:none;margin-top:1.5rem;font-size:0.9rem;color:var(--plum);font-weight:500;">&#10003; You're on the waitlist! We'll reach out as each pillar launches.</div>
+    <p style="font-size:0.75rem;color:rgba(74,16,66,0.45);margin-top:0.75rem;">No spam. Only meaningful updates. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script src="shared.js"></script>
+<script>
+initSite('platform');
+
+function joinWaitlist(e, type) {
+  e.preventDefault();
+  const email = type === 'supps'
+    ? document.getElementById('sw-email').value
+    : document.getElementById('pw-email').value;
+  const name = type === 'supps' ? document.getElementById('sw-name').value : '';
+  const condition = type === 'supps' ? document.getElementById('sw-condition').value : '';
+
+  const waitlist = JSON.parse(localStorage.getItem('fhw_waitlist') || '[]');
+  waitlist.push({ type, email, name, condition, timestamp: new Date().toISOString() });
+  localStorage.setItem('fhw_waitlist', JSON.stringify(waitlist));
+
+  if (type === 'supps') {
+    document.getElementById('supps-thanks').style.display = 'block';
+    e.target.style.display = 'none';
+  } else {
+    document.getElementById('platform-thanks').style.display = 'block';
+    e.target.style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>

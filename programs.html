@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programs — For Her Wellbeing</title>
+<meta name="description" content="Explore For Her Wellbeing's 3-month flagship programs: PCOS Healing Workshop, Women's Obesity Workshop, and Metabolic Reset. Personalised yoga, customised diet, community & 1:1 coaching by Dr. Raga Deepthi.">
+<meta property="og:title" content="Programs — For Her Wellbeing">
+<meta property="og:description" content="3-month science-backed programs for PCOS, weight loss, and metabolic reset. Yoga · Diet · Community · Coaching. By Dr. Raga Deepthi, PhD.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/programs.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+.pillars-bar {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin: 3rem 0;
+}
+.pillar-cell {
+  background: var(--white); padding: 1.5rem; text-align: center;
+}
+.pillar-icon { margin-bottom: 0.75rem; display: flex; justify-content: center; align-items: center; color: var(--plum); }
+.pillar-title { font-family: var(--serif); font-size: 0.95rem; font-weight: 400; color: var(--plum); margin-bottom: 0.2rem; }
+.pillar-sub { font-size: 0.75rem; font-weight: 300; color: var(--text-light); line-height: 1.4; }
+
+.workshop-block { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+.workshop-block:last-of-type { border-bottom: none; }
+.workshop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.workshop-grid.reverse { direction: rtl; }
+.workshop-grid.reverse > * { direction: ltr; }
+.workshop-header { margin-bottom: 1.5rem; }
+.workshop-num { font-family: var(--serif); font-size: 5rem; font-weight: 300; color: rgba(74,16,66,0.08); line-height: 1; margin-bottom: -1rem; }
+.workshop-name { font-family: var(--serif); font-size: 2.4rem; font-weight: 300; color: var(--plum); line-height: 1.2; margin-bottom: 0.5rem; }
+.workshop-name em { font-style: italic; color: var(--gold); }
+.workshop-tag { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-light); }
+.workshop-desc { font-size: 0.92rem; font-weight: 300; line-height: 1.85; color: var(--text-mid); margin-bottom: 2rem; }
+.workshop-includes { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+.wi { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.85rem; font-weight: 300; color: var(--text-mid); line-height: 1.5; }
+.wi-check { color: var(--gold); font-weight: 600; flex-shrink: 0; margin-top: 1px; }
+.workshop-visual {
+  border-radius: 4px; overflow: hidden; position: relative;
+}
+.workshop-visual img { width: 100%; height: 420px; object-fit: cover; display: block; }
+.workshop-visual-placeholder {
+  height: 420px; background: var(--blush); display: flex; align-items: center;
+  justify-content: center; font-size: 4rem; flex-direction: column; gap: 1rem;
+  border-radius: 4px;
+}
+.workshop-visual-placeholder span { font-family: var(--serif); font-size: 1rem; color: var(--text-light); font-style: italic; }
+.workshop-badge {
+  position: absolute; top: 1.5rem; left: 1.5rem;
+  background: var(--plum); color: white; padding: 0.5rem 1rem;
+  border-radius: 50px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.timeline { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; }
+.tl-item {
+  display: grid; grid-template-columns: 48px 1fr; gap: 1rem; padding: 1.25rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-month {
+  font-family: var(--serif); font-size: 0.85rem; font-weight: 400; color: var(--gold);
+  padding-top: 2px;
+}
+.tl-title { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--plum); margin-bottom: 0.3rem; }
+.tl-body { font-size: 0.82rem; font-weight: 300; line-height: 1.6; color: var(--text-mid); }
+
+.counselling-strip {
+  background: var(--plum); padding: 4rem 0;
+}
+.counselling-inner {
+  display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+}
+
+.faq-section { background: var(--cream); padding: 5rem 0; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.4rem 0; cursor: pointer; font-family: var(--serif);
+  font-size: 1.1rem; color: var(--plum); user-select: none; gap: 1rem;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-icon { font-size: 1.2rem; color: var(--gold); flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-mid); }
+.faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.25rem; }
+
+@media (max-width: 900px) {
+  .workshop-grid, .workshop-grid.reverse { grid-template-columns: 1fr; direction: ltr; gap: 2.5rem; }
+  .pillars-bar { grid-template-columns: repeat(2,1fr); }
+  .counselling-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .pillars-bar { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="page-header-inner">
+    <span class="eyebrow eyebrow-light">Flagship 3-Month Workshops</span>
+    <h1 class="page-title">Programs Built for<br><em>Real Transformation</em></h1>
+    <p class="page-sub">Not quick fixes. Each workshop runs 3 months and combines personalised yoga, customised diet, community sisterhood, and 1:1 coaching from Dr. Raga Deepthi.</p>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section style="background:var(--white);padding:5rem 0;">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:3.5rem;">
+      <span class="eyebrow">The Process</span>
+      <h2 class="section-title">How Your Journey<br><em>Begins</em></h2>
+      <p class="section-body" style="margin:0 auto;text-align:center;max-width:560px;">A thoughtful, clinical process — because real transformation starts with real understanding.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="fade-in">
+      <!-- connector line -->
+      <div style="position:absolute;top:40px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(to right,var(--gold),rgba(201,146,42,0.2));z-index:0;"></div>
+
+      <div style="text-align:center;padding:0 1.5rem;position:relative;z-index:1;">
+        <div style="width:80px;height:80px;background:var(--plum);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 4px 20px rgba(74,16,66,0.2);">
+          <span style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--gold);">1</span>
+        </div>
+        <div style="font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--plum);margin-bottom:0.5rem;">Book Consultation</div>
+        <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Pay ₹500 to book your initial 1:1 session with Dr. Raga Deepthi — online or in-person.</p>
+      </div>
+
+      <div style="text-align:center;padding:0 1.5rem;position:relative;z-index:1;">
+        <div style="width:80px;height:80px;background:var(--plum);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 4px 20px rgba(74,16,66,0.2);">
+          <span style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--gold);">2</span>
+        </div>
+        <div style="font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--plum);margin-bottom:0.5rem;">Deep Health Intake</div>
+        <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Dr. Raga listens to your complete health history, symptoms, lifestyle, and goals — with patience and without judgment.</p>
+      </div>
+
+      <div style="text-align:center;padding:0 1.5rem;position:relative;z-index:1;">
+        <div style="width:80px;height:80px;background:var(--plum);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 4px 20px rgba(74,16,66,0.2);">
+          <span style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--gold);">3</span>
+        </div>
+        <div style="font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--plum);margin-bottom:0.5rem;">Targeted Testing</div>
+        <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Dr. Raga recommends specific lab tests to identify the root cause — hormonal, metabolic, gut, or nutritional — no guesswork.</p>
+      </div>
+
+      <div style="text-align:center;padding:0 1.5rem;position:relative;z-index:1;">
+        <div style="width:80px;height:80px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 4px 20px rgba(201,146,42,0.25);">
+          <span style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--plum);">4</span>
+        </div>
+        <div style="font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--plum);margin-bottom:0.5rem;">Your Personal 3-Month Plan</div>
+        <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Based on your test results, Dr. Raga builds a fully personalised 3-month program — yoga, diet, supplements, and community.</p>
+      </div>
+    </div>
+
+    <!-- PRICING -->
+    <div style="margin-top:4rem;background:var(--cream);border-radius:6px;padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;" class="fade-in">
+      <div>
+        <span class="eyebrow">Investment</span>
+        <h3 style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--plum);margin-bottom:0.75rem;">Personalised Program Pricing</h3>
+        <p style="font-size:0.88rem;font-weight:300;line-height:1.8;color:var(--text-mid);">Program investment is determined after your consultation and test results — ensuring you only pay for what's right for your specific condition and needs. There are no hidden fees.</p>
+        <p style="font-size:0.82rem;font-weight:300;line-height:1.7;color:var(--text-light);margin-top:0.75rem;">Programs are available online across India and internationally. Payment plans available on request.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:var(--white);border-radius:4px;border:1px solid var(--border);">
+          <div>
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.15rem;">Initial Consultation</div>
+            <div style="font-size:0.75rem;color:var(--text-light);font-weight:300;">1:1 with Dr. Raga · Health intake & test guidance</div>
+          </div>
+          <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--gold);white-space:nowrap;">₹500</div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:var(--white);border-radius:4px;border:1px solid var(--border);">
+          <div>
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.15rem;">3-Month Personalised Programs</div>
+            <div style="font-size:0.75rem;color:var(--text-light);font-weight:300;">Based on condition · Yoga + Diet + Community + Coaching</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--gold);white-space:nowrap;">₹15,000</div>
+            <div style="font-size:0.7rem;color:var(--text-light);">to ₹50,000</div>
+          </div>
+        </div>
+        <div style="padding:1rem 1.5rem;background:rgba(74,16,66,0.04);border-radius:4px;border:1px dashed rgba(74,16,66,0.15);">
+          <p style="font-size:0.78rem;font-weight:300;line-height:1.6;color:var(--text-mid);">Exact pricing is shared after your consultation — once Dr. Raga understands your condition and designs your personalised plan. No surprises.</p>
+        </div>
+        <a href="contact.html" class="btn-primary" style="text-align:center;">Book Consultation — ₹500</a>
+      </div>
+    </div>
+  </div>
+</section>
+      <div class="pillar-cell">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><path d="M7 21c0-4 2.5-7 5-7s5 3 5 7"/><path d="M2 21c3-2 5-2 5-2"/><path d="M22 21c-3-2-5-2-5-2"/></svg></div>
+        <div class="pillar-title">Personalised Yoga</div>
+        <div class="pillar-sub">Weekly sessions tailored to your condition</div>
+      </div>
+      <div class="pillar-cell">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20C5 20 2 14 4 8c5-2 10 0 12 5-1 4-4 7-5 7z"/><path d="M4 8l8 8"/></svg></div>
+        <div class="pillar-title">Customised Diet</div>
+        <div class="pillar-sub">Science-backed meal plans, not generic charts</div>
+      </div>
+      <div class="pillar-cell">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="pillar-title">Community</div>
+        <div class="pillar-sub">A sisterhood of women on the same journey</div>
+      </div>
+      <div class="pillar-cell">
+        <div class="pillar-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="pillar-title">Empathy & Coaching</div>
+        <div class="pillar-sub">1:1 support from Dr. Raga throughout</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PCOS WORKSHOP -->
+<section style="background:var(--cream);" id="pcos">
+  <div class="section-inner">
+    <div class="workshop-block">
+      <div class="workshop-grid">
+        <div class="fade-in">
+          <div class="workshop-header">
+            <div class="workshop-num">01</div>
+            <div class="workshop-name">PCOS<br><em>Healing Workshop</em></div>
+            <div class="workshop-tag">3-Month Flagship Program · Hormonal Health</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+              <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);">From ₹15,000</div>
+              <div style="font-size:0.7rem;font-weight:300;color:var(--text-light);">· 3 months · Yoga + Diet + Community + Coaching</div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(201,146,42,0.1);border:1px solid rgba(201,146,42,0.25);border-radius:50px;padding:0.25rem 0.75rem;">
+              <span style="width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;"></span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--gold);letter-spacing:0.08em;">8 of 12 spots left — May batch</span>
+            </div>
+          </div>
+          <p class="workshop-desc">A comprehensive group program for women with PCOS — combining personalised yoga for hormonal balance, anti-inflammatory nutrition, microbiome restoration, and cycle tracking. Guided by Dr. Raga Deepthi's metabolic expertise and deep personal understanding of hormonal challenges.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-month">Month 1</div>
+              <div>
+                <div class="tl-title">Foundation & Assessment</div>
+                <p class="tl-body">Metabolic and hormonal baseline assessment. Introduction to anti-inflammatory eating. Gentle yoga for adrenal and hormonal support. Understanding your cycle.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 2</div>
+              <div>
+                <div class="tl-title">Restoration & Rebalancing</div>
+                <p class="tl-body">Gut microbiome restoration protocol. Insulin sensitising nutrition. Progressive yoga for pelvic health. Supplement guidance. Community accountability.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 3</div>
+              <div>
+                <div class="tl-title">Consolidation & Long-Term Tools</div>
+                <p class="tl-body">Cycle syncing your lifestyle. Advanced nutritional strategies. Stress modulation and sleep optimisation. Creating your personal PCOS management plan.</p>
+              </div>
+            </div>
+          </div>
+          <div class="workshop-includes">
+            <div class="wi"><span class="wi-check">✓</span>Weekly group yoga sessions (online & in-person)</div>
+            <div class="wi"><span class="wi-check">✓</span>Personalised PCOS diet plan & supplement guide</div>
+            <div class="wi"><span class="wi-check">✓</span>Monthly 1:1 consultation with Dr. Raga Deepthi</div>
+            <div class="wi"><span class="wi-check">✓</span>WhatsApp community support group</div>
+            <div class="wi"><span class="wi-check">✓</span>Cycle tracking & symptom monitoring</div>
+            <div class="wi"><span class="wi-check">✓</span>Access to recorded sessions & resources</div>
+          </div>
+          <a href="contact.html?program=pcos" class="btn-primary gold">Enrol in PCOS Workshop</a>
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <div class="workshop-visual">
+            <img src="uploads/IMG_0695-9f59af05.jpg" alt="PCOS Yoga Practice">
+            <div class="workshop-badge">PCOS Healing</div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.5rem;background:var(--white);border-radius:4px;border-left:3px solid var(--gold);">
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.4rem;">Who is this for?</div>
+            <p style="font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Women diagnosed with PCOS, or experiencing irregular periods, unexplained weight gain, acne, hair loss, or fertility challenges. No prior yoga experience required.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBESITY WORKSHOP -->
+<section style="background:var(--white);" id="obesity">
+  <div class="section-inner">
+    <div class="workshop-block">
+      <div class="workshop-grid reverse">
+        <div class="fade-in">
+          <div class="workshop-header">
+            <div class="workshop-num">02</div>
+            <div class="workshop-name">Women's Obesity<br><em>Workshop</em></div>
+            <div class="workshop-tag">3-Month Flagship Program · Weight & Metabolic Health</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+              <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);">From ₹18,000</div>
+              <div style="font-size:0.7rem;font-weight:300;color:var(--text-light);">· 3 months · Yoga + Diet + Community + Coaching</div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(201,146,42,0.1);border:1px solid rgba(201,146,42,0.25);border-radius:50px;padding:0.25rem 0.75rem;">
+              <span style="width:6px;height:6px;background:#e85c4a;border-radius:50%;display:inline-block;"></span>
+              <span style="font-size:0.68rem;font-weight:500;color:#c44a38;letter-spacing:0.08em;">Only 5 spots left — May batch filling fast</span>
+            </div>
+          </div>
+          <p class="workshop-desc">Designed for women who have tried everything and failed — because this program addresses WHY: hormonal fat, insulin resistance, gut dysbiosis, and emotional eating patterns. Science-first, compassion-led. This is the only weight program built for women's unique biology.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-month">Month 1</div>
+              <div>
+                <div class="tl-title">Root-Cause Discovery</div>
+                <p class="tl-body">Metabolic assessment identifying YOUR driver — hormonal, insulin-related, gut, or stress. Low-glycemic nutrition foundations. Movement introduction. Emotional relationship with food exploration.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 2</div>
+              <div>
+                <div class="tl-title">Metabolic Activation</div>
+                <p class="tl-body">Gut microbiome restoration. Progressive strength yoga and post-meal walks. Advanced nutritional strategies for fat burning. Cortisol and sleep optimisation. Community accountability sessions.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 3</div>
+              <div>
+                <div class="tl-title">Sustainable Lifestyle Integration</div>
+                <p class="tl-body">Building your personal maintenance protocol. Navigating social eating and travel. Advanced yoga practice. Long-term metabolic health strategies. Celebrating your transformation.</p>
+              </div>
+            </div>
+          </div>
+          <div class="workshop-includes">
+            <div class="wi"><span class="wi-check">✓</span>Root-cause metabolic assessment</div>
+            <div class="wi"><span class="wi-check">✓</span>Personalised low-glycemic nutrition protocol</div>
+            <div class="wi"><span class="wi-check">✓</span>Yoga & movement plan for metabolic health</div>
+            <div class="wi"><span class="wi-check">✓</span>Gut microbiome restoration protocol</div>
+            <div class="wi"><span class="wi-check">✓</span>Weekly accountability & community sessions</div>
+            <div class="wi"><span class="wi-check">✓</span>Pregnancy & postpartum weight track available</div>
+          </div>
+          <a href="contact.html?program=obesity" class="btn-primary gold">Enrol in Obesity Workshop</a>
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <div class="workshop-visual">
+            <img src="uploads/IMG_5070.jpg" alt="Women's Workshop">
+            <div class="workshop-badge">Obesity Workshop</div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.5rem;background:var(--cream);border-radius:4px;border-left:3px solid var(--gold);">
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.4rem;">Who is this for?</div>
+            <p style="font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Women struggling with weight despite dieting, women with hormonal weight gain (PCOS, thyroid, menopause), and women seeking pregnancy or postpartum weight support.</p>
+          </div>
+          <div style="margin-top:1rem;padding:1.5rem;background:var(--blush);border-radius:4px;">
+            <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Real Result</div>
+            <p style="font-family:var(--serif);font-size:0.98rem;font-style:italic;color:var(--plum);line-height:1.6;">"After 3 months I lost almost 15 kgs in a healthy way. The most happiest thing is that I conceived after following your diet plan."</p>
+            <p style="font-size:0.75rem;color:var(--text-light);margin-top:0.4rem;">— Divyasree, Diet Counselling Client</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METABOLIC RESET -->
+<section style="background:var(--cream);" id="metabolic">
+  <div class="section-inner">
+    <div class="workshop-block">
+      <div class="workshop-grid">
+        <div class="fade-in">
+          <div class="workshop-header">
+            <div class="workshop-num">03</div>
+            <div class="workshop-name">Metabolic Reset<br><em>Workshop</em></div>
+            <div class="workshop-tag">3-Month Flagship Program · Whole-Body Recalibration</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+              <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);">From ₹15,000</div>
+              <div style="font-size:0.7rem;font-weight:300;color:var(--text-light);">· 3 months · Yoga + Diet + Community + Coaching</div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(74,16,66,0.06);border:1px solid var(--border);border-radius:50px;padding:0.25rem 0.75rem;">
+              <span style="width:6px;height:6px;background:var(--plum);border-radius:50%;display:inline-block;"></span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--text-mid);letter-spacing:0.08em;">10 spots open — June batch</span>
+            </div>
+          </div>
+          <p class="workshop-desc">For women experiencing fatigue, brain fog, bloating, and hormonal disruption — without a clear diagnosis. This program resets your metabolism, restores gut health, rebalances hormones, and rebuilds energy from the cellular level up.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-month">Month 1</div>
+              <div>
+                <div class="tl-title">Detox & Restoration</div>
+                <p class="tl-body">Remove inflammatory foods and gut disruptors. Introduce restorative eating patterns. Begin yin yoga and breathwork for nervous system regulation. Sleep and stress baseline assessment.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 2</div>
+              <div>
+                <div class="tl-title">Rebuilding & Energising</div>
+                <p class="tl-body">Targeted gut healing protocol. Progressive yoga practice. Hormone-supportive nutrition. Meditation for HPA axis regulation. Supplement optimisation based on individual needs.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 3</div>
+              <div>
+                <div class="tl-title">Optimisation & Maintenance</div>
+                <p class="tl-body">Personalised long-term metabolic protocol. Advanced yoga and mindfulness practice. Building sustainable daily rhythms. Community celebration and ongoing support planning.</p>
+              </div>
+            </div>
+          </div>
+          <div class="workshop-includes">
+            <div class="wi"><span class="wi-check">✓</span>Comprehensive metabolic & hormone review</div>
+            <div class="wi"><span class="wi-check">✓</span>Anti-inflammatory & gut-healing nutrition plan</div>
+            <div class="wi"><span class="wi-check">✓</span>Yoga for nervous system & hormone regulation</div>
+            <div class="wi"><span class="wi-check">✓</span>Meditation & stress reduction protocol</div>
+            <div class="wi"><span class="wi-check">✓</span>Supplement guidance based on individual labs</div>
+            <div class="wi"><span class="wi-check">✓</span>Weekly group & monthly 1:1 sessions</div>
+          </div>
+          <a href="contact.html?program=metabolic" class="btn-primary gold">Enrol in Metabolic Reset</a>
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <div class="workshop-visual">
+            <img src="uploads/IMG_0542-a7c66b6d.jpg" alt="Metabolic Reset Yoga">
+            <div class="workshop-badge">Metabolic Reset</div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.5rem;background:var(--white);border-radius:4px;border-left:3px solid var(--gold);">
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.4rem;">Who is this for?</div>
+            <p style="font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Women feeling "off" but with no clear diagnosis. Symptoms: persistent fatigue, bloating, brain fog, unexplained weight gain, hormonal imbalance, poor sleep, or low immunity.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BATCH CALENDAR -->
+<section style="background:var(--white);padding:5rem 0;" id="batches">
+  <div class="section-inner">
+    <div class="fade-in" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem;">
+      <div>
+        <span class="eyebrow">Upcoming Batches</span>
+        <h2 class="section-title" style="margin-bottom:0.25rem;">Enrol in the<br><em>Next Available Batch</em></h2>
+        <p style="font-size:0.85rem;font-weight:300;color:var(--text-mid);">Each batch is limited to 12 women for personalised attention. Spots fill quickly.</p>
+      </div>
+      <a href="contact.html" class="btn-primary gold">Book Consultation First — ₹500</a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;" class="fade-in">
+
+      <!-- PCOS Batch -->
+      <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:4px 1fr;height:100%;">
+          <div style="background:var(--plum);"></div>
+          <div>
+            <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">PCOS Healing Workshop</div>
+                <div style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--plum);">May 2026 Batch</div>
+                <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 5 May · Ends 5 August · 3 months</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">8 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--text-light);">of 12 total</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem 1.75rem;">
+              <div style="background:var(--border);border-radius:50px;height:5px;margin-bottom:1rem;overflow:hidden;">
+                <div style="width:33%;height:100%;background:var(--gold);border-radius:50px;"></div>
+              </div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Yoga weekly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Diet plan</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">1:1 monthly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">WhatsApp community</span>
+              </div>
+              <a href="contact.html?program=pcos" class="btn-primary" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Obesity Batch -->
+      <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:4px 1fr;height:100%;">
+          <div style="background:var(--gold);"></div>
+          <div>
+            <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Women's Obesity Workshop</div>
+                <div style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--plum);">May 2026 Batch</div>
+                <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 5 May · Ends 5 August · 3 months</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">5 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--gold);font-weight:500;">Filling fast</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem 1.75rem;">
+              <div style="background:var(--border);border-radius:50px;height:5px;margin-bottom:1rem;overflow:hidden;">
+                <div style="width:58%;height:100%;background:var(--gold);border-radius:50px;"></div>
+              </div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Yoga weekly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Diet plan</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">1:1 monthly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">WhatsApp community</span>
+              </div>
+              <a href="contact.html?program=obesity" class="btn-primary gold" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metabolic Reset Batch -->
+      <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:4px 1fr;height:100%;">
+          <div style="background:var(--plum);"></div>
+          <div>
+            <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Metabolic Reset Workshop</div>
+                <div style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--plum);">June 2026 Batch</div>
+                <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 2 June · Ends 2 September · 3 months</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">10 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--text-light);">of 12 total</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem 1.75rem;">
+              <div style="background:var(--border);border-radius:50px;height:5px;margin-bottom:1rem;overflow:hidden;">
+                <div style="width:17%;height:100%;background:var(--gold);border-radius:50px;"></div>
+              </div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Yoga weekly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Diet plan</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">1:1 monthly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">WhatsApp community</span>
+              </div>
+              <a href="contact.html?program=metabolic" class="btn-primary" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Women Abroad Batch -->
+      <div style="background:linear-gradient(135deg,rgba(74,16,66,0.04),rgba(201,146,42,0.06));border-radius:6px;border:1px solid rgba(201,146,42,0.25);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:4px 1fr;height:100%;">
+          <div style="background:var(--gold);"></div>
+          <div>
+            <div style="padding:1.5rem 1.75rem;border-bottom:1px solid rgba(201,146,42,0.15);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">New — For Women Abroad</div>
+                <div style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--plum);">June 2026 Batch</div>
+                <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">100% Online · All time zones · Starts 2 June</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">New</div>
+                <div style="font-size:0.68rem;color:var(--gold);font-weight:500;">Enrolling now</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem 1.75rem;">
+              <p style="font-size:0.8rem;font-weight:300;color:var(--text-mid);line-height:1.6;margin-bottom:1.25rem;">Built for Indian women in Germany, UK, USA, Canada, Australia & beyond. Adapted meal plans, abroad-specific protocols, time-zone-flexible scheduling.</p>
+              <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+                <a href="abroad.html" class="btn-ghost" style="color:var(--plum);border-color:var(--border);font-size:0.75rem;padding:0.6rem 1.25rem;">Learn More →</a>
+                <a href="contact.html?program=abroad" class="btn-primary gold" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 1:1 COUNSELLING -->
+<section class="counselling-strip" id="counselling">
+  <div class="section-inner">
+    <div class="counselling-inner fade-in">
+      <div>
+        <span class="eyebrow eyebrow-light">Also Available</span>
+        <h2 class="section-title light" style="font-size:2rem;margin-bottom:0.75rem;">Holistic Diet Counselling<br>&amp; 1:1 Wellness Coaching</h2>
+        <p class="section-body light">Prefer individual sessions? Book a standalone 1:1 consultation for personalised diet guidance, functional wellness coaching, or a specific health concern. No 3-month commitment required.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--gold-light);line-height:1;">₹500</div>
+        <div style="font-size:0.72rem;color:rgba(255,253,249,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;">per session</div>
+        <a href="contact.html?program=counselling" class="btn-primary gold">Book a 1:1 Session</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-inner">
+    <div class="fade-in" style="text-align:center;margin-bottom:3rem;">
+      <span class="eyebrow">Questions</span>
+      <h2 class="section-title">Program FAQs</h2>
+    </div>
+    <div style="max-width:760px;margin:0 auto;">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Are the workshops online or in-person? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Both! Yoga sessions are available online via video call and in-person (Hyderabad). Diet consultations and community sessions are primarily online so women across India and internationally can join.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What is the batch size for each workshop? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Batches are kept intentionally small (8–15 women) to ensure Dr. Raga Deepthi can give personal attention to each participant. This is not a mass programme — it's a genuine community.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do I need prior yoga experience? <span class="faq-icon">+</span></div>
+        <div class="faq-a">No — all workshops welcome beginners. The yoga is adapted to each woman's current fitness level, health condition, and goals. You do not need any prior experience.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What does the consultation fee cover? <span class="faq-icon">+</span></div>
+        <div class="faq-a">The ₹500 consultation fee covers your initial 1:1 session with Dr. Raga Deepthi where she reviews your health history, goals, and recommends the most appropriate program. Workshop fees are separate and discussed after the initial consultation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I join if I'm pregnant or postpartum? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes — the Obesity Workshop has a dedicated pregnancy and postpartum track. Dr. Raga Deepthi has specific expertise in gestational weight management, postpartum recovery, and postnatal yoga.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+// Pre-select program from URL
+window.addEventListener('DOMContentLoaded', () => {
+  const prog = new URLSearchParams(window.location.search).get('program');
+  if (prog) {
+    const el = document.getElementById(prog);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 400);
+  }
+});
+</script>
+<div id="fhw-float"></div>
+<div id="fhw-footer"></div>
+<script src="shared.js"></script>
+<script>initSite('programs');</script>
+</body>
+</html>

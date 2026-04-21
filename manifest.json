@@ -1,0 +1,17 @@
+{
+  "name": "For Her Wellbeing",
+  "short_name": "FHW",
+  "description": "Science-backed holistic wellness for women by Dr. Raga Deepthi Ediga.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#fdf8f4",
+  "theme_color": "#4a1042",
+  "orientation": "portrait-primary",
+  "categories": ["health", "medical", "lifestyle"],
+  "icons": [
+    { "src": "uploads/logo-1776614290085.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    { "src": "uploads/IMG_5069-62fd8cb3.jpg", "sizes": "1280x720", "type": "image/jpeg" }
+  ]
+}

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Your Program — For Her Wellbeing</title>
+<meta name="description" content="Answer 4 questions and Dr. Raga will recommend the right program for your body. Takes under 2 minutes.">
+<meta property="og:title" content="Find Your Program — For Her Wellbeing">
+<meta property="og:description" content="Personalised program recommendation from Dr. Raga Deepthi — based on your symptoms and health goals.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://forherwellbeing.com/symptom-quiz.html">
+<link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4a1042">
+<link rel="stylesheet" href="shared.css">
+<style>
+.quiz-wrap {
+  min-height: calc(100vh - 68px); margin-top: 68px;
+  background: var(--cream); display: flex; align-items: flex-start;
+  justify-content: center; padding: 4rem 1.5rem 6rem;
+}
+.quiz-card {
+  background: var(--white); border-radius: 4px; border: 1px solid var(--border);
+  max-width: 740px; width: 100%; box-shadow: 0 12px 56px rgba(74,16,66,0.09);
+  overflow: hidden;
+}
+.quiz-head {
+  background: linear-gradient(135deg, var(--plum) 0%, #6b2060 100%);
+  padding: 2.5rem 3rem;
+}
+.quiz-step-label {
+  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,253,249,0.45); margin-bottom: 0.5rem;
+}
+.quiz-question {
+  font-family: var(--serif); font-size: 1.6rem; font-weight: 300;
+  color: white; line-height: 1.35; max-width: 520px;
+}
+.quiz-progress { margin-top: 1.75rem; display: flex; gap: 0.35rem; }
+.qp-seg { height: 2px; border-radius: 2px; flex: 1; background: rgba(255,253,249,0.18); transition: background 0.4s; }
+.qp-seg.done { background: var(--gold); }
+.qp-seg.active { background: rgba(255,253,249,0.65); }
+
+.quiz-step { padding: 2.5rem 3rem; }
+.qz-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.qz-opts.single-col { grid-template-columns: 1fr; }
+.qz-opt {
+  border: 1.5px solid var(--border); border-radius: 4px; padding: 1.1rem 1.25rem;
+  cursor: pointer; transition: all 0.2s; background: white;
+  display: flex; align-items: center; gap: 1rem; text-align: left;
+}
+.qz-opt:hover { border-color: rgba(74,16,66,0.35); background: rgba(74,16,66,0.025); }
+.qz-opt.selected {
+  border-color: var(--plum); background: rgba(74,16,66,0.05);
+  box-shadow: 0 0 0 3px rgba(74,16,66,0.08);
+}
+.qz-opt-icon {
+  width: 38px; height: 38px; border-radius: 50%; background: var(--cream);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.qz-opt.selected .qz-opt-icon { background: rgba(74,16,66,0.1); }
+.qz-opt-icon svg { width: 18px; height: 18px; stroke: var(--plum); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.qz-opt-text { font-size: 0.87rem; font-weight: 400; color: var(--text-dark); line-height: 1.4; }
+.qz-opt.selected .qz-opt-text { color: var(--plum); }
+
+.quiz-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+}
+.qnav-back {
+  background: none; border: none; font-family: var(--sans); font-size: 0.82rem;
+  color: var(--text-light); cursor: pointer; padding: 0.5rem 0; letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.qnav-back:hover { color: var(--plum); }
+.qnav-next {
+  background: var(--plum); color: white; border: none; border-radius: 50px;
+  padding: 0.8rem 2.25rem; font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+}
+.qnav-next:disabled { opacity: 0.3; cursor: not-allowed; }
+.qnav-next:not(:disabled):hover { background: var(--plum-light); transform: translateY(-1px); }
+
+/* RESULT */
+.quiz-result { padding: 3rem; display: none; }
+.qr-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.67rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.75rem;
+}
+.qr-badge::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+.qr-icon-wrap {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(74,16,66,0.08), rgba(201,146,42,0.1));
+  border: 1px solid rgba(74,16,66,0.12); display: flex; align-items: center;
+  justify-content: center; margin-bottom: 1.5rem;
+}
+.qr-icon-wrap svg { width: 26px; height: 26px; stroke: var(--plum); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.qr-headline { font-family: var(--serif); font-size: 1.9rem; font-weight: 400; color: var(--plum); line-height: 1.3; margin-bottom: 1rem; }
+.qr-body { font-size: 0.9rem; font-weight: 300; line-height: 1.9; color: var(--text-mid); margin-bottom: 2rem; max-width: 540px; }
+.qr-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.qr-divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0 1.5rem; }
+.qr-restart { font-size: 0.8rem; color: var(--text-light); cursor: pointer; background: none; border: none; padding: 0; font-family: var(--sans); transition: color 0.2s; display: inline-flex; align-items: center; gap: 0.4rem; }
+.qr-restart:hover { color: var(--plum); }
+
+@media(max-width:640px) {
+  .quiz-head { padding: 1.75rem 1.5rem; }
+  .quiz-step, .quiz-result { padding: 1.75rem 1.5rem; }
+  .qz-opts { grid-template-columns: 1fr; }
+  .quiz-question { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+<div id="fhw-float"></div>
+
+<div class="quiz-wrap">
+  <div class="quiz-card">
+
+    <div class="quiz-head" id="quiz-head">
+      <div class="quiz-step-label" id="step-label">Step 1 of 4</div>
+      <div class="quiz-question" id="step-question">What's your main health concern right now?</div>
+      <div class="quiz-progress" id="progress-segs">
+        <div class="qp-seg active"></div>
+        <div class="qp-seg"></div>
+        <div class="qp-seg"></div>
+        <div class="qp-seg"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="step-1" class="quiz-step">
+      <div class="qz-opts">
+        <div class="qz-opt" onclick="selectOpt(1,'pcos',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="21"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+          </div>
+          <span class="qz-opt-text">PCOS, irregular periods, or hormonal imbalance</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(1,'weight',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 20h20L12 2z"/><line x1="2" y1="20" x2="22" y2="20"/><line x1="12" y1="8" x2="12" y2="14"/></svg>
+          </div>
+          <span class="qz-opt-text">Weight that won't shift no matter what I try</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(1,'fatigue',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <span class="qz-opt-text">Constant fatigue, brain fog, or feeling perpetually "off"</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(1,'fertility',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22V12m0 0C12 6 7 4 5 7c-1.5 2.5 0 5 3 5"/><path d="M12 12c0-6 5-8 7-5 1.5 2.5 0 5-3 5"/><circle cx="12" cy="5" r="2"/></svg>
+          </div>
+          <span class="qz-opt-text">Fertility challenges or trying to conceive</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(1,'pregnancy',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 12c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6-3 2.686-3 6z"/><path d="M12 4V2M5 7l1.5 1.5M19 7l-1.5 1.5"/></svg>
+          </div>
+          <span class="qz-opt-text">Pregnancy or postpartum health and nutrition</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(1,'unsure',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg>
+          </div>
+          <span class="qz-opt-text">Not sure — I just know something feels wrong</span>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <span></span>
+        <button class="qnav-next" id="next-1" onclick="goNext(2)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step-2" class="quiz-step" style="display:none;">
+      <div class="qz-opts single-col">
+        <div class="qz-opt" onclick="selectOpt(2,'new',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="qz-opt-text">Under 3 months — I'm only just starting to look for answers</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(2,'recent',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <span class="qz-opt-text">3 months to 1 year</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(2,'chronic',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </div>
+          <span class="qz-opt-text">1–3 years — I've been searching for a solution for a while</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(2,'lifelong',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>
+          </div>
+          <span class="qz-opt-text">More than 3 years — it has started to feel like my "normal"</span>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="qnav-back" onclick="goBack(1)">← Back</button>
+        <button class="qnav-next" id="next-2" onclick="goNext(3)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step-3" class="quiz-step" style="display:none;">
+      <div class="qz-opts single-col">
+        <div class="qz-opt" onclick="selectOpt(3,'fresh',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <span class="qz-opt-text">I'm just beginning — haven't tried much yet</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(3,'tried',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="qz-opt-text">I've tried diets and exercise but nothing has worked</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(3,'doctors',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <span class="qz-opt-text">I've seen doctors but still have no real answers</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(3,'medicated',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <span class="qz-opt-text">I'm on medication but want holistic support alongside it</span>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="qnav-back" onclick="goBack(2)">← Back</button>
+        <button class="qnav-next" id="next-3" onclick="goNext(4)" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div id="step-4" class="quiz-step" style="display:none;">
+      <div class="qz-opts single-col">
+        <div class="qz-opt" onclick="selectOpt(4,'india',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span class="qz-opt-text">I'm currently based in India</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(4,'abroad',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <span class="qz-opt-text">I live abroad — Germany, UK, US, Canada, Australia, or elsewhere</span>
+        </div>
+        <div class="qz-opt" onclick="selectOpt(4,'moving',this)">
+          <div class="qz-opt-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <span class="qz-opt-text">I'm planning to move abroad soon</span>
+        </div>
+      </div>
+      <div class="quiz-nav">
+        <button class="qnav-back" onclick="goBack(3)">← Back</button>
+        <button class="qnav-next" id="next-4" onclick="showResult()" disabled>See My Recommendation</button>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="quiz-result" id="quiz-result">
+      <div class="qr-badge" id="qr-badge">Recommended for you</div>
+      <div class="qr-icon-wrap" id="qr-icon-wrap"></div>
+      <div class="qr-headline" id="qr-headline"></div>
+      <div class="qr-body" id="qr-body"></div>
+      <div class="qr-actions" id="qr-actions"></div>
+      <hr class="qr-divider">
+      <button class="qr-restart" onclick="restartQuiz()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+        Take the quiz again
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<div id="fhw-footer"></div>
+<script src="shared.js"></script>
+<script>
+initSite('quiz');
+
+const answers = {};
+
+const STEP_QUESTIONS = [
+  '',
+  "What's your main health concern right now?",
+  "How long have you been dealing with this?",
+  "Have you already tried to address this?",
+  "Where are you currently based?"
+];
+
+const RESULT_ICONS = {
+  pcos:      '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="5"/><line x1="12" y1="13" x2="12" y2="21"/><line x1="9" y1="18" x2="15" y2="18"/></svg>',
+  weight:    '<svg viewBox="0 0 24 24"><path d="M12 2L2 20h20L12 2z"/><line x1="2" y1="20" x2="22" y2="20"/></svg>',
+  fatigue:   '<svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+  fertility: '<svg viewBox="0 0 24 24"><path d="M12 22V12m0 0C12 6 7 4 5 7c-1.5 2.5 0 5 3 5"/><path d="M12 12c0-6 5-8 7-5 1.5 2.5 0 5-3 5"/><circle cx="12" cy="5" r="2"/></svg>',
+  abroad:    '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  pregnancy: '<svg viewBox="0 0 24 24"><path d="M9 12c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6-3 2.686-3 6z"/></svg>',
+  consult:   '<svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'
+};
+
+const RESULTS = {
+  abroad: {
+    icon: 'abroad', badge: 'Women Abroad Program',
+    headline: 'The Women Abroad Program was built for exactly this.',
+    body: 'Dr. Raga Deepthi spent 11 years in Germany — she knows what Vitamin D crashes, Western food, visa stress, and isolation do to an Indian woman\'s body. This program is 100% online, built around your timezone, your local supermarkets, and the specific ways relocation disrupts Indian female physiology.',
+    actions: [
+      { label: 'Explore Women Abroad', href: 'abroad.html', primary: true },
+      { label: 'Book a ₹500 Consultation', href: 'contact.html', primary: false }
+    ]
+  },
+  pcos: {
+    icon: 'pcos', badge: 'PCOS Healing Workshop',
+    headline: 'The PCOS Healing Workshop is the right starting point.',
+    body: 'A 3-month program combining personalised yoga for hormonal balance, anti-inflammatory Indian nutrition, and gut microbiome restoration. Women with PCOS have regulated their periods, lost significant weight, and conceived naturally after completing this program.',
+    actions: [
+      { label: 'Explore PCOS Workshop', href: 'programs.html#pcos', primary: true },
+      { label: 'Book a ₹500 Consultation', href: 'contact.html', primary: false }
+    ]
+  },
+  fertility: {
+    icon: 'fertility', badge: 'PCOS Healing Workshop',
+    headline: 'Hormonal restoration is the gateway to fertility.',
+    body: 'PCOS and insulin resistance account for the majority of female fertility challenges — and both respond well to diet and lifestyle intervention. Divyasree lost 15 kg and conceived naturally within one program cycle. Science-backed, without the side effects of fertility drugs.',
+    actions: [
+      { label: 'Explore PCOS Workshop', href: 'programs.html#pcos', primary: true },
+      { label: 'Ask Dr. Raga First', href: 'ask.html', primary: false }
+    ]
+  },
+  weight: {
+    icon: 'weight', badge: "Women's Obesity Workshop",
+    headline: "The Women's Obesity Workshop targets the actual cause.",
+    body: 'Standard diets fail women because they don\'t address the three real drivers: hormonal fat, insulin resistance, and gut dysbiosis. This program addresses all three simultaneously using PhD-level metabolic science applied through personalised nutrition and therapeutic yoga.',
+    actions: [
+      { label: "Explore Obesity Workshop", href: 'programs.html#obesity', primary: true },
+      { label: 'Book a ₹500 Consultation', href: 'contact.html', primary: false }
+    ]
+  },
+  fatigue: {
+    icon: 'fatigue', badge: 'Metabolic Reset Program',
+    headline: 'Chronic fatigue without answers has a metabolic root.',
+    body: 'Feeling persistently tired and "off" without a clear diagnosis is the classic presentation of gut dysbiosis combined with metabolic dysfunction. The Metabolic Reset program investigates and corrects the cellular-level disruption — gut, hormones, mitochondria, and systemic inflammation.',
+    actions: [
+      { label: 'Explore Metabolic Reset', href: 'programs.html#metabolic', primary: true },
+      { label: 'Ask Dr. Raga First', href: 'ask.html', primary: false }
+    ]
+  },
+  pregnancy: {
+    icon: 'pregnancy', badge: '1:1 Diet Counselling',
+    headline: 'Personalised 1:1 support is right for your stage.',
+    body: 'Pregnancy and postpartum nutrition is deeply individual — your trimester, health history, cultural food practices, and micronutrient needs are unique to you. Dr. Raga offers personalised 1:1 consultations that build a plan specific to you, not a generic pregnancy template.',
+    actions: [
+      { label: 'Book a ₹500 Consultation', href: 'contact.html', primary: true },
+      { label: 'Ask Dr. Raga First', href: 'ask.html', primary: false }
+    ]
+  },
+  unsure: {
+    icon: 'consult', badge: 'Ask Dr. Raga — Free',
+    headline: 'Start with a direct conversation.',
+    body: 'Dr. Raga personally reads and responds to every question within 48 hours — in English or Telugu. Describe what you\'re experiencing and she\'ll tell you exactly what she thinks and what she\'d recommend. Free, confidential, and no commitment required.',
+    actions: [
+      { label: 'Ask Your Free Question', href: 'ask.html', primary: true },
+      { label: 'Book a ₹500 Consultation', href: 'contact.html', primary: false }
+    ]
+  }
+};
+
+function selectOpt(step, value, el) {
+  document.getElementById('step-' + step).querySelectorAll('.qz-opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers['s' + step] = value;
+  document.getElementById('next-' + step).disabled = false;
+}
+
+function goNext(toStep) {
+  document.getElementById('step-' + (toStep - 1)).style.display = 'none';
+  document.getElementById('step-' + toStep).style.display = 'block';
+  updateHead(toStep);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goBack(toStep) {
+  document.getElementById('step-' + (toStep + 1)).style.display = 'none';
+  document.getElementById('step-' + toStep).style.display = 'block';
+  updateHead(toStep);
+}
+
+function updateHead(step) {
+  document.getElementById('step-label').textContent = 'Step ' + step + ' of 4';
+  document.getElementById('step-question').textContent = STEP_QUESTIONS[step];
+  document.querySelectorAll('.qp-seg').forEach((d, i) => {
+    d.className = 'qp-seg';
+    if (i < step - 1) d.classList.add('done');
+    else if (i === step - 1) d.classList.add('active');
+  });
+}
+
+function showResult() {
+  const concern = answers.s1;
+  const location = answers.s4;
+  let key = (location === 'abroad' || location === 'moving') ? 'abroad' : concern;
+  const r = RESULTS[key] || RESULTS.unsure;
+
+  document.getElementById('quiz-head').style.display = 'none';
+  document.getElementById('step-4').style.display = 'none';
+
+  document.getElementById('qr-badge').textContent = r.badge;
+  document.getElementById('qr-icon-wrap').innerHTML = RESULT_ICONS[r.icon] || RESULT_ICONS.consult;
+  document.getElementById('qr-icon-wrap').querySelector('svg').style.cssText = 'width:26px;height:26px;stroke:var(--plum);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;';
+  document.getElementById('qr-headline').textContent = r.headline;
+  document.getElementById('qr-body').textContent = r.body;
+  document.getElementById('qr-actions').innerHTML = r.actions.map(a =>
+    `<a href="${a.href}" class="${a.primary ? 'btn-primary gold' : 'btn-ghost'}" style="${!a.primary ? 'color:var(--plum);border-color:var(--border);' : ''}">${a.label} →</a>`
+  ).join('');
+
+  document.getElementById('quiz-result').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.getElementById('quiz-head').style.display = 'block';
+  document.getElementById('quiz-result').style.display = 'none';
+  for (let i = 1; i <= 4; i++) {
+    const s = document.getElementById('step-' + i);
+    if (s) { s.style.display = i === 1 ? 'block' : 'none'; s.querySelectorAll('.qz-opt').forEach(o => o.classList.remove('selected')); }
+    const b = document.getElementById('next-' + i);
+    if (b) b.disabled = true;
+  }
+  updateHead(1);
+}
+</script>
+</body>
+</html>
