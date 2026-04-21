@@ -13,7 +13,6 @@
 <link rel="canonical" href="https://forherwellbeing.com/contact.html">
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
 <link rel="stylesheet" href="shared.css">
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
 .contact-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0; }
 .process-steps { display:flex;flex-direction:column;gap:0;margin:2rem 0; }
@@ -239,11 +238,11 @@
               <div class="payment-label">Consultation Fee</div>
 
               <div class="pay-options">
-                <!-- Razorpay Button — activate by replacing key below -->
-                <button id="razorpay-pay-btn" class="razorpay-btn" onclick="openRazorpay()">
+                <!-- Razorpay Payment Link -->
+                <a id="razorpay-pay-btn" href="https://razorpay.me/@lebenspherelifesciencesprivat" target="_blank" class="razorpay-btn">
                   <svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg>
                   Pay ₹1000 Securely via Razorpay
-                </button>
+                </a>
                 <div class="pay-divider">or pay via UPI</div>
                 <!-- PhonePe Button -->
                 <a id="phonepe-link" href="#" target="_blank" class="phonepe-btn">
@@ -317,31 +316,7 @@
 const UPI_ID = '8008383699@ybl';
 const AMOUNT = 1000;
 const WA_NUM = '918008383699';
-// ── RAZORPAY ── Replace the key below when your account is activated ──
-const RAZORPAY_KEY = 'rzp_live_XXXXXXXXXXXXXXXX';
 let _bookingData = {};
-
-function openRazorpay() {
-  const options = {
-    key: RAZORPAY_KEY,
-    amount: AMOUNT * 100,
-    currency: 'INR',
-    name: 'For Her Wellbeing',
-    description: 'Initial Consultation — Dr. Raga Deepthi',
-    image: 'uploads/logo-1776614290085.png',
-    prefill: { name: _bookingData.name, email: _bookingData.email, contact: _bookingData.phone },
-    notes: { interest: _bookingData.interest },
-    theme: { color: '#4a1042' },
-    handler: function(response) {
-      document.getElementById('step-payment').style.display = 'none';
-      document.getElementById('step-success').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    },
-    modal: { ondismiss: function() {} }
-  };
-  const rzp = new Razorpay(options);
-  rzp.open();
-}
 
 function goToPayment(e) {
   e.preventDefault();
