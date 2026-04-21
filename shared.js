@@ -14,7 +14,7 @@ function initSite(activePage) {
         <li><a href="courses.html" ${activePage==='courses'?'class="active"':''}>Courses</a></li>
         <li><a href="about.html" ${activePage==='about'?'class="active"':''}>About Dr. Raga</a></li>
         <li><a href="ask.html" ${activePage==='ask'?'class="active"':''}>Ask Dr. Raga</a></li>
-        <li><a href="contact.html" class="nav-cta ${activePage==='contact'?'active':''}">Book — ₹500</a></li>
+        <li><a href="contact.html" class="nav-cta ${activePage==='contact'?'active':''}">Book — ₹1000</a></li>
       </ul>
       <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMobileNav()">
         <span></span><span></span><span></span>
@@ -33,7 +33,7 @@ function initSite(activePage) {
         </a>
         <a href="contact.html" class="float-btn float-book" aria-label="Book a consultation">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span>Book — ₹500</span>
+          <span>Book — ₹1000</span>
         </a>
       </div>`;
   }
@@ -77,7 +77,7 @@ function initSite(activePage) {
             <div>
               <div class="footer-col-title">Contact</div>
               <ul class="footer-col-links">
-                <li><a href="contact.html">Book — ₹500</a></li>
+                <li><a href="contact.html">Book — ₹1000</a></li>
                 <li><a href="mailto:edigaragadeepthi@gmail.com">Email Us</a></li>
                 <li><a href="https://wa.me/${WHATSAPP_NUM}" target="_blank">WhatsApp</a></li>
                 <li><a href="about.html#partner">Partner With Us</a></li>
