@@ -92,9 +92,14 @@
   .workshop-grid, .workshop-grid.reverse { grid-template-columns: 1fr; direction: ltr; gap: 2.5rem; }
   .pillars-bar { grid-template-columns: repeat(2,1fr); }
   .counselling-inner { grid-template-columns: 1fr; }
+  .prog-stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .prog-info-box { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+  .prog-compare-grid { grid-template-columns: 1fr !important; }
 }
 @media (max-width: 600px) {
   .pillars-bar { grid-template-columns: 1fr 1fr; }
+  .prog-stats-grid { grid-template-columns: 1fr 1fr !important; }
+  .workshop-step-inner { padding: 1.5rem !important; }
 }
 </style>
 </head>
@@ -115,7 +120,7 @@
       <h2 class="section-title">How Your Journey<br><em>Begins</em></h2>
       <p class="section-body" style="margin:0 auto;text-align:center;max-width:560px;">A thoughtful, clinical process — because real transformation starts with real understanding.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="fade-in">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="fade-in prog-stats-grid">
       <!-- connector line -->
       <div style="position:absolute;top:40px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(to right,var(--gold),rgba(201,146,42,0.2));z-index:0;"></div>
 
@@ -430,7 +435,7 @@
       </div>
       <a href="contact.html" class="btn-primary gold">Book Consultation First — ₹1000</a>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;" class="fade-in">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;" class="fade-in prog-compare-grid">
 
       <!-- PCOS Batch -->
       <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">

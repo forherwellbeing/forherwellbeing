@@ -84,7 +84,19 @@
 /* STEP 3 — SUCCESS */
 .success-step { display:none;padding:2.5rem;text-align:center; }
 
-@media(max-width:900px){ .contact-layout{grid-template-columns:1fr;gap:3rem;padding:3rem 0;} .form-row-2{grid-template-columns:1fr;} }
+@media(max-width:900px){
+  .contact-layout{grid-template-columns:1fr;gap:3rem;padding:3rem 0;}
+  .form-row-2{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  .booking-box-header{padding:1.5rem;}
+  .booking-form{padding:1.5rem;}
+  .payment-step > div:last-child{padding:1.5rem;}
+  .payment-amount{font-size:2.5rem;}
+  .success-step{padding:1.5rem;}
+  .booking-price-num{font-size:2rem;}
+  .ps{grid-template-columns:40px 1fr;gap:0.75rem;}
+}
 </style>
 </head>
 <body>
