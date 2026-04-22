@@ -168,7 +168,7 @@
 
 /* ===== VIDEO TESTIMONIALS ===== */
 .video-testi { background:var(--cream); }
-.video-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; margin-top:3rem; }
+.video-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem; }
 .video-card { background:var(--white); border-radius:4px; overflow:hidden; border:1px solid var(--border); }
 .video-wrap { position:relative; aspect-ratio:16/9; background:var(--plum); }
 .video-wrap video { width:100%; height:100%; object-fit:cover; display:block; }
@@ -622,6 +622,16 @@
           <div class="vc-name">"My periods regulated in 20 days — through diet alone"</div>
           <div class="vc-result">✦ Hormonal Health · Diet Protocol</div>
           <p class="vc-quote">No medication. No crash diets. Just a science-backed protocol designed specifically for her body. In her own words.</p>
+        </div>
+      </div>
+      <div class="video-card fade-in fade-in-delay-3">
+        <div class="video-wrap">
+          <video id="v3" src="uploads/testimonial_video_1.mp4" preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>
+          <div class="video-play-overlay" id="vpo3" onclick="playVideo('v3','vpo3')">
+            <div class="play-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--plum)"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
