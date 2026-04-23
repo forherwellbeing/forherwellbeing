@@ -13,6 +13,8 @@
 <link rel="canonical" href="https://forherwellbeing.com/contact.html">
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
 <link rel="stylesheet" href="shared.css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 .contact-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0; }
 .process-steps { display:flex;flex-direction:column;gap:0;margin:2rem 0; }
@@ -250,11 +252,11 @@
               <div class="payment-label">Consultation Fee</div>
 
               <div class="pay-options">
-                <!-- Razorpay Payment Link -->
-                <a id="razorpay-pay-btn" href="https://razorpay.me/@lebenspherelifesciencesprivat" target="_blank" class="razorpay-btn">
+                <!-- Razorpay SDK Button -->
+                <button id="razorpay-pay-btn" onclick="openRazorpay()" class="razorpay-btn" style="border:none;cursor:pointer;width:100%;">
                   <svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg>
                   Pay ₹1000 Securely via Razorpay
-                </a>
+                </button>
                 <div class="pay-divider">or pay via UPI</div>
                 <!-- PhonePe Button -->
                 <a id="phonepe-link" href="#" target="_blank" class="phonepe-btn">
@@ -328,7 +330,9 @@
 const UPI_ID = '8008383699@ybl';
 const AMOUNT = 1000;
 const WA_NUM = '918008383699';
+const RZP_KEY = 'rzp_test_SgnTXhtATf8QPQ';
 let _bookingData = {};
+let _orderId = '';
 
 function goToPayment(e) {
   e.preventDefault();
@@ -340,32 +344,22 @@ function goToPayment(e) {
   const note = document.getElementById('b-note').value;
 
   _bookingData = { name: fname+' '+lname, email, phone, interest, note };
+
   // Save lead
   const lead = { timestamp: new Date().toISOString(), name: fname+' '+lname, email, phone, interest, note };
   const leads = JSON.parse(localStorage.getItem('fhw_leads') || '[]');
   leads.push(lead); localStorage.setItem('fhw_leads', JSON.stringify(leads));
 
-  // Send to Formspree (async, no blocking)
-  const fd = new FormData();
-  fd.append('name', fname+' '+lname); fd.append('email', email);
-  fd.append('phone', phone); fd.append('interest', interest); fd.append('note', note);
-  fd.append('_subject', 'New Consultation Booking — For Her Wellbeing');
-  fetch('https://formspree.io/f/YOUR_FORM_ID', { method:'POST', body:fd, headers:{'Accept':'application/json'} }).catch(()=>{});
-
-  // Build payment links
+  // Build UPI fallback links
   const upiNote = encodeURIComponent('FHW Consultation - ' + fname);
   const upiLink = `upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR&tn=${upiNote}`;
   const phonePeLink = `phonepe://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR&tn=${upiNote}`;
-
   document.getElementById('phonepe-link').href = phonePeLink;
   document.getElementById('upi-link').href = upiLink;
-
-  // QR Code via Google Charts
   const qrData = encodeURIComponent(`upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR`);
   document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
   document.getElementById('upi-id-display').textContent = UPI_ID;
 
-  // WhatsApp confirm link
   const waMsg = encodeURIComponent(`Hi Dr. Raga, I have paid ₹1000 for my consultation booking.\n\nName: ${fname} ${lname}\nPhone: ${phone}\nEmail: ${email}\nInterest: ${interest}\n\nPlease confirm my slot. Thank you!`);
   document.getElementById('wa-confirm-link').href = `https://wa.me/${WA_NUM}?text=${waMsg}`;
 
@@ -377,6 +371,186 @@ function goToPayment(e) {
   document.getElementById('step-form').style.display = 'none';
   document.getElementById('step-payment').style.display = 'block';
   window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
+}
+
+async function openRazorpay() {
+  const btn = document.getElementById('razorpay-pay-btn');
+  btn.disabled = true;
+  btn.textContent = 'Creating order…';
+
+  try {
+    const res = await fetch('/api/create-order', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+    const order = await res.json();
+    if (!order.id) throw new Error('Order creation failed');
+    _orderId = order.id;
+
+    const rzp = new Razorpay({
+      key: RZP_KEY,
+      amount: order.amount,
+      currency: order.currency,
+      order_id: order.id,
+      name: 'For Her Wellbeing',
+      description: 'Consultation with Dr. Raga Deepthi',
+      image: '/uploads/logo-1776614290085.png',
+      prefill: {
+        name: _bookingData.name,
+        email: _bookingData.email,
+        contact: _bookingData.phone
+      },
+      theme: { color: '#4a1042' },
+      handler: async function(response) {
+        // Verify payment on backend
+        const verify = await fetch('/api/verify-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_signature: response.razorpay_signature
+          })
+        });
+        const result = await verify.json();
+
+        if (result.valid) {
+          generatePDF(response.razorpay_payment_id);
+          document.getElementById('step-payment').style.display = 'none';
+          document.getElementById('step-success').style.display = 'block';
+          window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
+        } else {
+          alert('Payment verification failed. Please contact us on WhatsApp.');
+        }
+      },
+      modal: {
+        ondismiss: function() {
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg> Pay ₹1000 Securely via Razorpay';
+        }
+      }
+    });
+    rzp.open();
+  } catch (err) {
+    alert('Could not initiate payment. Please try UPI below or contact us on WhatsApp.');
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg> Pay ₹1000 Securely via Razorpay';
+  }
+}
+
+function generatePDF(paymentId) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+  const W = 210, margin = 20;
+
+  // Header background
+  doc.setFillColor(74, 16, 66);
+  doc.rect(0, 0, W, 45, 'F');
+
+  // Brand name
+  doc.setTextColor(201, 146, 42);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'bold');
+  doc.text('FOR HER WELLBEING', margin, 18);
+
+  // Title
+  doc.setTextColor(255, 253, 249);
+  doc.setFontSize(22);
+  doc.setFont('helvetica', 'normal');
+  doc.text('Booking Confirmation', margin, 33);
+
+  // Green checkmark badge
+  doc.setFillColor(34, 197, 94);
+  doc.circle(W - margin - 8, 22, 8, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(12);
+  doc.text('✓', W - margin - 11, 26);
+
+  // Date
+  doc.setTextColor(100, 100, 100);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  const now = new Date();
+  doc.text('Date: ' + now.toLocaleDateString('en-IN', { day: '2-digit', month: 'long', year: 'numeric' }), margin, 58);
+
+  // Section: Patient Details
+  doc.setFillColor(248, 244, 240);
+  doc.roundedRect(margin, 65, W - margin * 2, 55, 3, 3, 'F');
+  doc.setTextColor(74, 16, 66);
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.text('PATIENT DETAILS', margin + 6, 75);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(60, 60, 60);
+  doc.setFontSize(10);
+  const details = [
+    ['Name', _bookingData.name],
+    ['Email', _bookingData.email],
+    ['Phone', _bookingData.phone],
+    ['Program Interest', _bookingData.interest],
+  ];
+  details.forEach(([label, value], i) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(8);
+    doc.text(label.toUpperCase(), margin + 6, 84 + i * 10);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(30, 30, 30);
+    doc.setFontSize(10);
+    doc.text(value || '—', margin + 50, 84 + i * 10);
+  });
+
+  // Section: Payment Details
+  doc.setFillColor(248, 244, 240);
+  doc.roundedRect(margin, 130, W - margin * 2, 45, 3, 3, 'F');
+  doc.setTextColor(74, 16, 66);
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.text('PAYMENT DETAILS', margin + 6, 140);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(60, 60, 60);
+  const payDetails = [
+    ['Amount Paid', '₹1,000'],
+    ['Payment ID', paymentId],
+    ['Order ID', _orderId],
+    ['Status', 'CONFIRMED'],
+  ];
+  payDetails.forEach(([label, value], i) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(8);
+    doc.text(label.toUpperCase(), margin + 6, 150 + i * 8);
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(i === 3 ? 34 : 30, i === 3 ? 197 : 30, i === 3 ? 94 : 30);
+    doc.setFontSize(10);
+    doc.text(value, margin + 50, 150 + i * 8);
+  });
+
+  // What's Next box
+  doc.setFillColor(74, 16, 66);
+  doc.roundedRect(margin, 185, W - margin * 2, 42, 3, 3, 'F');
+  doc.setTextColor(201, 146, 42);
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.text("WHAT'S NEXT", margin + 6, 195);
+  doc.setTextColor(255, 253, 249);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  const steps = [
+    '1. Dr. Raga\'s team will contact you within 24 hours to schedule your session.',
+    '2. You\'ll receive a video call link for your online consultation.',
+    '3. Please have your recent health reports ready if available.',
+  ];
+  steps.forEach((s, i) => doc.text(s, margin + 6, 204 + i * 8));
+
+  // Footer
+  doc.setDrawColor(220, 220, 220);
+  doc.line(margin, 240, W - margin, 240);
+  doc.setTextColor(150, 150, 150);
+  doc.setFontSize(8);
+  doc.text('For Her Wellbeing  |  forherwellbeing.com  |  WhatsApp: +91 8008383699', margin, 248);
+  doc.text('This is a computer-generated confirmation. No signature required.', margin, 255);
+
+  doc.save(`FHW-Booking-${_bookingData.name.replace(/\s+/g, '-')}.pdf`);
 }
 
 // Pre-select program from URL
