@@ -429,7 +429,7 @@ async function openRazorpay() {
     });
     rzp.open();
   } catch (err) {
-    alert('Could not initiate payment. Please try UPI below or contact us on WhatsApp.');
+    alert('Payment error: ' + err.message + '\n\nPlease try UPI below or contact us on WhatsApp.');
     btn.disabled = false;
     btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg> Pay ₹1000 Securely via Razorpay';
   }
