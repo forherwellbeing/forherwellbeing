@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://forherwellbeing.com/womens-health.html">
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=10">
 <style>
 .search-bar-wrap {
   background: var(--white); border-bottom: 1px solid var(--border);
@@ -46,6 +46,11 @@
   transition: all 0.2s; border-radius: 0 4px 4px 0; line-height: 1.3;
 }
 .sidebar-item a:hover { color: var(--plum); border-left-color: var(--gold); background: rgba(201,146,42,0.06); }
+.sidebar-coming {
+  display: block; padding: 0.55rem 0.75rem; font-size: 0.83rem; font-weight: 400;
+  color: #bbb; line-height: 1.3; cursor: default;
+}
+.sidebar-coming em { font-style: normal; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; background: #f2f0ee; color: #bbb; border-radius: 3px; padding: 0.1rem 0.4rem; margin-left: 0.35rem; vertical-align: middle; }
 
 .conditions-list { display: flex; flex-direction: column; gap: 2rem; }
 .cond-card {
@@ -131,27 +136,33 @@
       <li class="sidebar-cat">Hormonal</li>
       <li class="sidebar-item"><a href="#pcos">PCOS</a></li>
       <li class="sidebar-item"><a href="#thyroid">Hypothyroidism / Hashimoto's</a></li>
-      <li class="sidebar-item"><a href="#pms">PMS & PMDD</a></li>
+      <li class="sidebar-item"><span class="sidebar-coming">PMS &amp; PMDD <em>soon</em></span></li>
       <li class="sidebar-item"><a href="#menopause">Menopause & Perimenopause</a></li>
       <li class="sidebar-cat">Reproductive</li>
-      <li class="sidebar-item"><a href="#endometriosis">Endometriosis</a></li>
-      <li class="sidebar-item"><a href="#fibroids">Uterine Fibroids</a></li>
-      <li class="sidebar-item"><a href="#pelvic">Pelvic Floor Dysfunction</a></li>
-      <li class="sidebar-cat">Pregnancy</li>
+      <li class="sidebar-item"><span class="sidebar-coming">Endometriosis <em>soon</em></span></li>
+      <li class="sidebar-item"><span class="sidebar-coming">Uterine Fibroids <em>soon</em></span></li>
+      <li class="sidebar-item"><span class="sidebar-coming">Pelvic Floor Dysfunction <em>soon</em></span></li>
+      <li class="sidebar-cat">Pregnancy &amp; Motherhood</li>
+      <li class="sidebar-item"><a href="#prenatal">Prenatal Wellness</a></li>
+      <li class="sidebar-item"><a href="#postnatal">Postnatal Recovery</a></li>
       <li class="sidebar-item"><a href="#gestational">Gestational Diabetes</a></li>
       <li class="sidebar-item"><a href="#ppd">Postpartum Depression</a></li>
       <li class="sidebar-item"><a href="#pregnancy-weight">Pregnancy Weight</a></li>
       <li class="sidebar-cat">Mental Health</li>
       <li class="sidebar-item"><a href="#anxiety">Anxiety in Women</a></li>
-      <li class="sidebar-item"><a href="#depression">Depression in Women</a></li>
+      <li class="sidebar-item"><span class="sidebar-coming">Depression in Women <em>soon</em></span></li>
       <li class="sidebar-cat">Metabolic</li>
       <li class="sidebar-item"><a href="#obesity">Obesity in Women</a></li>
       <li class="sidebar-item"><a href="#insulin">Insulin Resistance</a></li>
-      <li class="sidebar-item"><a href="#osteoporosis">Osteoporosis</a></li>
-      <li class="sidebar-item"><a href="#anemia">Iron Deficiency Anemia</a></li>
+      <li class="sidebar-item"><a href="#diabetes">Type 2 Diabetes</a></li>
+      <li class="sidebar-item"><span class="sidebar-coming">Osteoporosis <em>soon</em></span></li>
+      <li class="sidebar-item"><span class="sidebar-coming">Iron Deficiency Anemia <em>soon</em></span></li>
       <li class="sidebar-cat">Autoimmune</li>
       <li class="sidebar-item"><a href="#autoimmune">Autoimmune in Women</a></li>
       <li class="sidebar-item"><a href="#fibro">Fibromyalgia</a></li>
+      <li class="sidebar-cat">Supplements</li>
+      <li class="sidebar-item"><a href="platform.html#supplements">Supplement Guide</a></li>
+      <li class="sidebar-item"><a href="ask.html" style="color:var(--gold);font-weight:500;">Ask Dr. Raga — Free ↗</a></li>
     </ul>
   </aside>
 
@@ -273,6 +284,118 @@
           <div class="fhw-box-title">Women's Obesity Workshop — For Her Wellbeing</div>
           <p>Dr. Raga Deepthi's PhD in Pediatric Metabolism provides cellular-level understanding of fat storage, insulin signaling, and metabolic health. Our Women's Obesity Workshop addresses weight at its actual root — not with generic calorie advice, but with precision metabolic assessment, gut restoration, yoga, and community. Real result: Divyasree lost 15 kg in 3 months — and conceived naturally.</p>
           <a href="contact.html?program=obesity" class="btn-primary book-btn">Book Obesity Workshop Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRENATAL WELLNESS ===== -->
+<div class="cond-card" id="prenatal" data-cat="pregnancy" data-name="prenatal pregnancy wellness yoga nutrition gestational diabetes trimester">
+  <div class="cond-header" onclick="toggleCond('prenatal')">
+    <div>
+      <span class="cond-cat">Pregnancy</span>
+      <div class="cond-name">Prenatal Wellness</div>
+      <div class="cond-tagline">The most important nutrition window of a woman's life — and the most under-served</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Pregnancy places extraordinary nutritional and physiological demands on a woman's body. Trimester-specific nutrition, safe movement, and proactive management of gestational risks — including gestational diabetes, anaemia, and preeclampsia — have lifelong effects on both mother and child. Yet most women receive generic, outdated advice.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('prenatal','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('prenatal','trimester',this)">By Trimester</div>
+        <div class="ctab" onclick="switchTab('prenatal','nutrition',this)">Key Nutrients</div>
+        <div class="ctab" onclick="switchTab('prenatal','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="prenatal-overview">
+        <div class="content-h4">Why Prenatal Care Needs to Be Personalised</div>
+        <p class="content-p">Standard prenatal advice — "take folic acid, avoid certain foods, attend antenatal appointments" — covers the minimum. But research shows that maternal nutrition quality, metabolic health, stress levels, and movement patterns during pregnancy have profound effects on the baby's lifelong health outcomes, including their own risk of metabolic disease.</p>
+        <p class="content-p">For Indian women specifically, the risk of gestational diabetes is 2–3× higher than in Western populations due to genetic predisposition to insulin resistance. Proactive, personalised nutrition and movement protocols can significantly reduce this risk — and improve birth outcomes.</p>
+      </div>
+      <div class="ctab-pane" id="prenatal-trimester">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">T1</div><div class="tip-text"><strong>First trimester:</strong> Focus on folate (neural tube protection), managing nausea with food sequencing and ginger protocols, establishing iron baseline, and gentle restorative movement. Energy needs increase only modestly — quality over quantity.</div></div>
+          <div class="tip-item"><div class="tip-num">T2</div><div class="tip-text"><strong>Second trimester:</strong> Gestational diabetes screening window. Optimal calcium and Vitamin D for fetal bone development. Progressive prenatal yoga for back pain, pelvic discomfort, and improved sleep. Iron and DHA supplementation review.</div></div>
+          <div class="tip-item"><div class="tip-num">T3</div><div class="tip-text"><strong>Third trimester:</strong> Caloric needs peak — but quality remains paramount. Pelvic floor yoga and breathing techniques for labour preparation. Managing oedema, heartburn, and sleep disruption. Colostrum preparation and birth plan nutrition.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="prenatal-nutrition">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Folate — neural tube development (weeks 1–12 critical)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Iron — maternal and fetal oxygen transport</div>
+          <div class="symp-item"><div class="symp-dot"></div>DHA — fetal brain and retinal development</div>
+          <div class="symp-item"><div class="symp-dot"></div>Calcium &amp; Vitamin D — fetal bone and maternal bone preservation</div>
+          <div class="symp-item"><div class="symp-dot"></div>Iodine — fetal thyroid and neurological development</div>
+          <div class="symp-item"><div class="symp-dot"></div>Choline — placental function and fetal brain development</div>
+          <div class="symp-item"><div class="symp-dot"></div>Magnesium — blood pressure regulation, sleep, muscle function</div>
+          <div class="symp-item"><div class="symp-dot"></div>Protein — fetal tissue building and maternal muscle preservation</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="prenatal-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Prenatal Wellness Program — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's PhD in Pediatric Metabolism gives her a rare scientific lens on fetal and maternal nutrition. Our 3-Month Prenatal Wellness Program provides trimester-specific nutrition science, certified prenatal yoga, gestational diabetes prevention, and a community of expectant mothers — because pregnancy deserves more than minimum-standard advice.</p>
+          <a href="contact.html?program=prenatal" class="btn-primary book-btn">Book a Prenatal Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== POSTNATAL RECOVERY ===== -->
+<div class="cond-card" id="postnatal" data-cat="pregnancy" data-name="postnatal postpartum recovery yoga hormone hair loss weight breastfeeding PPD exhaustion">
+  <div class="cond-header" onclick="toggleCond('postnatal')">
+    <div>
+      <span class="cond-cat">Pregnancy &amp; Motherhood</span>
+      <div class="cond-name">Postnatal Recovery</div>
+      <div class="cond-tagline">The "fourth trimester" — the most neglected health period in a woman's life</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">The postpartum period involves one of the most dramatic hormonal shifts a human body can undergo — estrogen and progesterone crash by over 90% within 24 hours of delivery. This drives fatigue, mood changes, hair loss, thyroid disruption, and metabolic changes that can persist for years if not properly addressed. "Bouncing back" is not the goal. Healing forward is.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('postnatal','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('postnatal','symptoms',this)">What to Expect</div>
+        <div class="ctab" onclick="switchTab('postnatal','recovery',this)">Recovery Protocol</div>
+        <div class="ctab" onclick="switchTab('postnatal','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="postnatal-overview">
+        <div class="content-h4">The Biology of Postpartum</div>
+        <p class="content-p">The postpartum hormone crash is abrupt and profound. Estrogen and progesterone — which peaked during pregnancy — plummet after delivery, while prolactin rises if breastfeeding. This hormonal shift, combined with sleep deprivation, physical recovery from birth, and the emotional adjustment of new motherhood, creates a uniquely demanding physiological state.</p>
+        <p class="content-p">Postpartum thyroid dysfunction affects 1 in 10 women in the 12 months following birth — causing fatigue, hair loss, weight changes, and mood disruption that are frequently attributed to "just being tired" rather than identified and treated. Regular thyroid monitoring post-delivery is essential.</p>
+      </div>
+      <div class="ctab-pane" id="postnatal-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Postpartum hair loss (telogen effluvium, 2–6 months post-delivery)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Persistent fatigue beyond normal new-mother exhaustion</div>
+          <div class="symp-item"><div class="symp-dot"></div>Difficulty losing postpartum weight despite effort</div>
+          <div class="symp-item"><div class="symp-dot"></div>Mood swings, tearfulness, or persistent low mood</div>
+          <div class="symp-item"><div class="symp-dot"></div>Reduced milk supply (if breastfeeding)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Joint pain and muscle weakness</div>
+          <div class="symp-item"><div class="symp-dot"></div>Brain fog and poor concentration</div>
+          <div class="symp-item"><div class="symp-dot"></div>Night sweats and temperature dysregulation</div>
+          <div class="symp-item"><div class="symp-dot"></div>Loss of sense of self or identity</div>
+          <div class="symp-item"><div class="symp-dot"></div>Diastasis recti (abdominal muscle separation)</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="postnatal-recovery">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Anti-inflammatory nutrition:</strong> Prioritise omega-3s (DHA/EPA), iron-rich foods, vitamin C, zinc, and biotin for hair and energy recovery. If breastfeeding, caloric needs are actually higher than during pregnancy — do not restrict.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Safe movement progression:</strong> Begin with deep breathing and pelvic floor activation immediately. Gentle walking from week 1. Core rehabilitation from week 6 (only after diastasis recti screening). Never rush return to high-impact exercise.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Thyroid monitoring:</strong> Request thyroid panel (TSH, Free T4, TPO antibodies) at 6-week and 3-month postnatal checks — especially if you have PCOS, family history, or existing thyroid conditions. Postpartum thyroiditis is common and treatable.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Sleep protection:</strong> Sleep deprivation is not only exhausting — it actively elevates cortisol, drives insulin resistance, and prolongs hormonal recovery. Sleep when the baby sleeps is not laziness — it is physiologically essential recovery.</div></div>
+          <div class="tip-item"><div class="tip-num">05</div><div class="tip-text"><strong>Community and mental health:</strong> Isolation dramatically worsens postpartum recovery. A community of women on the same journey — who understand the physical AND emotional experience of new motherhood — is not a luxury. It is part of the medicine.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="postnatal-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Postnatal Recovery Program — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi designed the Postnatal Recovery Program from the conviction that new mothers deserve the same scientific rigour and personal attention as any clinical patient. The program addresses hormone recovery, nutrition, safe movement, thyroid and hair health, mental wellbeing, and the identity journey of new motherhood — in a community of women who truly understand.</p>
+          <a href="contact.html?program=postnatal" class="btn-primary book-btn">Book a Postnatal Consultation</a>
         </div>
       </div>
     </div>
@@ -625,6 +748,64 @@
   </div>
 </div>
 
+<!-- ===== TYPE 2 DIABETES ===== -->
+<div class="cond-card" id="diabetes" data-cat="metabolic" data-name="diabetes type 2 blood sugar glucose insulin hba1c prediabetes metabolic reversal">
+  <div class="cond-header" onclick="toggleCond('diabetes')">
+    <div>
+      <span class="cond-cat">Metabolic</span>
+      <div class="cond-name">Type 2 Diabetes &amp; Blood Sugar Management</div>
+      <div class="cond-tagline">Highly reversible with the right lifestyle medicine — yet dramatically undertreated in Indian women</div>
+    </div>
+    <div class="cond-toggle">+</div>
+  </div>
+  <div class="cond-summary">Type 2 diabetes is a metabolic condition of chronically elevated blood glucose driven by insulin resistance, poor diet, stress, and inflammation. In Indian women, it is compounded by PCOS, hormonal imbalance, and a genetic predisposition to central adiposity. With the right protocol, many women achieve full blood sugar normalisation without medication.</div>
+  <div class="cond-body">
+    <div class="cond-body-inner">
+      <div class="cond-tabs">
+        <div class="ctab active" onclick="switchTab('diabetes','overview',this)">Overview</div>
+        <div class="ctab" onclick="switchTab('diabetes','symptoms',this)">Signs & Symptoms</div>
+        <div class="ctab" onclick="switchTab('diabetes','management',this)">Reversal</div>
+        <div class="ctab" onclick="switchTab('diabetes','fhw',this)">For Her Wellbeing</div>
+      </div>
+      <div class="ctab-pane active" id="diabetes-overview">
+        <div class="content-h4">Why Type 2 Diabetes is Different in Women</div>
+        <p class="content-p">Women with PCOS have a 5–7× greater risk of developing Type 2 diabetes due to chronic insulin resistance. Indian women are genetically predisposed to visceral fat accumulation and impaired insulin secretion — meaning diabetes can develop at lower BMIs than in Western populations. Standard HbA1c screening misses many early cases; fasting insulin and HOMA-IR testing are essential.</p>
+        <p class="content-p">The good news: Type 2 diabetes and prediabetes are among the most responsive conditions to lifestyle intervention. Clinical evidence consistently shows that targeted nutrition, therapeutic movement, stress management, and evidence-based supplementation can achieve blood sugar normalisation — particularly when started early.</p>
+      </div>
+      <div class="ctab-pane" id="diabetes-symptoms">
+        <div class="symp-grid">
+          <div class="symp-item"><div class="symp-dot"></div>Elevated fasting blood glucose or HbA1c</div>
+          <div class="symp-item"><div class="symp-dot"></div>Excessive thirst and frequent urination</div>
+          <div class="symp-item"><div class="symp-dot"></div>Unexplained fatigue and low energy</div>
+          <div class="symp-item"><div class="symp-dot"></div>Blurred vision</div>
+          <div class="symp-item"><div class="symp-dot"></div>Slow-healing wounds or infections</div>
+          <div class="symp-item"><div class="symp-dot"></div>Tingling or numbness in hands/feet</div>
+          <div class="symp-item"><div class="symp-dot"></div>Skin darkening in body folds (acanthosis nigricans)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Recurrent yeast or skin infections</div>
+          <div class="symp-item"><div class="symp-dot"></div>Unexplained weight gain (central)</div>
+          <div class="symp-item"><div class="symp-dot"></div>Strong carbohydrate cravings</div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="diabetes-management">
+        <div class="tip-list">
+          <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><strong>Low-glycaemic nutrition:</strong> Prioritise fibre-rich vegetables, legumes, quality protein, and healthy fats. Minimise refined carbohydrates and sugars. Meal sequencing (vegetables first, then protein, then carbohydrates) reduces post-meal glucose spikes by 30–40%.</div></div>
+          <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><strong>Post-meal movement:</strong> 10–15 minute walks after meals are one of the most powerful, evidence-backed tools for reducing post-meal blood glucose. This habit alone can lower HbA1c by 0.3–0.5% over 3 months.</div></div>
+          <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><strong>Build muscle:</strong> Skeletal muscle is the primary site of glucose disposal. Resistance training and strength-based yoga build insulin-sensitive muscle that acts as a metabolic buffer — permanently improving glucose control at rest.</div></div>
+          <div class="tip-item"><div class="tip-num">04</div><div class="tip-text"><strong>Stress and sleep:</strong> Cortisol directly raises blood glucose. Managing chronic stress through yoga, breathwork, and sleep optimisation (7–9 hours) is a metabolic intervention — not just a lifestyle one.</div></div>
+          <div class="tip-item"><div class="tip-num">05</div><div class="tip-text"><strong>Evidence-based supplements:</strong> Berberine (1,500mg/day), chromium, magnesium, alpha-lipoic acid, and bitter melon extract have clinical evidence for blood sugar reduction. Always under medical supervision.</div></div>
+        </div>
+      </div>
+      <div class="ctab-pane" id="diabetes-fhw">
+        <div class="fhw-box">
+          <div class="fhw-box-title">Diabetes &amp; Blood Sugar Program — For Her Wellbeing</div>
+          <p>Dr. Raga Deepthi's PhD in Pediatric Metabolism gives her a rare cellular-level understanding of glucose and insulin biology. Our 3-Month Diabetes &amp; Blood Sugar Management Program combines precision metabolic science with personalised nutrition, therapeutic yoga, and targeted supplementation to achieve sustainable blood sugar control — and in many women, measurable reversal.</p>
+          <a href="contact.html?program=diabetes" class="btn-primary book-btn">Book a Diabetes Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== MENOPAUSE ===== -->
 <div class="cond-card" id="menopause" data-cat="hormonal" data-name="menopause perimenopause hot flashes estrogen bone weight mood sleep">
   <div class="cond-header" onclick="toggleCond('menopause')">
@@ -809,14 +990,14 @@
     <p style="font-size:0.9rem;font-weight:300;color:rgba(255,253,249,0.65);line-height:1.7;margin-bottom:2rem;">Not finding your condition here? Dr. Raga Deepthi personally responds to health questions within 48 hours — in English or Telugu. Free. Confidential.</p>
     <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
       <a href="ask.html" class="btn-primary gold">Ask a Free Question</a>
-      <a href="contact.html" class="btn-ghost" style="color:rgba(255,253,249,0.75);border-color:rgba(255,253,249,0.3);">Book ₹1000 Consultation</a>
+      <a href="contact.html" class="btn-ghost" style="color:rgba(255,253,249,0.75);border-color:rgba(255,253,249,0.3);">Book ₹1,000 Consultation</a>
     </div>
   </div>
 </div>
 
 <div id="fhw-float"></div>
 <div id="fhw-footer"></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=10"></script>
 <script>
 initSite('health');
 

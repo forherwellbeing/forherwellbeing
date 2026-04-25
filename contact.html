@@ -4,19 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book a Consultation — For Her Wellbeing</title>
-<meta name="description" content="Book a personalised consultation with Dr. Raga Deepthi for ₹1000. Science-backed guidance on PCOS, weight management, hormonal health, and metabolic issues. Pay via Razorpay, PhonePe, or UPI.">
+<meta name="description" content="Book a personalised consultation with Dr. Raga Deepthi for ₹1,000. Science-backed guidance on PCOS, weight management, hormonal health, and metabolic issues. Pay via Razorpay, PhonePe, or UPI.">
 <meta property="og:title" content="Book a Consultation — For Her Wellbeing">
-<meta property="og:description" content="₹1000 initial consultation with Dr. Raga Deepthi. Understand your root cause. Get a personalised 3-month plan for PCOS, weight, hormones, or gut health.">
+<meta property="og:description" content="₹1,000 initial consultation with Dr. Raga Deepthi. Understand your root cause. Get a personalised 3-month plan for PCOS, weight, hormones, or gut health.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://forherwellbeing.com/contact.html">
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=10">
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-.contact-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0; }
+.contact-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:3.5rem 0; }
 .process-steps { display:flex;flex-direction:column;gap:0;margin:2rem 0; }
 .ps { display:grid;grid-template-columns:48px 1fr;gap:1rem;align-items:start;padding:1.25rem 0;border-bottom:1px solid var(--border); }
 .ps:last-child { border-bottom:none; }
@@ -86,19 +85,9 @@
 /* STEP 3 — SUCCESS */
 .success-step { display:none;padding:2.5rem;text-align:center; }
 
-@media(max-width:900px){
-  .contact-layout{grid-template-columns:1fr;gap:3rem;padding:3rem 0;}
-  .form-row-2{grid-template-columns:1fr;}
-}
-@media(max-width:600px){
-  .booking-box-header{padding:1.5rem;}
-  .booking-form{padding:1.5rem;}
-  .payment-step > div:last-child{padding:1.5rem;}
-  .payment-amount{font-size:2.5rem;}
-  .success-step{padding:1.5rem;}
-  .booking-price-num{font-size:2rem;}
-  .ps{grid-template-columns:40px 1fr;gap:0.75rem;}
-}
+@media(max-width:900px){ .contact-layout{grid-template-columns:1fr;gap:3rem;padding:3rem 0;} .form-row-2{grid-template-columns:1fr;} }
+@keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:0.4;transform:scale(0.75);} }
+.cancel-policy { font-size:0.72rem;color:var(--text-light);line-height:1.6;text-align:center;padding:0.75rem 1rem;border-top:1px solid var(--border);background:var(--cream); }
 </style>
 </head>
 <body>
@@ -122,8 +111,8 @@
           <div class="ps">
             <div class="ps-num"><span>1</span></div>
             <div>
-              <div class="ps-title">Book & Pay ₹1000</div>
-              <p class="ps-body">Fill the form and pay ₹1000 via Razorpay, PhonePe, or any UPI app to confirm your consultation slot.</p>
+              <div class="ps-title">Book & Pay ₹1,000</div>
+              <p class="ps-body">Fill the form and pay ₹1,000 via Razorpay, PhonePe, or any UPI app to confirm your consultation slot.</p>
             </div>
           </div>
           <div class="ps">
@@ -177,14 +166,39 @@
 
       <!-- RIGHT — BOOKING FORM -->
       <div class="fade-in fade-in-delay-2">
+        <!-- WHAT YOU GET BANNER -->
+        <div style="background:var(--plum);border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:flex;flex-direction:column;gap:0.6rem;">
+          <div style="font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">What your ₹1,000 gets you</div>
+          <div style="display:flex;flex-direction:column;gap:0.45rem;">
+            <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.8rem;color:rgba(255,253,249,0.82);font-weight:300;line-height:1.5;">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:1px;">✓</span>
+              <span><strong style="font-weight:500;color:white;">45–60 minute 1:1 video call</strong> with Dr. Raga — not an assistant</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.8rem;color:rgba(255,253,249,0.82);font-weight:300;line-height:1.5;">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:1px;">✓</span>
+              <span><strong style="font-weight:500;color:white;">Your root cause identified</strong> — hormonal, metabolic, gut, or nutritional</span>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.8rem;color:rgba(255,253,249,0.82);font-weight:300;line-height:1.5;">
+              <span style="color:var(--gold);flex-shrink:0;margin-top:1px;">✓</span>
+              <span><strong style="font-weight:500;color:white;">Specific lab tests recommended</strong> — so you stop guessing and start knowing</span>
+            </div>
+          </div>
+        </div>
         <div class="booking-box">
           <!-- STEP 1: FORM -->
           <div id="step-form">
             <div class="booking-box-header">
+              <div style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(201,146,42,0.18);border:1px solid rgba(201,146,42,0.35);border-radius:50px;padding:0.2rem 0.75rem;margin-bottom:0.75rem;">
+                <span style="width:7px;height:7px;background:var(--gold);border-radius:50%;display:inline-block;animation:pulse-dot 1.8s ease-in-out infinite;"></span>
+                <span style="font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);">Limited Slots This Month</span>
+              </div>
               <div class="booking-box-title">Book Your Consultation</div>
               <div class="booking-box-sub">Fill in your details — you'll be guided to pay securely via Razorpay or UPI.</div>
+              <div style="margin-top:0.65rem;padding:0.5rem 0.75rem;background:rgba(255,253,249,0.08);border-radius:4px;font-size:0.72rem;color:rgba(255,253,249,0.55);line-height:1.5;">
+                🌍 <strong style="color:rgba(255,253,249,0.75);">Based abroad?</strong> Consultation fee is ₹1,000 (approx. €11 / £9 / $12). International payment via bank transfer — WhatsApp us after submitting this form and we'll send details.
+              </div>
               <div class="booking-price">
-                <span class="booking-price-num">₹1000</span>
+                <span class="booking-price-num">₹1,000</span>
                 <span class="booking-price-label">/ initial consultation</span>
               </div>
             </div>
@@ -238,6 +252,9 @@
                 <p style="font-size:0.72rem;text-align:center;color:var(--text-light);line-height:1.5;">Your details are private and never shared.</p>
               </form>
             </div>
+            <div class="cancel-policy">
+              Need to reschedule? Contact us on WhatsApp within 24 hours of booking — we'll move your slot at no charge. Refunds are available if cancelled at least 12 hours before your consultation.
+            </div>
           </div>
 
           <!-- STEP 2: PAYMENT -->
@@ -248,14 +265,14 @@
               <div id="payment-interest" style="font-size:0.8rem;color:rgba(255,253,249,0.6);margin-top:0.15rem;"></div>
             </div>
             <div style="padding:2.5rem;">
-              <div class="payment-amount">₹1000</div>
+              <div class="payment-amount">₹1,000</div>
               <div class="payment-label">Consultation Fee</div>
 
               <div class="pay-options">
-                <!-- Razorpay SDK Button -->
-                <button id="razorpay-pay-btn" onclick="openRazorpay()" class="razorpay-btn" style="border:none;cursor:pointer;width:100%;">
+                <!-- Razorpay Button — activate by replacing key below -->
+                <button id="razorpay-pay-btn" class="razorpay-btn" onclick="openRazorpay()">
                   <svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg>
-                  Pay ₹1000 Securely via Razorpay
+                  Pay ₹1,000 Securely via Razorpay
                 </button>
                 <div class="pay-divider">or pay via UPI</div>
                 <!-- PhonePe Button -->
@@ -264,7 +281,7 @@
                     <rect width="40" height="40" rx="8" fill="white"/>
                     <path d="M20 6C12.268 6 6 12.268 6 20s6.268 14 14 14 14-6.268 14-14S27.732 6 20 6zm4.5 19.5h-3v-5h-4v5h-3v-11l5-4.5 5 4.5v11z" fill="#5f259f"/>
                   </svg>
-                  Pay ₹1000 via PhonePe
+                  Pay ₹1,000 via PhonePe
                 </a>
 
                 <!-- Any UPI Button -->
@@ -330,9 +347,31 @@
 const UPI_ID = '8008383699@ybl';
 const AMOUNT = 1000;
 const WA_NUM = '918008383699';
-const RZP_KEY = 'rzp_test_SgnTXhtATf8QPQ';
+// ── RAZORPAY ── Replace the key below when your account is activated ──
+const RAZORPAY_KEY = 'rzp_live_XXXXXXXXXXXXXXXX';
 let _bookingData = {};
-let _orderId = '';
+
+function openRazorpay() {
+  const options = {
+    key: RAZORPAY_KEY,
+    amount: AMOUNT * 100,
+    currency: 'INR',
+    name: 'For Her Wellbeing',
+    description: 'Initial Consultation — Dr. Raga Deepthi',
+    image: 'uploads/logo-1776614290085.png',
+    prefill: { name: _bookingData.name, email: _bookingData.email, contact: _bookingData.phone },
+    notes: { interest: _bookingData.interest },
+    theme: { color: '#4a1042' },
+    handler: function(response) {
+      document.getElementById('step-payment').style.display = 'none';
+      document.getElementById('step-success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    modal: { ondismiss: function() {} }
+  };
+  const rzp = new Razorpay(options);
+  rzp.open();
+}
 
 function goToPayment(e) {
   e.preventDefault();
@@ -344,23 +383,33 @@ function goToPayment(e) {
   const note = document.getElementById('b-note').value;
 
   _bookingData = { name: fname+' '+lname, email, phone, interest, note };
-
   // Save lead
   const lead = { timestamp: new Date().toISOString(), name: fname+' '+lname, email, phone, interest, note };
   const leads = JSON.parse(localStorage.getItem('fhw_leads') || '[]');
   leads.push(lead); localStorage.setItem('fhw_leads', JSON.stringify(leads));
 
-  // Build UPI fallback links
+  // Send to Formspree (async, no blocking)
+  const fd = new FormData();
+  fd.append('name', fname+' '+lname); fd.append('email', email);
+  fd.append('phone', phone); fd.append('interest', interest); fd.append('note', note);
+  fd.append('_subject', 'New Consultation Booking — For Her Wellbeing');
+  fetch('https://formspree.io/f/YOUR_FORM_ID', { method:'POST', body:fd, headers:{'Accept':'application/json'} }).catch(()=>{});
+
+  // Build payment links
   const upiNote = encodeURIComponent('FHW Consultation - ' + fname);
   const upiLink = `upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR&tn=${upiNote}`;
   const phonePeLink = `phonepe://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR&tn=${upiNote}`;
+
   document.getElementById('phonepe-link').href = phonePeLink;
   document.getElementById('upi-link').href = upiLink;
+
+  // QR Code via Google Charts
   const qrData = encodeURIComponent(`upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR`);
   document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
   document.getElementById('upi-id-display').textContent = UPI_ID;
 
-  const waMsg = encodeURIComponent(`Hi Dr. Raga, I have paid ₹1000 for my consultation booking.\n\nName: ${fname} ${lname}\nPhone: ${phone}\nEmail: ${email}\nInterest: ${interest}\n\nPlease confirm my slot. Thank you!`);
+  // WhatsApp confirm link
+  const waMsg = encodeURIComponent(`Hi Dr. Raga, I have paid ₹1,000 for my consultation booking.\n\nName: ${fname} ${lname}\nPhone: ${phone}\nEmail: ${email}\nInterest: ${interest}\n\nPlease confirm my slot. Thank you!`);
   document.getElementById('wa-confirm-link').href = `https://wa.me/${WA_NUM}?text=${waMsg}`;
 
   // Update payment step header
@@ -570,7 +619,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <!-- FAQ -->
-<section style="padding:5rem 0;background:var(--cream);">
+<section style="padding:4rem 0;background:var(--cream);">
   <div class="section-inner" style="max-width:720px;">
     <div class="fade-in" style="text-align:center;margin-bottom:3rem;">
       <span class="eyebrow">Before You Book</span>
@@ -586,8 +635,8 @@ window.addEventListener('DOMContentLoaded', () => {
         <div class="faq-a">After payment, share your screenshot on WhatsApp (+91 8008383699). Dr. Raga's team will confirm your booking within a few hours and share a calendar link to schedule your video call at a time that works for you.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Is ₹1000 refundable if I change my mind?<span class="faq-icon">+</span></button>
-        <div class="faq-a">Yes — if you cancel at least 24 hours before your scheduled slot, the ₹1000 is fully refunded. If you need to reschedule, simply WhatsApp us and we will find you a new time at no extra charge.</div>
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Is ₹1,000 refundable if I change my mind?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Yes — if you cancel at least 24 hours before your scheduled slot, the ₹1,000 is fully refunded. If you need to reschedule, simply WhatsApp us and we will find you a new time at no extra charge.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Do I need to bring test reports?<span class="faq-icon">+</span></button>
@@ -598,7 +647,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <div class="faq-a">Yes. Dr. Raga speaks Telugu and English. Many clients find it easier to explain their health history in Telugu — you are welcome to switch languages mid-conversation.</div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does the ₹1000 consultation include?<span class="faq-icon">+</span></button>
+        <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What does the ₹1,000 consultation include?<span class="faq-icon">+</span></button>
         <div class="faq-a">A complete 45–60 minute 1:1 with Dr. Raga: root-cause assessment, review of your symptoms and history, recommended lab tests, and a personalised 3-month roadmap. You leave with clarity and a plan — not just generic advice.</div>
       </div>
       <div class="faq-item" style="border-bottom:none;">
@@ -626,7 +675,7 @@ function toggleFaq(btn) {
 </script>
 <div id="fhw-float"></div>
 <div id="fhw-footer"></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=10"></script>
 <script>initSite('contact');</script>
 </body>
 </html>

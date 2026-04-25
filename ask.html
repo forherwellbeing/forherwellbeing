@@ -12,9 +12,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://forherwellbeing.com/ask.html">
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=10">
 <style>
-.ask-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:5rem 0; }
+.ask-layout { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;padding:3.5rem 0; }
 .feature-row { display:grid;grid-template-columns:44px 1fr;gap:1rem;align-items:start;margin-bottom:1.75rem; }
 .feature-icon { width:44px;height:44px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--plum); }
 .feature-icon svg { width:20px;height:20px; }
@@ -98,7 +98,7 @@
         </div>
 
         <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(74,16,66,0.04);border-radius:4px;border-left:3px solid var(--gold);">
-          <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">This service is free. If after her response you'd like a deeper 1:1 consultation, you can <a href="contact.html" style="color:var(--plum);font-weight:500;">book a session for ₹1000</a>.</p>
+          <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">This service is free. If after her response you'd like a deeper 1:1 consultation, you can <a href="contact.html" style="color:var(--plum);font-weight:500;">book a session for ₹1,000</a>.</p>
         </div>
       </div>
 
@@ -189,9 +189,50 @@ async function submitAsk(e) {
   document.getElementById('ask-success').style.display = 'block';
 }
 </script>
+<!-- EXAMPLE Q&A SECTION -->
+<section style="background:var(--cream);padding:4rem 0;">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:2.5rem;" class="fade-in">
+      <span class="eyebrow">Real Answers</span>
+      <h2 class="section-title" style="margin-bottom:0.5rem;">How Dr. Raga<br><em>Actually Responds</em></h2>
+      <p class="section-body">Every question is answered personally — not by a chatbot, not by a template.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:900px;margin:0 auto;" class="fade-in example-qa-grid">
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+        <div style="background:var(--plum);padding:1.25rem 1.5rem;">
+          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;">Question from Ananya, 29 — Bangalore</div>
+          <p style="font-family:var(--serif);font-size:1rem;font-weight:300;color:white;line-height:1.6;margin:0;">"I've had PCOS for 4 years. My doctor just says lose weight and put me on metformin. My periods are still irregular. What am I missing?"</p>
+        </div>
+        <div style="padding:1.25rem 1.5rem;">
+          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Dr. Raga's Response</div>
+          <p style="font-size:0.84rem;font-weight:300;line-height:1.8;color:var(--text-mid);margin:0;">Ananya, metformin addresses insulin resistance — which is just one of PCOS's five root causes. If your PCOS is driven by gut dysbiosis or HPA axis disruption (stress hormones), metformin alone will not regulate your cycle. I'd want to know your LH:FSH ratio, fasting insulin, SHBG, and gut health markers before recommending anything specific. Losing weight is an outcome, not a cause — your body needs the right metabolic environment first.</p>
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:6px;overflow:hidden;">
+        <div style="background:var(--plum);padding:1.25rem 1.5rem;">
+          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;">Question from Preethi, 34 — London</div>
+          <p style="font-family:var(--serif);font-size:1rem;font-weight:300;color:white;line-height:1.6;margin:0;">"I moved to the UK 2 years ago and my weight has gone up 8kg despite eating the same. My thyroid tests are 'normal' according to my GP. What's happening?"</p>
+        </div>
+        <div style="padding:1.25rem 1.5rem;">
+          <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Dr. Raga's Response</div>
+          <p style="font-size:0.84rem;font-weight:300;line-height:1.8;color:var(--text-mid);margin:0;">Preethi, UK winter means your Vitamin D has likely crashed — and Vitamin D is not just a vitamin, it is a hormone that regulates insulin sensitivity and fat storage. UK labs use Western reference ranges; your TSH might be "normal" by UK standards but suboptimal for an Indian woman's physiology. I also want to know if your gut microbiome shifted with the diet change — that alone can cause 6–10kg of inflammatory weight. This is absolutely fixable.</p>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="fade-in">
+      <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:1rem;">These are real questions. Names changed for privacy. Dr. Raga responds to every question within 48 hours.</p>
+      <a href="#ask-form-box" class="btn-primary" onclick="document.getElementById('ask-form-box').scrollIntoView({behavior:'smooth'});return false;">Ask Your Question — It's Free →</a>
+    </div>
+  </div>
+</section>
+<style>@media(max-width:640px){.example-qa-grid{grid-template-columns:1fr!important;}}</style>
+
 <div id="fhw-float"></div>
 <div id="fhw-footer"></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=10"></script>
 <script>initSite('ask');</script>
 </body>
 </html>

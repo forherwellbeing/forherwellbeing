@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Programs — For Her Wellbeing</title>
-<meta name="description" content="Explore For Her Wellbeing's 3-month flagship programs: PCOS Healing Workshop, Women's Obesity Workshop, and Metabolic Reset. Personalised yoga, customised diet, community & 1:1 coaching by Dr. Raga Deepthi.">
+<meta name="description" content="6 flagship 3-month programs by Dr. Raga Deepthi: PCOS, Women's Obesity, Metabolic Reset, Diabetes & Blood Sugar, Prenatal Wellness, and Postnatal Recovery. Science-backed yoga, personalised nutrition, community, and 1:1 coaching.">
 <meta property="og:title" content="Programs — For Her Wellbeing">
-<meta property="og:description" content="3-month science-backed programs for PCOS, weight loss, and metabolic reset. Yoga · Diet · Community · Coaching. By Dr. Raga Deepthi, PhD.">
+<meta property="og:description" content="6 science-backed 3-month programs for women: PCOS · Obesity · Metabolic Reset · Diabetes · Prenatal · Postnatal. Yoga + Diet + Community + Coaching. By Dr. Raga Deepthi, PhD.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="uploads/IMG_5069-62fd8cb3.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://forherwellbeing.com/programs.html">
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=10">
 <style>
 .pillars-bar {
   display: grid; grid-template-columns: repeat(4,1fr);
@@ -28,9 +28,12 @@
 
 .workshop-block { padding: 5rem 0; border-bottom: 1px solid var(--border); }
 .workshop-block:last-of-type { border-bottom: none; }
-.workshop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.workshop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: stretch; }
 .workshop-grid.reverse { direction: rtl; }
 .workshop-grid.reverse > * { direction: ltr; }
+.workshop-grid > div { display: flex; flex-direction: column; }
+.workshop-grid .workshop-visual { flex: 1; min-height: 300px; }
+.workshop-grid .workshop-visual img { height: 100%; min-height: 300px; }
 .workshop-header { margin-bottom: 1.5rem; }
 .workshop-num { font-family: var(--serif); font-size: 5rem; font-weight: 300; color: rgba(74,16,66,0.08); line-height: 1; margin-bottom: -1rem; }
 .workshop-name { font-family: var(--serif); font-size: 2.4rem; font-weight: 300; color: var(--plum); line-height: 1.2; margin-bottom: 0.5rem; }
@@ -75,7 +78,7 @@
   display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
 }
 
-.faq-section { background: var(--cream); padding: 5rem 0; }
+.faq-section { background: var(--cream); padding: 4rem 0; }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-q {
   display: flex; justify-content: space-between; align-items: center;
@@ -88,48 +91,105 @@
 .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; font-size: 0.88rem; font-weight: 300; line-height: 1.8; color: var(--text-mid); }
 .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.25rem; }
 
+/* Programs quick-selector grid */
+.prog-selector-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.08); border-radius:var(--r-md); overflow:hidden; }
+.prog-tile { display:flex; flex-direction:column; gap:0.35rem; padding:1.5rem 1.75rem; background:rgba(255,255,255,0.04); text-decoration:none; transition:background 0.2s, transform 0.2s; }
+.prog-tile:hover { background:rgba(201,146,42,0.12); transform:translateY(-2px); }
+.prog-tile-num { font-family:var(--serif); font-size:0.72rem; font-weight:600; letter-spacing:0.1em; color:var(--gold); opacity:0.7; }
+.prog-tile-name { font-family:var(--sans); font-size:0.97rem; font-weight:600; color:#fff; line-height:1.3; }
+.prog-tile-desc { font-family:var(--sans); font-size:0.78rem; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.5; flex:1; }
+.prog-tile-cta { font-family:var(--sans); font-size:0.72rem; font-weight:500; letter-spacing:0.05em; color:var(--gold); margin-top:0.4rem; }
+
 @media (max-width: 900px) {
   .workshop-grid, .workshop-grid.reverse { grid-template-columns: 1fr; direction: ltr; gap: 2.5rem; }
   .pillars-bar { grid-template-columns: repeat(2,1fr); }
   .counselling-inner { grid-template-columns: 1fr; }
-  .prog-stats-grid { grid-template-columns: repeat(2,1fr) !important; }
-  .prog-info-box { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
-  .prog-compare-grid { grid-template-columns: 1fr !important; }
+  .prog-selector-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 600px) {
   .pillars-bar { grid-template-columns: 1fr 1fr; }
-  .prog-stats-grid { grid-template-columns: 1fr 1fr !important; }
-  .workshop-step-inner { padding: 1.5rem !important; }
+  .prog-selector-grid { grid-template-columns: 1fr 1fr; }
+  .prog-tile { padding:1.1rem 1.25rem; }
+  .steps-grid { grid-template-columns: 1fr 1fr !important; gap: 2rem !important; }
+  .steps-connector { display: none !important; }
+}
+@media (max-width: 400px) {
+  .steps-grid { grid-template-columns: 1fr !important; }
 }
 </style>
 </head>
 <body>
 <div class="page-header">
   <div class="page-header-inner">
-    <span class="eyebrow eyebrow-light">Flagship 3-Month Workshops</span>
-    <h1 class="page-title">Programs Built for<br><em>Real Transformation</em></h1>
-    <p class="page-sub">Not quick fixes. Each workshop runs 3 months and combines personalised yoga, customised diet, community sisterhood, and 1:1 coaching from Dr. Raga Deepthi.</p>
+    <span class="eyebrow eyebrow-light">6 Flagship 3-Month Programs</span>
+    <h1 class="page-title">Programs Built Around<br><em>Your Specific Journey</em></h1>
+    <p class="page-sub">PCOS · Obesity · Metabolic Reset · Diabetes · Prenatal · Postnatal. Every program combines personalised yoga, science-backed nutrition, a curated community of 20 women, and direct 1:1 coaching from Dr. Raga Deepthi.</p>
   </div>
 </div>
 
+<!-- PROGRAMS QUICK SELECTOR -->
+<section style="background:var(--plum-deep);padding:2.5rem 0;">
+  <div class="section-inner">
+    <p class="fade-in" style="text-align:center;font-family:var(--sans);font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:1.5rem;">Jump to your program</p>
+    <div class="fade-in prog-selector-grid">
+      <a href="#pcos" class="prog-tile">
+        <span class="prog-tile-num">01</span>
+        <span class="prog-tile-name">PCOS &amp; Hormonal Health</span>
+        <span class="prog-tile-desc">Regulate cycles, balance hormones, reduce cysts</span>
+        <span class="prog-tile-cta">View Program ↓</span>
+      </a>
+      <a href="#obesity" class="prog-tile">
+        <span class="prog-tile-num">02</span>
+        <span class="prog-tile-name">Weight &amp; Metabolic Reset</span>
+        <span class="prog-tile-desc">Sustainable weight release, no crash diets</span>
+        <span class="prog-tile-cta">View Program ↓</span>
+      </a>
+      <a href="#metabolic" class="prog-tile">
+        <span class="prog-tile-num">03</span>
+        <span class="prog-tile-name">Gut Health &amp; Nutrition</span>
+        <span class="prog-tile-desc">Heal your gut, reclaim energy and digestion</span>
+        <span class="prog-tile-cta">View Program ↓</span>
+      </a>
+      <a href="#diabetes" class="prog-tile">
+        <span class="prog-tile-num">04</span>
+        <span class="prog-tile-name">Diabetes &amp; Blood Sugar</span>
+        <span class="prog-tile-desc">Reverse insulin resistance, stabilise glucose</span>
+        <span class="prog-tile-cta">View Program ↓</span>
+      </a>
+      <a href="#prenatal" class="prog-tile">
+        <span class="prog-tile-num">05</span>
+        <span class="prog-tile-name">Prenatal Wellness</span>
+        <span class="prog-tile-desc">Safe, trimester-by-trimester support</span>
+        <span class="prog-tile-cta">View Program ↓</span>
+      </a>
+      <a href="#postnatal" class="prog-tile">
+        <span class="prog-tile-num">06</span>
+        <span class="prog-tile-name">Postnatal Recovery</span>
+        <span class="prog-tile-desc">Heal, rebuild and thrive after birth</span>
+        <span class="prog-tile-cta">View Program ↓</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- HOW IT WORKS -->
-<section style="background:var(--white);padding:5rem 0;">
+<section style="background:var(--white);padding:4rem 0;">
   <div class="section-inner">
     <div class="fade-in" style="text-align:center;margin-bottom:3.5rem;">
       <span class="eyebrow">The Process</span>
       <h2 class="section-title">How Your Journey<br><em>Begins</em></h2>
       <p class="section-body" style="margin:0 auto;text-align:center;max-width:560px;">A thoughtful, clinical process — because real transformation starts with real understanding.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="fade-in prog-stats-grid">
+    <div class="steps-grid fade-in" style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;">
       <!-- connector line -->
-      <div style="position:absolute;top:40px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(to right,var(--gold),rgba(201,146,42,0.2));z-index:0;"></div>
+      <div class="steps-connector" style="position:absolute;top:40px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(to right,var(--gold),rgba(201,146,42,0.2));z-index:0;"></div>
 
       <div style="text-align:center;padding:0 1.5rem;position:relative;z-index:1;">
         <div style="width:80px;height:80px;background:var(--plum);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 4px 20px rgba(74,16,66,0.2);">
           <span style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--gold);">1</span>
         </div>
         <div style="font-family:var(--serif);font-size:1.05rem;font-weight:400;color:var(--plum);margin-bottom:0.5rem;">Book Consultation</div>
-        <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Pay ₹1000 to book your initial 1:1 session with Dr. Raga Deepthi — online or in-person.</p>
+        <p style="font-size:0.8rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Pay ₹1,000 to book your initial 1:1 session with Dr. Raga Deepthi — online or in-person.</p>
       </div>
 
       <div style="text-align:center;padding:0 1.5rem;position:relative;z-index:1;">
@@ -171,7 +231,7 @@
             <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.15rem;">Initial Consultation</div>
             <div style="font-size:0.75rem;color:var(--text-light);font-weight:300;">1:1 with Dr. Raga · Health intake & test guidance</div>
           </div>
-          <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--gold);white-space:nowrap;">₹1000</div>
+          <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--gold);white-space:nowrap;">₹1,000</div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;background:var(--white);border-radius:4px;border:1px solid var(--border);">
           <div>
@@ -186,7 +246,7 @@
         <div style="padding:1rem 1.5rem;background:rgba(74,16,66,0.04);border-radius:4px;border:1px dashed rgba(74,16,66,0.15);">
           <p style="font-size:0.78rem;font-weight:300;line-height:1.6;color:var(--text-mid);">Exact pricing is shared after your consultation — once Dr. Raga understands your condition and designs your personalised plan. No surprises.</p>
         </div>
-        <a href="contact.html" class="btn-primary" style="text-align:center;">Book Consultation — ₹1000</a>
+        <a href="contact.html" class="btn-primary" style="text-align:center;">Book Consultation — ₹1,000</a>
       </div>
     </div>
   </div>
@@ -231,7 +291,7 @@
             </div>
             <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(201,146,42,0.1);border:1px solid rgba(201,146,42,0.25);border-radius:50px;padding:0.25rem 0.75rem;">
               <span style="width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;"></span>
-              <span style="font-size:0.68rem;font-weight:500;color:var(--gold);letter-spacing:0.08em;">8 of 12 spots left — May batch</span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--gold);letter-spacing:0.08em;">14 of 20 spots left — May batch</span>
             </div>
           </div>
           <p class="workshop-desc">A comprehensive group program for women with PCOS — combining personalised yoga for hormonal balance, anti-inflammatory nutrition, microbiome restoration, and cycle tracking. Guided by Dr. Raga Deepthi's metabolic expertise and deep personal understanding of hormonal challenges.</p>
@@ -372,7 +432,7 @@
             </div>
             <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(74,16,66,0.06);border:1px solid var(--border);border-radius:50px;padding:0.25rem 0.75rem;">
               <span style="width:6px;height:6px;background:var(--plum);border-radius:50%;display:inline-block;"></span>
-              <span style="font-size:0.68rem;font-weight:500;color:var(--text-mid);letter-spacing:0.08em;">10 spots open — June batch</span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--text-mid);letter-spacing:0.08em;">16 spots open — June batch</span>
             </div>
           </div>
           <p class="workshop-desc">For women experiencing fatigue, brain fog, bloating, and hormonal disruption — without a clear diagnosis. This program resets your metabolism, restores gut health, rebalances hormones, and rebuilds energy from the cellular level up.</p>
@@ -424,18 +484,230 @@
   </div>
 </section>
 
+<!-- DIABETES & BLOOD SUGAR MANAGEMENT -->
+<section style="background:var(--white);" id="diabetes">
+  <div class="section-inner">
+    <div class="workshop-block">
+      <div class="workshop-grid reverse">
+        <div class="fade-in">
+          <div class="workshop-header">
+            <div class="workshop-num">04</div>
+            <div class="workshop-name">Diabetes &amp; Blood Sugar<br><em>Management</em></div>
+            <div class="workshop-tag">3-Month Flagship Program · Metabolic Health</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+              <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);">From ₹15,000</div>
+              <div style="font-size:0.7rem;font-weight:300;color:var(--text-light);">· 3 months · Yoga + Diet + Community + Coaching</div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(74,16,66,0.06);border:1px solid var(--border);border-radius:50px;padding:0.25rem 0.75rem;">
+              <span style="width:6px;height:6px;background:var(--plum);border-radius:50%;display:inline-block;"></span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--text-mid);letter-spacing:0.08em;">15 spots open — July batch</span>
+            </div>
+          </div>
+          <p class="workshop-desc">For women living with Type 2 diabetes, prediabetes, or PCOS-related insulin resistance. This program combines PhD-level metabolic science with personalised nutrition, therapeutic yoga, and evidence-based supplementation to achieve sustainable blood sugar control — and in many cases, reversal.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-month">Month 1</div>
+              <div>
+                <div class="tl-title">Metabolic Foundations</div>
+                <p class="tl-body">Comprehensive blood sugar and insulin profiling. Remove glycaemic triggers. Introduce low-GI, anti-inflammatory eating. Begin restorative yoga to reduce cortisol — a key driver of blood sugar dysregulation.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 2</div>
+              <div>
+                <div class="tl-title">Metabolic Activation</div>
+                <p class="tl-body">Progressive resistance-friendly yoga to build muscle insulin sensitivity. Therapeutic meal timing and post-meal movement protocols. Targeted supplementation (berberine, magnesium, chromium) based on individual labs.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 3</div>
+              <div>
+                <div class="tl-title">Reversal Protocol</div>
+                <p class="tl-body">Advanced metabolic optimisation. Personalised long-term blood sugar management plan. Stress resilience and sleep optimisation. Community celebration and ongoing monitoring guidance.</p>
+              </div>
+            </div>
+          </div>
+          <div class="workshop-includes">
+            <div class="wi"><span class="wi-check">✓</span>Comprehensive HbA1c, fasting insulin &amp; HOMA-IR review</div>
+            <div class="wi"><span class="wi-check">✓</span>Low-glycaemic, anti-inflammatory personalised nutrition plan</div>
+            <div class="wi"><span class="wi-check">✓</span>Therapeutic yoga for muscle insulin sensitivity</div>
+            <div class="wi"><span class="wi-check">✓</span>Post-meal movement protocol (clinically proven)</div>
+            <div class="wi"><span class="wi-check">✓</span>Evidence-based supplement guidance for blood sugar</div>
+            <div class="wi"><span class="wi-check">✓</span>Weekly group &amp; monthly 1:1 sessions with Dr. Raga</div>
+          </div>
+          <a href="contact.html?program=diabetes" class="btn-primary gold">Enrol in Diabetes Program</a>
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <div class="workshop-visual">
+            <img src="uploads/PXL_20250218_040053330.jpg" alt="Diabetes & Blood Sugar Management">
+            <div class="workshop-badge">Blood Sugar Management</div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.5rem;background:var(--cream);border-radius:4px;border-left:3px solid var(--gold);">
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.4rem;">Who is this for?</div>
+            <p style="font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Women with Type 2 diabetes, prediabetes, or PCOS-related insulin resistance. Also ideal for women with a strong family history of diabetes who want to prevent progression through lifestyle medicine.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRENATAL WELLNESS -->
+<section style="background:var(--cream);" id="prenatal">
+  <div class="section-inner">
+    <div class="workshop-block">
+      <div class="workshop-grid">
+        <div class="fade-in">
+          <div class="workshop-header">
+            <div class="workshop-num">05</div>
+            <div class="workshop-name">Prenatal<br><em>Wellness Program</em></div>
+            <div class="workshop-tag">3-Month Flagship Program · Pregnancy Care</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+              <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);">From ₹15,000</div>
+              <div style="font-size:0.7rem;font-weight:300;color:var(--text-light);">· 3 months · Prenatal Yoga + Nutrition + Community + Coaching</div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(74,16,66,0.06);border:1px solid var(--border);border-radius:50px;padding:0.25rem 0.75rem;">
+              <span style="width:6px;height:6px;background:var(--plum);border-radius:50%;display:inline-block;"></span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--text-mid);letter-spacing:0.08em;">18 spots open — July batch</span>
+            </div>
+          </div>
+          <p class="workshop-desc">You are growing a life. Your body has never needed more — or been more misunderstood. This program gives you trimester-by-trimester nutrition science, safe and empowering prenatal yoga, and the community of other mothers who truly understand what you're going through. Because a healthy pregnancy is the foundation of a healthy child.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-month">Month 1</div>
+              <div>
+                <div class="tl-title">Safe Foundations</div>
+                <p class="tl-body">Comprehensive prenatal nutrition baseline. Gestational diabetes risk screening. Gentle restorative yoga (safe for all trimesters). Manage morning sickness, nausea, and first-trimester fatigue with evidence-based food and breathwork strategies.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 2</div>
+              <div>
+                <div class="tl-title">Nourishment &amp; Strength</div>
+                <p class="tl-body">Optimal fetal nutrition — iron, folate, DHA, calcium, and Vitamin D protocols tailored to your labs. Progressive prenatal yoga to manage back pain, oedema, and pelvic discomfort. Gestational weight management without restriction.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 3</div>
+              <div>
+                <div class="tl-title">Birth Preparation</div>
+                <p class="tl-body">Breathing and movement techniques for labour. Pelvic floor yoga for easier birth. Managing late-pregnancy discomfort and anxiety. Postnatal care planning — so you're not starting from zero after delivery.</p>
+              </div>
+            </div>
+          </div>
+          <div class="workshop-includes">
+            <div class="wi"><span class="wi-check">✓</span>Trimester-safe yoga sequence (certified prenatal practice)</div>
+            <div class="wi"><span class="wi-check">✓</span>Personalised prenatal nutrition plan (iron, folate, DHA, calcium)</div>
+            <div class="wi"><span class="wi-check">✓</span>Gestational diabetes prevention protocol</div>
+            <div class="wi"><span class="wi-check">✓</span>Gestational weight management — without restriction</div>
+            <div class="wi"><span class="wi-check">✓</span>Labour breathing and pelvic floor yoga preparation</div>
+            <div class="wi"><span class="wi-check">✓</span>Weekly group + monthly 1:1 sessions with Dr. Raga</div>
+          </div>
+          <a href="contact.html?program=prenatal" class="btn-primary gold">Enrol in Prenatal Wellness</a>
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <div class="workshop-visual">
+            <img src="uploads/IMG_1214-e18cb6c7.jpg" alt="Prenatal Wellness Yoga">
+            <div class="workshop-badge">Prenatal Care</div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.5rem;background:var(--white);border-radius:4px;border-left:3px solid var(--gold);">
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.4rem;">Who is this for?</div>
+            <p style="font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid);">Any pregnant woman — from confirmed pregnancy through the third trimester — who wants personalised nutrition science, safe yoga, and community support. Especially valuable for women with PCOS, gestational diabetes risk, previous pregnancy loss, or thyroid conditions.</p>
+          </div>
+          <div style="margin-top:1rem;padding:1.25rem 1.5rem;background:rgba(201,146,42,0.07);border-radius:4px;border:1px solid rgba(201,146,42,0.2);">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">Safety First</div>
+            <p style="font-size:0.8rem;font-weight:300;line-height:1.6;color:var(--text-mid);">Every yoga session, nutrition protocol, and supplement recommendation in this program is reviewed for pregnancy safety. We work alongside your OB-GYN — not instead of them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POSTNATAL RECOVERY -->
+<section style="background:var(--white);" id="postnatal">
+  <div class="section-inner">
+    <div class="workshop-block">
+      <div class="workshop-grid reverse">
+        <div class="fade-in">
+          <div class="workshop-header">
+            <div class="workshop-num">06</div>
+            <div class="workshop-name">Postnatal<br><em>Recovery Program</em></div>
+            <div class="workshop-tag">3-Month Flagship Program · Postpartum Care</div>
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;flex-wrap:wrap;">
+              <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--gold);">From ₹15,000</div>
+              <div style="font-size:0.7rem;font-weight:300;color:var(--text-light);">· 3 months · Postnatal Yoga + Nutrition + Community + Coaching</div>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.5rem;background:rgba(74,16,66,0.06);border:1px solid var(--border);border-radius:50px;padding:0.25rem 0.75rem;">
+              <span style="width:6px;height:6px;background:var(--plum);border-radius:50%;display:inline-block;"></span>
+              <span style="font-size:0.68rem;font-weight:500;color:var(--text-mid);letter-spacing:0.08em;">20 spots open — August batch</span>
+            </div>
+          </div>
+          <p class="workshop-desc">You grew a human being. Your body did something extraordinary — and now it deserves extraordinary care. Postpartum hormone crashes, hair loss, stubborn weight, exhaustion, and mood changes are not "just motherhood." They are real, treatable, and deeply misunderstood. This program gives you the science-backed recovery your body earned.</p>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="tl-month">Month 1</div>
+              <div>
+                <div class="tl-title">Rest, Repair &amp; Hormone Reset</div>
+                <p class="tl-body">Gentle postnatal yoga (week 6+ safe). Anti-inflammatory, hormone-supportive nutrition. Addressing the postpartum estrogen and progesterone crash. Sleep-optimised feeding strategies. Baby blues vs. postpartum depression — recognising and responding.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 2</div>
+              <div>
+                <div class="tl-title">Rebuilding &amp; Energy Recovery</div>
+                <p class="tl-body">Progressive core restoration (safe diastasis recti protocol). Postnatal nutrition for energy and — if breastfeeding — optimal milk production. Addressing postpartum thyroid dysfunction and hair loss. Iron and micronutrient replenishment protocol.</p>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-month">Month 3</div>
+              <div>
+                <div class="tl-title">Thriving &amp; Reclaiming Yourself</div>
+                <p class="tl-body">Sustainable weight management — when your body is ready, not before. Strength restoration yoga. Body image healing and identity work. Community sisterhood of mothers on the same journey. Building a sustainable wellbeing rhythm around new motherhood.</p>
+              </div>
+            </div>
+          </div>
+          <div class="workshop-includes">
+            <div class="wi"><span class="wi-check">✓</span>Safe postnatal yoga progression (week 6 onwards, diastasis-safe)</div>
+            <div class="wi"><span class="wi-check">✓</span>Breastfeeding-optimised or formula-stage nutrition plan</div>
+            <div class="wi"><span class="wi-check">✓</span>Postpartum hormone, thyroid &amp; iron recovery protocol</div>
+            <div class="wi"><span class="wi-check">✓</span>Hair loss and fatigue reversal through targeted nutrition</div>
+            <div class="wi"><span class="wi-check">✓</span>Postpartum mental wellbeing support (baby blues / PPD guidance)</div>
+            <div class="wi"><span class="wi-check">✓</span>Weekly group + monthly 1:1 sessions with Dr. Raga</div>
+          </div>
+          <a href="contact.html?program=postnatal" class="btn-primary gold">Enrol in Postnatal Recovery</a>
+        </div>
+        <div class="fade-in fade-in-delay-2">
+          <div class="workshop-visual">
+            <img src="uploads/IMG_0695-9f59af05.jpg" alt="Postnatal Recovery Yoga">
+            <div class="workshop-badge">Postnatal Recovery</div>
+          </div>
+          <div style="margin-top:1.5rem;padding:1.5rem;background:var(--cream);border-radius:4px;border-left:3px solid var(--gold);">
+            <div style="font-family:var(--serif);font-size:1rem;color:var(--plum);margin-bottom:0.4rem;">Who is this for?</div>
+            <p style="font-size:0.82rem;font-weight:300;line-height:1.65;color:var(--text-mid);">New mothers from 6 weeks to 18 months postpartum. Ideal for women experiencing postpartum weight retention, fatigue, hair loss, hormonal mood changes, or simply feeling disconnected from their own body after birth.</p>
+          </div>
+          <div style="margin-top:1rem;padding:1.25rem 1.5rem;background:rgba(201,146,42,0.07);border-radius:4px;border:1px solid rgba(201,146,42,0.2);">
+            <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">A note from Dr. Raga</div>
+            <p style="font-size:0.8rem;font-weight:300;line-height:1.6;color:var(--text-mid);font-style:italic;">"The postnatal period is one of the most hormonally turbulent times in a woman's life — and one of the most under-supported. You are not 'bouncing back.' You are healing forward."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- BATCH CALENDAR -->
-<section style="background:var(--white);padding:5rem 0;" id="batches">
+<section style="background:var(--white);padding:4rem 0;" id="batches">
   <div class="section-inner">
     <div class="fade-in" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem;">
       <div>
         <span class="eyebrow">Upcoming Batches</span>
         <h2 class="section-title" style="margin-bottom:0.25rem;">Enrol in the<br><em>Next Available Batch</em></h2>
-        <p style="font-size:0.85rem;font-weight:300;color:var(--text-mid);">Each batch is limited to 12 women for personalised attention. Spots fill quickly.</p>
+        <p style="font-size:0.85rem;font-weight:300;color:var(--text-mid);">Each batch is limited to 20 women for personalised attention. Spots fill quickly.</p>
       </div>
-      <a href="contact.html" class="btn-primary gold">Book Consultation First — ₹1000</a>
+      <a href="contact.html" class="btn-primary gold">Book Consultation First — ₹1,000</a>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;" class="fade-in prog-compare-grid">
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;" class="fade-in">
 
       <!-- PCOS Batch -->
       <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">
@@ -449,8 +721,8 @@
                 <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 5 May · Ends 5 August · 3 months</div>
               </div>
               <div style="text-align:right;">
-                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">8 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
-                <div style="font-size:0.68rem;color:var(--text-light);">of 12 total</div>
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">14 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--text-light);">of 20 total</div>
               </div>
             </div>
             <div style="padding:1.25rem 1.75rem;">
@@ -513,8 +785,8 @@
                 <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 2 June · Ends 2 September · 3 months</div>
               </div>
               <div style="text-align:right;">
-                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">10 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
-                <div style="font-size:0.68rem;color:var(--text-light);">of 12 total</div>
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">16 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--text-light);">of 20 total</div>
               </div>
             </div>
             <div style="padding:1.25rem 1.75rem;">
@@ -528,6 +800,70 @@
                 <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">WhatsApp community</span>
               </div>
               <a href="contact.html?program=metabolic" class="btn-primary" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prenatal Wellness Batch -->
+      <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:4px 1fr;height:100%;">
+          <div style="background:var(--plum);"></div>
+          <div>
+            <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Prenatal Wellness Program</div>
+                <div style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--plum);">July 2026 Batch</div>
+                <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 7 July · Ends 7 October · 3 months</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">18 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--text-light);">of 20 total</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem 1.75rem;">
+              <div style="background:var(--border);border-radius:50px;height:5px;margin-bottom:1rem;overflow:hidden;">
+                <div style="width:10%;height:100%;background:var(--gold);border-radius:50px;"></div>
+              </div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Prenatal yoga</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Nutrition plan</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">1:1 monthly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Mums community</span>
+              </div>
+              <a href="contact.html?program=prenatal" class="btn-primary" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Postnatal Recovery Batch -->
+      <div style="background:var(--cream);border-radius:6px;border:1px solid var(--border);overflow:hidden;">
+        <div style="display:grid;grid-template-columns:4px 1fr;height:100%;">
+          <div style="background:var(--gold);"></div>
+          <div>
+            <div style="padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:0.63rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.25rem;">Postnatal Recovery Program</div>
+                <div style="font-family:var(--serif);font-size:1.3rem;font-weight:300;color:var(--plum);">August 2026 Batch</div>
+                <div style="font-size:0.78rem;font-weight:300;color:var(--text-light);margin-top:0.15rem;">Starts 4 Aug · Ends 4 November · 3 months</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:var(--serif);font-size:1.5rem;font-weight:300;color:var(--plum);">20 <span style="font-size:0.85rem;font-weight:300;color:var(--text-light);">spots left</span></div>
+                <div style="font-size:0.68rem;color:var(--text-light);">of 20 total · Open</div>
+              </div>
+            </div>
+            <div style="padding:1.25rem 1.75rem;">
+              <div style="background:var(--border);border-radius:50px;height:5px;margin-bottom:1rem;overflow:hidden;">
+                <div style="width:5%;height:100%;background:var(--gold);border-radius:50px;"></div>
+              </div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Postnatal yoga</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">Recovery nutrition</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">1:1 monthly</span>
+                <span style="font-size:0.72rem;padding:0.2rem 0.6rem;background:rgba(74,16,66,0.06);border-radius:50px;color:var(--text-mid);font-weight:300;">New mums community</span>
+              </div>
+              <a href="contact.html?program=postnatal" class="btn-primary gold" style="display:inline-block;font-size:0.78rem;padding:0.7rem 1.5rem;">Reserve My Spot →</a>
             </div>
           </div>
         </div>
@@ -574,7 +910,7 @@
         <p class="section-body light">Prefer individual sessions? Book a standalone 1:1 consultation for personalised diet guidance, functional wellness coaching, or a specific health concern. No 3-month commitment required.</p>
       </div>
       <div style="text-align:center;flex-shrink:0;">
-        <div style="font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--gold-light);line-height:1;">₹1000</div>
+        <div style="font-family:var(--serif);font-size:3rem;font-weight:300;color:var(--gold-light);line-height:1;">₹1,000</div>
         <div style="font-size:0.72rem;color:rgba(255,253,249,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1.25rem;">per session</div>
         <a href="contact.html?program=counselling" class="btn-primary gold">Book a 1:1 Session</a>
       </div>
@@ -596,7 +932,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">What is the batch size for each workshop? <span class="faq-icon">+</span></div>
-        <div class="faq-a">Batches are kept intentionally small (8–15 women) to ensure Dr. Raga Deepthi can give personal attention to each participant. This is not a mass programme — it's a genuine community.</div>
+        <div class="faq-a">Each batch accommodates up to 20 women. This is intentional — large enough to create a rich community sisterhood, small enough for Dr. Raga to give meaningful personal attention. This is not a mass programme — it's a curated cohort.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">Do I need prior yoga experience? <span class="faq-icon">+</span></div>
@@ -604,11 +940,15 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" onclick="toggleFaq(this)">What does the consultation fee cover? <span class="faq-icon">+</span></div>
-        <div class="faq-a">The ₹1000 consultation fee covers your initial 1:1 session with Dr. Raga Deepthi where she reviews your health history, goals, and recommends the most appropriate program. Workshop fees are separate and discussed after the initial consultation.</div>
+        <div class="faq-a">The ₹1,000 consultation fee covers your initial 1:1 session with Dr. Raga Deepthi where she reviews your health history, goals, and recommends the most appropriate program. Workshop fees are separate and discussed after the initial consultation.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Can I join if I'm pregnant or postpartum? <span class="faq-icon">+</span></div>
-        <div class="faq-a">Yes — the Obesity Workshop has a dedicated pregnancy and postpartum track. Dr. Raga Deepthi has specific expertise in gestational weight management, postpartum recovery, and postnatal yoga.</div>
+        <div class="faq-q" onclick="toggleFaq(this)">Are the Prenatal and Postnatal programs safe? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely. Every yoga sequence, nutrition protocol, and supplement recommendation in both programs is specifically designed for pregnancy and postpartum safety. We work alongside your OB-GYN — never as a replacement. Dr. Raga Deepthi has specific expertise in prenatal nutrition, gestational diabetes prevention, and postnatal hormone recovery.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">When can I start the Postnatal program after delivery? <span class="faq-icon">+</span></div>
+        <div class="faq-a">We recommend starting from 6 weeks postpartum (or as advised by your doctor). The program is suitable anytime up to 18 months postpartum — it's never "too late" to heal and recover. Nutrition and community support begin immediately; the yoga practice is introduced progressively at your own pace.</div>
       </div>
     </div>
   </div>
@@ -632,7 +972,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 <div id="fhw-float"></div>
 <div id="fhw-footer"></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=10"></script>
 <script>initSite('programs');</script>
 </body>
 </html>

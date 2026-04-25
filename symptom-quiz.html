@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" href="uploads/logo-1776614290085.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#4a1042">
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=10">
 <style>
 .quiz-wrap {
   min-height: calc(100vh - 68px); margin-top: 68px;
@@ -291,7 +291,7 @@
 </div>
 
 <div id="fhw-footer"></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=10"></script>
 <script>
 initSite('quiz');
 
@@ -322,7 +322,7 @@ const RESULTS = {
     body: 'Dr. Raga Deepthi spent 11 years in Germany — she knows what Vitamin D crashes, Western food, visa stress, and isolation do to an Indian woman\'s body. This program is 100% online, built around your timezone, your local supermarkets, and the specific ways relocation disrupts Indian female physiology.',
     actions: [
       { label: 'Explore Women Abroad', href: 'abroad.html', primary: true },
-      { label: 'Book a ₹1000 Consultation', href: 'contact.html', primary: false }
+      { label: 'Book a ₹1,000 Consultation', href: 'contact.html', primary: false }
     ]
   },
   pcos: {
@@ -331,7 +331,7 @@ const RESULTS = {
     body: 'A 3-month program combining personalised yoga for hormonal balance, anti-inflammatory Indian nutrition, and gut microbiome restoration. Women with PCOS have regulated their periods, lost significant weight, and conceived naturally after completing this program.',
     actions: [
       { label: 'Explore PCOS Workshop', href: 'programs.html#pcos', primary: true },
-      { label: 'Book a ₹1000 Consultation', href: 'contact.html', primary: false }
+      { label: 'Book a ₹1,000 Consultation', href: 'contact.html', primary: false }
     ]
   },
   fertility: {
@@ -349,7 +349,7 @@ const RESULTS = {
     body: 'Standard diets fail women because they don\'t address the three real drivers: hormonal fat, insulin resistance, and gut dysbiosis. This program addresses all three simultaneously using PhD-level metabolic science applied through personalised nutrition and therapeutic yoga.',
     actions: [
       { label: "Explore Obesity Workshop", href: 'programs.html#obesity', primary: true },
-      { label: 'Book a ₹1000 Consultation', href: 'contact.html', primary: false }
+      { label: 'Book a ₹1,000 Consultation', href: 'contact.html', primary: false }
     ]
   },
   fatigue: {
@@ -366,7 +366,7 @@ const RESULTS = {
     headline: 'Personalised 1:1 support is right for your stage.',
     body: 'Pregnancy and postpartum nutrition is deeply individual — your trimester, health history, cultural food practices, and micronutrient needs are unique to you. Dr. Raga offers personalised 1:1 consultations that build a plan specific to you, not a generic pregnancy template.',
     actions: [
-      { label: 'Book a ₹1000 Consultation', href: 'contact.html', primary: true },
+      { label: 'Book a ₹1,000 Consultation', href: 'contact.html', primary: true },
       { label: 'Ask Dr. Raga First', href: 'ask.html', primary: false }
     ]
   },
@@ -376,7 +376,7 @@ const RESULTS = {
     body: 'Dr. Raga personally reads and responds to every question within 48 hours — in English or Telugu. Describe what you\'re experiencing and she\'ll tell you exactly what she thinks and what she\'d recommend. Free, confidential, and no commitment required.',
     actions: [
       { label: 'Ask Your Free Question', href: 'ask.html', primary: true },
-      { label: 'Book a ₹1000 Consultation', href: 'contact.html', primary: false }
+      { label: 'Book a ₹1,000 Consultation', href: 'contact.html', primary: false }
     ]
   }
 };
@@ -413,6 +413,7 @@ function updateHead(step) {
 
 function showResult() {
   const concern = answers.s1;
+  const duration = answers.s2;
   const location = answers.s4;
   let key = (location === 'abroad' || location === 'moving') ? 'abroad' : concern;
   const r = RESULTS[key] || RESULTS.unsure;
@@ -420,11 +421,19 @@ function showResult() {
   document.getElementById('quiz-head').style.display = 'none';
   document.getElementById('step-4').style.display = 'none';
 
+  // Empathy message for long-sufferers
+  let empathyHtml = '';
+  if (duration === 'chronic') {
+    empathyHtml = `<div style="background:rgba(201,146,42,0.08);border:1px solid rgba(201,146,42,0.2);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:0.85rem;color:var(--text-mid);line-height:1.7;"><strong style="color:var(--plum);">You've been searching for 1–3 years.</strong> That is not a personal failure — it is a system failure. Most conventional medicine is not designed to find these root causes. Dr. Raga specialises in exactly the cases that "normal" medicine missed.</div>`;
+  } else if (duration === 'lifelong') {
+    empathyHtml = `<div style="background:rgba(201,146,42,0.08);border:1px solid rgba(201,146,42,0.2);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:0.85rem;color:var(--text-mid);line-height:1.7;"><strong style="color:var(--plum);">Over 3 years of searching.</strong> This has become your "normal" — but it doesn't have to be. Women who felt this way for years have found their root cause and healed within months. You are not broken. You just haven't had the right science applied to your specific body yet.</div>`;
+  }
+
   document.getElementById('qr-badge').textContent = r.badge;
   document.getElementById('qr-icon-wrap').innerHTML = RESULT_ICONS[r.icon] || RESULT_ICONS.consult;
   document.getElementById('qr-icon-wrap').querySelector('svg').style.cssText = 'width:26px;height:26px;stroke:var(--plum);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;';
   document.getElementById('qr-headline').textContent = r.headline;
-  document.getElementById('qr-body').textContent = r.body;
+  document.getElementById('qr-body').innerHTML = empathyHtml + `<p style="font-size:0.9rem;font-weight:300;line-height:1.9;color:var(--text-mid);">${r.body}</p>`;
   document.getElementById('qr-actions').innerHTML = r.actions.map(a =>
     `<a href="${a.href}" class="${a.primary ? 'btn-primary gold' : 'btn-ghost'}" style="${!a.primary ? 'color:var(--plum);border-color:var(--border);' : ''}">${a.label} →</a>`
   ).join('');

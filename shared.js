@@ -3,18 +3,77 @@ const WHATSAPP_NUM = '918008383699';
 
 function initSite(activePage) {
   // NAV — inject at top of body
+  const _hc  = ['programs','quiz','health','courses','ask'].includes(activePage);
+  const _org = ['corporate','platform'].includes(activePage);
   document.body.insertAdjacentHTML('afterbegin', `
     <nav class="site-nav" id="site-nav">
       <div class="nav-logo"><a href="index.html"><img src="uploads/logo-1776614290085.png" alt="For Her Wellbeing"></a></div>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" ${activePage==='home'?'class="active"':''}>Home</a></li>
-        <li><a href="programs.html" ${activePage==='programs'?'class="active"':''}>Programs</a></li>
-        <li><a href="symptom-quiz.html" ${activePage==='quiz'?'class="active"':''} style="color:var(--gold);font-weight:500;">Find My Program</a></li>
-        <li><a href="abroad.html" ${activePage==='abroad'?'class="active"':''}>Women Abroad</a></li>
-        <li><a href="courses.html" ${activePage==='courses'?'class="active"':''}>Courses</a></li>
-        <li><a href="about.html" ${activePage==='about'?'class="active"':''}>About Dr. Raga</a></li>
-        <li><a href="ask.html" ${activePage==='ask'?'class="active"':''}>Ask Dr. Raga</a></li>
-        <li><a href="contact.html" class="nav-cta ${activePage==='contact'?'active':''}">Book — ₹1000</a></li>
+
+        <!-- Health Concerns — mega dropdown -->
+        <li class="nav-item">
+          <a href="programs.html" ${_hc?'class="active"':''}>
+            Health Concerns
+            <svg class="nav-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,3 5,7 8,3"/></svg>
+          </a>
+          <div class="nav-dropdown nav-dropdown-mega">
+            <div class="nav-dropdown-col">
+              <span class="nav-dropdown-label">Hormonal &amp; Metabolic</span>
+              <a href="programs.html#pcos" ${activePage==='programs'?'class="active"':''}>PCOS &amp; Hormonal Health</a>
+              <a href="programs.html#obesity">Weight &amp; Metabolic Reset</a>
+              <a href="programs.html#metabolic">Gut Health &amp; Nutrition</a>
+              <a href="programs.html#diabetes">Diabetes &amp; Blood Sugar</a>
+              <a href="womens-health.html#thyroid">Fatigue &amp; Thyroid Support</a>
+              <div class="nav-dropdown-rule"></div>
+              <span class="nav-dropdown-label">Pregnancy &amp; Motherhood</span>
+              <a href="programs.html#prenatal">Prenatal Wellness</a>
+              <a href="programs.html#postnatal">Postnatal Recovery</a>
+            </div>
+            <div class="nav-dropdown-col">
+              <span class="nav-dropdown-label">Find Your Path</span>
+              <a href="symptom-quiz.html" class="nav-featured ${activePage==='quiz'?'active':''}">Take the Symptom Quiz →</a>
+              <a href="programs.html">View All Programs &amp; Pricing</a>
+              <div class="nav-dropdown-rule"></div>
+              <span class="nav-dropdown-label">Learn &amp; Explore</span>
+              <a href="courses.html" ${activePage==='courses'?'class="active"':''}>Online Courses</a>
+              <a href="ask.html" ${activePage==='ask'?'class="active"':''}>Ask Dr. Raga — Free</a>
+              <a href="womens-health.html" ${activePage==='health'?'class="active"':''}>Health Library</a>
+              <a href="platform.html#supplements">Supplement Guide</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- Women Abroad — standalone, high visibility -->
+        <li class="nav-item">
+          <a href="abroad.html" ${activePage==='abroad'?'class="active"':''}>Women Abroad</a>
+        </li>
+
+        <!-- Dr. Raga — trust anchor -->
+        <li class="nav-item">
+          <a href="about.html" ${activePage==='about'?'class="active"':''}>Dr. Raga</a>
+        </li>
+
+        <!-- For Organisations — institutional -->
+        <li class="nav-item nav-item-end">
+          <a href="corporate.html" ${_org?'class="active"':''}>
+            For Organisations
+            <svg class="nav-chevron" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2"><polyline points="2,3 5,7 8,3"/></svg>
+          </a>
+          <div class="nav-dropdown">
+            <span class="nav-dropdown-label">Work With Us</span>
+            <a href="corporate.html" ${activePage==='corporate'?'class="active"':''}>Corporate Wellness</a>
+            <a href="platform.html" ${activePage==='platform'?'class="active"':''}>Platform &amp; Partnerships</a>
+            <div class="nav-dropdown-rule"></div>
+            <span class="nav-dropdown-label">Our Vision</span>
+            <a href="platform.html#vision">The Bigger Picture</a>
+          </div>
+        </li>
+
+        <!-- CTA -->
+        <li class="nav-item">
+          <a href="contact.html" class="nav-cta ${activePage==='contact'?'active':''}">Book Consultation — ₹1,000</a>
+        </li>
+
       </ul>
       <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMobileNav()">
         <span></span><span></span><span></span>
@@ -33,7 +92,7 @@ function initSite(activePage) {
         </a>
         <a href="contact.html" class="float-btn float-book" aria-label="Book a consultation">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span>Book — ₹1000</span>
+          <span>Book — ₹1,000</span>
         </a>
       </div>`;
   }
@@ -57,10 +116,13 @@ function initSite(activePage) {
             <div>
               <div class="footer-col-title">Programs</div>
               <ul class="footer-col-links">
-                <li><a href="programs.html#pcos">PCOS Workshop</a></li>
-                <li><a href="programs.html#obesity">Obesity Workshop</a></li>
+                <li><a href="programs.html#pcos">PCOS Healing</a></li>
+                <li><a href="programs.html#obesity">Weight &amp; Metabolic</a></li>
                 <li><a href="programs.html#metabolic">Metabolic Reset</a></li>
-                <li><a href="programs.html#counselling">Diet Counselling</a></li>
+                <li><a href="programs.html#diabetes">Diabetes &amp; Blood Sugar</a></li>
+                <li><a href="programs.html#prenatal">Prenatal Wellness</a></li>
+                <li><a href="programs.html#postnatal">Postnatal Recovery</a></li>
+                <li><a href="programs.html#counselling">1:1 Counselling</a></li>
               </ul>
             </div>
             <div>
@@ -77,7 +139,7 @@ function initSite(activePage) {
             <div>
               <div class="footer-col-title">Contact</div>
               <ul class="footer-col-links">
-                <li><a href="contact.html">Book — ₹1000</a></li>
+                <li><a href="contact.html">Book — ₹1,000</a></li>
                 <li><a href="mailto:edigaragadeepthi@gmail.com">Email Us</a></li>
                 <li><a href="https://wa.me/${WHATSAPP_NUM}" target="_blank">WhatsApp</a></li>
                 <li><a href="about.html#partner">Partner With Us</a></li>
@@ -85,7 +147,7 @@ function initSite(activePage) {
             </div>
           </div>
           <div class="footer-bottom">
-            <div class="footer-copy">© 2026 For Her Wellbeing. All rights reserved.</div>
+            <div class="footer-copy">© 2026 For Her Wellbeing. All rights reserved. · <a href="privacy-policy.html" style="color:inherit;text-decoration:underline;text-underline-offset:3px;opacity:0.7;">Privacy Policy</a></div>
             <div class="footer-disclaimer">Educational content only — not a substitute for professional medical advice. Always consult your healthcare provider.</div>
           </div>
         </div>
@@ -122,13 +184,32 @@ function initSite(activePage) {
 }
 
 function toggleMobileNav() {
-  document.getElementById('nav-links').classList.toggle('mobile-open');
+  const nl = document.getElementById('nav-links');
+  nl.classList.toggle('mobile-open');
+  if (!nl.classList.contains('mobile-open')) {
+    nl.querySelectorAll('.nav-item.mobile-expanded').forEach(i => i.classList.remove('mobile-expanded'));
+  }
 }
 document.addEventListener('click', function(e) {
   const nav = document.getElementById('nav-links');
   const burger = document.querySelector('.nav-hamburger');
-  if (nav && nav.classList.contains('mobile-open') && !nav.contains(e.target) && e.target !== burger && !burger.contains(e.target)) {
+  if (!nav) return;
+  // close when clicking outside
+  if (nav.classList.contains('mobile-open') && !nav.contains(e.target) && !burger.contains(e.target)) {
     nav.classList.remove('mobile-open');
+    nav.querySelectorAll('.nav-item.mobile-expanded').forEach(i => i.classList.remove('mobile-expanded'));
+    return;
+  }
+  // mobile accordion — tap parent link to expand/collapse
+  if (nav.classList.contains('mobile-open')) {
+    const parentLink = e.target.closest('.nav-item > a');
+    if (parentLink) {
+      const item = parentLink.closest('.nav-item');
+      if (item && item.querySelector('.nav-dropdown')) {
+        e.preventDefault();
+        item.classList.toggle('mobile-expanded');
+      }
+    }
   }
 });
 
@@ -138,8 +219,33 @@ s.textContent = `
   #nav-links.mobile-open {
     display: flex !important; flex-direction: column; position: fixed;
     top: 68px; left: 0; right: 0; background: var(--white);
-    padding: 1.5rem 2rem; border-bottom: 1px solid var(--border);
-    box-shadow: 0 8px 32px rgba(74,16,66,0.1); gap: 1rem; z-index: 99;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 32px rgba(74,16,66,0.12);
+    gap: 0; z-index: 99;
+    max-height: calc(100vh - 68px); overflow-y: auto;
+  }
+  #nav-links.mobile-open .nav-item > a {
+    padding: 0.95rem 2rem; height: auto;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem; justify-content: space-between;
+  }
+  #nav-links.mobile-open .nav-item > a .nav-chevron { width: 10px; height: 10px; opacity: 0.5; }
+  #nav-links.mobile-open .nav-item.mobile-expanded > a .nav-chevron { transform: rotate(180deg); opacity: 1; }
+  #nav-links.mobile-open .nav-dropdown {
+    position: static; opacity: 1; visibility: visible; pointer-events: all;
+    transform: none; box-shadow: none; border: none; border-top: none;
+    min-width: 0; background: rgba(74,16,66,0.025);
+    display: none; padding: 0.5rem 0 0.75rem;
+  }
+  #nav-links.mobile-open .nav-item.mobile-expanded .nav-dropdown { display: block; }
+  #nav-links.mobile-open .nav-dropdown-mega { display: block; }
+  #nav-links.mobile-open .nav-dropdown-col + .nav-dropdown-col { border-left: none; border-top: 1px solid var(--border); }
+  #nav-links.mobile-open .nav-dropdown a { padding: 0.6rem 2.75rem; border-left: none; }
+  #nav-links.mobile-open .nav-dropdown-label { padding-left: 2rem; }
+  #nav-links.mobile-open .nav-dropdown-rule { margin: 0.5rem 2rem; }
+  #nav-links.mobile-open .nav-cta {
+    margin: 1rem 2rem 1.5rem; display: block; text-align: center;
+    padding: 0.9rem 1.5rem; border-radius: 3px; width: calc(100% - 4rem);
   }
   #fhw-cookie {
     position: fixed; bottom: 0; left: 0; right: 0; z-index: 998;
@@ -166,7 +272,7 @@ function initCookieConsent() {
   const banner = document.createElement('div');
   banner.id = 'fhw-cookie';
   banner.innerHTML = `<div class="fhw-cookie-inner">
-    <p class="fhw-cookie-text"><strong>We use cookies</strong> to remember your preferences and improve your experience. We never sell your data.</p>
+    <p class="fhw-cookie-text"><strong>We use cookies</strong> to remember your preferences and improve your experience. We never sell your data. <a href="privacy-policy.html" style="color:rgba(255,253,249,0.7);text-decoration:underline;text-underline-offset:2px;">Privacy Policy</a></p>
     <div class="fhw-cookie-btns">
       <button class="fhw-cookie-accept" onclick="fhwCookieAccept()">Accept</button>
       <button class="fhw-cookie-decline" onclick="fhwCookieDecline()">Essential only</button>

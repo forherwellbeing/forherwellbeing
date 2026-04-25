@@ -32,9 +32,9 @@
   "worksFor": {"@type": "Organization", "name": "For Her Wellbeing", "url": "https://forherwellbeing.com"}
 }
 </script>
-<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="shared.css?v=10">
 <style>
-.about-hero-grid { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:5rem 0; }
+.about-hero-grid { display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;padding:3.5rem 0; }
 .about-hero-img { border-radius:4px;overflow:hidden; }
 .about-hero-img img { width:100%;height:560px;object-fit:cover;object-position:center top;display:block; }
 .cred-list { display:flex;flex-direction:column;gap:0.75rem;margin:1.75rem 0 2rem; }
@@ -67,12 +67,10 @@
   .phil-grid{grid-template-columns:1fr 1fr;}
   .gallery-grid{grid-template-columns:1fr 1fr;}
   .gallery-img.tall{aspect-ratio:4/3;grid-row:span 1;}
-  .about-hero-grid img{max-height:360px;width:100%;object-fit:cover;}
 }
 @media(max-width:600px){
   .journey-steps,.phil-grid{grid-template-columns:1fr;}
   .gallery-grid{grid-template-columns:1fr;}
-  .partner-benefit{grid-template-columns:3px 1fr;gap:1rem;}
 }
 </style>
 </head>
@@ -104,6 +102,10 @@
           <div class="cred-item">MSc in Animal Biotechnology — Hyderabad Central University</div>
           <div class="cred-item">Yoga Certified — Rishikesh &amp; Svyasa University, Bangalore</div>
           <div class="cred-item">Specialist in PCOS, Obesity, Metabolic Health & Women's Nutrition</div>
+        </div>
+        <div style="background:var(--cream);border-left:3px solid var(--gold);padding:0.9rem 1.1rem;border-radius:0 4px 4px 0;margin-bottom:1.75rem;font-size:0.8rem;font-weight:300;color:var(--text-mid);line-height:1.7;">
+          <strong style="display:block;color:var(--plum);font-weight:500;margin-bottom:0.25rem;">What is Pediatric Metabolism?</strong>
+          It is the science of how the body processes hormones, nutrients and energy at the cellular level — starting from birth through adulthood. These are the exact same mechanisms driving PCOS, hormonal weight gain, insulin resistance and fatigue in adult women. Dr. Raga applies this cellular-level science to women's health — which is why her approach goes deeper than standard nutrition or gynaecology.
         </div>
         <a href="contact.html" class="btn-primary">Book a Consultation</a>
       </div>
@@ -207,38 +209,91 @@
   </div>
 </section>
 
-<!-- PARTNER -->
-<section style="background:var(--blush);" class="section-pad" id="partner">
-  <div class="section-inner">
-    <div class="partner-grid">
-      <div class="fade-in">
-        <span class="eyebrow">Collaborate</span>
-        <h2 class="section-title">Partner With Us:<br><em>Expanding Women's Health</em></h2>
-        <p class="section-body" style="margin-bottom:2rem;">We invite passionate healthcare professionals, hospitals, wellness organisations, and corporates to collaborate — extending science-backed holistic wellness to more women across India and globally.</p>
-        <div class="partner-benefit">
-          <div class="pb-line"></div>
-          <div><div class="pb-title">Amplify Your Impact</div><p class="pb-body">Reach more women through evidence-based wellness solutions — multiplying your ability to make a meaningful difference.</p></div>
-        </div>
-        <div class="partner-benefit">
-          <div class="pb-line"></div>
-          <div><div class="pb-title">Co-develop Programs</div><p class="pb-body">Combine expertise to create cutting-edge programs addressing corporate women's health, prenatal care, or community wellness.</p></div>
-        </div>
-        <div class="partner-benefit">
-          <div class="pb-line"></div>
-          <div><div class="pb-title">Shared Mission</div><p class="pb-body">Unite with a community dedicated to holistic health grounded in scientific understanding — building the future of women's wellness together.</p></div>
-        </div>
-        <a href="contact.html?program=partnership" class="btn-primary">Connect to Collaborate</a>
+<!-- HONEST ANSWERS / TRUST FAQ -->
+<section style="background:var(--cream);" class="section-pad">
+  <div class="section-inner" style="max-width:760px;">
+    <div class="fade-in" style="text-align:center;margin-bottom:3rem;">
+      <span class="eyebrow">Before You Trust Anyone With Your Health</span>
+      <h2 class="section-title">Honest Answers<br><em>To Real Questions</em></h2>
+    </div>
+    <div class="fade-in" style="display:flex;flex-direction:column;gap:0;">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaqAbout(this)" aria-expanded="false">Is Dr. Raga an MBBS / medical doctor?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Dr. Raga is not an MBBS. She holds a <strong>PhD in Metabolic Science from Heidelberg University, Germany</strong> — one of Europe's leading research universities — plus an MSc in Biotechnology and formal yoga therapy certifications. Her work is not about prescribing drugs or replacing your gynaecologist. It is about understanding <em>why</em> your body is behaving the way it is, and using evidence-based nutrition, yoga, and lifestyle science to correct it at the root. For many women, this is the piece that conventional medicine never addresses.</div>
       </div>
-      <div class="fade-in fade-in-delay-2">
-        <img src="uploads/IMG_6659.jpg" alt="Dr. Raga presenting" style="width:100%;border-radius:4px;object-fit:cover;height:480px;">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaqAbout(this)" aria-expanded="false">Can Dr. Raga treat my PCOS / thyroid / hormonal issue?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Dr. Raga does not diagnose or prescribe — she investigates and corrects root causes through metabolic science, nutrition and yoga therapy. PCOS, hormonal weight gain, thyroid dysfunction and metabolic issues respond strongly to these approaches. Many clients see measurable improvements within 6–8 weeks. If you are on medication, Dr. Raga works <em>alongside</em> your treating doctor — not in place of them.</div>
       </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaqAbout(this)" aria-expanded="false">How is this different from a regular nutritionist or dietician?<span class="faq-icon">+</span></button>
+        <div class="faq-a">A standard dietician gives you a meal plan. Dr. Raga investigates why your metabolism, hormones or gut is not responding to normal diet and exercise — using PhD-level cellular science — and then builds a protocol specific to your biology. The programs combine clinical nutrition, therapeutic yoga, gut microbiome support and community accountability. It is considerably more layered than a weekly diet chart.</div>
+      </div>
+
+      <div class="faq-item" style="border-bottom:none;">
+        <button class="faq-q" onclick="toggleFaqAbout(this)" aria-expanded="false">How many women has Dr. Raga worked with?<span class="faq-icon">+</span></button>
+        <div class="faq-a">Dr. Raga has personally guided women across India, Germany, UK, US and Australia — through group programs, 1:1 consultations, and community sessions that have collectively reached hundreds of women since For Her Wellbeing was founded. Every client receives Dr. Raga's direct attention — she does not delegate your care to assistants.</div>
+      </div>
+
+    </div>
+    <div style="text-align:center;margin-top:3rem;" class="fade-in">
+      <p style="font-size:0.88rem;color:var(--text-mid);font-weight:300;margin-bottom:1.25rem;">Still have questions? Ask Dr. Raga directly — no obligation.</p>
+      <a href="ask.html" class="btn-primary">Ask Dr. Raga a Free Question →</a>
+    </div>
+  </div>
+</section>
+<style>
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q { width:100%; background:none; border:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.25rem 0; font-family:var(--sans); font-size:0.95rem; font-weight:500; color:var(--plum); text-align:left; }
+.faq-q:hover { color:var(--gold); }
+.faq-icon { font-size:1.3rem; font-weight:300; flex-shrink:0; transition:transform 0.25s; line-height:1; }
+.faq-q[aria-expanded="true"] .faq-icon { transform:rotate(45deg); }
+.faq-a { font-size:0.85rem; font-weight:300; color:var(--text-mid); line-height:1.75; max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.4,0,0.2,1), padding 0.35s; padding-bottom:0; }
+.faq-q[aria-expanded="true"] + .faq-a { max-height:300px; padding-bottom:1.25rem; }
+</style>
+<script>
+function toggleFaqAbout(btn) {
+  const isOpen = btn.getAttribute('aria-expanded') === 'true';
+  document.querySelectorAll('.faq-q').forEach(b => b.setAttribute('aria-expanded','false'));
+  if (!isOpen) btn.setAttribute('aria-expanded','true');
+}
+</script>
+
+<!-- CLOSING CTA -->
+<section style="background:var(--plum);" class="section-pad">
+  <div class="section-inner" style="max-width:680px;text-align:center;">
+    <div class="fade-in">
+      <span class="eyebrow eyebrow-light">Ready to Begin?</span>
+      <h2 class="section-title light" style="margin-bottom:1.25rem;">You Deserve Real Answers<br><em>About Your Own Body.</em></h2>
+      <p style="font-size:0.95rem;font-weight:300;color:rgba(255,253,249,0.72);line-height:1.8;margin-bottom:2.5rem;">Start with a ₹1,000 consultation — 45 to 60 minutes with Dr. Raga, where she reviews your complete history, identifies your root cause, and tells you exactly what to do next. No generic advice. No guesswork.</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1rem;">
+        <a href="contact.html" class="btn-primary" style="font-size:0.95rem;padding:1rem 2.5rem;">Book Your Consultation — ₹1,000 →</a>
+        <a href="ask.html" style="font-size:0.82rem;color:rgba(255,253,249,0.5);text-decoration:none;border-bottom:1px solid rgba(255,253,249,0.2);padding-bottom:1px;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,253,249,0.8)'" onmouseout="this.style.color='rgba(255,253,249,0.5)'">Not ready yet? Ask a free question first →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER (for organisations/corporates — kept for B2B visitors) -->
+<section style="background:var(--blush);padding:3rem 0;" id="partner">
+  <div class="section-inner" style="max-width:720px;">
+    <div class="fade-in" style="display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
+      <div>
+        <span class="eyebrow" style="margin-bottom:0.5rem;">For Healthcare Professionals & Corporates</span>
+        <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--plum);margin-bottom:0.5rem;">Partner with For Her Wellbeing</h3>
+        <p style="font-size:0.83rem;font-weight:300;color:var(--text-mid);line-height:1.7;max-width:480px;">We collaborate with hospitals, wellness organisations, and corporates to bring science-backed women's health programs to more women across India and globally.</p>
+      </div>
+      <a href="contact.html?program=partnership" class="btn-secondary" style="white-space:nowrap;flex-shrink:0;">Get in Touch →</a>
     </div>
   </div>
 </section>
 
 <div id="fhw-float"></div>
 <div id="fhw-footer"></div>
-<script src="shared.js"></script>
+<script src="shared.js?v=10"></script>
 <script>initSite('about');</script>
 </body>
 </html>
