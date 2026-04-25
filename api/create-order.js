@@ -9,8 +9,12 @@ module.exports = async function handler(req, res) {
 
   const keyId = process.env.RAZORPAY_KEY_ID;
   const keySecret = process.env.RAZORPAY_KEY_SECRET;
-  const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
 
+  if (!keyId || !keySecret) {
+    return res.status(500).json({ error: 'Razorpay credentials not configured' });
+  }
+
+  const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
   const body = JSON.stringify({
     amount: 100000,
     currency: 'INR',
@@ -31,11 +35,21 @@ module.exports = async function handler(req, res) {
       let data = '';
       response.on('data', chunk => data += chunk);
       response.on('end', () => {
-        res.status(response.statusCode).json(JSON.parse(data));
+        try {
+          const parsed = JSON.parse(data);
+          res.status(response.statusCode).json(parsed);
+        } catch (e) {
+          res.status(500).json({ error: 'Invalid response from Razorpay', raw: data });
+        }
         resolve();
       });
     });
-    request.on('error', (e) => { res.status(500).json({ error: e.message }); resolve(); });
+
+    request.on('error', (e) => {
+      res.status(500).json({ error: e.message });
+      resolve();
+    });
+
     request.write(body);
     request.end();
   });
