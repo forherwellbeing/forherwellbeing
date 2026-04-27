@@ -2,19 +2,11 @@
   "rewrites": [
     {
       "source": "/dashboard",
-      "destination": "/dashboard/dist/index.html"
+      "destination": "/dashboard/index.html"
     },
     {
       "source": "/dashboard/",
-      "destination": "/dashboard/dist/index.html"
-    },
-    {
-      "source": "/dashboard/index.html",
-      "destination": "/dashboard/dist/index.html"
-    },
-    {
-      "source": "/dashboard/assets/:path*",
-      "destination": "/dashboard/dist/assets/:path*"
+      "destination": "/dashboard/index.html"
     }
   ]
 }
