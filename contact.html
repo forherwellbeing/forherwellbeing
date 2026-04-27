@@ -350,34 +350,52 @@ const UPI_ID = '8008383699@ybl';
 const AMOUNT = 1000;
 const WA_NUM = '918008383699';
 const RZP_KEY = 'rzp_test_ShjKweXWG2tCOG';
+const API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
+  ? 'https://forherwellbeing.com'
+  : window.location.origin;
 let _bookingData = {};
 let _orderId = '';
 
 const _supabase = supabase.createClient(
-  'https://ofzslbmftnkrmdepohsb.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9menNsYm1mdG5rcm1kZXBvaHNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxMzk2MjIsImV4cCI6MjA5MDcxNTYyMn0.xgvRhUqGtU4AIlpq0PFqSolyetNmFlIumgoc3U6YNQo'
+  'https://yravazjxlpjjavtyxeea.supabase.co',
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlyYXZhemp4bHBqamF2dHl4ZWVhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcyNjA2MTIsImV4cCI6MjA5MjgzNjYxMn0.xV3-mw0YyLxDRSyQ8dljWyZ5uZx6FAOPHSRUFZ__spI'
 );
 
 async function savePatientToSupabase(paymentId) {
   const { name, email, phone, interest, note } = _bookingData;
   const today = new Date().toISOString().split('T')[0];
 
-  const { error } = await _supabase.from('patients').insert({
-    name:             name,
-    phone:            phone,
-    condition:        interest || 'General Wellness',
-    consult_notes:    note || '',
-    payment_status:   'Paid',
-    amount_paid:      '1000',
-    payment_mode:     'Online / Razorpay',
-    payment_date:     today,
-    patient_status:   'Active',
-    consultation_status: 'Pending',
-    diet_status:      'Pending',
-    consult_notes:    `${note ? note + ' | ' : ''}Payment ID: ${paymentId} | Order ID: ${_orderId}`,
-  });
+  const payload = {
+    name:                  name,
+    email:                 email || '',
+    phone:                 phone,
+    program:               interest || 'General Wellness',
+    condition:             '',
+    consult_notes:         note || '',
+    payment_status:        'Paid',
+    amount_paid:           1000,
+    payment_mode:          'Online / Razorpay',
+    payment_date:          today,
+    razorpay_payment_id:   paymentId,
+    razorpay_order_id:     _orderId,
+    patient_status:        'Active',
+    consultation_status:   'Pending',
+    diet_status:           'Pending',
+    doctor:                'Dr. Raga Deepthi',
+  };
 
-  if (error) console.error('Supabase save error:', error.message);
+  const { data, error } = await _supabase
+    .from('patients')
+    .insert(payload)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Supabase save error:', error.message, payload);
+    throw new Error(`Payment was successful, but saving the patient to the dashboard failed: ${error.message}`);
+  }
+
+  return data;
 }
 
 function goToPayment(e) {
@@ -435,7 +453,7 @@ async function openRazorpay() {
   btn.textContent = 'Creating order…';
 
   try {
-    const res = await fetch('/api/create-order', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+    const res = await fetch(`${API_BASE}/api/create-order`, { method: 'POST', headers: { 'Content-Type': 'application/json' } });
     const order = await res.json();
     if (!order.id) throw new Error(order.error || order.description || 'Order creation failed');
     _orderId = order.id;
@@ -456,7 +474,7 @@ async function openRazorpay() {
       theme: { color: '#4a1042' },
       handler: async function(response) {
         // Verify payment on backend
-        const verify = await fetch('/api/verify-payment', {
+        const verify = await fetch(`${API_BASE}/api/verify-payment`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -475,6 +493,8 @@ async function openRazorpay() {
           window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
         } else {
           alert('Payment verification failed. Please contact us on WhatsApp.');
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg> Pay ₹1000 Securely via Razorpay';
         }
       },
       modal: {
@@ -486,7 +506,10 @@ async function openRazorpay() {
     });
     rzp.open();
   } catch (err) {
-    alert('Payment error: ' + err.message + '\n\nPlease try UPI below or contact us on WhatsApp.');
+    const extra = err.name === 'TypeError'
+      ? '\n\nThe payment server could not be reached. If you are testing locally, the /api backend is usually not running on the same local server.'
+      : '';
+    alert('Payment error: ' + err.message + extra + '\n\nPlease try UPI below or contact us on WhatsApp.');
     btn.disabled = false;
     btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 35 35" fill="none"><rect width="35" height="35" rx="6" fill="white"/><path d="M8 26l4.5-13.5h3.5l-2 6h5L22 8h3.5L19 26h-3.5l2.5-7.5h-5L11.5 26H8z" fill="#2d2d2d"/></svg> Pay ₹1000 Securely via Razorpay';
   }

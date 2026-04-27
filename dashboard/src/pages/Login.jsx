@@ -1,0 +1,103 @@
+import { useState } from 'react'
+import { mkT, TWEAK_DEFAULTS } from '../theme'
+
+const DEMO = {
+  doctor: { email:'raga@forherwellbeing.com',  pass:'doctor123' },
+  staff:  { email:'staff@forherwellbeing.com', pass:'staff123'  },
+}
+
+export default function Login({ onLogin }) {
+  const [role, setRole]       = useState('doctor')
+  const [email, setEmail]     = useState('')
+  const [password, setPass]   = useState('')
+  const [error, setError]     = useState('')
+  const [loading, setLoading] = useState(false)
+  const T = mkT(TWEAK_DEFAULTS)
+
+  const handleLogin = () => {
+    const c = DEMO[role]
+    if (email === c.email && password === c.pass) {
+      setLoading(true)
+      setTimeout(() => onLogin(role), 700)
+    } else {
+      setError('Invalid credentials. Use the demo credentials below.')
+    }
+  }
+
+  const fillDemo = (r) => {
+    setRole(r); setEmail(DEMO[r].email); setPass(DEMO[r].pass); setError('')
+  }
+
+  return (
+    <div style={{ minHeight:'100vh', display:'flex', background:'#FAF8F5' }}>
+      {/* Left panel */}
+      <div style={{ width:'42%', background:T.sidebar, padding:'44px 42px', display:'flex', flexDirection:'column', justifyContent:'space-between', position:'relative', overflow:'hidden' }}>
+        <div style={{ position:'absolute', top:-70, right:-70, width:220, height:220, borderRadius:'50%', border:`1px solid ${T.accent}28` }}/>
+        <div style={{ position:'absolute', top:-30, right:-30, width:130, height:130, borderRadius:'50%', border:`1px solid ${T.accent}18` }}/>
+        <div style={{ position:'absolute', bottom:70, left:-50, width:170, height:170, borderRadius:'50%', border:'1px solid rgba(255,255,255,0.05)' }}/>
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:24, fontWeight:700, color:'#FAF8F5', lineHeight:1.2 }}>
+            For Her<br/><span style={{ fontStyle:'italic', color:T.accent }}>Wellbeing</span>
+          </div>
+          <div style={{ fontSize:10, color:'rgba(255,255,255,0.3)', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:8 }}>Healthcare Management Portal</div>
+        </div>
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:30, fontWeight:600, color:'#FAF8F5', lineHeight:1.5, marginBottom:20 }}>
+            Science-backed<br/><span style={{ color:T.accent, fontStyle:'italic' }}>holistic wellness</span><br/>for women.
+          </div>
+          {['Manage patient consultations & progress','Track billing & program enrollments','Generate detailed health reports'].map((t, i) => (
+            <div key={i} style={{ display:'flex', alignItems:'center', gap:10, fontSize:13, color:'rgba(255,255,255,0.55)', marginBottom:10 }}>
+              <div style={{ width:5, height:5, borderRadius:'50%', background:T.accent, flexShrink:0 }}/>
+              {t}
+            </div>
+          ))}
+        </div>
+        <div style={{ position:'relative', zIndex:1, fontSize:12, color:'rgba(255,255,255,0.28)' }}>Dr. Raga Deepthi · PhD Metabolic Science</div>
+      </div>
+
+      {/* Right panel */}
+      <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', padding:44 }}>
+        <div style={{ width:'100%', maxWidth:400 }}>
+          <div style={{ marginBottom:34 }}>
+            <div style={{ fontFamily:"'Playfair Display',serif", fontSize:27, fontWeight:700, color:'#1A1A2E', marginBottom:5 }}>Welcome back</div>
+            <div style={{ fontSize:14, color:'#7A7A8A' }}>Sign in to access your dashboard</div>
+          </div>
+
+          {/* Role toggle */}
+          <div style={{ background:'#FAF8F5', borderRadius:12, padding:4, display:'flex', marginBottom:26, border:'1.5px solid #EDE8E5' }}>
+            {['doctor','staff'].map(r => (
+              <button key={r} onClick={() => { setRole(r); setError('') }} style={{ flex:1, padding:'10px', borderRadius:9, border:'none', cursor:'pointer', background:role===r?'#fff':'transparent', color:role===r?'#1A1A2E':'#7A7A8A', fontWeight:role===r?600:400, fontSize:14, transition:'all 0.18s', boxShadow:role===r?'0 2px 8px rgba(0,0,0,0.08)':'none', fontFamily:'inherit' }}>
+                {r === 'doctor' ? '◉ Doctor' : '⊞ Staff'}
+              </button>
+            ))}
+          </div>
+
+          <div style={{ marginBottom:14 }}>
+            <label style={{ display:'block', fontSize:13, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>Email address</label>
+            <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder={DEMO[role].email} style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'11px 13px', fontSize:14, background:'#FAFAFA', color:'#1A1A2E', outline:'none' }} />
+          </div>
+          <div style={{ marginBottom:8 }}>
+            <label style={{ display:'block', fontSize:13, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>Password</label>
+            <input value={password} onChange={e => setPass(e.target.value)} type="password" placeholder="••••••••" style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'11px 13px', fontSize:14, background:'#FAFAFA', color:'#1A1A2E', outline:'none' }} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+          </div>
+
+          {error && <div style={{ color:'#D45B5B', fontSize:13, marginBottom:10, padding:'8px 12px', background:'#FEF2F2', borderRadius:8 }}>{error}</div>}
+
+          <button onClick={handleLogin} disabled={loading} style={{ width:'100%', background:loading?'#7A7A8A':T.accent, color:'#fff', border:'none', borderRadius:10, padding:'13px', fontSize:15, fontWeight:600, cursor:loading?'not-allowed':'pointer', fontFamily:'inherit', marginTop:14, transition:'all 0.2s' }}>
+            {loading ? 'Signing in…' : 'Sign In →'}
+          </button>
+
+          <div style={{ marginTop:22, padding:14, background:T.accentLight, borderRadius:10, border:`1px solid ${T.accent}28` }}>
+            <div style={{ fontSize:12, fontWeight:600, color:T.accent, marginBottom:8 }}>Demo credentials</div>
+            {[['Doctor','doctor'],['Staff','staff']].map(([label, r]) => (
+              <div key={r} style={{ fontSize:12, color:'#1A1A2E', marginBottom:5 }}>
+                <strong>{label}:</strong> {DEMO[r].email} / <code style={{ background:'rgba(0,0,0,0.06)', padding:'1px 5px', borderRadius:4 }}>{DEMO[r].pass}</code>
+                <button onClick={() => fillDemo(r)} style={{ marginLeft:8, background:T.accent, color:'#fff', border:'none', borderRadius:4, padding:'1px 8px', fontSize:11, cursor:'pointer', fontFamily:'inherit' }}>Use</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

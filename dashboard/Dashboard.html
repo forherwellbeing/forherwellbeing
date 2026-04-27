@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Her Wellbeing — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: #FAF8F5; color: #1A1A2E; min-height: 100vh; }
+    input, textarea, select, button { font-family: inherit; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #D4C5CB; border-radius: 3px; }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useCallback, useRef } = React;
+
+// ── TWEAKS PANEL (inlined) ────────────────────────────────────────────────────
+const __TWEAKS_STYLE = `
+  .twk-panel{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:280px;
+    max-height:calc(100vh - 32px);display:flex;flex-direction:column;
+    background:rgba(250,249,247,.78);color:#29261b;
+    -webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);
+    border:.5px solid rgba(255,255,255,.6);border-radius:14px;
+    box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 12px 40px rgba(0,0,0,.18);
+    font:11.5px/1.4 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
+  .twk-hd{display:flex;align-items:center;justify-content:space-between;
+    padding:10px 8px 10px 14px;cursor:move;user-select:none}
+  .twk-hd b{font-size:12px;font-weight:600;letter-spacing:.01em}
+  .twk-x{appearance:none;border:0;background:transparent;color:rgba(41,38,27,.55);
+    width:22px;height:22px;border-radius:6px;cursor:default;font-size:13px;line-height:1}
+  .twk-x:hover{background:rgba(0,0,0,.06);color:#29261b}
+  .twk-body{padding:2px 14px 14px;display:flex;flex-direction:column;gap:10px;
+    overflow-y:auto;overflow-x:hidden;min-height:0;
+    scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.15) transparent}
+  .twk-body::-webkit-scrollbar{width:8px}
+  .twk-body::-webkit-scrollbar-track{background:transparent;margin:2px}
+  .twk-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:4px;
+    border:2px solid transparent;background-clip:content-box}
+  .twk-row{display:flex;flex-direction:column;gap:5px}
+  .twk-row-h{flex-direction:row;align-items:center;justify-content:space-between;gap:10px}
+  .twk-lbl{display:flex;justify-content:space-between;align-items:baseline;color:rgba(41,38,27,.72)}
+  .twk-lbl>span:first-child{font-weight:500}
+  .twk-val{color:rgba(41,38,27,.5);font-variant-numeric:tabular-nums}
+  .twk-sect{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(41,38,27,.45);padding:10px 0 0}
+  .twk-sect:first-child{padding-top:0}
+  .twk-field{appearance:none;width:100%;height:26px;padding:0 8px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:7px;
+    background:rgba(255,255,255,.6);color:inherit;font:inherit;outline:none}
+  .twk-field:focus{border-color:rgba(0,0,0,.25);background:rgba(255,255,255,.85)}
+  .twk-slider{appearance:none;-webkit-appearance:none;width:100%;height:4px;margin:6px 0;
+    border-radius:999px;background:rgba(0,0,0,.12);outline:none}
+  .twk-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;
+    width:14px;height:14px;border-radius:50%;background:#fff;
+    border:.5px solid rgba(0,0,0,.12);box-shadow:0 1px 3px rgba(0,0,0,.2);cursor:default}
+  .twk-seg{position:relative;display:flex;padding:2px;border-radius:8px;
+    background:rgba(0,0,0,.06);user-select:none}
+  .twk-seg-thumb{position:absolute;top:2px;bottom:2px;border-radius:6px;
+    background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(0,0,0,.12);
+    transition:left .15s cubic-bezier(.3,.7,.4,1),width .15s}
+  .twk-seg button{appearance:none;position:relative;z-index:1;flex:1;border:0;
+    background:transparent;color:inherit;font:inherit;font-weight:500;min-height:22px;
+    border-radius:6px;cursor:default;padding:4px 6px;line-height:1.2}
+  .twk-toggle{position:relative;width:32px;height:18px;border:0;border-radius:999px;
+    background:rgba(0,0,0,.15);transition:background .15s;cursor:default;padding:0}
+  .twk-toggle[data-on="1"]{background:#34c759}
+  .twk-toggle i{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+    background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .15s}
+  .twk-toggle[data-on="1"] i{transform:translateX(14px)}
+  .twk-swatch{appearance:none;-webkit-appearance:none;width:56px;height:22px;
+    border:.5px solid rgba(0,0,0,.1);border-radius:6px;padding:0;cursor:default;
+    background:transparent;flex-shrink:0}
+  .twk-swatch::-webkit-color-swatch-wrapper{padding:0}
+  .twk-swatch::-webkit-color-swatch{border:0;border-radius:5.5px}
+`;
+
+function useTweaks(defaults) {
+  const [values, setValues] = React.useState(defaults);
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'object' && keyOrEdits !== null
+      ? keyOrEdits : { [keyOrEdits]: val };
+    setValues((prev) => ({ ...prev, ...edits }));
+  }, []);
+  return [values, setTweak];
+}
+
+function TweaksPanel({ title = 'Tweaks', children }) {
+  const [open, setOpen] = React.useState(false);
+  const dragRef = React.useRef(null);
+  const offsetRef = React.useRef({ x: 16, y: 16 });
+  const PAD = 16;
+
+  const clampToViewport = React.useCallback(() => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const w = panel.offsetWidth, h = panel.offsetHeight;
+    const maxRight = Math.max(PAD, window.innerWidth - w - PAD);
+    const maxBottom = Math.max(PAD, window.innerHeight - h - PAD);
+    offsetRef.current = {
+      x: Math.min(maxRight, Math.max(PAD, offsetRef.current.x)),
+      y: Math.min(maxBottom, Math.max(PAD, offsetRef.current.y)),
+    };
+    panel.style.right = offsetRef.current.x + 'px';
+    panel.style.bottom = offsetRef.current.y + 'px';
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return;
+    clampToViewport();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(clampToViewport) : null;
+    if (ro) { ro.observe(document.documentElement); return () => ro.disconnect(); }
+    window.addEventListener('resize', clampToViewport);
+    return () => window.removeEventListener('resize', clampToViewport);
+  }, [open, clampToViewport]);
+
+  const onDragStart = (e) => {
+    const panel = dragRef.current;
+    if (!panel) return;
+    const r = panel.getBoundingClientRect();
+    const sx = e.clientX, sy = e.clientY;
+    const startRight = window.innerWidth - r.right;
+    const startBottom = window.innerHeight - r.bottom;
+    const move = (ev) => {
+      offsetRef.current = { x: startRight - (ev.clientX - sx), y: startBottom - (ev.clientY - sy) };
+      clampToViewport();
+    };
+    const up = () => { window.removeEventListener('mousemove', move); window.removeEventListener('mouseup', up); };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  if (!open) {
+    return (
+      <button onClick={() => setOpen(true)} style={{ position:'fixed', right:16, bottom:16, zIndex:2147483646, background:'rgba(176,90,114,0.9)', color:'#fff', border:'none', borderRadius:10, padding:'8px 14px', fontSize:12, fontWeight:600, cursor:'pointer', backdropFilter:'blur(8px)', boxShadow:'0 4px 16px rgba(0,0,0,0.2)' }}>
+        🎨 Tweaks
+      </button>
+    );
+  }
+  return (
+    <>
+      <style>{__TWEAKS_STYLE}</style>
+      <div ref={dragRef} className="twk-panel" style={{ right: offsetRef.current.x, bottom: offsetRef.current.y }}>
+        <div className="twk-hd" onMouseDown={onDragStart}>
+          <b>{title}</b>
+          <button className="twk-x" onMouseDown={e => e.stopPropagation()} onClick={() => setOpen(false)}>✕</button>
+        </div>
+        <div className="twk-body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+function TweakSection({ label, children }) {
+  return <><div className="twk-sect">{label}</div>{children}</>;
+}
+
+function TweakColor({ label, value, onChange }) {
+  return (
+    <div className="twk-row twk-row-h">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <input type="color" className="twk-swatch" value={value} onChange={e => onChange(e.target.value)} />
+    </div>
+  );
+}
+
+function TweakRadio({ label, value, options, onChange }) {
+  const trackRef = React.useRef(null);
+  const [dragging, setDragging] = React.useState(false);
+  const opts = options.map(o => typeof o === 'object' ? o : { value: o, label: o });
+  const idx = Math.max(0, opts.findIndex(o => o.value === value));
+  const n = opts.length;
+  const valueRef = React.useRef(value);
+  valueRef.current = value;
+
+  const segAt = (clientX) => {
+    const r = trackRef.current.getBoundingClientRect();
+    const inner = r.width - 4;
+    const i = Math.floor(((clientX - r.left - 2) / inner) * n);
+    return opts[Math.max(0, Math.min(n - 1, i))].value;
+  };
+
+  const onPointerDown = (e) => {
+    setDragging(true);
+    const v0 = segAt(e.clientX);
+    if (v0 !== valueRef.current) onChange(v0);
+    const move = (ev) => { if (!trackRef.current) return; const v = segAt(ev.clientX); if (v !== valueRef.current) onChange(v); };
+    const up = () => { setDragging(false); window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  return (
+    <div className="twk-row">
+      <div className="twk-lbl"><span>{label}</span></div>
+      <div ref={trackRef} role="radiogroup" onPointerDown={onPointerDown} className={dragging ? 'twk-seg dragging' : 'twk-seg'}>
+        <div className="twk-seg-thumb" style={{ left: `calc(2px + ${idx} * (100% - 4px) / ${n})`, width: `calc((100% - 4px) / ${n})` }} />
+        {opts.map(o => <button key={o.value} type="button" role="radio" aria-checked={o.value === value}>{o.label}</button>)}
+      </div>
+    </div>
+  );
+}
+
+// ── TWEAK DEFAULTS ────────────────────────────────────────────────────────────
+const TWEAK_DEFAULTS = {
+  accentColor: '#B05A72',
+  sidebarColor: '#3D1A35',
+  density: 'comfortable'
+};
+
+// ── DESIGN TOKENS ─────────────────────────────────────────────────────────────
+const mkT = (tw = {}) => ({
+  sidebar:     tw.sidebarColor || '#3D1A35',
+  accent:      tw.accentColor  || '#B05A72',
+  accentBg:    (tw.accentColor || '#B05A72') + '1A',
+  accentLight: '#F4E8EC',
+  bg:          '#FAF8F5',
+  card:        '#FFFFFF',
+  text:        '#1A1A2E',
+  muted:       '#7A7A8A',
+  border:      '#EDE8E5',
+  success:     '#52A67A',
+  warning:     '#D4854A',
+  info:        '#5B8DD9',
+  danger:      '#D45B5B',
+  pad:         tw.density === 'compact' ? 16 : 24,
+});
+
+// ── SAMPLE DATA ───────────────────────────────────────────────────────────────
+const PATIENTS = [
+  { id:1, name:'Priya Sharma',     age:28, contact:'+91 98765 43210', condition:'PCOS',              doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'20 Apr 2026', program:'PCOS Healing' },
+  { id:2, name:'Ananya Reddy',     age:34, contact:'+91 87654 32109', condition:'Thyroid Imbalance', doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'22 Apr 2026', program:'Metabolic Reset' },
+  { id:3, name:'Meena Krishnan',   age:31, contact:'+91 76543 21098', condition:'Obesity',           doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'18 Apr 2026', program:"Women's Obesity" },
+  { id:4, name:'Sunita Patel',     age:26, contact:'+91 65432 10987', condition:'Insulin Resistance',doctor:'Dr. Raga Deepthi', status:'Inactive', lastVisit:'10 Apr 2026', program:'Diabetes Mgmt' },
+  { id:5, name:'Kavitha Nair',     age:29, contact:'+91 54321 09876', condition:'Hormonal Imbalance',doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'25 Apr 2026', program:'PCOS Healing' },
+  { id:6, name:'Divyasree Kumar',  age:32, contact:'+91 43210 98765', condition:'PCOS + Weight',     doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'26 Apr 2026', program:'PCOS Healing' },
+  { id:7, name:'Rekha Iyer',       age:41, contact:'+91 32109 87654', condition:'Thyroid',           doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'15 Apr 2026', program:'Metabolic Reset' },
+  { id:8, name:'Padma Venkat',     age:27, contact:'+91 21098 76543', condition:'Irregular Periods', doctor:'Dr. Raga Deepthi', status:'Active',   lastVisit:'24 Apr 2026', program:'PCOS Healing' },
+];
+const CONSULTATIONS = [
+  { id:1, patient:'Priya Sharma',   date:'26 Apr 2026', time:'10:00 AM', type:'Follow-up', status:'Completed', notes:'Reviewed diet plan, adjusted carb intake. Patient reporting 2 kg weight loss this week. Yoga practice consistent. Continue current protocol.' },
+  { id:2, patient:'Ananya Reddy',   date:'26 Apr 2026', time:'11:30 AM', type:'Initial',   status:'Completed', notes:'First consultation. Thyroid panel ordered. Started on anti-inflammatory meal plan.' },
+  { id:3, patient:'Kavitha Nair',   date:'27 Apr 2026', time:'09:00 AM', type:'Follow-up', status:'Scheduled', notes:'' },
+  { id:4, patient:'Padma Venkat',   date:'27 Apr 2026', time:'02:00 PM', type:'Initial',   status:'Scheduled', notes:'' },
+  { id:5, patient:'Meena Krishnan', date:'25 Apr 2026', time:'03:30 PM', type:'Follow-up', status:'Completed', notes:'Excellent progress. Down 4 kg in month 1. Sleep quality improved. Yoga 5×/week consistently.' },
+];
+const PAYMENTS = [
+  { id:1, patient:'Priya Sharma',    program:'PCOS Healing Workshop',    amount:15000, paid:15000, date:'05 Apr 2026', status:'Paid',    method:'UPI' },
+  { id:2, patient:'Ananya Reddy',    program:'Metabolic Reset',          amount:15000, paid:7500,  date:'08 Apr 2026', status:'Partial', method:'Bank Transfer' },
+  { id:3, patient:'Meena Krishnan',  program:"Women's Obesity Workshop", amount:15000, paid:15000, date:'01 Apr 2026', status:'Paid',    method:'UPI' },
+  { id:4, patient:'Kavitha Nair',    program:'PCOS Healing Workshop',    amount:15000, paid:0,     date:'25 Apr 2026', status:'Pending', method:'—' },
+  { id:5, patient:'Divyasree Kumar', program:'1:1 Premium Program',      amount:50000, paid:50000, date:'03 Apr 2026', status:'Paid',    method:'Bank Transfer' },
+  { id:6, patient:'Rekha Iyer',      program:'Metabolic Reset',          amount:15000, paid:15000, date:'10 Apr 2026', status:'Paid',    method:'UPI' },
+];
+const APPOINTMENTS = [
+  { id:1, patient:'Priya Sharma', doctor:'Dr. Raga Deepthi', date:'27 Apr', time:'09:00 AM', type:'Follow-up', status:'Confirmed' },
+  { id:2, patient:'Kavitha Nair', doctor:'Dr. Raga Deepthi', date:'27 Apr', time:'10:30 AM', type:'Initial',   status:'Confirmed' },
+  { id:3, patient:'Padma Venkat', doctor:'Dr. Raga Deepthi', date:'27 Apr', time:'02:00 PM', type:'Initial',   status:'Pending'   },
+  { id:4, patient:'Sunita Patel', doctor:'Dr. Raga Deepthi', date:'28 Apr', time:'11:00 AM', type:'Follow-up', status:'Confirmed' },
+  { id:5, patient:'Ananya Reddy', doctor:'Dr. Raga Deepthi', date:'28 Apr', time:'03:00 PM', type:'Follow-up', status:'Pending'   },
+];
+
+// ── SHARED UI ─────────────────────────────────────────────────────────────────
+const BADGE_COLORS = {
+  Active:    { bg:'#E8F5EE', c:'#1E6B40' }, Inactive:  { bg:'#F5E8E8', c:'#7A2D2D' },
+  Completed: { bg:'#E8F5EE', c:'#1E6B40' }, Scheduled: { bg:'#EBF0FB', c:'#2A4FA0' },
+  Confirmed: { bg:'#E8F5EE', c:'#1E6B40' }, Pending:   { bg:'#FFF3E8', c:'#7A5A2D' },
+  Paid:      { bg:'#E8F5EE', c:'#1E6B40' }, Partial:   { bg:'#FFF3E8', c:'#7A5A2D' },
+};
+const Badge = ({ text }) => {
+  const s = BADGE_COLORS[text] || { bg:'#F0EDF8', c:'#5A4A7A' };
+  return <span style={{ background:s.bg, color:s.c, padding:'3px 10px', borderRadius:20, fontSize:11.5, fontWeight:600, whiteSpace:'nowrap' }}>{text}</span>;
+};
+
+const Avatar = ({ name, size=36 }) => {
+  const initials = name.split(' ').slice(0,2).map(n=>n[0]).join('').toUpperCase();
+  const palette = ['#B05A72','#5B8DD9','#52A67A','#D4854A','#7B6DD9','#C17B3A'];
+  const color = palette[name.charCodeAt(0) % palette.length];
+  return <div style={{ width:size, height:size, borderRadius:'50%', background:color+'22', color, fontSize:size*0.37, fontWeight:700, display:'flex', alignItems:'center', justifyContent:'center', border:`1.5px solid ${color}44`, flexShrink:0 }}>{initials}</div>;
+};
+
+const Modal = ({ open, onClose, title, children, width=520 }) => {
+  if (!open) return null;
+  return (
+    <div onClick={onClose} style={{ position:'fixed', inset:0, background:'rgba(20,5,15,0.45)', zIndex:1000, display:'flex', alignItems:'center', justifyContent:'center', padding:24, backdropFilter:'blur(2px)' }}>
+      <div onClick={e=>e.stopPropagation()} style={{ background:'#fff', borderRadius:20, width:'100%', maxWidth:width, maxHeight:'90vh', overflow:'auto', boxShadow:'0 32px 100px rgba(0,0,0,0.25)' }}>
+        <div style={{ padding:'22px 26px 0', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:20, fontWeight:600, color:'#1A1A2E' }}>{title}</div>
+          <button onClick={onClose} style={{ background:'none', border:'none', cursor:'pointer', fontSize:22, color:'#7A7A8A', lineHeight:1, padding:4 }}>×</button>
+        </div>
+        <div style={{ padding:26 }}>{children}</div>
+      </div>
+    </div>
+  );
+};
+
+const FF = ({ label, children }) => (
+  <div style={{ marginBottom:14 }}>
+    <label style={{ display:'block', fontSize:12.5, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>{label}</label>
+    {children}
+  </div>
+);
+
+const inp = (extra={}) => ({ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:9, padding:'9px 12px', fontSize:13.5, color:'#1A1A2E', background:'#FAFAFA', outline:'none', ...extra });
+const Input    = (props) => <input   {...props} style={inp(props.style)} />;
+const Sel      = ({ children, ...p }) => <select {...p} style={inp({ cursor:'pointer', ...p.style })}>{children}</select>;
+const Textarea2 = (props) => <textarea {...props} style={inp({ resize:'vertical', minHeight:76, ...props.style })} />;
+
+const Btn = ({ children, onClick, variant='primary', size='md', T:theme, style:x={}, disabled }) => {
+  const accent = (theme||{}).accent || '#B05A72';
+  const sz  = size==='sm' ? '6px 13px' : size==='lg' ? '12px 28px' : '9px 20px';
+  const fsz = size==='sm' ? 12.5 : size==='lg' ? 15 : 13.5;
+  const vs  = {
+    primary:   { background:accent, color:'#fff', border:'none' },
+    secondary: { background:accent+'1A', color:accent, border:'none' },
+    ghost:     { background:'transparent', color:'#7A7A8A', border:'1.5px solid #EDE8E5' },
+    danger:    { background:'#FEE8E8', color:'#D45B5B', border:'none' },
+  };
+  return <button disabled={disabled} onClick={onClick} style={{ borderRadius:8, cursor:disabled?'not-allowed':'pointer', fontFamily:'inherit', fontWeight:600, fontSize:fsz, padding:sz, display:'inline-flex', alignItems:'center', gap:6, transition:'all 0.18s', opacity:disabled?0.5:1, ...vs[variant], ...x }}>{children}</button>;
+};
+
+// ── SVG CHARTS ────────────────────────────────────────────────────────────────
+const LineChart = ({ data, width=360, height=130, color='#B05A72' }) => {
+  const p = { t:10, r:10, b:26, l:10 };
+  const w = width-p.l-p.r, h = height-p.t-p.b;
+  const max = Math.max(...data.map(d=>d.v))*1.12;
+  const pts = data.map((d,i) => [p.l+(i/(data.length-1))*w, p.t+h-((d.v)/(max))*h]);
+  const line = pts.map(([x,y])=>`${x},${y}`).join(' ');
+  const area = `M${pts[0]} ${pts.slice(1).map(([x,y])=>`L${x},${y}`).join(' ')} L${p.l+w},${p.t+h} L${p.l},${p.t+h} Z`;
+  return (
+    <svg width={width} height={height} style={{ overflow:'visible' }}>
+      <defs><linearGradient id="lcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor={color} stopOpacity="0.22"/><stop offset="100%" stopColor={color} stopOpacity="0"/></linearGradient></defs>
+      <path d={area} fill="url(#lcg)" />
+      <polyline fill="none" stroke={color} strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" points={line} />
+      {pts.map(([x,y],i) => <circle key={i} cx={x} cy={y} r={3.5} fill={color} />)}
+      {data.map((d,i) => <text key={i} x={pts[i][0]} y={height-4} textAnchor="middle" fontSize={10} fill="#7A7A8A">{d.l}</text>)}
+    </svg>
+  );
+};
+
+const BarChart = ({ data, width=440, height=155, color='#B05A72' }) => {
+  const p = { t:8, r:8, b:24, l:8 };
+  const w = width-p.l-p.r, h = height-p.t-p.b;
+  const max = Math.max(...data.map(d=>d.v))*1.18;
+  const bw = (w/data.length)*0.52;
+  return (
+    <svg width={width} height={height}>
+      {data.map((d,i) => {
+        const bh = (d.v/max)*h;
+        const x = p.l+(i/data.length)*w+(w/data.length-bw)/2;
+        const y = p.t+h-bh;
+        return <g key={i}><rect x={x} y={y} width={bw} height={bh} rx={5} fill={color} opacity={0.82}/><text x={x+bw/2} y={height-5} textAnchor="middle" fontSize={10} fill="#7A7A8A">{d.l}</text></g>;
+      })}
+    </svg>
+  );
+};
+
+const DonutChart = ({ segs, size=108 }) => {
+  const r = size*0.38, cx=size/2, cy=size/2;
+  const total = segs.reduce((s,d)=>s+d.v, 0);
+  let ang = -Math.PI/2;
+  const paths = segs.map(d => {
+    const a0 = ang, da = (d.v/total)*Math.PI*2; ang += da;
+    const x1=cx+r*Math.cos(a0), y1=cy+r*Math.sin(a0);
+    const x2=cx+r*Math.cos(ang), y2=cy+r*Math.sin(ang);
+    return { d:`M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${da>Math.PI?1:0},1 ${x2},${y2} Z`, color:d.color };
+  });
+  return <svg width={size} height={size}><circle cx={cx} cy={cy} r={r*0.6} fill="white"/>{paths.map((p,i)=><path key={i} d={p.d} fill={p.color}/>)}</svg>;
+};
+
+// ── SIDEBAR ───────────────────────────────────────────────────────────────────
+const Sidebar = ({ role, activePage, setActivePage, onLogout, T }) => {
+  const doctorNav = [
+    { id:'overview',      icon:'⊞', label:'Dashboard' },
+    { id:'patients',      icon:'♀', label:'Patients' },
+    { id:'consultations', icon:'✦', label:'Consultations' },
+    { id:'prescriptions', icon:'⊡', label:'Prescriptions' },
+    { id:'reports',       icon:'≡', label:'Reports' },
+    { id:'profile',       icon:'◉', label:'Profile' },
+  ];
+  const staffNav = [
+    { id:'overview',     icon:'⊞', label:'Dashboard' },
+    { id:'patients',     icon:'♀', label:'Patient Management' },
+    { id:'appointments', icon:'◷', label:'Appointments' },
+    { id:'billing',      icon:'₹', label:'Billing & Payments' },
+    { id:'reports',      icon:'≡', label:'Reports' },
+    { id:'profile',      icon:'◉', label:'Profile' },
+  ];
+  const nav = role==='doctor' ? doctorNav : staffNav;
+  const userName = role==='doctor' ? 'Dr. Raga Deepthi' : 'Staff Admin';
+  const userSub  = role==='doctor' ? 'PhD Metabolic Science' : 'Admin · Portal';
+  return (
+    <div style={{ width:238, background:T.sidebar, height:'100vh', display:'flex', flexDirection:'column', position:'fixed', left:0, top:0, zIndex:100, flexShrink:0 }}>
+      <div style={{ padding:'22px 20px 18px', borderBottom:'1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:17, fontWeight:700, color:'#FAF8F5', lineHeight:1.2 }}>For Her</div>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:17, fontStyle:'italic', color:T.accent, lineHeight:1.2 }}>Wellbeing</div>
+        <div style={{ marginTop:7, fontSize:10, color:'rgba(255,255,255,0.3)', letterSpacing:'0.1em', textTransform:'uppercase' }}>{role==='doctor'?'Doctor Portal':'Staff Portal'}</div>
+      </div>
+      <nav style={{ flex:1, padding:'14px 10px', overflowY:'auto' }}>
+        {nav.map(item => {
+          const isActive = activePage===item.id;
+          return (
+            <button key={item.id} onClick={()=>setActivePage(item.id)} style={{ width:'100%', display:'flex', alignItems:'center', gap:11, padding:'10px 12px', borderRadius:10, border:'none', cursor:'pointer', background:isActive?'rgba(255,255,255,0.1)':'transparent', color:isActive?'#FAF8F5':'rgba(255,255,255,0.52)', marginBottom:2, fontSize:13.5, fontWeight:isActive?600:400, textAlign:'left', fontFamily:'inherit', transition:'all 0.15s', borderLeft:isActive?`3px solid ${T.accent}`:'3px solid transparent' }}>
+              <span style={{ fontSize:15, width:20, textAlign:'center' }}>{item.icon}</span>
+              {item.label}
+            </button>
+          );
+        })}
+      </nav>
+      <div style={{ padding:'14px 18px 20px', borderTop:'1px solid rgba(255,255,255,0.07)' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
+          <Avatar name={userName} size={33} />
+          <div>
+            <div style={{ fontSize:12.5, fontWeight:600, color:'#FAF8F5', lineHeight:1.3 }}>{userName}</div>
+            <div style={{ fontSize:10.5, color:'rgba(255,255,255,0.36)' }}>{userSub}</div>
+          </div>
+        </div>
+        <button onClick={onLogout} style={{ width:'100%', padding:'7px', borderRadius:8, border:'1px solid rgba(255,255,255,0.12)', background:'transparent', color:'rgba(255,255,255,0.45)', fontSize:12.5, cursor:'pointer', fontFamily:'inherit' }}>Sign Out</button>
+      </div>
+    </div>
+  );
+};
+
+// ── TOPBAR ────────────────────────────────────────────────────────────────────
+const TopBar = ({ title, role }) => (
+  <div style={{ height:62, background:'#fff', borderBottom:'1px solid #EDE8E5', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 26px', position:'sticky', top:0, zIndex:50, flexShrink:0 }}>
+    <div>
+      <div style={{ fontFamily:"'Playfair Display',serif", fontSize:18, fontWeight:600, color:'#1A1A2E' }}>{title}</div>
+      <div style={{ fontSize:11, color:'#7A7A8A' }}>For Her Wellbeing · {role==='doctor'?'Doctor Portal':'Staff Portal'}</div>
+    </div>
+    <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+      <div style={{ position:'relative' }}>
+        <input placeholder="Search…" style={{ background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:20, padding:'7px 14px 7px 34px', fontSize:13, color:'#1A1A2E', width:185, outline:'none' }} />
+        <span style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', color:'#7A7A8A', fontSize:14 }}>⌕</span>
+      </div>
+      <div style={{ position:'relative' }}>
+        <div style={{ width:36, height:36, background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', fontSize:15 }}>🔔</div>
+        <div style={{ position:'absolute', top:3, right:3, width:7, height:7, background:'#D45B5B', borderRadius:'50%', border:'2px solid #fff' }} />
+      </div>
+      <div style={{ fontSize:12, color:'#7A7A8A', background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:8, padding:'5px 11px' }}>
+        {new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })}
+      </div>
+    </div>
+  </div>
+);
+
+// ── STAT CARD ─────────────────────────────────────────────────────────────────
+const StatCard = ({ icon, label, value, change, color }) => (
+  <div style={{ background:'#fff', borderRadius:16, padding:'20px 22px', boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
+    <div style={{ background:color+'1C', borderRadius:11, padding:'9px 11px', fontSize:19, display:'inline-flex', marginBottom:14 }}>{icon}</div>
+    <div style={{ fontSize:26, fontWeight:700, color:'#1A1A2E', lineHeight:1, marginBottom:4 }}>{value}</div>
+    <div style={{ fontSize:13, color:'#7A7A8A' }}>{label}</div>
+    {change && <div style={{ fontSize:12, color, marginTop:6, fontWeight:500 }}>{change}</div>}
+  </div>
+);
+
+// ── DOCTOR PAGES ──────────────────────────────────────────────────────────────
+const DoctorOverview = ({ T }) => (
+  <div>
+    <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginBottom:20 }}>
+      <StatCard icon="♀" label="Assigned Patients"     value="24" change="+3 this week"     color={T.accent}  />
+      <StatCard icon="◷" label="Today's Consultations" value="6"  change="2 remaining"      color={T.info}    />
+      <StatCard icon="✦" label="Pending Follow-ups"    value="8"  change="3 need attention" color={T.warning} />
+      <StatCard icon="≡" label="Reports This Month"    value="12" change="All reviewed"      color={T.success} />
+    </div>
+    <div style={{ display:'grid', gridTemplateColumns:'1fr 320px', gap:14 }}>
+      <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:16, fontWeight:600, color:'#1A1A2E', marginBottom:16 }}>Today's Consultations</div>
+        {CONSULTATIONS.map(c => (
+          <div key={c.id} style={{ display:'flex', alignItems:'center', gap:12, padding:'11px 0', borderBottom:'1px solid #EDE8E5' }}>
+            <Avatar name={c.patient} size={38} />
+            <div style={{ flex:1 }}>
+              <div style={{ fontWeight:600, fontSize:14 }}>{c.patient}</div>
+              <div style={{ fontSize:12, color:'#7A7A8A' }}>{c.time} · {c.type}</div>
+            </div>
+            <Badge text={c.status} />
+          </div>
+        ))}
+      </div>
+      <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:16, fontWeight:600, marginBottom:4 }}>Patient Growth</div>
+        <div style={{ fontSize:12, color:'#7A7A8A', marginBottom:14 }}>New patients per month</div>
+        <LineChart data={[{l:'Nov',v:8},{l:'Dec',v:11},{l:'Jan',v:14},{l:'Feb',v:18},{l:'Mar',v:20},{l:'Apr',v:24}]} width={276} height={134} color={T.accent} />
+      </div>
+    </div>
+  </div>
+);
+
+const DoctorPatients = ({ T }) => {
+  const [search, setSearch] = useState('');
+  const [sel, setSel] = useState(null);
+  const filtered = PATIENTS.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.condition.toLowerCase().includes(search.toLowerCase()));
+  return (
+    <div>
+      <div style={{ position:'relative', marginBottom:16 }}>
+        <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search by name or condition…" style={{ width:'100%', background:'#fff', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'10px 14px 10px 36px', fontSize:13.5, outline:'none' }} />
+        <span style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', color:'#7A7A8A' }}>⌕</span>
+      </div>
+      <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse' }}>
+          <thead><tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
+            {['Patient','Age','Condition','Program','Last Visit','Status',''].map(h=><th key={h} style={{ padding:'11px 15px', textAlign:'left', fontSize:11.5, fontWeight:600, color:'#7A7A8A', textTransform:'uppercase', letterSpacing:'0.05em', whiteSpace:'nowrap' }}>{h}</th>)}
+          </tr></thead>
+          <tbody>
+            {filtered.map(p=>(
+              <tr key={p.id} style={{ borderBottom:'1px solid #EDE8E5', cursor:'pointer' }}>
+                <td style={{ padding:'13px 15px' }}><div style={{ display:'flex', alignItems:'center', gap:10 }}><Avatar name={p.name} size={32}/><span style={{ fontWeight:500, fontSize:14 }}>{p.name}</span></div></td>
+                <td style={{ padding:'13px 15px', fontSize:13.5, color:'#7A7A8A' }}>{p.age}</td>
+                <td style={{ padding:'13px 15px', fontSize:13.5 }}>{p.condition}</td>
+                <td style={{ padding:'13px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.program}</td>
+                <td style={{ padding:'13px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.lastVisit}</td>
+                <td style={{ padding:'13px 15px' }}><Badge text={p.status}/></td>
+                <td style={{ padding:'13px 15px' }}><Btn size="sm" variant="secondary" T={T} onClick={()=>setSel(p)}>View</Btn></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Modal open={!!sel} onClose={()=>setSel(null)} title="Patient Details">
+        {sel&&<div>
+          <div style={{ display:'flex', gap:16, alignItems:'center', background:'#FAF8F5', borderRadius:12, padding:16, marginBottom:18 }}>
+            <Avatar name={sel.name} size={52}/>
+            <div>
+              <div style={{ fontFamily:"'Playfair Display',serif", fontSize:19, fontWeight:700 }}>{sel.name}</div>
+              <div style={{ fontSize:13, color:'#7A7A8A', marginTop:2 }}>{sel.age} yrs · {sel.condition}</div>
+              <div style={{ marginTop:7 }}><Badge text={sel.status}/></div>
+            </div>
+          </div>
+          {[['Contact',sel.contact],['Program',sel.program],['Last Visit',sel.lastVisit],['Assigned Doctor',sel.doctor]].map(([k,v])=>(
+            <div key={k} style={{ display:'flex', justifyContent:'space-between', padding:'10px 0', borderBottom:'1px solid #EDE8E5' }}>
+              <span style={{ fontSize:13, color:'#7A7A8A' }}>{k}</span>
+              <span style={{ fontSize:13, fontWeight:500 }}>{v}</span>
+            </div>
+          ))}
+          <div style={{ marginTop:18, padding:14, background:T.accentLight, borderRadius:10 }}>
+            <div style={{ fontSize:11.5, fontWeight:600, color:T.accent, marginBottom:6 }}>Clinical Notes</div>
+            <div style={{ fontSize:13, lineHeight:1.6 }}>Patient on 3-month {sel.program} program. Responding well to dietary protocol. Yoga practice consistent. Next follow-up scheduled.</div>
+          </div>
+          <div style={{ marginTop:16, display:'flex', gap:10 }}>
+            <Btn variant="primary" T={T}>Add Consultation Note</Btn>
+            <Btn variant="ghost" T={T}>View Full History</Btn>
+          </div>
+        </div>}
+      </Modal>
+    </div>
+  );
+};
+
+const DoctorConsultations = ({ T }) => {
+  const [showAdd, setShowAdd] = useState(false);
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:16 }}>
+        <Btn variant="primary" T={T} onClick={()=>setShowAdd(true)}>+ Add Consultation Note</Btn>
+      </div>
+      <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
+        {CONSULTATIONS.map(c=>(
+          <div key={c.id} style={{ background:'#fff', borderRadius:14, padding:'18px 20px', boxShadow:'0 2px 10px rgba(0,0,0,0.05)', display:'flex', gap:14, alignItems:'flex-start' }}>
+            <Avatar name={c.patient} size={42}/>
+            <div style={{ flex:1 }}>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:7 }}>
+                <div>
+                  <span style={{ fontWeight:600, fontSize:14 }}>{c.patient}</span>
+                  <span style={{ fontSize:12.5, color:'#7A7A8A', marginLeft:10 }}>{c.date} · {c.time}</span>
+                </div>
+                <div style={{ display:'flex', gap:7, alignItems:'center' }}>
+                  <span style={{ fontSize:11.5, color:'#7A7A8A', background:'#FAF8F5', padding:'3px 9px', borderRadius:20 }}>{c.type}</span>
+                  <Badge text={c.status}/>
+                </div>
+              </div>
+              {c.notes
+                ? <div style={{ fontSize:13.5, color:'#1A1A2E', lineHeight:1.65, background:'#FAFAFA', borderRadius:9, padding:'10px 13px', border:'1px solid #EDE8E5' }}>{c.notes}</div>
+                : <div style={{ fontSize:13, color:'#7A7A8A', fontStyle:'italic' }}>No notes yet — consultation is upcoming.</div>
+              }
+            </div>
+          </div>
+        ))}
+      </div>
+      <Modal open={showAdd} onClose={()=>setShowAdd(false)} title="Add Consultation Note">
+        <FF label="Patient *"><Sel><option value="">Select patient…</option>{PATIENTS.map(p=><option key={p.id}>{p.name}</option>)}</Sel></FF>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+          <FF label="Date *"><Input type="date" defaultValue="2026-04-27"/></FF>
+          <FF label="Time *"><Input type="time" defaultValue="10:00"/></FF>
+        </div>
+        <FF label="Type"><Sel><option>Follow-up</option><option>Initial</option><option>Emergency</option></Sel></FF>
+        <FF label="Notes *"><Textarea2 rows={5} placeholder="Enter observations, recommendations, dietary adjustments…" /></FF>
+        <div style={{ display:'flex', gap:10, justifyContent:'flex-end' }}>
+          <Btn variant="ghost" T={T} onClick={()=>setShowAdd(false)}>Cancel</Btn>
+          <Btn variant="primary" T={T} onClick={()=>setShowAdd(false)}>Save Note</Btn>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+const DoctorPrescriptions = ({ T }) => {
+  const [showUpload, setShowUpload] = useState(false);
+  const items = [
+    { id:1, patient:'Priya Sharma',    date:'20 Apr 2026', title:'Anti-Inflammatory Protocol',  type:'Diet Plan'       },
+    { id:2, patient:'Ananya Reddy',    date:'22 Apr 2026', title:'Thyroid Support Supplements',  type:'Supplement Plan' },
+    { id:3, patient:'Meena Krishnan',  date:'18 Apr 2026', title:'Low-Glycemic Meal Plan',       type:'Diet Plan'       },
+    { id:4, patient:'Divyasree Kumar', date:'15 Apr 2026', title:'PCOS Reversal Protocol',       type:'Full Protocol'   },
+  ];
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:16 }}>
+        <Btn variant="primary" T={T} onClick={()=>setShowUpload(true)}>+ Upload Prescription</Btn>
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:13 }}>
+        {items.map(item=>(
+          <div key={item.id} style={{ background:'#fff', borderRadius:14, padding:20, boxShadow:'0 2px 10px rgba(0,0,0,0.05)', display:'flex', gap:14 }}>
+            <div style={{ background:T.accentLight, borderRadius:11, padding:'12px', fontSize:22, flexShrink:0 }}>📋</div>
+            <div style={{ flex:1 }}>
+              <div style={{ fontWeight:600, fontSize:14 }}>{item.title}</div>
+              <div style={{ fontSize:12.5, color:'#7A7A8A', marginTop:3 }}>{item.patient} · {item.date}</div>
+              <div style={{ marginTop:10, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+                <span style={{ fontSize:12, background:T.accentLight, color:T.accent, padding:'3px 10px', borderRadius:20, fontWeight:500 }}>{item.type}</span>
+                <Btn size="sm" variant="ghost" T={T}>↓ Download</Btn>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Modal open={showUpload} onClose={()=>setShowUpload(false)} title="Upload Prescription">
+        <FF label="Patient *"><Sel><option value="">Select patient…</option>{PATIENTS.map(p=><option key={p.id}>{p.name}</option>)}</Sel></FF>
+        <FF label="Title *"><Input placeholder="e.g. PCOS Diet Protocol Week 3" /></FF>
+        <FF label="Type"><Sel><option>Diet Plan</option><option>Supplement Plan</option><option>Full Protocol</option><option>Yoga Sequence</option></Sel></FF>
+        <FF label="Notes"><Textarea2 rows={3} placeholder="Additional instructions for patient…" /></FF>
+        <div style={{ border:'2px dashed #EDE8E5', borderRadius:11, padding:'22px', textAlign:'center', marginBottom:14, cursor:'pointer', background:'#FAFAFA' }}>
+          <div style={{ fontSize:22, marginBottom:6 }}>📎</div>
+          <div style={{ fontSize:13.5, color:'#7A7A8A' }}>Drag & drop or click to browse</div>
+          <div style={{ fontSize:12, color:'#7A7A8A', marginTop:3 }}>PDF, DOC, PNG — up to 10 MB</div>
+        </div>
+        <div style={{ display:'flex', gap:10, justifyContent:'flex-end' }}>
+          <Btn variant="ghost" T={T} onClick={()=>setShowUpload(false)}>Cancel</Btn>
+          <Btn variant="primary" T={T} onClick={()=>setShowUpload(false)}>Upload</Btn>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+// ── SHARED PAGES ──────────────────────────────────────────────────────────────
+const ReportsPage = ({ T }) => {
+  const items = [
+    { title:'Monthly Consultation Summary', desc:'April 2026 — 48 consultations, 24 patients', date:'01 May 2026', icon:'📊' },
+    { title:'Patient Progress Report',       desc:'All active patients — program outcomes',    date:'27 Apr 2026', icon:'📈' },
+    { title:'Revenue Summary',               desc:'April 2026 — ₹4,25,000 collected',         date:'27 Apr 2026', icon:'💰' },
+    { title:'PCOS Program Outcomes',         desc:'Q1 2026 — 12 patients completed',          date:'01 Apr 2026', icon:'✦'  },
+  ];
+  return (
+    <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:14 }}>
+      {items.map((r,i)=>(
+        <div key={i} style={{ background:'#fff', borderRadius:14, padding:22, boxShadow:'0 2px 10px rgba(0,0,0,0.05)' }}>
+          <div style={{ display:'flex', gap:14, alignItems:'flex-start', marginBottom:16 }}>
+            <div style={{ background:T.accentLight, borderRadius:11, padding:'12px', fontSize:22 }}>{r.icon}</div>
+            <div>
+              <div style={{ fontWeight:600, fontSize:14 }}>{r.title}</div>
+              <div style={{ fontSize:12.5, color:'#7A7A8A', marginTop:3 }}>{r.desc}</div>
+            </div>
+          </div>
+          <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+            <span style={{ fontSize:12, color:'#7A7A8A' }}>Generated {r.date}</span>
+            <div style={{ display:'flex', gap:8 }}>
+              <Btn size="sm" variant="secondary" T={T}>View</Btn>
+              <Btn size="sm" variant="ghost" T={T}>↓ PDF</Btn>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const ProfilePage = ({ role, T }) => {
+  const isDoc = role==='doctor';
+  return (
+    <div style={{ maxWidth:620 }}>
+      <div style={{ background:'#fff', borderRadius:16, padding:26, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
+        <div style={{ display:'flex', gap:20, alignItems:'flex-start', marginBottom:22, paddingBottom:22, borderBottom:'1px solid #EDE8E5' }}>
+          <div style={{ width:70, height:70, borderRadius:'50%', background:T.accentLight, display:'flex', alignItems:'center', justifyContent:'center', fontSize:24, color:T.accent, fontWeight:700, fontFamily:"'Playfair Display',serif" }}>{isDoc?'RD':'SA'}</div>
+          <div>
+            <div style={{ fontFamily:"'Playfair Display',serif", fontSize:21, fontWeight:700 }}>{isDoc?'Dr. Raga Deepthi':'Staff Admin'}</div>
+            <div style={{ fontSize:13, color:'#7A7A8A', marginTop:4 }}>{isDoc?'PhD Metabolic Science · Yoga Certified':'Admin · For Her Wellbeing'}</div>
+            <div style={{ marginTop:8 }}><Badge text="Active"/></div>
+          </div>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, marginBottom:14 }}>
+          <FF label="Full Name"><Input defaultValue={isDoc?'Dr. Raga Deepthi':'Staff Admin'}/></FF>
+          <FF label="Email"><Input defaultValue={isDoc?'raga@forherwellbeing.com':'staff@forherwellbeing.com'}/></FF>
+          <FF label="Phone"><Input defaultValue="+91 98765 00000"/></FF>
+          <FF label={isDoc?'Specialisation':'Role'}><Input defaultValue={isDoc?'PhD Metabolic Science':'Admin'}/></FF>
+        </div>
+        {isDoc&&<FF label="Bio"><Textarea2 rows={3} defaultValue="PhD in Pediatric Metabolism from Heidelberg University, Germany. Certified Yoga instructor from Rishikesh & Svyasa University. 11 years of metabolic wellness expertise." /></FF>}
+        <div style={{ display:'flex', gap:10, marginTop:8 }}>
+          <Btn variant="primary" T={T}>Save Changes</Btn>
+          <Btn variant="ghost" T={T}>Change Password</Btn>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── STAFF PAGES ───────────────────────────────────────────────────────────────
+const StaffOverview = ({ T }) => (
+  <div>
+    <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginBottom:20 }}>
+      <StatCard icon="♀" label="Total Patients"       value="24"     change="+3 this month" color={T.accent}  />
+      <StatCard icon="◷" label="Today's Appointments" value="8"      change="3 pending"      color={T.info}    />
+      <StatCard icon="₹" label="Monthly Revenue"      value="₹4.25L" change="+18% vs March"  color={T.success} />
+      <StatCard icon="✦" label="Active Programs"      value="6"      change="All running"     color={T.warning} />
+    </div>
+    <div style={{ display:'grid', gridTemplateColumns:'1fr 316px', gap:14 }}>
+      <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:16, fontWeight:600, marginBottom:4 }}>Monthly Revenue</div>
+        <div style={{ fontSize:12, color:'#7A7A8A', marginBottom:14 }}>2026 overview (₹)</div>
+        <BarChart data={[{l:'Jan',v:180000},{l:'Feb',v:245000},{l:'Mar',v:310000},{l:'Apr',v:425000},{l:'May',v:280000},{l:'Jun',v:390000}]} width={440} height={150} color={T.accent} />
+      </div>
+      <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
+        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:16, fontWeight:600, marginBottom:4 }}>Program Enrollment</div>
+        <div style={{ fontSize:12, color:'#7A7A8A', marginBottom:14 }}>Active patients by program</div>
+        <div style={{ display:'flex', alignItems:'center', gap:16 }}>
+          <DonutChart segs={[{v:12,color:T.accent},{v:6,color:T.info},{v:4,color:T.success},{v:2,color:T.warning}]} size={106}/>
+          <div>
+            {[['PCOS Healing',12,T.accent],["Women's Obesity",4,T.success],['Metabolic Reset',6,T.info],['Diabetes Mgmt',2,T.warning]].map(([l,v,c])=>(
+              <div key={l} style={{ display:'flex', alignItems:'center', gap:8, marginBottom:7 }}>
+                <div style={{ width:8, height:8, borderRadius:2, background:c, flexShrink:0 }}/>
+                <div style={{ fontSize:12, color:'#7A7A8A', flex:1 }}>{l}</div>
+                <div style={{ fontSize:12, fontWeight:600 }}>{v}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const StaffPatients = ({ T }) => {
+  const [patients, setPatients] = useState(PATIENTS);
+  const [search, setSearch] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [editPt, setEditPt] = useState(null);
+  const blank = { name:'', age:'', contact:'', condition:'', program:'', status:'Active' };
+  const [form, setForm] = useState(blank);
+  const filtered = patients.filter(p=>p.name.toLowerCase().includes(search.toLowerCase()));
+  const upd = k => e => setForm(f=>({...f,[k]:e.target.value}));
+  const handleSave = () => {
+    if (editPt) setPatients(pts=>pts.map(p=>p.id===editPt.id?{...p,...form}:p));
+    else setPatients(pts=>[...pts,{ id:Date.now(), ...form, doctor:'Dr. Raga Deepthi', lastVisit:new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}) }]);
+    setShowModal(false); setEditPt(null); setForm(blank);
+  };
+  const openEdit = p => { setEditPt(p); setForm({ name:p.name, age:p.age, contact:p.contact, condition:p.condition, program:p.program, status:p.status }); setShowModal(true); };
+  const del = id => { if(window.confirm('Delete this patient record?')) setPatients(pts=>pts.filter(p=>p.id!==id)); };
+  return (
+    <div>
+      <div style={{ display:'flex', gap:12, marginBottom:16, alignItems:'center' }}>
+        <div style={{ position:'relative', flex:1 }}>
+          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search patients…" style={{ width:'100%', background:'#fff', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'10px 14px 10px 36px', fontSize:13.5, outline:'none' }} />
+          <span style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', color:'#7A7A8A' }}>⌕</span>
+        </div>
+        <Btn variant="primary" T={T} onClick={()=>{ setEditPt(null); setForm(blank); setShowModal(true); }}>+ Add Patient</Btn>
+      </div>
+      <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse' }}>
+          <thead><tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
+            {['Patient','Age','Condition','Program','Last Visit','Status','Actions'].map(h=><th key={h} style={{ padding:'11px 15px', textAlign:'left', fontSize:11.5, fontWeight:600, color:'#7A7A8A', textTransform:'uppercase', letterSpacing:'0.05em', whiteSpace:'nowrap' }}>{h}</th>)}
+          </tr></thead>
+          <tbody>
+            {filtered.map(p=>(
+              <tr key={p.id} style={{ borderBottom:'1px solid #EDE8E5' }}>
+                <td style={{ padding:'12px 15px' }}><div style={{ display:'flex', alignItems:'center', gap:10 }}><Avatar name={p.name} size={31}/><span style={{ fontWeight:500, fontSize:13.5 }}>{p.name}</span></div></td>
+                <td style={{ padding:'12px 15px', fontSize:13.5, color:'#7A7A8A' }}>{p.age}</td>
+                <td style={{ padding:'12px 15px', fontSize:13.5 }}>{p.condition}</td>
+                <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.program}</td>
+                <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.lastVisit}</td>
+                <td style={{ padding:'12px 15px' }}><Badge text={p.status}/></td>
+                <td style={{ padding:'12px 15px' }}><div style={{ display:'flex', gap:6 }}><Btn size="sm" variant="secondary" T={T} onClick={()=>openEdit(p)}>Edit</Btn><Btn size="sm" variant="danger" T={T} onClick={()=>del(p.id)}>Delete</Btn></div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Modal open={showModal} onClose={()=>{setShowModal(false);setEditPt(null);}} title={editPt?'Edit Patient':'Add New Patient'}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+          <FF label="Full Name *"><Input value={form.name} onChange={upd('name')} placeholder="Full name" /></FF>
+          <FF label="Age *"><Input type="number" value={form.age} onChange={upd('age')} placeholder="Age" /></FF>
+          <FF label="Contact *"><Input value={form.contact} onChange={upd('contact')} placeholder="+91 XXXXX XXXXX" /></FF>
+          <FF label="Status"><Sel value={form.status} onChange={upd('status')}><option>Active</option><option>Inactive</option></Sel></FF>
+        </div>
+        <FF label="Condition / Diagnosis *"><Input value={form.condition} onChange={upd('condition')} placeholder="e.g. PCOS, Thyroid Imbalance" /></FF>
+        <FF label="Program"><Sel value={form.program} onChange={upd('program')}><option value="">Select program…</option><option>PCOS Healing</option><option>Women's Obesity</option><option>Metabolic Reset</option><option>Diabetes Management</option><option>Prenatal Wellness</option><option>Postnatal Recovery</option></Sel></FF>
+        <div style={{ display:'flex', gap:10, justifyContent:'flex-end' }}>
+          <Btn variant="ghost" T={T} onClick={()=>{setShowModal(false);setEditPt(null);}}>Cancel</Btn>
+          <Btn variant="primary" T={T} onClick={handleSave}>{editPt?'Save Changes':'Add Patient'}</Btn>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+const StaffAppointments = ({ T }) => {
+  const [showAdd, setShowAdd] = useState(false);
+  const [filter, setFilter] = useState('All');
+  const filtered = APPOINTMENTS.filter(a => filter==='All' || a.status===filter || (filter==='Today' && a.date.includes('27 Apr')));
+  return (
+    <div>
+      <div style={{ display:'flex', justifyContent:'space-between', marginBottom:16, alignItems:'center' }}>
+        <div style={{ display:'flex', gap:8 }}>
+          {['All','Today','Upcoming','Pending'].map(f=>(
+            <button key={f} onClick={()=>setFilter(f)} style={{ padding:'7px 16px', borderRadius:20, border:`1.5px solid ${filter===f?T.accent:'#EDE8E5'}`, background:filter===f?T.accentLight:'white', color:filter===f?T.accent:'#7A7A8A', fontSize:13, cursor:'pointer', fontFamily:'inherit', fontWeight:filter===f?600:400 }}>{f}</button>
+          ))}
+        </div>
+        <Btn variant="primary" T={T} onClick={()=>setShowAdd(true)}>+ Schedule</Btn>
+      </div>
+      <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse' }}>
+          <thead><tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
+            {['Patient','Doctor','Date','Time','Type','Status',''].map(h=><th key={h} style={{ padding:'11px 15px', textAlign:'left', fontSize:11.5, fontWeight:600, color:'#7A7A8A', textTransform:'uppercase', letterSpacing:'0.05em' }}>{h}</th>)}
+          </tr></thead>
+          <tbody>
+            {filtered.map(a=>(
+              <tr key={a.id} style={{ borderBottom:'1px solid #EDE8E5' }}>
+                <td style={{ padding:'13px 15px' }}><div style={{ display:'flex', alignItems:'center', gap:10 }}><Avatar name={a.patient} size={31}/><span style={{ fontWeight:500, fontSize:13.5 }}>{a.patient}</span></div></td>
+                <td style={{ padding:'13px 15px', fontSize:12.5, color:'#7A7A8A' }}>{a.doctor}</td>
+                <td style={{ padding:'13px 15px', fontSize:14, fontWeight:500 }}>{a.date}</td>
+                <td style={{ padding:'13px 15px', fontSize:14, fontWeight:500 }}>{a.time}</td>
+                <td style={{ padding:'13px 15px', fontSize:12.5, color:'#7A7A8A' }}>{a.type}</td>
+                <td style={{ padding:'13px 15px' }}><Badge text={a.status}/></td>
+                <td style={{ padding:'13px 15px' }}><div style={{ display:'flex', gap:6 }}><Btn size="sm" variant="secondary" T={T}>Edit</Btn><Btn size="sm" variant="ghost" T={T}>Cancel</Btn></div></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Modal open={showAdd} onClose={()=>setShowAdd(false)} title="Schedule Appointment">
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+          <FF label="Patient *"><Sel><option value="">Select patient…</option>{PATIENTS.map(p=><option key={p.id}>{p.name}</option>)}</Sel></FF>
+          <FF label="Doctor"><Sel><option>Dr. Raga Deepthi</option></Sel></FF>
+          <FF label="Date *"><Input type="date" defaultValue="2026-04-28"/></FF>
+          <FF label="Time *"><Input type="time" defaultValue="10:00"/></FF>
+        </div>
+        <FF label="Type"><Sel><option>Initial</option><option>Follow-up</option><option>Emergency</option></Sel></FF>
+        <FF label="Notes"><Textarea2 rows={3} placeholder="Any special notes…" /></FF>
+        <div style={{ display:'flex', gap:10, justifyContent:'flex-end' }}>
+          <Btn variant="ghost" T={T} onClick={()=>setShowAdd(false)}>Cancel</Btn>
+          <Btn variant="primary" T={T} onClick={()=>setShowAdd(false)}>Schedule</Btn>
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+const StaffBilling = ({ T }) => {
+  const total   = PAYMENTS.reduce((s,p)=>s+p.paid, 0);
+  const pending = PAYMENTS.reduce((s,p)=>s+(p.amount-p.paid), 0);
+  return (
+    <div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:14, marginBottom:20 }}>
+        <StatCard icon="₹" label="Total Collected" value={`₹${(total/1000).toFixed(0)}K`}   change="April 2026"         color={T.success} />
+        <StatCard icon="⏳" label="Pending Amount"  value={`₹${(pending/1000).toFixed(1)}K`} change="2 invoices pending" color={T.warning} />
+        <StatCard icon="📅" label="This Month"      value="₹4.25L"                            change="+18% vs March"      color={T.info}    />
+      </div>
+      <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse' }}>
+          <thead><tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
+            {['Patient','Program','Total','Paid','Balance','Date','Method','Status'].map(h=><th key={h} style={{ padding:'11px 15px', textAlign:'left', fontSize:11.5, fontWeight:600, color:'#7A7A8A', textTransform:'uppercase', letterSpacing:'0.05em', whiteSpace:'nowrap' }}>{h}</th>)}
+          </tr></thead>
+          <tbody>
+            {PAYMENTS.map(p=>(
+              <tr key={p.id} style={{ borderBottom:'1px solid #EDE8E5' }}>
+                <td style={{ padding:'12px 15px' }}><div style={{ display:'flex', alignItems:'center', gap:9 }}><Avatar name={p.patient} size={29}/><span style={{ fontWeight:500, fontSize:13 }}>{p.patient}</span></div></td>
+                <td style={{ padding:'12px 15px', fontSize:12, color:'#7A7A8A', maxWidth:140 }}>{p.program}</td>
+                <td style={{ padding:'12px 15px', fontSize:13.5, fontWeight:600 }}>₹{p.amount.toLocaleString()}</td>
+                <td style={{ padding:'12px 15px', fontSize:13.5, color:T.success, fontWeight:600 }}>₹{p.paid.toLocaleString()}</td>
+                <td style={{ padding:'12px 15px', fontSize:13.5, color:p.amount-p.paid>0?T.danger:'#7A7A8A' }}>₹{(p.amount-p.paid).toLocaleString()}</td>
+                <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.date}</td>
+                <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.method}</td>
+                <td style={{ padding:'12px 15px' }}><Badge text={p.status}/></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+const LoginPage = ({ onLogin }) => {
+  const [role, setRole] = useState('doctor');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const DEMO = { doctor:{ email:'raga@forherwellbeing.com', pass:'doctor123' }, staff:{ email:'staff@forherwellbeing.com', pass:'staff123' } };
+  const T2 = mkT(TWEAK_DEFAULTS);
+
+  const handleLogin = () => {
+    const c = DEMO[role];
+    if (email===c.email && password===c.pass) { setLoading(true); setTimeout(()=>onLogin(role), 700); }
+    else setError('Invalid credentials. Use the demo credentials below.');
+  };
+
+  return (
+    <div style={{ minHeight:'100vh', display:'flex', background:'#FAF8F5' }}>
+      <div style={{ width:'42%', background:T2.sidebar, padding:'44px 42px', display:'flex', flexDirection:'column', justifyContent:'space-between', position:'relative', overflow:'hidden' }}>
+        <div style={{ position:'absolute', top:-70, right:-70, width:220, height:220, borderRadius:'50%', border:`1px solid ${T2.accent}28` }}/>
+        <div style={{ position:'absolute', top:-30, right:-30, width:130, height:130, borderRadius:'50%', border:`1px solid ${T2.accent}18` }}/>
+        <div style={{ position:'absolute', bottom:70, left:-50, width:170, height:170, borderRadius:'50%', border:'1px solid rgba(255,255,255,0.05)' }}/>
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:24, fontWeight:700, color:'#FAF8F5', lineHeight:1.2 }}>For Her<br/><span style={{ fontStyle:'italic', color:T2.accent }}>Wellbeing</span></div>
+          <div style={{ fontSize:10, color:'rgba(255,255,255,0.3)', letterSpacing:'0.1em', textTransform:'uppercase', marginTop:8 }}>Healthcare Management Portal</div>
+        </div>
+        <div style={{ position:'relative', zIndex:1 }}>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize:30, fontWeight:600, color:'#FAF8F5', lineHeight:1.5, marginBottom:20 }}>
+            Science-backed<br/><span style={{ color:T2.accent, fontStyle:'italic' }}>holistic wellness</span><br/>for women.
+          </div>
+          {['Manage patient consultations & progress','Track billing & program enrollments','Generate detailed health reports'].map((t,i)=>(
+            <div key={i} style={{ display:'flex', alignItems:'center', gap:10, fontSize:13, color:'rgba(255,255,255,0.55)', marginBottom:10 }}>
+              <div style={{ width:5, height:5, borderRadius:'50%', background:T2.accent, flexShrink:0 }}/>
+              {t}
+            </div>
+          ))}
+        </div>
+        <div style={{ position:'relative', zIndex:1, fontSize:12, color:'rgba(255,255,255,0.28)' }}>Dr. Raga Deepthi · PhD Metabolic Science</div>
+      </div>
+      <div style={{ flex:1, display:'flex', alignItems:'center', justifyContent:'center', padding:44 }}>
+        <div style={{ width:'100%', maxWidth:400 }}>
+          <div style={{ marginBottom:34 }}>
+            <div style={{ fontFamily:"'Playfair Display',serif", fontSize:27, fontWeight:700, color:'#1A1A2E', marginBottom:5 }}>Welcome back</div>
+            <div style={{ fontSize:14, color:'#7A7A8A' }}>Sign in to access your dashboard</div>
+          </div>
+          <div style={{ background:'#FAF8F5', borderRadius:12, padding:4, display:'flex', marginBottom:26, border:'1.5px solid #EDE8E5' }}>
+            {['doctor','staff'].map(r=>(
+              <button key={r} onClick={()=>{ setRole(r); setError(''); }} style={{ flex:1, padding:'10px', borderRadius:9, border:'none', cursor:'pointer', background:role===r?'#fff':'transparent', color:role===r?'#1A1A2E':'#7A7A8A', fontWeight:role===r?600:400, fontSize:14, transition:'all 0.18s', boxShadow:role===r?'0 2px 8px rgba(0,0,0,0.08)':'none', fontFamily:'inherit' }}>
+                {r==='doctor'?'◉ Doctor':'⊞ Staff'}
+              </button>
+            ))}
+          </div>
+          <div style={{ marginBottom:14 }}>
+            <label style={{ display:'block', fontSize:13, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>Email address</label>
+            <input value={email} onChange={e=>setEmail(e.target.value)} type="email" placeholder={DEMO[role].email} style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'11px 13px', fontSize:14, background:'#FAFAFA', color:'#1A1A2E', outline:'none' }} />
+          </div>
+          <div style={{ marginBottom:8 }}>
+            <label style={{ display:'block', fontSize:13, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>Password</label>
+            <input value={password} onChange={e=>setPassword(e.target.value)} type="password" placeholder="••••••••" style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'11px 13px', fontSize:14, background:'#FAFAFA', color:'#1A1A2E', outline:'none' }} onKeyDown={e=>e.key==='Enter'&&handleLogin()} />
+          </div>
+          {error&&<div style={{ color:'#D45B5B', fontSize:13, marginBottom:10, padding:'8px 12px', background:'#FEF2F2', borderRadius:8 }}>{error}</div>}
+          <button onClick={handleLogin} disabled={loading} style={{ width:'100%', background:loading?'#7A7A8A':T2.accent, color:'#fff', border:'none', borderRadius:10, padding:'13px', fontSize:15, fontWeight:600, cursor:loading?'not-allowed':'pointer', fontFamily:'inherit', marginTop:14, transition:'all 0.2s' }}>
+            {loading?'Signing in…':'Sign In →'}
+          </button>
+          <div style={{ marginTop:22, padding:14, background:T2.accentLight, borderRadius:10, border:`1px solid ${T2.accent}28` }}>
+            <div style={{ fontSize:12, fontWeight:600, color:T2.accent, marginBottom:8 }}>Demo credentials</div>
+            {[['Doctor',DEMO.doctor.email,DEMO.doctor.pass],['Staff',DEMO.staff.email,DEMO.staff.pass]].map(([r,e,p])=>(
+              <div key={r} style={{ fontSize:12, color:'#1A1A2E', marginBottom:5 }}>
+                <strong>{r}:</strong> {e} / <code style={{ background:'rgba(0,0,0,0.06)', padding:'1px 5px', borderRadius:4 }}>{p}</code>
+                <button onClick={()=>{ setRole(r.toLowerCase()); setEmail(e); setPassword(p); setError(''); }} style={{ marginLeft:8, background:T2.accent, color:'#fff', border:'none', borderRadius:4, padding:'1px 8px', fontSize:11, cursor:'pointer', fontFamily:'inherit' }}>Use</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── APP ROOT ──────────────────────────────────────────────────────────────────
+const App = () => {
+  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const T = mkT(tweaks);
+  const [user, setUser] = useState(null);
+  const [page, setPage] = useState('overview');
+
+  const PAGE_TITLES = {
+    overview: 'Dashboard',
+    patients: user?.role==='doctor' ? 'Patients' : 'Patient Management',
+    consultations: 'Consultations',
+    prescriptions: 'Prescriptions',
+    appointments: 'Appointments',
+    billing: 'Billing & Payments',
+    reports: 'Reports',
+    profile: 'Profile',
+  };
+
+  if (!user) return <LoginPage onLogin={role=>{ setUser({role}); setPage('overview'); }} />;
+
+  const renderPage = () => {
+    if (user.role==='doctor') {
+      if (page==='overview')      return <DoctorOverview T={T}/>;
+      if (page==='patients')      return <DoctorPatients T={T}/>;
+      if (page==='consultations') return <DoctorConsultations T={T}/>;
+      if (page==='prescriptions') return <DoctorPrescriptions T={T}/>;
+      if (page==='reports')       return <ReportsPage T={T}/>;
+      if (page==='profile')       return <ProfilePage role="doctor" T={T}/>;
+    } else {
+      if (page==='overview')     return <StaffOverview T={T}/>;
+      if (page==='patients')     return <StaffPatients T={T}/>;
+      if (page==='appointments') return <StaffAppointments T={T}/>;
+      if (page==='billing')      return <StaffBilling T={T}/>;
+      if (page==='reports')      return <ReportsPage T={T}/>;
+      if (page==='profile')      return <ProfilePage role="staff" T={T}/>;
+    }
+    return null;
+  };
+
+  return (
+    <div style={{ display:'flex', height:'100vh', background:T.bg }}>
+      <Sidebar role={user.role} activePage={page} setActivePage={setPage} onLogout={()=>setUser(null)} T={T}/>
+      <div style={{ flex:1, marginLeft:238, display:'flex', flexDirection:'column', overflow:'hidden' }}>
+        <TopBar title={PAGE_TITLES[page]||'Dashboard'} role={user.role}/>
+        <div style={{ flex:1, overflowY:'auto', padding:'22px 26px' }}>
+          {renderPage()}
+        </div>
+      </div>
+      <TweaksPanel>
+        <TweakSection label="Branding">
+          <TweakColor label="Accent Color"  value={tweaks.accentColor}  onChange={v => setTweak('accentColor', v)} />
+          <TweakColor label="Sidebar Color" value={tweaks.sidebarColor} onChange={v => setTweak('sidebarColor', v)} />
+        </TweakSection>
+        <TweakSection label="Layout">
+          <TweakRadio label="Density" value={tweaks.density} options={['comfortable','compact']} onChange={v => setTweak('density', v)} />
+        </TweakSection>
+      </TweaksPanel>
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
