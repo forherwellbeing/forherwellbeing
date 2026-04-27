@@ -355,6 +355,9 @@ const API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
   : window.location.origin;
 let _bookingData = {};
 let _orderId = '';
+let _qrId = '';
+let _qrPoller = null;
+let _paymentDone = false;
 
 const _supabase = supabase.createClient(
   'https://yravazjxlpjjavtyxeea.supabase.co',
@@ -398,7 +401,76 @@ async function savePatientToSupabase(paymentId) {
   return data;
 }
 
-function goToPayment(e) {
+function resetQrPolling() {
+  if (_qrPoller) {
+    clearInterval(_qrPoller);
+    _qrPoller = null;
+  }
+}
+
+async function finishSuccessfulPayment(paymentId) {
+  if (_paymentDone) return;
+  _paymentDone = true;
+  resetQrPolling();
+  await savePatientToSupabase(paymentId);
+  generatePDF(paymentId);
+  document.getElementById('step-payment').style.display = 'none';
+  document.getElementById('step-success').style.display = 'block';
+  window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
+}
+
+async function pollQrPaymentStatus() {
+  if (!_qrId || _paymentDone) return;
+
+  try {
+    const verify = await fetch(`${API_BASE}/api/verify-qr-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ qr_id: _qrId })
+    });
+    const result = await verify.json();
+    if (result.paid && result.payment && result.payment.id) {
+      await finishSuccessfulPayment(result.payment.id);
+    }
+  } catch (err) {
+    console.error('QR payment poll failed:', err);
+  }
+}
+
+async function createDynamicQr() {
+  const qrImg = document.getElementById('qr-img');
+  const upiId = document.getElementById('upi-id-display');
+
+  qrImg.src = '';
+  qrImg.alt = 'Generating payment QR';
+  upiId.textContent = 'Generating QR...';
+  _paymentDone = false;
+  _orderId = '';
+  _qrId = '';
+  resetQrPolling();
+
+  const response = await fetch(`${API_BASE}/api/create-qr`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: _bookingData.name,
+      phone: _bookingData.phone,
+      email: _bookingData.email,
+      interest: _bookingData.interest,
+      booking_ref: _bookingData.bookingRef
+    })
+  });
+  const qr = await response.json();
+  if (!qr.id) throw new Error(qr.error || qr.description || 'QR creation failed');
+
+  _qrId = qr.id;
+  qrImg.src = qr.image_url;
+  qrImg.alt = 'Razorpay payment QR';
+  upiId.textContent = qr.id;
+  _qrPoller = setInterval(pollQrPaymentStatus, 5000);
+}
+
+async function goToPayment(e) {
   e.preventDefault();
   const fname = document.getElementById('b-fname').value;
   const lname = document.getElementById('b-lname').value;
@@ -407,7 +479,7 @@ function goToPayment(e) {
   const interest = document.getElementById('b-interest').value;
   const note = document.getElementById('b-note').value;
 
-  _bookingData = { name: fname+' '+lname, email, phone, interest, note };
+  _bookingData = { name: fname+' '+lname, email, phone, interest, note, bookingRef: `fhw_${Date.now()}` };
   // Save lead
   const lead = { timestamp: new Date().toISOString(), name: fname+' '+lname, email, phone, interest, note };
   const leads = JSON.parse(localStorage.getItem('fhw_leads') || '[]');
@@ -428,11 +500,6 @@ function goToPayment(e) {
   document.getElementById('phonepe-link').href = phonePeLink;
   document.getElementById('upi-link').href = upiLink;
 
-  // QR Code via Google Charts
-  const qrData = encodeURIComponent(`upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR`);
-  document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
-  document.getElementById('upi-id-display').textContent = UPI_ID;
-
   // WhatsApp confirm link
   const waMsg = encodeURIComponent(`Hi Dr. Raga, I have paid ₹1,000 for my consultation booking.\n\nName: ${fname} ${lname}\nPhone: ${phone}\nEmail: ${email}\nInterest: ${interest}\n\nPlease confirm my slot. Thank you!`);
   document.getElementById('wa-confirm-link').href = `https://wa.me/${WA_NUM}?text=${waMsg}`;
@@ -445,6 +512,15 @@ function goToPayment(e) {
   document.getElementById('step-form').style.display = 'none';
   document.getElementById('step-payment').style.display = 'block';
   window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
+
+  try {
+    await createDynamicQr();
+  } catch (err) {
+    document.getElementById('upi-id-display').textContent = UPI_ID;
+    const qrData = encodeURIComponent(`upi://pay?pa=${UPI_ID}&pn=ForHerWellbeing&am=${AMOUNT}&cu=INR`);
+    document.getElementById('qr-img').src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${qrData}`;
+    alert('Could not create a booking-specific Razorpay QR. The fallback UPI QR is shown instead, but it will not auto-verify. You can still use the Razorpay button for automatic verification.\n\nError: ' + err.message);
+  }
 }
 
 async function openRazorpay() {
@@ -486,11 +562,7 @@ async function openRazorpay() {
         const result = await verify.json();
 
         if (result.valid) {
-          await savePatientToSupabase(response.razorpay_payment_id);
-          generatePDF(response.razorpay_payment_id);
-          document.getElementById('step-payment').style.display = 'none';
-          document.getElementById('step-success').style.display = 'block';
-          window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
+          await finishSuccessfulPayment(response.razorpay_payment_id);
         } else {
           alert('Payment verification failed. Please contact us on WhatsApp.');
           btn.disabled = false;
