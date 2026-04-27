@@ -347,9 +347,9 @@
 
 <script>
 const UPI_ID = '8008383699@ybl';
-const AMOUNT = 1000;
+const AMOUNT = 1;
 const WA_NUM = '918008383699';
-const RZP_KEY = 'rzp_test_ShjKweXWG2tCOG';
+const RZP_KEY = 'rzp_live_SiRDPrCu26Dygx';
 const API_BASE = ['localhost', '127.0.0.1'].includes(window.location.hostname)
   ? 'https://forherwellbeing.com'
   : window.location.origin;
@@ -376,7 +376,7 @@ async function savePatientToSupabase(paymentId) {
     condition:             '',
     consult_notes:         note || '',
     payment_status:        'Paid',
-    amount_paid:           1000,
+    amount_paid:           1,
     payment_mode:          'Online / Razorpay',
     payment_date:          today,
     razorpay_payment_id:   paymentId,

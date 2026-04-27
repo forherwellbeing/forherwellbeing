@@ -25,7 +25,7 @@ module.exports = async function handler(req, res) {
     name: 'FHW Consultation',
     usage: 'single_use',
     fixed_amount: true,
-    payment_amount: 100000,
+    payment_amount: 100,
     description: 'Consultation booking',
     close_by: closeBy,
     notes: {
