@@ -163,10 +163,13 @@
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:1024px){
-  .abroad-hero-inner { grid-template-columns:1fr; gap:3rem; }
-  .abroad-hero-img { display:none; }
-  .story-grid { grid-template-columns:1fr; gap:3rem; }
-  .story-img { display:none; }
+  .abroad-hero-inner { grid-template-columns:1fr; gap:2rem; }
+  .abroad-hero-img { display:block; order:-1; }
+  .abroad-hero-img img { height:260px; }
+  .abroad-hero-img::after { display:none; }
+  .story-grid { grid-template-columns:1fr; gap:2rem; }
+  .story-img { display:block; }
+  .story-img img { height:240px; }
 }
 @media(max-width:768px){
   .happen-grid { grid-template-columns:1fr 1fr; }

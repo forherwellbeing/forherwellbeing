@@ -32,7 +32,7 @@
 }
 .course-icon { width: 40px; height: 40px; margin-bottom: 0.75rem; color: var(--plum); }
 .course-badge {
-  font-size: 0.63rem; font-weight: 500; letter-spacing: 0.15em;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
   text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 50px;
   display: inline-block; margin-bottom: 0.6rem;
 }
@@ -122,6 +122,7 @@ button.curriculum-open + .curriculum-body { max-height: 800px; }
 
 @media(max-width: 900px) { .course-grid { grid-template-columns: 1fr 1fr; } .how-grid { grid-template-columns: 1fr 1fr; } }
 @media(max-width: 600px) { .course-grid { grid-template-columns: 1fr; } .how-grid { grid-template-columns: 1fr 1fr; } .wb-form { flex-direction: column; } .wb-input { width: 100%; } }
+.diff-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 </style>
 </head>
 <body>
@@ -362,7 +363,7 @@ button.curriculum-open + .curriculum-body { max-height: 800px; }
       <span class="eyebrow">Which is Right for You?</span>
       <h2 class="section-title">Course vs.<br><em>3-Month Program</em></h2>
     </div>
-    <table class="diff-table fade-in">
+    <div class="diff-table-wrap"><table class="diff-table fade-in">
       <thead>
         <tr>
           <th></th>
@@ -379,7 +380,7 @@ button.curriculum-open + .curriculum-body { max-height: 800px; }
         <tr><td>Community support</td><td class="diff-cross">—</td><td class="diff-check">✓ WhatsApp group</td></tr>
         <tr><td>Best for</td><td>Self-starters who want to understand their body</td><td>Women ready for a guided, accountable transformation</td></tr>
       </tbody>
-    </table>
+    </table></div>
     <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;" class="fade-in">
       <a href="#" onclick="document.getElementById('wl-email').focus()" class="btn-primary">Join Course Waitlist</a>
       <a href="programs.html" class="btn-ghost" style="color:var(--plum);border-color:var(--border);">See 3-Month Programs →</a>
@@ -464,11 +465,19 @@ function joinWaitlist(e) {
 }
 function joinWaitlistFor(course) {
   const email = prompt('Enter your email to join the waitlist for this course:');
-  if (!email) return;
+  if (!email || !email.includes('@')) return;
   const leads = JSON.parse(localStorage.getItem('fhw_course_waitlist') || '[]');
   leads.push({ email, course, timestamp: new Date().toISOString() });
   localStorage.setItem('fhw_course_waitlist', JSON.stringify(leads));
-  alert('You\'re on the waitlist! Dr. Raga will notify you when this course launches.');
+  // Find the button that triggered this and update it inline
+  const btns = document.querySelectorAll(`[onclick="joinWaitlistFor('${course}')"]`);
+  btns.forEach(btn => {
+    btn.textContent = 'On Waitlist ✓';
+    btn.style.background = '#25D366';
+    btn.style.color = 'white';
+    btn.style.borderColor = '#25D366';
+    btn.onclick = null;
+  });
 }
 </script>
 <script src="shared.js?v=10"></script>

@@ -144,11 +144,11 @@
           <div class="eyebrow" style="margin-bottom:1rem;">Contact Details</div>
           <div class="contact-info-item">
             <div class="ci-label">Email</div>
-            <div class="ci-value"><a href="mailto:edigaragadeepthi@gmail.com" style="color:inherit;text-decoration:none;">edigaragadeepthi@gmail.com</a></div>
+            <div class="ci-value"><a href="mailto:forherwellbeing.official@gmail.com" style="color:inherit;text-decoration:none;">forherwellbeing.official@gmail.com</a></div>
           </div>
           <div class="contact-info-item">
             <div class="ci-label">WhatsApp</div>
-            <div class="ci-value"><a href="https://wa.me/918008383699" target="_blank" style="color:inherit;text-decoration:none;">+91 8008383699</a></div>
+            <div class="ci-value"><a href="https://wa.me/918008383699?text=Hi%20Dr.%20Raga%2C%20I%20would%20like%20to%20book%20a%20consultation." target="_blank" style="color:inherit;text-decoration:none;">Chat with us on WhatsApp</a></div>
           </div>
           <div class="contact-info-item">
             <div class="ci-label">Instagram</div>
@@ -259,6 +259,33 @@
             </div>
           </div>
 
+          <!-- SOCIAL PROOF — shown between form and payment -->
+          <div class="payment-step" id="step-social-proof" style="padding:1.5rem 2rem 0;text-align:left;">
+            <div style="display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1.25rem;">
+              <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;background:var(--cream);border-radius:8px;border-left:3px solid var(--gold);">
+                <span style="font-size:1.1rem;flex-shrink:0;">⭐</span>
+                <div>
+                  <div style="font-size:0.8rem;font-weight:500;color:var(--plum);margin-bottom:0.2rem;">"Lost 15 kg, conceived naturally in 3 months"</div>
+                  <div style="font-size:0.72rem;color:var(--text-light);">— Divyasree, Hyderabad</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;background:var(--cream);border-radius:8px;border-left:3px solid var(--gold);">
+                <span style="font-size:1.1rem;flex-shrink:0;">⭐</span>
+                <div>
+                  <div style="font-size:0.8rem;font-weight:500;color:var(--plum);margin-bottom:0.2rem;">"Regular periods in 20 days through diet alone"</div>
+                  <div style="font-size:0.72rem;color:var(--text-light);">— Padma, London</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:0.75rem;padding:0.9rem 1rem;background:var(--cream);border-radius:8px;border-left:3px solid var(--gold);">
+                <span style="font-size:1.1rem;flex-shrink:0;">⭐</span>
+                <div>
+                  <div style="font-size:0.8rem;font-weight:500;color:var(--plum);margin-bottom:0.2rem;">"The ₹1,000 consultation gave me more clarity than 3 years of doctors"</div>
+                  <div style="font-size:0.72rem;color:var(--text-light);">— Ananya, Bangalore</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- STEP 2: PAYMENT -->
           <div class="payment-step" id="step-payment">
             <div style="background:var(--plum);padding:1.5rem 2rem;text-align:left;margin:-0px;">
@@ -300,11 +327,11 @@
                   <img id="qr-img" src="" alt="UPI QR Code">
                 </div>
                 <div style="font-size:0.75rem;color:var(--text-light);margin-bottom:0.4rem;">UPI ID</div>
-                <div class="upi-id" id="upi-id-display">8008383699@ybl</div>
+                <div class="upi-id" id="upi-id-display">Loading…</div>
               </div>
 
               <div class="payment-note">
-                After paying, please share your payment screenshot on WhatsApp (+91 8008383699) to confirm your booking. Dr. Raga's team will then schedule your consultation within 24 hours.
+                After paying, tap the button below to send your payment screenshot via WhatsApp. Dr. Raga's team will confirm your booking and schedule your consultation within 24 hours.
               </div>
 
               <a id="wa-confirm-link" href="#" target="_blank" class="wa-confirm" style="margin-top:1.25rem;display:flex;">
@@ -318,8 +345,10 @@
           <div class="success-step" id="step-success">
             <div style="display:flex;justify-content:center;margin-bottom:1rem;"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
             <div style="font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--plum);margin-bottom:0.75rem;">You're All Set!</div>
-            <p style="font-size:0.88rem;font-weight:300;line-height:1.75;color:var(--text-mid);">Once Dr. Raga's team confirms your payment on WhatsApp, your consultation will be scheduled within 24 hours.<br><br>Check your email for a confirmation note.</p>
-            <a href="https://wa.me/918008383699" target="_blank" class="btn-primary" style="display:block;text-align:center;margin-top:1.5rem;background:#25D366;">Share Payment Screenshot on WhatsApp →</a>
+            <p style="font-size:0.88rem;font-weight:300;line-height:1.75;color:var(--text-mid);">Your booking is confirmed. Our team will contact you within 24 hours on the phone number and email you provided to schedule your session.<br><br>Check your email for a confirmation note.</p>
+            <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;font-size:0.85rem;color:#166534;line-height:1.75;">
+              Booking confirmed — no further action needed. We'll reach out to you shortly.
+            </div>
             <!-- POST-BOOKING UPSELL -->
             <div style="margin-top:2rem;padding:1.5rem;background:var(--cream);border-radius:6px;text-align:left;">
               <div style="font-size:0.65rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">While You Wait</div>
@@ -391,7 +420,7 @@ async function savePatientToSupabase(paymentId) {
     .single();
 
   if (error) {
-    console.error('Supabase save error:', error.message, payload);
+    console.error('Supabase save error:', error.message);
     throw new Error(`Payment was successful, but saving the patient to the dashboard failed: ${error.message}`);
   }
 
@@ -402,6 +431,7 @@ async function finishSuccessfulPayment(paymentId) {
   await savePatientToSupabase(paymentId);
   generatePDF(paymentId);
   document.getElementById('step-payment').style.display = 'none';
+  document.getElementById('step-social-proof').style.display = 'none';
   document.getElementById('step-success').style.display = 'block';
   window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
 }
@@ -450,8 +480,9 @@ async function goToPayment(e) {
   document.getElementById('payment-name').textContent = fname + ' ' + lname;
   document.getElementById('payment-interest').textContent = interest;
 
-  // Show payment step
+  // Show payment step + social proof
   document.getElementById('step-form').style.display = 'none';
+  document.getElementById('step-social-proof').style.display = 'block';
   document.getElementById('step-payment').style.display = 'block';
   window.scrollTo({ top: document.querySelector('.booking-box').offsetTop - 100, behavior: 'smooth' });
 }
@@ -632,7 +663,7 @@ function generatePDF(paymentId) {
   doc.line(margin, 240, W - margin, 240);
   doc.setTextColor(150, 150, 150);
   doc.setFontSize(8);
-  doc.text('For Her Wellbeing  |  forherwellbeing.com  |  WhatsApp: +91 8008383699', margin, 248);
+  doc.text('For Her Wellbeing  |  forherwellbeing.com  |  forherwellbeing.official@gmail.com', margin, 248);
   doc.text('This is a computer-generated confirmation. No signature required.', margin, 255);
 
   doc.save(`FHW-Booking-${_bookingData.name.replace(/\s+/g, '-')}.pdf`);
@@ -668,7 +699,7 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">What happens after I pay?<span class="faq-icon">+</span></button>
-        <div class="faq-a">After payment, share your screenshot on WhatsApp (+91 8008383699). Dr. Raga's team will confirm your booking within a few hours and share a calendar link to schedule your video call at a time that works for you.</div>
+        <div class="faq-a">After payment, use the WhatsApp button shown on screen to send your screenshot to our team. We will confirm your booking within a few hours and share a calendar link to schedule your video call at a time that works for you.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">Is ₹1,000 refundable if I change my mind?<span class="faq-icon">+</span></button>

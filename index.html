@@ -42,7 +42,7 @@
       },
       "areaServed": ["India", "Germany", "United Kingdom", "United States", "Canada", "Australia", "Singapore", "Netherlands"],
       "priceRange": "₹1,000 – ₹1,00,000",
-      "contactPoint": {"@type": "ContactPoint", "telephone": "+918008383699", "contactType": "customer service", "availableLanguage": ["English", "Telugu"]}
+      "contactPoint": {"@type": "ContactPoint", "email": "forherwellbeing.official@gmail.com", "contactType": "customer service", "availableLanguage": ["English", "Telugu"]}
     },
     {
       "@type": "FAQPage",
@@ -66,7 +66,7 @@
 
 /* ===== HERO ===== */
 .hero {
-  min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 90svh; display: grid; grid-template-columns: 3fr 2fr;
   background: var(--plum); position: relative; overflow: hidden;
 }
 .hero::before {
@@ -251,21 +251,28 @@
 /* ===== RESPONSIVE ===== */
 @media(max-width:1024px){
   .hero {
-    grid-template-columns:1fr;
-    background: linear-gradient(to bottom, rgba(74,16,66,0.88) 0%, rgba(74,16,66,0.78) 60%, rgba(74,16,66,0.92) 100%),
-                url('uploads/IMG_5069-62fd8cb3.jpg') center top / cover no-repeat;
+    grid-template-columns: 1fr;
+    grid-template-rows: 340px auto;
+    background: var(--plum);
+    min-height: auto;
   }
   .hero::before { display:none; }
-  .hero-right { display:none; }
+  .hero-right {
+    display: block;
+    height: 340px;
+    border-left: none;
+    border-bottom: 1px solid rgba(255,253,249,0.1);
+    order: -1;
+  }
   .about-strip-grid { grid-template-columns:1fr; gap:3rem; }
   .about-img img { height:380px; }
   .resp-2col, .resp-2col-lg { grid-template-columns:1fr; gap:3rem; }
   .batch-grid { grid-template-columns:1fr 1fr; gap:1rem; }
 }
 @media(max-width:768px){
-  /* Hero — remove dead empty space below buttons on mobile */
-  .hero { min-height:auto; }
-  .hero-left { padding:5rem 1.25rem 4.5rem; }
+  .hero-right { height: 280px; }
+  .mute-btn { display:none; }
+  .hero-left { padding:3rem 1.25rem 4rem; }
   .symptom-cards { grid-template-columns:1fr 1fr; }
   .prog-grid { grid-template-columns:1fr; }
   .video-grid { grid-template-columns:1fr; }
@@ -278,7 +285,8 @@
   .batch-grid { grid-template-columns:1fr; }
 }
 @media(max-width:480px){
-  .hero-left { padding:4.5rem 1.25rem 4rem; }
+  .hero-right { height: 240px; }
+  .hero-left { padding:2.5rem 1.25rem 3.5rem; }
   .symptom-cards { grid-template-columns:1fr; }
   .impact-grid { grid-template-columns:1fr 1fr; }
   .abroad-cards { grid-template-columns:1fr 1fr; gap:0.75rem; }
@@ -315,7 +323,7 @@
     </div>
   </div>
   <div class="hero-right">
-    <video id="hero-video" autoplay muted loop playsinline src="uploads/hero-video.mp4"></video>
+    <video id="hero-video" autoplay muted loop playsinline src="uploads/hero-video.mp4" poster="uploads/IMG_5069-62fd8cb3.jpg"></video>
     <div class="hero-overlay"></div>
     <button class="mute-btn" id="mute-btn" onclick="toggleMute()" aria-label="Toggle sound">
       <svg id="mute-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>

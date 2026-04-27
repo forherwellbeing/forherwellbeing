@@ -75,7 +75,7 @@ function initSite(activePage) {
         </li>
 
       </ul>
-      <button class="nav-hamburger" aria-label="Open menu" onclick="toggleMobileNav()">
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleMobileNav()">
         <span></span><span></span><span></span>
       </button>
     </nav>`);
@@ -140,7 +140,7 @@ function initSite(activePage) {
               <div class="footer-col-title">Contact</div>
               <ul class="footer-col-links">
                 <li><a href="contact.html">Book — ₹1,000</a></li>
-                <li><a href="mailto:edigaragadeepthi@gmail.com">Email Us</a></li>
+                <li><a href="mailto:forherwellbeing.official@gmail.com">Email Us</a></li>
                 <li><a href="https://wa.me/${WHATSAPP_NUM}" target="_blank">WhatsApp</a></li>
                 <li><a href="about.html#partner">Partner With Us</a></li>
               </ul>
@@ -185,8 +185,15 @@ function initSite(activePage) {
 
 function toggleMobileNav() {
   const nl = document.getElementById('nav-links');
+  const burger = document.getElementById('nav-hamburger');
   nl.classList.toggle('mobile-open');
-  if (!nl.classList.contains('mobile-open')) {
+  const isOpen = nl.classList.contains('mobile-open');
+  if (burger) {
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    burger.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    burger.classList.toggle('is-open', isOpen);
+  }
+  if (!isOpen) {
     nl.querySelectorAll('.nav-item.mobile-expanded').forEach(i => i.classList.remove('mobile-expanded'));
   }
 }
@@ -198,6 +205,7 @@ document.addEventListener('click', function(e) {
   if (nav.classList.contains('mobile-open') && !nav.contains(e.target) && !burger.contains(e.target)) {
     nav.classList.remove('mobile-open');
     nav.querySelectorAll('.nav-item.mobile-expanded').forEach(i => i.classList.remove('mobile-expanded'));
+    if (burger) { burger.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-label','Open menu'); }
     return;
   }
   // mobile accordion — tap parent link to expand/collapse
@@ -260,9 +268,13 @@ s.textContent = `
   .fhw-cookie-btns { display: flex; gap: 0.6rem; flex-shrink: 0; }
   .fhw-cookie-accept { background: var(--gold); color: var(--plum); border: none; border-radius: 50px; padding: 0.5rem 1.35rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
   .fhw-cookie-accept:hover { opacity: 0.85; }
-  .fhw-cookie-decline { background: transparent; color: rgba(255,253,249,0.45); border: 1px solid rgba(255,253,249,0.12); border-radius: 50px; padding: 0.5rem 1.1rem; font-family: var(--sans); font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
-  .fhw-cookie-decline:hover { color: rgba(255,253,249,0.8); border-color: rgba(255,253,249,0.3); }
+  .fhw-cookie-decline { background: transparent; color: rgba(255,253,249,0.65); border: 1px solid rgba(255,253,249,0.2); border-radius: 50px; padding: 0.5rem 1.1rem; font-family: var(--sans); font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
+  .fhw-cookie-decline:hover { color: rgba(255,253,249,0.9); border-color: rgba(255,253,249,0.4); }
   @media(max-width:640px) { #fhw-cookie { padding: 1rem 1.25rem; } }
+  .nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-hamburger span { transition: transform 0.25s ease, opacity 0.2s ease; display: block; }
 `;
 document.head.appendChild(s);
 
