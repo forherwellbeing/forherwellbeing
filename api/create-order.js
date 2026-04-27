@@ -16,7 +16,7 @@ module.exports = async function handler(req, res) {
 
   const auth = Buffer.from(`${keyId}:${keySecret}`).toString('base64');
   const body = JSON.stringify({
-    amount: 100,
+    amount: 100000,
     currency: 'INR',
     receipt: `rcpt_${Date.now()}`
   });
