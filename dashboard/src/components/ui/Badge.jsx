@@ -7,6 +7,8 @@ const COLORS = {
   Pending:   { bg:'#FFF3E8', c:'#7A5A2D' },
   Paid:      { bg:'#E8F5EE', c:'#1E6B40' },
   Partial:   { bg:'#FFF3E8', c:'#7A5A2D' },
+  Cancelled: { bg:'#F5E8E8', c:'#7A2D2D' },
+  Manual:    { bg:'#F0EDF8', c:'#5A4A7A' },
 }
 
 export default function Badge({ text }) {

@@ -6,8 +6,10 @@ import Modal   from '../../components/ui/Modal'
 import Btn     from '../../components/ui/Button'
 import Icon    from '../../components/ui/Icon'
 import { FF, Input, Sel } from '../../components/ui/FormField'
+import { useAppointments } from '../../hooks/useAppointments'
 
-const PROGRAMS = ['All Programs','PCOS Healing',"Women's Obesity",'Metabolic Reset','Diabetes Management','Prenatal Wellness','Postnatal Recovery']
+const TODAY    = new Date().toISOString().split('T')[0]
+const PROGRAMS =['All Programs','PCOS Healing',"Women's Obesity",'Metabolic Reset','Diabetes Management','Prenatal Wellness','Postnatal Recovery']
 const STATUSES = ['All Status','Active','Inactive','Completed']
 const BLANK    = { name:'', email:'', phone:'', condition:'', program:'', patient_status:'Active' }
 
@@ -52,6 +54,10 @@ function EmptyState() {
 
 export default function StaffPatients({ T }) {
   const { patients, loading, error, addPatient, updatePatient, deletePatient } = usePatients()
+  const { addAppointment } = useAppointments()
+  const [schedPt,  setSchedPt] = useState(null)
+  const [schedForm, setSchedForm] = useState({ appointment_date: TODAY, appointment_time:'10:00', type:'Initial', meet_link:'', notes:'' })
+  const [schedSaving, setSchedSaving] = useState(false)
   const [search,  setSearch]  = useState('')
   const [progFilter, setProg] = useState('All Programs')
   const [statFilter, setStat] = useState('All Status')
@@ -89,6 +95,14 @@ export default function StaffPatients({ T }) {
   }
 
   const handleDelete = async id => { if (window.confirm('Delete this patient record?')) await deletePatient(id) }
+
+  const handleSchedule = async () => {
+    if (!schedPt || !schedForm.appointment_date) return
+    setSchedSaving(true)
+    const raw = patients.find(p => p.id === schedPt.id)
+    await addAppointment({ patient_id: raw.id, patient_name: raw.name, patient_email: raw.email || '', patient_phone: raw.phone || '', program: raw.program || '', doctor:'Dr. Raga Deepthi', appointment_date: schedForm.appointment_date, appointment_time: schedForm.appointment_time, type: schedForm.type, meet_link: schedForm.meet_link, notes: schedForm.notes, status:'Scheduled' })
+    setSchedSaving(false); setSchedPt(null); setSchedForm({ appointment_date: TODAY, appointment_time:'10:00', type:'Initial', meet_link:'', notes:'' })
+  }
 
   if (error) return <div style={{ color:'#D45B5B', padding:20 }}>Error loading patients: {error}</div>
 
@@ -152,6 +166,7 @@ export default function StaffPatients({ T }) {
                   <td style={{ padding:'12px 15px' }}>
                     <div style={{ display:'flex', gap:6 }}>
                       <Btn size="sm" variant="secondary" T={T} onClick={() => openEdit(p)}>Edit</Btn>
+                      <Btn size="sm" variant="primary"   T={T} onClick={() => setSchedPt(p)}>Schedule</Btn>
                       <Btn size="sm" variant="danger"    T={T} onClick={() => handleDelete(p.id)}>Delete</Btn>
                     </div>
                   </td>
@@ -161,6 +176,25 @@ export default function StaffPatients({ T }) {
           </table>
         </div>
       )}
+
+      {/* Schedule consultation modal */}
+      <Modal open={!!schedPt} onClose={() => setSchedPt(null)} title={`Schedule — ${schedPt?.name || ''}`}>
+        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+          <FF label="Date *"><Input type="date" value={schedForm.appointment_date} onChange={e => setSchedForm(f => ({ ...f, appointment_date: e.target.value }))} /></FF>
+          <FF label="Time *"><Input type="time" value={schedForm.appointment_time} onChange={e => setSchedForm(f => ({ ...f, appointment_time: e.target.value }))} /></FF>
+          <FF label="Type">
+            <Sel value={schedForm.type} onChange={e => setSchedForm(f => ({ ...f, type: e.target.value }))}>
+              <option>Initial</option><option>Follow-up</option><option>Emergency</option>
+            </Sel>
+          </FF>
+          <FF label="Meet Link"><Input value={schedForm.meet_link} onChange={e => setSchedForm(f => ({ ...f, meet_link: e.target.value }))} placeholder="https://meet.google.com/…" /></FF>
+        </div>
+        <FF label="Notes"><Input value={schedForm.notes} onChange={e => setSchedForm(f => ({ ...f, notes: e.target.value }))} placeholder="Preparation instructions…" /></FF>
+        <div style={{ display:'flex', gap:10, justifyContent:'flex-end' }}>
+          <Btn variant="ghost"   T={T} onClick={() => setSchedPt(null)}>Cancel</Btn>
+          <Btn variant="primary" T={T} onClick={handleSchedule} disabled={schedSaving}>{schedSaving ? 'Scheduling…' : 'Confirm Appointment'}</Btn>
+        </div>
+      </Modal>
 
       <Modal open={showModal} onClose={() => { setShow(false); setEditPt(null) }} title={editPt ? 'Edit Patient' : 'Add Patient Manually'}>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
