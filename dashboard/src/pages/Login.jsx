@@ -3,7 +3,6 @@ import { mkT, TWEAK_DEFAULTS } from '../theme'
 import { supabase } from '../lib/supabase'
 
 export default function Login({ onLogin }) {
-  const [role, setRole]       = useState('doctor')
   const [email, setEmail]     = useState('')
   const [password, setPass]   = useState('')
   const [error, setError]     = useState('')
@@ -13,13 +12,14 @@ export default function Login({ onLogin }) {
   const handleLogin = async () => {
     setLoading(true)
     setError('')
-    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
+    const { data, error: authError } = await supabase.auth.signInWithPassword({ email, password })
     if (authError) {
       setError('Invalid email or password.')
       setLoading(false)
       return
     }
-    onLogin(role)
+    const userRole = data.user.user_metadata?.role || 'doctor'
+    onLogin(userRole)
   }
 
   return (
@@ -55,15 +55,6 @@ export default function Login({ onLogin }) {
           <div style={{ marginBottom:34 }}>
             <div style={{ fontFamily:"'Playfair Display',serif", fontSize:27, fontWeight:700, color:'#1A1A2E', marginBottom:5 }}>Welcome back</div>
             <div style={{ fontSize:14, color:'#7A7A8A' }}>Sign in to access your dashboard</div>
-          </div>
-
-          {/* Role toggle */}
-          <div style={{ background:'#FAF8F5', borderRadius:12, padding:4, display:'flex', marginBottom:26, border:'1.5px solid #EDE8E5' }}>
-            {['doctor','staff'].map(r => (
-              <button key={r} onClick={() => { setRole(r); setError('') }} style={{ flex:1, padding:'10px', borderRadius:9, border:'none', cursor:'pointer', background:role===r?'#fff':'transparent', color:role===r?'#1A1A2E':'#7A7A8A', fontWeight:role===r?600:400, fontSize:14, transition:'all 0.18s', boxShadow:role===r?'0 2px 8px rgba(0,0,0,0.08)':'none', fontFamily:'inherit' }}>
-                {r === 'doctor' ? '◉ Doctor' : '⊞ Staff'}
-              </button>
-            ))}
           </div>
 
           <div style={{ marginBottom:14 }}>
