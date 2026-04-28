@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { mkT, TWEAK_DEFAULTS } from '../theme'
 
-const DEMO = {
+const CREDENTIALS = {
   doctor: { email:'raga@forherwellbeing.com',  pass:'doctor123' },
   staff:  { email:'staff@forherwellbeing.com', pass:'staff123'  },
 }
@@ -15,17 +15,13 @@ export default function Login({ onLogin }) {
   const T = mkT(TWEAK_DEFAULTS)
 
   const handleLogin = () => {
-    const c = DEMO[role]
+    const c = CREDENTIALS[role]
     if (email === c.email && password === c.pass) {
       setLoading(true)
       setTimeout(() => onLogin(role), 700)
     } else {
-      setError('Invalid credentials. Use the demo credentials below.')
+      setError('Invalid email or password.')
     }
-  }
-
-  const fillDemo = (r) => {
-    setRole(r); setEmail(DEMO[r].email); setPass(DEMO[r].pass); setError('')
   }
 
   return (
@@ -74,7 +70,7 @@ export default function Login({ onLogin }) {
 
           <div style={{ marginBottom:14 }}>
             <label style={{ display:'block', fontSize:13, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>Email address</label>
-            <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder={DEMO[role].email} style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'11px 13px', fontSize:14, background:'#FAFAFA', color:'#1A1A2E', outline:'none' }} />
+            <input value={email} onChange={e => setEmail(e.target.value)} type="email" placeholder="Email address" style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'11px 13px', fontSize:14, background:'#FAFAFA', color:'#1A1A2E', outline:'none' }} />
           </div>
           <div style={{ marginBottom:8 }}>
             <label style={{ display:'block', fontSize:13, fontWeight:500, color:'#1A1A2E', marginBottom:5 }}>Password</label>
@@ -87,15 +83,6 @@ export default function Login({ onLogin }) {
             {loading ? 'Signing in…' : 'Sign In →'}
           </button>
 
-          <div style={{ marginTop:22, padding:14, background:T.accentLight, borderRadius:10, border:`1px solid ${T.accent}28` }}>
-            <div style={{ fontSize:12, fontWeight:600, color:T.accent, marginBottom:8 }}>Demo credentials</div>
-            {[['Doctor','doctor'],['Staff','staff']].map(([label, r]) => (
-              <div key={r} style={{ fontSize:12, color:'#1A1A2E', marginBottom:5 }}>
-                <strong>{label}:</strong> {DEMO[r].email} / <code style={{ background:'rgba(0,0,0,0.06)', padding:'1px 5px', borderRadius:4 }}>{DEMO[r].pass}</code>
-                <button onClick={() => fillDemo(r)} style={{ marginLeft:8, background:T.accent, color:'#fff', border:'none', borderRadius:4, padding:'1px 8px', fontSize:11, cursor:'pointer', fontFamily:'inherit' }}>Use</button>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>

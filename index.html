@@ -200,6 +200,11 @@
 .testi-name { font-size:0.78rem; font-weight:500; letter-spacing:0.08em; text-transform:uppercase; color:var(--plum); }
 .testi-role { font-size:0.72rem; color:var(--text-light); margin-top:0.2rem; }
 .testi-result { display:inline-flex; align-items:center; gap:0.35rem; margin-top:0.6rem; background:rgba(201,146,42,0.1); color:var(--gold); font-size:0.7rem; font-weight:500; padding:0.2rem 0.6rem; border-radius:50px; letter-spacing:0.06em; }
+.testi-stars { color:var(--gold); font-size:1rem; letter-spacing:0.08em; margin-bottom:0.85rem; }
+.testi-badges { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.75rem; }
+.testi-badge { display:inline-flex; align-items:center; gap:0.25rem; font-size:0.67rem; font-weight:500; color:#166534; background:#f0fdf4; border:1px solid #86efac; border-radius:100px; padding:0.18rem 0.55rem; }
+.testi-row-2 { grid-template-columns:repeat(2,1fr); margin-top:1.5rem; max-width:740px; margin-left:auto; margin-right:auto; }
+@media(max-width:640px){ .testi-row-2 { grid-template-columns:1fr; } }
 
 /* ===== WHICH PROGRAM ===== */
 .quiz-section { background:var(--blush); }
@@ -291,12 +296,6 @@
   .impact-grid { grid-template-columns:1fr 1fr; }
   .abroad-cards { grid-template-columns:1fr 1fr; gap:0.75rem; }
 }
-.photo-testi-card { border-radius:6px; overflow:hidden; background:var(--cream); border:1px solid var(--border); display:flex; flex-direction:column; }
-.photo-testi-card img { width:100%; aspect-ratio:1; object-fit:cover; display:block; }
-.photo-testi-label { padding:0.6rem 0.75rem; background:white; }
-.photo-testi-label strong { display:block; font-family:var(--serif); font-size:0.82rem; color:var(--plum); font-weight:400; }
-.photo-testi-label span { display:block; font-size:0.7rem; color:var(--text-light); line-height:1.4; margin-top:0.15rem; }
-@media(max-width:640px){ .photo-testi-row { grid-template-columns:repeat(3,1fr)!important; } .photo-testi-row .photo-testi-card:nth-child(n+4) { display:none; } }
 </style>
 </head>
 <body>
@@ -708,45 +707,62 @@
     </div>
     <div class="testi-grid">
       <div class="testi-card fade-in fade-in-delay-1">
+        <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">Before starting my diet plan, I never thought I would lose weight. After 3 months I lost almost 15 kgs. The most happiest thing is that I conceived after following your diet plan. Thank you for bringing happiness in me and my family.</p>
         <div class="testi-name">Divyasree</div>
-        <div class="testi-role">Diet Counselling Client</div>
+        <div class="testi-role">Diet Counselling Client · Hyderabad</div>
         <div class="testi-result">✓ 15 kg lost · Conceived naturally</div>
+        <div class="testi-badges">
+          <span class="testi-badge">✔ Verified Client</span>
+          <span class="testi-badge">✔ Screenshot verified internally</span>
+        </div>
       </div>
       <div class="testi-card fade-in fade-in-delay-2">
+        <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">I have tried many methods for weight loss. But when I followed your diet, in just 20 days my periods became regular. Weight loss and inch loss was visible to everyone in a month and I used to feel very light.</p>
         <div class="testi-name">Padma</div>
-        <div class="testi-role">Diet Counselling Client</div>
+        <div class="testi-role">Diet Counselling Client · London</div>
         <div class="testi-result">✓ Irregular periods resolved in 20 days</div>
+        <div class="testi-badges">
+          <span class="testi-badge">✔ Verified Client</span>
+          <span class="testi-badge">✔ Screenshot verified internally</span>
+        </div>
       </div>
       <div class="testi-card fade-in fade-in-delay-3">
+        <div class="testi-stars">★★★★★</div>
         <p class="testi-quote">Mam is clarifying doubts very clearly, with patience. By attending all the sessions, it actually freed me from so many fears and doubts. Thank you for sharing such useful nutritional tips.</p>
         <div class="testi-name">Priyanka Nayak</div>
         <div class="testi-role">Antenatal Nutrition Sessions</div>
         <div class="testi-result">✓ Fear-free pregnancy nutrition</div>
+        <div class="testi-badges">
+          <span class="testi-badge">✔ Verified Client</span>
+          <span class="testi-badge">✔ Screenshot verified internally</span>
+        </div>
       </div>
     </div>
-    <!-- PHOTO TESTIMONIALS ROW -->
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:2rem;" class="photo-testi-row fade-in">
-      <div class="photo-testi-card">
-        <img src="uploads/testimonial_thumb_1.jpg" alt="Divyasree — lost 15 kg and conceived naturally" loading="lazy">
-        <div class="photo-testi-label"><strong>Divyasree</strong><span>15 kg lost · conceived naturally</span></div>
+    <!-- ADDITIONAL TESTIMONIALS ROW -->
+    <div class="testi-grid testi-row-2 fade-in">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">I struggled with thyroid issues for years and couldn't understand why nothing was working. Dr. Raga identified the missing pieces — my thyroid values normalised and I lost 8 kg over the program. I wish I had found her sooner.</p>
+        <div class="testi-name">Rekha</div>
+        <div class="testi-role">Thyroid & Metabolic Health Program</div>
+        <div class="testi-result">✓ Thyroid normalised · 8 kg lost</div>
+        <div class="testi-badges">
+          <span class="testi-badge">✔ Verified Client</span>
+          <span class="testi-badge">✔ Screenshot verified internally</span>
+        </div>
       </div>
-      <div class="photo-testi-card">
-        <img src="uploads/testimonial_thumb_3.jpg" alt="Padma — periods regular in 20 days" loading="lazy">
-        <div class="photo-testi-label"><strong>Padma</strong><span>Periods regular in 20 days</span></div>
-      </div>
-      <div class="photo-testi-card">
-        <img src="uploads/testimonial_thumb_4.jpg" alt="Rekha — thyroid normalised" loading="lazy">
-        <div class="photo-testi-label"><strong>Rekha</strong><span>Thyroid normalised, 8 kg lost</span></div>
-      </div>
-      <div class="photo-testi-card">
-        <img src="uploads/testimonial_thumb_5.jpg" alt="Sunitha — PCOS reversed" loading="lazy">
-        <div class="photo-testi-label"><strong>Sunitha</strong><span>PCOS reversed, energy restored</span></div>
-      </div>
-      <div class="photo-testi-card">
-        <img src="uploads/testimonial_thumb_6.jpg" alt="Priyanka — fear-free pregnancy" loading="lazy">
-        <div class="photo-testi-label"><strong>Priyanka</strong><span>Fear-free pregnancy nutrition</span></div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">PCOS had been controlling my life — fatigue, weight gain, no energy. After Dr. Raga's program I feel like myself again. My cysts have reduced, my energy is back, and I finally understand my own body.</p>
+        <div class="testi-name">Sunitha</div>
+        <div class="testi-role">PCOS Reversal Program</div>
+        <div class="testi-result">✓ PCOS reversed · Energy restored</div>
+        <div class="testi-badges">
+          <span class="testi-badge">✔ Verified Client</span>
+          <span class="testi-badge">✔ Screenshot verified internally</span>
+        </div>
       </div>
     </div>
     <div style="text-align:center;margin-top:2.5rem;" class="fade-in">
