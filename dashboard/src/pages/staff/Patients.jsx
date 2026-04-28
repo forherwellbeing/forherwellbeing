@@ -6,6 +6,7 @@ import Modal   from '../../components/ui/Modal'
 import Btn     from '../../components/ui/Button'
 import Icon    from '../../components/ui/Icon'
 import { FF, Input, Sel } from '../../components/ui/FormField'
+import SlotPicker          from '../../components/ui/SlotPicker'
 import { useAppointments } from '../../hooks/useAppointments'
 
 const TODAY    = new Date().toISOString().split('T')[0]
@@ -54,7 +55,7 @@ function EmptyState() {
 
 export default function StaffPatients({ T }) {
   const { patients, loading, error, addPatient, updatePatient, deletePatient } = usePatients()
-  const { addAppointment } = useAppointments()
+  const { appointments, addAppointment } = useAppointments()
   const [schedPt,  setSchedPt] = useState(null)
   const [schedForm, setSchedForm] = useState({ appointment_date: TODAY, appointment_time:'10:00', type:'Initial', meet_link:'', notes:'' })
   const [schedSaving, setSchedSaving] = useState(false)
@@ -180,19 +181,31 @@ export default function StaffPatients({ T }) {
       {/* Schedule consultation modal */}
       <Modal open={!!schedPt} onClose={() => setSchedPt(null)} title={`Schedule — ${schedPt?.name || ''}`}>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
-          <FF label="Date *"><Input type="date" value={schedForm.appointment_date} onChange={e => setSchedForm(f => ({ ...f, appointment_date: e.target.value }))} /></FF>
-          <FF label="Time *"><Input type="time" value={schedForm.appointment_time} onChange={e => setSchedForm(f => ({ ...f, appointment_time: e.target.value }))} /></FF>
+          <FF label="Date *">
+            <Input type="date" value={schedForm.appointment_date} onChange={e => setSchedForm(f => ({ ...f, appointment_date: e.target.value, appointment_time:'' }))} />
+          </FF>
           <FF label="Type">
             <Sel value={schedForm.type} onChange={e => setSchedForm(f => ({ ...f, type: e.target.value }))}>
               <option>Initial</option><option>Follow-up</option><option>Emergency</option>
             </Sel>
           </FF>
-          <FF label="Meet Link"><Input value={schedForm.meet_link} onChange={e => setSchedForm(f => ({ ...f, meet_link: e.target.value }))} placeholder="https://meet.google.com/…" /></FF>
         </div>
+        <FF label="Select a Time Slot *">
+          <SlotPicker
+            T={T}
+            selected={schedForm.appointment_time}
+            onChange={v => setSchedForm(f => ({ ...f, appointment_time: v }))}
+            bookedTimes={appointments
+              .filter(a => a.appointment_date === schedForm.appointment_date && a.status !== 'Cancelled')
+              .map(a => a.appointment_time)
+            }
+          />
+        </FF>
+        <FF label="Meet Link"><Input value={schedForm.meet_link} onChange={e => setSchedForm(f => ({ ...f, meet_link: e.target.value }))} placeholder="https://meet.google.com/…" /></FF>
         <FF label="Notes"><Input value={schedForm.notes} onChange={e => setSchedForm(f => ({ ...f, notes: e.target.value }))} placeholder="Preparation instructions…" /></FF>
         <div style={{ display:'flex', gap:10, justifyContent:'flex-end' }}>
           <Btn variant="ghost"   T={T} onClick={() => setSchedPt(null)}>Cancel</Btn>
-          <Btn variant="primary" T={T} onClick={handleSchedule} disabled={schedSaving}>{schedSaving ? 'Scheduling…' : 'Confirm Appointment'}</Btn>
+          <Btn variant="primary" T={T} onClick={handleSchedule} disabled={schedSaving || !schedForm.appointment_date || !schedForm.appointment_time}>{schedSaving ? 'Scheduling…' : 'Confirm Appointment'}</Btn>
         </div>
       </Modal>
 

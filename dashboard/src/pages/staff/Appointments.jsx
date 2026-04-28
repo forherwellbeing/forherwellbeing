@@ -5,6 +5,7 @@ import Modal   from '../../components/ui/Modal'
 import Btn     from '../../components/ui/Button'
 import Icon    from '../../components/ui/Icon'
 import { FF, Input, Sel, Textarea2 } from '../../components/ui/FormField'
+import SlotPicker          from '../../components/ui/SlotPicker'
 import { useAppointments } from '../../hooks/useAppointments'
 import { usePatients }     from '../../hooks/usePatients'
 
@@ -202,20 +203,25 @@ export default function StaffAppointments({ T }) {
             </FF>
           )}
           <FF label="Date *">
-            <Input type="date" value={form.appointment_date} onChange={upd('appointment_date')} />
-          </FF>
-          <FF label="Time *">
-            <Input type="time" value={form.appointment_time} onChange={upd('appointment_time')} />
+            <Input type="date" value={form.appointment_date} onChange={e => { upd('appointment_date')(e); upd('appointment_time')({ target:{ value:'' } }) }} />
           </FF>
           <FF label="Type">
             <Sel value={form.type} onChange={upd('type')}>
               <option>Initial</option><option>Follow-up</option><option>Emergency</option>
             </Sel>
           </FF>
-          <FF label="Doctor">
-            <Input value={form.doctor} onChange={upd('doctor')} />
-          </FF>
         </div>
+        <FF label="Select a Time Slot *">
+          <SlotPicker
+            T={T}
+            selected={form.appointment_time}
+            onChange={v => upd('appointment_time')({ target:{ value:v } })}
+            bookedTimes={appointments
+              .filter(a => a.appointment_date === form.appointment_date && a.status !== 'Cancelled' && (!editAppt || a.id !== editAppt.id))
+              .map(a => a.appointment_time)
+            }
+          />
+        </FF>
         <FF label="Google Meet / Video Link">
           <Input value={form.meet_link} onChange={upd('meet_link')} placeholder="https://meet.google.com/xxx-xxxx-xxx" />
         </FF>
