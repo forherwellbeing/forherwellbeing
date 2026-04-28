@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { mkT, TWEAK_DEFAULTS } from '../theme'
-
-const CREDENTIALS = {
-  doctor: { email:'raga@forherwellbeing.com',  pass:'doctor123' },
-  staff:  { email:'staff@forherwellbeing.com', pass:'staff123'  },
-}
+import { supabase } from '../lib/supabase'
 
 export default function Login({ onLogin }) {
   const [role, setRole]       = useState('doctor')
@@ -14,14 +10,16 @@ export default function Login({ onLogin }) {
   const [loading, setLoading] = useState(false)
   const T = mkT(TWEAK_DEFAULTS)
 
-  const handleLogin = () => {
-    const c = CREDENTIALS[role]
-    if (email === c.email && password === c.pass) {
-      setLoading(true)
-      setTimeout(() => onLogin(role), 700)
-    } else {
+  const handleLogin = async () => {
+    setLoading(true)
+    setError('')
+    const { error: authError } = await supabase.auth.signInWithPassword({ email, password })
+    if (authError) {
       setError('Invalid email or password.')
+      setLoading(false)
+      return
     }
+    onLogin(role)
   }
 
   return (
