@@ -2,7 +2,19 @@ import Avatar    from '../../components/ui/Avatar'
 import Badge     from '../../components/ui/Badge'
 import StatCard  from '../../components/StatCard'
 import Icon      from '../../components/ui/Icon'
+import Btn       from '../../components/ui/Button'
 import { usePatients } from '../../hooks/usePatients'
+
+const exportCSV = rows => {
+  const headers = 'Patient,Program,Amount Paid,Date,Method,Status'
+  const body = rows.map(r =>
+    [r.patient, r.program, r.paid, r.date, r.method, r.status].map(v => `"${String(v||'').replace(/"/g,'""')}"`).join(',')
+  ).join('\n')
+  const blob = new Blob([headers + '\n' + body], { type:'text/csv' })
+  const url  = URL.createObjectURL(blob)
+  const a    = document.createElement('a'); a.href = url; a.download = 'billing.csv'; a.click()
+  URL.revokeObjectURL(url)
+}
 
 const money   = v => `₹${Number(v || 0).toLocaleString('en-IN')}`
 const fmtDate = v => {
@@ -41,6 +53,14 @@ export default function StaffBilling({ T }) {
         <StatCard icon={<Icon name="calendar" size={18} />} label="This Month"       value={loading ? '…' : money(thisMonthCollected)}  change="Current month collections"  color={T.info}    />
         <StatCard icon={<Icon name="users"    size={18} />} label="Total Patients"   value={loading ? '…' : String(totalPatients)}      change="All time"                   color={T.accent}  />
       </div>
+
+      {rows.length > 0 && (
+        <div style={{ display:'flex', justifyContent:'flex-end', marginBottom:12 }}>
+          <Btn variant="ghost" T={T} onClick={() => exportCSV(rows)}>
+            <Icon name="download" size={13} /> Export CSV
+          </Btn>
+        </div>
+      )}
 
       <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
         <table style={{ width:'100%', borderCollapse:'collapse' }}>

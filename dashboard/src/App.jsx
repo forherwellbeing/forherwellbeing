@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { mkT, TWEAK_DEFAULTS } from './theme'
+import { useNotifications } from './hooks/useNotifications'
 
 import Sidebar      from './components/Sidebar'
 import TopBar       from './components/TopBar'
@@ -31,6 +32,7 @@ const DASHBOARD_PAGE_KEY = 'fhw_dashboard_page'
 
 export default function App() {
   const T = mkT(TWEAK_DEFAULTS)
+  const { notifications, unreadCount, markAllRead } = useNotifications()
 
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem(DASHBOARD_USER_KEY)
@@ -83,7 +85,7 @@ export default function App() {
         T={T}
       />
       <div style={{ flex:1, marginLeft:238, display:'flex', flexDirection:'column', overflow:'hidden' }}>
-        <TopBar title={title} role={user.role} />
+        <TopBar title={title} role={user.role} notifications={notifications} unreadCount={unreadCount} onMarkAllRead={markAllRead} />
         <div style={{ flex:1, overflowY:'auto', padding:'22px 26px' }}>
           {renderPage()}
         </div>

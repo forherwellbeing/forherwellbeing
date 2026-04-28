@@ -1,14 +1,17 @@
 import { useState } from 'react'
 import { usePatients } from '../../hooks/usePatients'
-import Avatar from '../../components/ui/Avatar'
-import Badge from '../../components/ui/Badge'
-import Modal from '../../components/ui/Modal'
-import Btn from '../../components/ui/Button'
+import Avatar  from '../../components/ui/Avatar'
+import Badge   from '../../components/ui/Badge'
+import Modal   from '../../components/ui/Modal'
+import Btn     from '../../components/ui/Button'
+import Icon    from '../../components/ui/Icon'
 import { FF, Input, Sel } from '../../components/ui/FormField'
 
-const BLANK = { name:'', email:'', phone:'', condition:'', program:'', patient_status:'Active' }
+const PROGRAMS = ['All Programs','PCOS Healing',"Women's Obesity",'Metabolic Reset','Diabetes Management','Prenatal Wellness','Postnatal Recovery']
+const STATUSES = ['All Status','Active','Inactive','Completed']
+const BLANK    = { name:'', email:'', phone:'', condition:'', program:'', patient_status:'Active' }
 
-const fmt = (p) => ({
+const fmt = p => ({
   id:        p.id,
   name:      p.name,
   contact:   p.phone,
@@ -18,70 +21,106 @@ const fmt = (p) => ({
   status:    p.patient_status || 'Active',
   lastVisit: p.payment_date
     ? new Date(p.payment_date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
-    : new Date(p.created_at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }),
-  paymentId: p.razorpay_payment_id,
+    : new Date(p.created_at).toLocaleDateString('en-IN',  { day:'numeric', month:'short', year:'numeric' }),
   amountPaid: p.amount_paid,
 })
 
+const exportCSV = rows => {
+  const headers = 'Name,Email,Phone,Condition,Program,Status,Paid On,Amount Paid'
+  const body = rows.map(p =>
+    [p.name, p.email||'', p.contact||'', p.condition, p.program, p.status, p.lastVisit, p.amountPaid||''].map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')
+  ).join('\n')
+  const blob = new Blob([headers + '\n' + body], { type:'text/csv' })
+  const url  = URL.createObjectURL(blob)
+  const a    = document.createElement('a'); a.href = url; a.download = 'patients.csv'; a.click()
+  URL.revokeObjectURL(url)
+}
+
+function EmptyState() {
+  return (
+    <div style={{ textAlign:'center', padding:'52px 24px', color:'#7A7A8A' }}>
+      <svg width={64} height={64} viewBox="0 0 24 24" fill="none" stroke="#EDE8E5" strokeWidth={1.2} strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom:16 }}>
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+      <div style={{ fontSize:15, fontWeight:600, color:'#1A1A2E', marginBottom:6 }}>No patients yet</div>
+      <div style={{ fontSize:13 }}>Patients appear here automatically after completing a booking on the website.</div>
+    </div>
+  )
+}
+
 export default function StaffPatients({ T }) {
   const { patients, loading, error, addPatient, updatePatient, deletePatient } = usePatients()
-  const [search, setSearch]  = useState('')
-  const [showModal, setShow] = useState(false)
-  const [editPt, setEditPt]  = useState(null)
-  const [form, setForm]      = useState(BLANK)
-  const [saving, setSaving]  = useState(false)
+  const [search,  setSearch]  = useState('')
+  const [progFilter, setProg] = useState('All Programs')
+  const [statFilter, setStat] = useState('All Status')
+  const [showModal, setShow]  = useState(false)
+  const [editPt,   setEditPt] = useState(null)
+  const [form,     setForm]   = useState(BLANK)
+  const [saving,   setSaving] = useState(false)
 
-  const rows     = patients.map(fmt)
-  const filtered = rows.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
-  const upd      = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
+  const rows = patients.map(fmt)
+  const filtered = rows.filter(p => {
+    const q = search.toLowerCase()
+    const matchSearch = !q || p.name.toLowerCase().includes(q) || p.email?.toLowerCase().includes(q) || p.program?.toLowerCase().includes(q)
+    const matchProg   = progFilter === 'All Programs' || p.program === progFilter
+    const matchStat   = statFilter === 'All Status'   || p.status  === statFilter
+    return matchSearch && matchProg && matchStat
+  })
+
+  const upd = k => e => setForm(f => ({ ...f, [k]: e.target.value }))
 
   const handleSave = async () => {
     setSaving(true)
     if (editPt) {
-      await updatePatient(editPt.id, {
-        name: form.name, email: form.email, phone: form.phone,
-        condition: form.condition, program: form.program, patient_status: form.patient_status,
-      })
+      await updatePatient(editPt.id, { name:form.name, email:form.email, phone:form.phone, condition:form.condition, program:form.program, patient_status:form.patient_status })
     } else {
-      await addPatient({
-        name: form.name, email: form.email, phone: form.phone,
-        condition: form.condition, program: form.program,
-        patient_status: form.patient_status,
-        payment_status: 'Manual', amount_paid: 0,
-        payment_date: new Date().toISOString().split('T')[0],
-        doctor: 'Dr. Raga Deepthi',
-      })
+      await addPatient({ name:form.name, email:form.email, phone:form.phone, condition:form.condition, program:form.program, patient_status:form.patient_status, payment_status:'Manual', amount_paid:0, payment_date:new Date().toISOString().split('T')[0], doctor:'Dr. Raga Deepthi' })
     }
-    setSaving(false)
-    setShow(false); setEditPt(null); setForm(BLANK)
+    setSaving(false); setShow(false); setEditPt(null); setForm(BLANK)
   }
 
-  const openEdit = (row) => {
+  const openEdit = row => {
     const raw = patients.find(p => p.id === row.id)
     setEditPt(raw)
     setForm({ name:raw.name, email:raw.email||'', phone:raw.phone||'', condition:raw.condition||'', program:raw.program||'', patient_status:raw.patient_status||'Active' })
     setShow(true)
   }
 
-  const handleDelete = async (id) => {
-    if (window.confirm('Delete this patient record?')) await deletePatient(id)
-  }
+  const handleDelete = async id => { if (window.confirm('Delete this patient record?')) await deletePatient(id) }
 
   if (error) return <div style={{ color:'#D45B5B', padding:20 }}>Error loading patients: {error}</div>
 
   return (
     <div>
-      <div style={{ display:'flex', gap:12, marginBottom:16, alignItems:'center' }}>
-        <div style={{ position:'relative', flex:1 }}>
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search patients…" style={{ width:'100%', background:'#fff', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'10px 14px 10px 36px', fontSize:13.5, outline:'none' }} />
+      <div style={{ display:'flex', gap:10, marginBottom:16, alignItems:'center', flexWrap:'wrap' }}>
+        <div style={{ position:'relative', flex:1, minWidth:200 }}>
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search patients…"
+            style={{ width:'100%', background:'#fff', border:'1.5px solid #EDE8E5', borderRadius:10, padding:'9px 14px 9px 36px', fontSize:13.5, outline:'none' }} />
           <span style={{ position:'absolute', left:12, top:'50%', transform:'translateY(-50%)', color:'#7A7A8A' }}>⌕</span>
         </div>
-        <Btn variant="primary" T={T} onClick={() => { setEditPt(null); setForm(BLANK); setShow(true) }}>+ Add Patient</Btn>
+        <select value={progFilter} onChange={e => setProg(e.target.value)}
+          style={{ border:'1.5px solid #EDE8E5', borderRadius:10, padding:'9px 12px', fontSize:13, background:'#fff', color:'#1A1A2E', outline:'none', cursor:'pointer' }}>
+          {PROGRAMS.map(p => <option key={p}>{p}</option>)}
+        </select>
+        <select value={statFilter} onChange={e => setStat(e.target.value)}
+          style={{ border:'1.5px solid #EDE8E5', borderRadius:10, padding:'9px 12px', fontSize:13, background:'#fff', color:'#1A1A2E', outline:'none', cursor:'pointer' }}>
+          {STATUSES.map(s => <option key={s}>{s}</option>)}
+        </select>
+        {rows.length > 0 && (
+          <Btn variant="ghost" T={T} onClick={() => exportCSV(filtered)}>
+            <Icon name="download" size={13} /> Export CSV
+          </Btn>
+        )}
+        <Btn variant="primary" T={T} onClick={() => { setEditPt(null); setForm(BLANK); setShow(true) }}>
+          <Icon name="plus" size={13} /> Add Patient
+        </Btn>
       </div>
 
       {loading ? (
         <div style={{ textAlign:'center', padding:40, color:'#7A7A8A' }}>Loading patients…</div>
-      ) : (
+      ) : patients.length === 0 ? <EmptyState /> : (
         <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
           <table style={{ width:'100%', borderCollapse:'collapse' }}>
             <thead>
@@ -93,7 +132,7 @@ export default function StaffPatients({ T }) {
             </thead>
             <tbody>
               {filtered.length === 0 ? (
-                <tr><td colSpan={7} style={{ padding:32, textAlign:'center', color:'#7A7A8A', fontSize:14 }}>No patients yet. They'll appear here after paying on the homepage.</td></tr>
+                <tr><td colSpan={7} style={{ padding:32, textAlign:'center', color:'#7A7A8A', fontSize:14 }}>No patients match current filters.</td></tr>
               ) : filtered.map(p => (
                 <tr key={p.id} style={{ borderBottom:'1px solid #EDE8E5' }}>
                   <td style={{ padding:'12px 15px' }}>
@@ -105,12 +144,10 @@ export default function StaffPatients({ T }) {
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.contact}</td>
+                  <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.contact || '—'}</td>
                   <td style={{ padding:'12px 15px', fontSize:12.5 }}>{p.program}</td>
                   <td style={{ padding:'12px 15px', fontSize:12.5, color:'#7A7A8A' }}>{p.lastVisit}</td>
-                  <td style={{ padding:'12px 15px', fontSize:13, fontWeight:600, color:'#52A67A' }}>
-                    {p.amountPaid ? `₹${Number(p.amountPaid).toLocaleString()}` : '—'}
-                  </td>
+                  <td style={{ padding:'12px 15px', fontSize:13, fontWeight:600, color:'#52A67A' }}>{p.amountPaid ? `₹${Number(p.amountPaid).toLocaleString()}` : '—'}</td>
                   <td style={{ padding:'12px 15px' }}><Badge text={p.status} /></td>
                   <td style={{ padding:'12px 15px' }}>
                     <div style={{ display:'flex', gap:6 }}>
@@ -132,7 +169,7 @@ export default function StaffPatients({ T }) {
           <FF label="Email">      <Input value={form.email} onChange={upd('email')} type="email" placeholder="email@example.com" /></FF>
           <FF label="Status">
             <Sel value={form.patient_status} onChange={upd('patient_status')}>
-              <option>Active</option><option>Inactive</option>
+              <option>Active</option><option>Inactive</option><option>Completed</option>
             </Sel>
           </FF>
         </div>
