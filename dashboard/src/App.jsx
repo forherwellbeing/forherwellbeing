@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useTweaks } from './hooks/useTweaks'
+import { useState } from 'react'
 import { mkT, TWEAK_DEFAULTS } from './theme'
 
 import Sidebar      from './components/Sidebar'
 import TopBar       from './components/TopBar'
-import TweaksPanel  from './components/TweaksPanel'
 
 import Login            from './pages/Login'
 import DoctorOverview   from './pages/doctor/Overview'
@@ -33,8 +31,7 @@ const DASHBOARD_USER_KEY = 'fhw_dashboard_user'
 const DASHBOARD_PAGE_KEY = 'fhw_dashboard_page'
 
 export default function App() {
-  const [tweaks, setTweak] = useTweaks(TWEAK_DEFAULTS)
-  const T = mkT(tweaks)
+  const T = mkT(TWEAK_DEFAULTS)
 
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem(DASHBOARD_USER_KEY)
@@ -94,7 +91,6 @@ export default function App() {
           {renderPage()}
         </div>
       </div>
-      <TweaksPanel tweaks={tweaks} setTweak={setTweak} />
     </div>
   )
 }
