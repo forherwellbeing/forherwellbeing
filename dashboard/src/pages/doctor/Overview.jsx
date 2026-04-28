@@ -4,9 +4,11 @@ import Badge       from '../../components/ui/Badge'
 import BarChart    from '../../components/charts/BarChart'
 import Icon        from '../../components/ui/Icon'
 import { usePatients } from '../../hooks/usePatients'
+import { useIsMobile } from '../../hooks/useIsMobile'
 
 export default function DoctorOverview({ T }) {
   const { patients, loading } = usePatients()
+  const isMobile = useIsMobile()
 
   const now   = new Date()
   const total = patients.length
@@ -41,14 +43,14 @@ export default function DoctorOverview({ T }) {
 
   return (
     <div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginBottom:20 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap:14, marginBottom:20 }}>
         <StatCard icon={<Icon name="users"     size={18} />} label="Total Patients"      value={loading ? '…' : String(total)}                                            change="All time"            color={T.accent}  />
         <StatCard icon={<Icon name="clipboard" size={18} />} label="Pending Consultations" value={loading ? '…' : String(pendingConsults)}                                change="Awaiting session"    color={T.info}    />
         <StatCard icon={<Icon name="trending"  size={18} />} label="Revenue This Month"  value={loading ? '…' : `₹${(thisMonthRevenue/1000).toFixed(1)}K`}               change="Current month"       color={T.success} />
         <StatCard icon={<Icon name="activity"  size={18} />} label="New This Month"      value={loading ? '…' : String(monthlyPatients[5]?.count ?? 0)}                   change="Bookings this month" color={T.warning} />
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 320px', gap:14 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap:14 }}>
         <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
           <div style={{ fontFamily:"'Playfair Display',serif", fontSize:16, fontWeight:600, marginBottom:4 }}>Patient Growth</div>
           <div style={{ fontSize:12, color:'#7A7A8A', marginBottom:14 }}>New patients per month — hover for details</div>

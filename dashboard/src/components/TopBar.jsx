@@ -3,7 +3,7 @@ import Icon from './ui/Icon'
 
 const fmtTime = t => new Date(t).toLocaleTimeString('en-IN', { hour:'2-digit', minute:'2-digit' })
 
-export default function TopBar({ title, role, notifications = [], unreadCount = 0, onMarkAllRead }) {
+export default function TopBar({ title, role, notifications = [], unreadCount = 0, onMarkAllRead, isMobile, onMenuToggle }) {
   const [showNotifs, setShowNotifs] = useState(false)
   const bellRef = useRef(null)
   const today = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })
@@ -20,16 +20,24 @@ export default function TopBar({ title, role, notifications = [], unreadCount = 
   }
 
   return (
-    <div style={{ height:62, background:'#fff', borderBottom:'1px solid #EDE8E5', display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0 26px', position:'sticky', top:0, zIndex:50, flexShrink:0 }}>
-      <div>
-        <div style={{ fontFamily:"'Playfair Display',serif", fontSize:18, fontWeight:600, color:'#1A1A2E' }}>{title}</div>
-        <div style={{ fontSize:11, color:'#7A7A8A' }}>For Her Wellbeing · {role === 'doctor' ? 'Doctor Portal' : 'Staff Portal'}</div>
+    <div style={{ height:62, background:'#fff', borderBottom:'1px solid #EDE8E5', display:'flex', alignItems:'center', justifyContent:'space-between', padding:`0 ${isMobile ? 16 : 26}px`, position:'sticky', top:0, zIndex:50, flexShrink:0 }}>
+      <div style={{ display:'flex', alignItems:'center', gap:12 }}>
+        {isMobile && (
+          <button onClick={onMenuToggle} style={{ width:36, height:36, background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:8, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', color:'#1A1A2E', flexShrink:0 }}>
+            <Icon name="menu" size={16} />
+          </button>
+        )}
+        <div>
+          <div style={{ fontFamily:"'Playfair Display',serif", fontSize: isMobile ? 15 : 18, fontWeight:600, color:'#1A1A2E' }}>{title}</div>
+          {!isMobile && <div style={{ fontSize:11, color:'#7A7A8A' }}>For Her Wellbeing · {role === 'doctor' ? 'Doctor Portal' : 'Staff Portal'}</div>}
+        </div>
       </div>
 
-      <div style={{ display:'flex', alignItems:'center', gap:14 }}>
-        <div style={{ fontSize:12, color:'#7A7A8A', background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:8, padding:'5px 11px' }}>{today}</div>
+      <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+        {!isMobile && (
+          <div style={{ fontSize:12, color:'#7A7A8A', background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:8, padding:'5px 11px' }}>{today}</div>
+        )}
 
-        {/* Notification bell */}
         <div ref={bellRef} style={{ position:'relative' }}>
           <button onClick={handleBell} style={{ width:36, height:36, background:'#FAF8F5', border:'1.5px solid #EDE8E5', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', color:'#7A7A8A', position:'relative' }}>
             <Icon name="bell" size={15} />
@@ -41,7 +49,7 @@ export default function TopBar({ title, role, notifications = [], unreadCount = 
           </button>
 
           {showNotifs && (
-            <div style={{ position:'absolute', top:44, right:0, width:320, background:'#fff', borderRadius:12, boxShadow:'0 8px 32px rgba(0,0,0,0.14)', border:'1px solid #EDE8E5', zIndex:200, overflow:'hidden' }}>
+            <div style={{ position:'absolute', top:44, right:0, width: isMobile ? 'calc(100vw - 48px)' : 320, maxWidth:320, background:'#fff', borderRadius:12, boxShadow:'0 8px 32px rgba(0,0,0,0.14)', border:'1px solid #EDE8E5', zIndex:200, overflow:'hidden' }}>
               <div style={{ padding:'12px 16px', borderBottom:'1px solid #EDE8E5', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
                 <span style={{ fontSize:13, fontWeight:600, color:'#1A1A2E' }}>New Bookings</span>
                 {notifications.length > 0 && (

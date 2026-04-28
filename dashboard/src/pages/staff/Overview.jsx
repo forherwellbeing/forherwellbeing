@@ -3,6 +3,7 @@ import BarChart  from '../../components/charts/BarChart'
 import DonutChart from '../../components/charts/DonutChart'
 import Icon      from '../../components/ui/Icon'
 import { usePatients } from '../../hooks/usePatients'
+import { useIsMobile } from '../../hooks/useIsMobile'
 
 const PROGRAM_COLORS = {
   'PCOS Healing':        '#B05A72',
@@ -15,6 +16,7 @@ const PROGRAM_COLORS = {
 
 export default function StaffOverview({ T }) {
   const { patients, loading } = usePatients()
+  const isMobile = useIsMobile()
 
   const total   = patients.length
   const revenue = patients.reduce((s, p) => s + (Number(p.amount_paid) || 0), 0)
@@ -46,14 +48,14 @@ export default function StaffOverview({ T }) {
 
   return (
     <div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginBottom:20 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap:14, marginBottom:20 }}>
         <StatCard icon={<Icon name="users"    size={18} />} label="Total Patients"       value={loading ? '…' : String(total)}                                     change="All time"         color={T.accent}  />
         <StatCard icon={<Icon name="calendar" size={18} />} label="Today's Appointments" value="—"                                                                  change="Connect calendar" color={T.info}    />
         <StatCard icon={<Icon name="trending" size={18} />} label="Total Revenue"        value={loading ? '…' : `₹${(revenue / 1000).toFixed(1)}K`}                change="All payments"     color={T.success} />
         <StatCard icon={<Icon name="activity" size={18} />} label="Active Programs"      value={loading ? '…' : String(Object.keys(programCounts).length || 0)}    change="Running now"      color={T.warning} />
       </div>
 
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 316px', gap:14 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 316px', gap:14 }}>
         <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
           <div style={{ fontFamily:"'Playfair Display',serif", fontSize:16, fontWeight:600, marginBottom:4 }}>Monthly Revenue</div>
           <div style={{ fontSize:12, color:'#7A7A8A', marginBottom:14 }}>Last 6 months — hover a bar for details</div>

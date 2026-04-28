@@ -9,10 +9,10 @@ export default function BarChart({ data, width = 440, height = 155, color = '#B0
   const bw = (w / data.length) * 0.52
 
   return (
-    <div style={{ position:'relative', display:'inline-block' }}>
+    <div style={{ position:'relative', width:'100%' }}>
       {tooltip && (
         <div style={{
-          position:'absolute', left:tooltip.px, top:0,
+          position:'absolute', left:`${(tooltip.px / width) * 100}%`, top:0,
           transform:'translateX(-50%)',
           background:'#1A1A2E', color:'#fff',
           borderRadius:8, padding:'7px 11px',
@@ -33,7 +33,7 @@ export default function BarChart({ data, width = 440, height = 155, color = '#B0
           </div>
         </div>
       )}
-      <svg width={width} height={height}>
+      <svg width="100%" viewBox={`0 0 ${width} ${height}`} style={{ display:'block' }}>
         {data.map((d, i) => {
           const bh = (d.v / max) * h
           const x  = p.l + (i / data.length) * w + (w / data.length - bw) / 2

@@ -8,6 +8,7 @@ import Icon    from '../../components/ui/Icon'
 import { FF, Input, Sel } from '../../components/ui/FormField'
 import SlotPicker          from '../../components/ui/SlotPicker'
 import { useAppointments } from '../../hooks/useAppointments'
+import { useIsMobile } from '../../hooks/useIsMobile'
 
 const TODAY    = new Date().toISOString().split('T')[0]
 const PROGRAMS =['All Programs','PCOS Healing',"Women's Obesity",'Metabolic Reset','Diabetes Management','Prenatal Wellness','Postnatal Recovery']
@@ -55,6 +56,7 @@ function EmptyState() {
 
 export default function StaffPatients({ T }) {
   const { patients, loading, error, addPatient, updatePatient, deletePatient } = usePatients()
+  const isMobile = useIsMobile()
   const { appointments, addAppointment } = useAppointments()
   const [schedPt,  setSchedPt] = useState(null)
   const [schedForm, setSchedForm] = useState({ appointment_date: TODAY, appointment_time:'10:00', type:'Initial', meet_link:'', notes:'' })
@@ -136,8 +138,8 @@ export default function StaffPatients({ T }) {
       {loading ? (
         <div style={{ textAlign:'center', padding:40, color:'#7A7A8A' }}>Loading patients…</div>
       ) : patients.length === 0 ? <EmptyState /> : (
-        <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
-          <table style={{ width:'100%', borderCollapse:'collapse' }}>
+        <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflowX:'auto' }}>
+          <table style={{ width:'100%', borderCollapse:'collapse', minWidth:620 }}>
             <thead>
               <tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
                 {['Patient','Contact','Program','Paid On','Amount','Status','Actions'].map(h => (
@@ -180,7 +182,7 @@ export default function StaffPatients({ T }) {
 
       {/* Schedule consultation modal */}
       <Modal open={!!schedPt} onClose={() => setSchedPt(null)} title={`Schedule — ${schedPt?.name || ''}`}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:12 }}>
           <FF label="Date *">
             <Input type="date" value={schedForm.appointment_date} onChange={e => setSchedForm(f => ({ ...f, appointment_date: e.target.value, appointment_time:'' }))} />
           </FF>
@@ -210,7 +212,7 @@ export default function StaffPatients({ T }) {
       </Modal>
 
       <Modal open={showModal} onClose={() => { setShow(false); setEditPt(null) }} title={editPt ? 'Edit Patient' : 'Add Patient Manually'}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:12 }}>
           <FF label="Full Name *"><Input value={form.name}  onChange={upd('name')}  placeholder="Full name" /></FF>
           <FF label="Phone *">    <Input value={form.phone} onChange={upd('phone')} placeholder="+91 XXXXX XXXXX" /></FF>
           <FF label="Email">      <Input value={form.email} onChange={upd('email')} type="email" placeholder="email@example.com" /></FF>

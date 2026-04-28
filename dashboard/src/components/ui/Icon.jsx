@@ -17,6 +17,7 @@ const PATHS = {
   plus:      'M12 5v14 M5 12h14',
   edit:      'M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7 M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z',
   trash:     'M3 6h18 M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6 M10 11v6 M14 11v6 M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2',
+  menu:      'M3 12h18 M3 6h18 M3 18h18',
 }
 
 export default function Icon({ name, size = 16 }) {

@@ -4,6 +4,7 @@ import StatCard  from '../../components/StatCard'
 import Icon      from '../../components/ui/Icon'
 import Btn       from '../../components/ui/Button'
 import { usePatients } from '../../hooks/usePatients'
+import { useIsMobile } from '../../hooks/useIsMobile'
 
 const exportCSV = rows => {
   const headers = 'Patient,Program,Amount Paid,Date,Method,Status'
@@ -35,6 +36,7 @@ const toRows = patients => patients.map(p => ({
 
 export default function StaffBilling({ T }) {
   const { patients, loading, error } = usePatients()
+  const isMobile = useIsMobile()
   const rows = toRows(patients)
 
   const totalCollected     = rows.reduce((s, r) => s + r.paid, 0)
@@ -48,7 +50,7 @@ export default function StaffBilling({ T }) {
 
   return (
     <div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:14, marginBottom:20 }}>
+      <div style={{ display:'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(3,1fr)', gap:14, marginBottom:20 }}>
         <StatCard icon={<Icon name="trending" size={18} />} label="Total Collected"  value={loading ? '…' : money(totalCollected)}     change="All successful payments"    color={T.success} />
         <StatCard icon={<Icon name="calendar" size={18} />} label="This Month"       value={loading ? '…' : money(thisMonthCollected)}  change="Current month collections"  color={T.info}    />
         <StatCard icon={<Icon name="users"    size={18} />} label="Total Patients"   value={loading ? '…' : String(totalPatients)}      change="All time"                   color={T.accent}  />
@@ -62,8 +64,8 @@ export default function StaffBilling({ T }) {
         </div>
       )}
 
-      <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
-        <table style={{ width:'100%', borderCollapse:'collapse' }}>
+      <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflowX:'auto' }}>
+        <table style={{ width:'100%', borderCollapse:'collapse', minWidth:560 }}>
           <thead>
             <tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
               {['Patient','Program','Amount Paid','Date','Method','Status'].map(h => (

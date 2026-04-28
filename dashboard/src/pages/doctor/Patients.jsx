@@ -112,8 +112,8 @@ export default function DoctorPatients({ T }) {
       {loading ? (
         <div style={{ textAlign:'center', padding:40, color:'#7A7A8A' }}>Loading patients…</div>
       ) : patients.length === 0 ? <EmptyState /> : (
-        <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
-          <table style={{ width:'100%', borderCollapse:'collapse' }}>
+        <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflowX:'auto' }}>
+          <table style={{ width:'100%', borderCollapse:'collapse', minWidth:620 }}>
             <thead>
               <tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
                 {['Patient','Contact','Condition','Program','Paid On','Status',''].map(h => (

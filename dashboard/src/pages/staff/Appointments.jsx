@@ -8,6 +8,7 @@ import { FF, Input, Sel, Textarea2 } from '../../components/ui/FormField'
 import SlotPicker          from '../../components/ui/SlotPicker'
 import { useAppointments } from '../../hooks/useAppointments'
 import { usePatients }     from '../../hooks/usePatients'
+import { useIsMobile }    from '../../hooks/useIsMobile'
 
 const TODAY     = new Date().toISOString().split('T')[0]
 const BLANK     = { patient_id:'', patient_name:'', patient_email:'', patient_phone:'', program:'', doctor:'Dr. Raga Deepthi', appointment_date:TODAY, appointment_time:'10:00', type:'Initial', notes:'', meet_link:'' }
@@ -53,6 +54,7 @@ function EmptyState({ filter }) {
 
 export default function StaffAppointments({ T }) {
   const { appointments, loading, error, addAppointment, updateAppointment, deleteAppointment } = useAppointments()
+  const isMobile = useIsMobile()
   const { patients } = usePatients()
 
   const [filter,    setFilter]  = useState('All')
@@ -140,8 +142,8 @@ export default function StaffAppointments({ T }) {
       {loading ? (
         <div style={{ textAlign:'center', padding:40, color:'#7A7A8A' }}>Loading appointments…</div>
       ) : filtered.length === 0 ? <EmptyState filter={filter} /> : (
-        <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflow:'hidden' }}>
-          <table style={{ width:'100%', borderCollapse:'collapse' }}>
+        <div style={{ background:'#fff', borderRadius:16, boxShadow:'0 2px 14px rgba(0,0,0,0.05)', overflowX:'auto' }}>
+          <table style={{ width:'100%', borderCollapse:'collapse', minWidth:700 }}>
             <thead>
               <tr style={{ background:'#FAFAFA', borderBottom:'1px solid #EDE8E5' }}>
                 {['Patient','Date','Time','Type','Meet Link','Status',''].map(h => (
@@ -204,7 +206,7 @@ export default function StaffAppointments({ T }) {
 
       {/* Schedule / Edit Modal */}
       <Modal open={showModal} onClose={() => { setShow(false); setEdit(null) }} title={editAppt ? 'Edit Appointment' : 'Schedule Appointment'}>
-        <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:12 }}>
+        <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:12 }}>
           <FF label="Patient *" style={{ gridColumn:'1/-1' }}>
             {editAppt ? (
               <input value={form.patient_name} disabled style={{ width:'100%', border:'1.5px solid #EDE8E5', borderRadius:9, padding:'9px 12px', fontSize:13.5, background:'#F5F5F5', color:'#7A7A8A', outline:'none' }} />

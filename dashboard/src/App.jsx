@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { mkT, TWEAK_DEFAULTS } from './theme'
 import { useNotifications } from './hooks/useNotifications'
+import { useIsMobile } from './hooks/useIsMobile'
 
 import Sidebar      from './components/Sidebar'
 import TopBar       from './components/TopBar'
@@ -33,6 +34,8 @@ const DASHBOARD_PAGE_KEY = 'fhw_dashboard_page'
 export default function App() {
   const T = mkT(TWEAK_DEFAULTS)
   const { notifications, unreadCount, markAllRead } = useNotifications()
+  const isMobile = useIsMobile()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem(DASHBOARD_USER_KEY)
@@ -48,6 +51,8 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(DASHBOARD_PAGE_KEY, page)
   }, [page])
+
+  useEffect(() => { if (!isMobile) setSidebarOpen(false) }, [isMobile])
 
   if (!user) {
     return <Login onLogin={role => { setUser({ role }); setPage('overview') }} />
@@ -78,15 +83,23 @@ export default function App() {
         role={user.role}
         activePage={page}
         setActivePage={setPage}
-        onLogout={() => {
-          setUser(null)
-          setPage('overview')
-        }}
+        onLogout={() => { setUser(null); setPage('overview') }}
         T={T}
+        isMobile={isMobile}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
-      <div style={{ flex:1, marginLeft:238, display:'flex', flexDirection:'column', overflow:'hidden' }}>
-        <TopBar title={title} role={user.role} notifications={notifications} unreadCount={unreadCount} onMarkAllRead={markAllRead} />
-        <div style={{ flex:1, overflowY:'auto', padding:'22px 26px' }}>
+      <div style={{ flex:1, marginLeft: isMobile ? 0 : 238, display:'flex', flexDirection:'column', overflow:'hidden' }}>
+        <TopBar
+          title={title}
+          role={user.role}
+          notifications={notifications}
+          unreadCount={unreadCount}
+          onMarkAllRead={markAllRead}
+          isMobile={isMobile}
+          onMenuToggle={() => setSidebarOpen(v => !v)}
+        />
+        <div style={{ flex:1, overflowY:'auto', padding: isMobile ? '16px' : '22px 26px' }}>
           {renderPage()}
         </div>
       </div>
