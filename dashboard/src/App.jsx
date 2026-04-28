@@ -14,7 +14,6 @@ import StaffPatients    from './pages/staff/Patients'
 import StaffAppts       from './pages/staff/Appointments'
 import StaffBilling     from './pages/staff/Billing'
 import Reports          from './pages/shared/Reports'
-import Profile          from './pages/shared/Profile'
 
 const PAGE_TITLE = {
   overview:      'Dashboard',
@@ -61,14 +60,12 @@ export default function App() {
       if (page === 'consultations') return <DoctorConsults T={T} />
       if (page === 'prescriptions') return <DoctorRx       T={T} />
       if (page === 'reports')       return <Reports         T={T} />
-      if (page === 'profile')       return <Profile role="doctor" T={T} />
     } else {
       if (page === 'overview')     return <StaffOverview T={T} />
       if (page === 'patients')     return <StaffPatients T={T} />
       if (page === 'appointments') return <StaffAppts    T={T} />
       if (page === 'billing')      return <StaffBilling  T={T} />
       if (page === 'reports')      return <Reports        T={T} />
-      if (page === 'profile')      return <Profile role="staff" T={T} />
     }
     return null
   }

@@ -1,21 +1,20 @@
 import Avatar from './ui/Avatar'
+import Icon  from './ui/Icon'
 
 const DOCTOR_NAV = [
-  { id:'overview',      icon:'⊞', label:'Dashboard' },
-  { id:'patients',      icon:'♀', label:'Patients' },
-  { id:'consultations', icon:'✦', label:'Consultations' },
-  { id:'prescriptions', icon:'⊡', label:'Prescriptions' },
-  { id:'reports',       icon:'≡', label:'Reports' },
-  { id:'profile',       icon:'◉', label:'Profile' },
+  { id:'overview',      icon:'grid',      label:'Dashboard' },
+  { id:'patients',      icon:'users',     label:'Patients' },
+  { id:'consultations', icon:'clipboard', label:'Consultations' },
+  { id:'prescriptions', icon:'file',      label:'Prescriptions' },
+  { id:'reports',       icon:'chart',     label:'Reports' },
 ]
 
 const STAFF_NAV = [
-  { id:'overview',     icon:'⊞', label:'Dashboard' },
-  { id:'patients',     icon:'♀', label:'Patient Management' },
-  { id:'appointments', icon:'◷', label:'Appointments' },
-  { id:'billing',      icon:'₹', label:'Billing & Payments' },
-  { id:'reports',      icon:'≡', label:'Reports' },
-  { id:'profile',      icon:'◉', label:'Profile' },
+  { id:'overview',     icon:'grid',     label:'Dashboard' },
+  { id:'patients',     icon:'users',    label:'Patient Management' },
+  { id:'appointments', icon:'calendar', label:'Appointments' },
+  { id:'billing',      icon:'card',     label:'Billing & Payments' },
+  { id:'reports',      icon:'chart',    label:'Reports' },
 ]
 
 export default function Sidebar({ role, activePage, setActivePage, onLogout, T }) {
@@ -38,7 +37,9 @@ export default function Sidebar({ role, activePage, setActivePage, onLogout, T }
           const isActive = activePage === item.id
           return (
             <button key={item.id} onClick={() => setActivePage(item.id)} style={{ width:'100%', display:'flex', alignItems:'center', gap:11, padding:'10px 12px', borderRadius:10, border:'none', cursor:'pointer', background:isActive?'rgba(255,255,255,0.1)':'transparent', color:isActive?'#FAF8F5':'rgba(255,255,255,0.52)', marginBottom:2, fontSize:13.5, fontWeight:isActive?600:400, textAlign:'left', fontFamily:'inherit', transition:'all 0.15s', borderLeft:isActive?`3px solid ${T.accent}`:'3px solid transparent' }}>
-              <span style={{ fontSize:15, width:20, textAlign:'center' }}>{item.icon}</span>
+              <span style={{ width:20, display:'flex', alignItems:'center', justifyContent:'center' }}>
+                <Icon name={item.icon} size={15} />
+              </span>
               {item.label}
             </button>
           )

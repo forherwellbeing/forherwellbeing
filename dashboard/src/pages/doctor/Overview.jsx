@@ -1,17 +1,18 @@
-import StatCard from '../../components/StatCard'
-import Avatar from '../../components/ui/Avatar'
-import Badge from '../../components/ui/Badge'
+import StatCard  from '../../components/StatCard'
+import Avatar    from '../../components/ui/Avatar'
+import Badge     from '../../components/ui/Badge'
 import LineChart from '../../components/charts/LineChart'
+import Icon      from '../../components/ui/Icon'
 import { CONSULTATIONS } from '../../data'
 
 export default function DoctorOverview({ T }) {
   return (
     <div>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:14, marginBottom:20 }}>
-        <StatCard icon="♀" label="Assigned Patients"     value="24" change="+3 this week"     color={T.accent}  />
-        <StatCard icon="◷" label="Today's Consultations" value="6"  change="2 remaining"      color={T.info}    />
-        <StatCard icon="✦" label="Pending Follow-ups"    value="8"  change="3 need attention" color={T.warning} />
-        <StatCard icon="≡" label="Reports This Month"    value="12" change="All reviewed"     color={T.success} />
+        <StatCard icon={<Icon name="users"     size={18} />} label="Assigned Patients"     value="24" change="+3 this week"     color={T.accent}  />
+        <StatCard icon={<Icon name="clipboard" size={18} />} label="Today's Consultations" value="6"  change="2 remaining"      color={T.info}    />
+        <StatCard icon={<Icon name="alert"     size={18} />} label="Pending Follow-ups"    value="8"  change="3 need attention" color={T.warning} />
+        <StatCard icon={<Icon name="file"      size={18} />} label="Reports This Month"    value="12" change="All reviewed"     color={T.success} />
       </div>
       <div style={{ display:'grid', gridTemplateColumns:'1fr 320px', gap:14 }}>
         <div style={{ background:'#fff', borderRadius:16, padding:22, boxShadow:'0 2px 14px rgba(0,0,0,0.05)' }}>
