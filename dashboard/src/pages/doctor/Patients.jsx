@@ -6,6 +6,7 @@ import Modal   from '../../components/ui/Modal'
 import Btn     from '../../components/ui/Button'
 import Icon    from '../../components/ui/Icon'
 import { FF, Textarea2 } from '../../components/ui/FormField'
+import IntakeModal from '../../components/ui/IntakeModal'
 
 const PROGRAMS = ['All Programs','PCOS Healing',"Women's Obesity",'Metabolic Reset','Diabetes Management','Prenatal Wellness','Postnatal Recovery']
 const STATUSES = ['All Status','Active','Inactive','Completed']
@@ -59,6 +60,7 @@ export default function DoctorPatients({ T }) {
   const [notes,   setNotes]   = useState('')
   const [saving,  setSaving]  = useState(false)
   const [saved,   setSaved]   = useState(false)
+  const [intakePt, setIntakePt] = useState(null)
 
   const rows = patients.map(fmt)
   const filtered = rows.filter(p => {
@@ -146,7 +148,10 @@ export default function DoctorPatients({ T }) {
                     </select>
                   </td>
                   <td style={{ padding:'12px 15px' }}>
-                    <Btn size="sm" variant="secondary" T={T} onClick={() => openPatient(p)}>View</Btn>
+                    <div style={{ display:'flex', gap:6 }}>
+                      <Btn size="sm" variant="secondary" T={T} onClick={() => openPatient(p)}>View</Btn>
+                      <Btn size="sm" variant="ghost"     T={T} onClick={() => setIntakePt(patients.find(x => x.id === p.id))}>Intake</Btn>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -154,6 +159,14 @@ export default function DoctorPatients({ T }) {
           </table>
         </div>
       )}
+
+      <IntakeModal
+        patient={intakePt}
+        open={!!intakePt}
+        onClose={() => setIntakePt(null)}
+        onSave={async (id, data) => { await updatePatient(id, data); setIntakePt(null) }}
+        T={T}
+      />
 
       {/* Patient detail + notes modal */}
       <Modal open={!!sel} onClose={() => setSel(null)} title="Patient Details">

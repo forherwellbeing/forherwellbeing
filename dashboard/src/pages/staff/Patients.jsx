@@ -8,7 +8,8 @@ import Icon    from '../../components/ui/Icon'
 import { FF, Input, Sel } from '../../components/ui/FormField'
 import SlotPicker          from '../../components/ui/SlotPicker'
 import { useAppointments } from '../../hooks/useAppointments'
-import { useIsMobile } from '../../hooks/useIsMobile'
+import { useIsMobile }    from '../../hooks/useIsMobile'
+import IntakeModal        from '../../components/ui/IntakeModal'
 
 const TODAY    = new Date().toISOString().split('T')[0]
 const PROGRAMS =['All Programs','PCOS Healing',"Women's Obesity",'Metabolic Reset','Diabetes Management','Prenatal Wellness','Postnatal Recovery']
@@ -61,6 +62,7 @@ export default function StaffPatients({ T }) {
   const [schedPt,  setSchedPt] = useState(null)
   const [schedForm, setSchedForm] = useState({ appointment_date: TODAY, appointment_time:'10:00', type:'Initial', meet_link:'', notes:'' })
   const [schedSaving, setSchedSaving] = useState(false)
+  const [intakePt,  setIntakePt]  = useState(null)
   const [search,  setSearch]  = useState('')
   const [progFilter, setProg] = useState('All Programs')
   const [statFilter, setStat] = useState('All Status')
@@ -170,6 +172,7 @@ export default function StaffPatients({ T }) {
                     <div style={{ display:'flex', gap:6 }}>
                       <Btn size="sm" variant="secondary" T={T} onClick={() => openEdit(p)}>Edit</Btn>
                       <Btn size="sm" variant="primary"   T={T} onClick={() => setSchedPt(p)}>Schedule</Btn>
+                      <Btn size="sm" variant="ghost"     T={T} onClick={() => setIntakePt(patients.find(x => x.id === p.id))}>Intake</Btn>
                       <Btn size="sm" variant="danger"    T={T} onClick={() => handleDelete(p.id)}>Delete</Btn>
                     </div>
                   </td>
@@ -210,6 +213,14 @@ export default function StaffPatients({ T }) {
           <Btn variant="primary" T={T} onClick={handleSchedule} disabled={schedSaving || !schedForm.appointment_date || !schedForm.appointment_time}>{schedSaving ? 'Scheduling…' : 'Confirm Appointment'}</Btn>
         </div>
       </Modal>
+
+      <IntakeModal
+        patient={intakePt}
+        open={!!intakePt}
+        onClose={() => setIntakePt(null)}
+        onSave={async (id, data) => { await updatePatient(id, data); setIntakePt(null) }}
+        T={T}
+      />
 
       <Modal open={showModal} onClose={() => { setShow(false); setEditPt(null) }} title={editPt ? 'Edit Patient' : 'Add Patient Manually'}>
         <div style={{ display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap:12 }}>
